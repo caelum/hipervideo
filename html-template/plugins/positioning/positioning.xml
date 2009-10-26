@@ -1,0 +1,26 @@
+<plugin>
+	<title>Positioning</title>
+	<filename>listening.swf</filename>
+	<version>1</version>
+	<compatibility>Compatible with 4.1; positioning only works from 4.4.</compatibility>
+	<author>LongTail Video</author>
+	<description>This is a simple plugin showing a red block you can freely position with flashvars.
+		This only works from 4.4, so this template also shows how to do fallbacks for previous versions.
+		You're free to build your own plugins on top of this code.</description>
+	<href>http://developer.longtailvideo.com/trac/browser/trunk/sdk/plugins/templates</href>
+
+	<flashvars>
+		<flashvar>
+			<name>position</name>
+			<default>over</default>
+			<description>Position of the plugin. Can be "over", "left", "right", "top" or "bottom".</description>
+		</flashvar>
+		<flashvar>
+			<name>size</name>
+			<default>100</default>
+			<description>Width or height of the plugin when not over the display.</description>
+		</flashvar>
+	</flashvars>
+
+
+</plugin>

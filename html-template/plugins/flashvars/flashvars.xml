@@ -1,0 +1,18 @@
+<plugin>
+	<title>Flashvars</title>
+	<filename>flashvars.swf</filename>
+	<version>1</version>
+	<compatibility>Compatible with 4.1.</compatibility>
+	<author>LongTail Video</author>
+	<description>This is a simple plugin that loads a flashvar. 
+		You're free to build your own plugins on top of this code.</description>
+	<href>http://developer.longtailvideo.com/trac/browser/trunk/sdk/plugins/templates</href>
+
+	<flashvars>
+		<flashvar>
+			<name>message</name>
+			<default>Hello world!</default>
+			<description>Message to be displayed.</description>
+		</flashvar>
+	</flashvars>
+</plugin>

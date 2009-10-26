@@ -1,0 +1,15 @@
+<plugin>
+	<title>Docking</title>
+	<filename>docking.swf</filename>
+	<version>1</version>
+	<compatibility>Compatible with 4.1.</compatibility>
+	<author>LongTail Video</author>
+	<description>
+		This is a simple plugin that shows how to insert a button in the dock. 
+		The dock is a new feature of the 4.5 player, organizing buttons for advanced features.
+		You're free to build your own plugins on top of this code.
+	</description>
+	<href>http://developer.longtailvideo.com/trac/browser/trunk/sdk/plugins/docking</href>
+
+	<flashvars />
+</plugin>
