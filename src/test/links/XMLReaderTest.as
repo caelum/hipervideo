@@ -11,6 +11,7 @@ package test.links
 			var xmlStr:String = ( <![CDATA[
 				<links>
 					<link>
+						<content>Site da caelum</content>
 						<startTime>100</startTime>
 						<endTime>200</endTime>
 						<topLeft>
@@ -23,6 +24,7 @@ package test.links
 						</bottomRight>
 					</link>
 					<link>
+						<content>Informacoes Gerais em um combo</content>
 						<startTime>1100</startTime>
 						<endTime>1200</endTime>
 						<topLeft>
@@ -40,6 +42,7 @@ package test.links
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
 			var linkArray:Array = xmlReader.extract();
 			
+			assertEquals("Site da caelum", linkArray[0].content);
 			assertEquals(100, linkArray[0].startTime);
 			assertEquals(200, linkArray[0].endTime);
 			assertEquals(50, linkArray[0].topLeft_x);
@@ -47,6 +50,7 @@ package test.links
 			assertEquals(100, linkArray[0].bottomRight_x);
 			assertEquals(130, linkArray[0].bottomRight_y);
 			
+			assertEquals("Informacoes Gerais em um combo", linkArray[1].content);
 			assertEquals(1100, linkArray[1].startTime);
 			assertEquals(1200, linkArray[1].endTime);
 			assertEquals(150, linkArray[1].topLeft_x);

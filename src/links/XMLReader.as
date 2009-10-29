@@ -16,7 +16,8 @@ package links
 			var linkArray:Array = new Array();
 			for each (var link:XML in xml.link) {
 				linkArray.push(
-					new Link(link.startTime, link.endTime,
+					new Link(link.content,
+							link.startTime, link.endTime,
 							link.topLeft.x, link.topLeft.y,
 							link.bottomRight.x, link.bottomRight.y)
 				);
