@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="fillTextArea()" >
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+		
+			private function fillTextArea():void {
+				textarea.text = "<videos><video id='1' name='abc xyz'><blah /></video><video id='2' name='123 ijk'><blah /></video></videos>";
+			}
+		
+			private function parseXML():void {
+				var myXML:XML = new XML(textarea.text);
+				Alert.show(myXML.video[0].@id);
+			}
+		
+		]]>
+	</mx:Script>
+	
+	<mx:VBox>
+		<mx:TextArea id="textarea" width="300" height="400" />
+		<mx:Button width="300" label="Action!" click="parseXML()" />		
+	</mx:VBox>
 	
 </mx:Application>
