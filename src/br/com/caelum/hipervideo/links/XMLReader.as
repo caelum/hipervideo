@@ -1,6 +1,6 @@
 package br.com.caelum.hipervideo.links
 {
-	import mx.controls.Alert;
+	import com.jeroenwijering.utils.Strings;
 	
 	public class XMLReader
 	{
@@ -17,7 +17,7 @@ package br.com.caelum.hipervideo.links
 			for each (var link:XML in xml.link) {
 				linkArray.push(
 					new Link(link.content,
-							link.startTime, link.endTime,
+							Strings.seconds(link.startTime), Strings.seconds(link.endTime),
 							link.topLeft.x, link.topLeft.y,
 							link.bottomRight.x, link.bottomRight.y)
 				);
