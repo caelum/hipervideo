@@ -78,10 +78,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		format.font = "_sans";
 		format.leading = 4;
 		field = new TextField();
-		field.width = 400;
-		field.height = 10;
-		field.y = 5;
-		field.autoSize = "center";
+		field.border = true;
+		field.borderColor = 0xAAAAFF;
+		field.x = Infinity;
 		field.selectable = false;
 		field.multiline = true;
 		field.wordWrap = true;
@@ -171,8 +170,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		/* Translate from link class to internal representation*/
 		for each (var link:Link in linkArray) {
-			captions.push({begin:link.startTime, text:link.content});
-			captions.push({begin:link.endTime, text:''});
+			captions.push({begin:link.startTime, text:link.content,
+							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
+							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
+			captions.push({begin:link.endTime, text:'',
+							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
+							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 		}
 		
 		if(captions.length == 0) {
@@ -215,6 +218,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			if(captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
 				current = i;
 				field.htmlText = captions[i]['text'];
+				field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
+				field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
+				field.x = captions[i]['topLeft_x'];
+				field.y = - captions[i]['bottomRight_y'];
 				resizeHandler();
 				Logger.log(captions[i]['text'],'hipervideo');
 				return;
