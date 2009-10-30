@@ -1,0 +1,36 @@
+<plugin>
+	<title>Captions</title>
+	<filename>captions.swf</filename>
+	<version>1</version>
+	<compatibility>Compatible with 4.2; controlbar button works from 4.3; back/fontsize/state flashvars work from 4.4; dock button works from 4.5</compatibility>
+	<author>LongTail Video</author>
+	<description>This plugin plays closed captions with a video.
+		For the 4.3 player or higher, the plugin will place a  button in the controlbar.
+		For the 4.5 button or higher, the plugin can also place a button in the dock.
+	</description>
+	<href>http://developer.longtailvideo.com/trac/browser/plugins/captions</href>
+
+	<flashvars>
+		<flashvar>
+			<name>back</name>
+			<default>false</default>
+			<description>Set this to "true" to show a semitransparent backdrop that makes the captions more readable.</description>
+		</flashvar>
+		<flashvar>
+			<name>file</name>
+			<default></default>
+			<description>Location of the captions in (TimedText or SRT format) to display.</description>
+		</flashvar>
+		<flashvar>
+			<name>fontsize</name>
+			<default>14</default>
+			<description>Size of the captions font. Default is 14. The captions scale automatically, but this flashvar can be used to enlarge/shrink the baseline.</description>
+		</flashvar>
+		<flashvar>
+			<name>state</name>
+			<default>true</default>
+			<description>Set this to false to turn off the captions by default.</description>
+		</flashvar>
+	</flashvars>
+
+</plugin>
