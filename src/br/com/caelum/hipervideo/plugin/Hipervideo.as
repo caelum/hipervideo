@@ -1,7 +1,7 @@
 /**
 * Plugin for playing closed captions and a closed audiodescription with a video.
 **/
-package com.jeroenwijering.plugins {
+package br.com.caelum.hipervideo.plugin {
 
 
 import com.jeroenwijering.events.*;
@@ -18,9 +18,9 @@ import flash.text.*;
 public class Hipervideo extends MovieClip implements PluginInterface {
 
 
-	[Embed(source="../../../controlbar.png")]
+	[Embed(source="../../../../../controlbar.png")]
 	private const ControlbarIcon:Class;
-	[Embed(source="../../../dock.png")]
+	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
 
 
