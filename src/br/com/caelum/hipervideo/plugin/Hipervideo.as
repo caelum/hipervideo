@@ -4,6 +4,9 @@
 package br.com.caelum.hipervideo.plugin {
 
 
+import br.com.caelum.hipervideo.links.Link;
+import br.com.caelum.hipervideo.links.XMLReader;
+
 import com.jeroenwijering.events.*;
 import com.jeroenwijering.parsers.*;
 import com.jeroenwijering.utils.Logger;
@@ -164,7 +167,14 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
-		captions = TTParser.parseCaptions(XML(evt.target.data));
+		var linkArray:Array = new XMLReader(new XML(evt.target.data)).extract();
+		
+		/* Translate from link class to internal representation*/
+		for each (var link:Link in linkArray) {
+			captions.push({begin:link.startTime, text:link.content});
+			captions.push({begin:link.endTime, text:''});
+		}
+		
 		if(captions.length == 0) {
 			Logger.log('Not a valid file.','hipervideo');
 		}

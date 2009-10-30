@@ -1,0 +1,42 @@
+<links>
+	<link>
+		<content>Esta legenda vem de um arquivo XML.</content>
+		<startTime>00:00:00.5</startTime>
+		<endTime>00:00:02</endTime>
+		<topLeft>
+			<x>50</x>
+			<y>70</y>
+		</topLeft>
+		<bottomRight>
+			<x>100</x>
+			<y>130</y>
+		</bottomRight>
+	</link>
+	<link>
+		<content>O formato final ainda não está definido.</content>
+		<startTime>00:00:02.5</startTime>
+		<endTime>00:00:04.00</endTime>
+		<topLeft>
+			<x>150</x>
+			<y>170</y>
+		</topLeft>
+		<bottomRight>
+			<x>1100</x>
+			<y>1130</y>
+		</bottomRight>
+	</link>
+	<link>
+		<content>E o posicionamento não foi implementado ainda.</content>
+		<startTime>00:00:04.5</startTime>
+		<endTime>00:00:06.00</endTime>
+		<topLeft>
+			<x>150</x>
+			<y>170</y>
+		</topLeft>
+		<bottomRight>
+			<x>1100</x>
+			<y>1130</y>
+		</bottomRight>
+	</link>
+	
+</links>
