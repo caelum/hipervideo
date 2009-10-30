@@ -1,8 +1,8 @@
-package test.links
+package test.br.com.caelum.hipervideo.links
 {
 	import asunit.framework.TestCase;
 	
-	import links.XMLReader;
+	import br.com.caelum.hipervideo.links.XMLReader;
 	
 	public class XMLReaderTest extends TestCase
 	{

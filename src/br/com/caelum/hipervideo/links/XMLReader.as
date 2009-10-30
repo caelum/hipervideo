@@ -1,4 +1,4 @@
-package links
+package br.com.caelum.hipervideo.links
 {
 	import mx.controls.Alert;
 	
