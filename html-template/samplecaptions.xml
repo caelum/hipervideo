@@ -1,0 +1,12 @@
+<tt xml:lang="en" xmlns="http://www.w3.org/2006/10/ttaf1" xmlns:tts="http://www.w3.org/2006/10/ttaf1#style">
+  <head>
+    <layout />
+  </head>
+  <body>
+    <div xml:id="captions">
+      <p begin="00:00:01" end="00:00:02">Primeira mensagem</p>
+      <p begin="00:00:03.5" end="00:00:4.5">Segunda mensagem</p>
+      <p begin="00:00:05" end="00:00:06">Terceira mensagem</p>
+    </div>
+  </body>
+</tt>
