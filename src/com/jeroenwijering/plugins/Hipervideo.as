@@ -15,7 +15,7 @@ import flash.net.*;
 import flash.text.*;
 
 
-public class Captions extends MovieClip implements PluginInterface {
+public class Hipervideo extends MovieClip implements PluginInterface {
 
 
 	[Embed(source="../../../controlbar.png")]
@@ -51,7 +51,7 @@ public class Captions extends MovieClip implements PluginInterface {
 	private var button:MovieClip;
 
 
-	public function Captions() {
+	public function Hipervideo() {
 		loader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
 	};

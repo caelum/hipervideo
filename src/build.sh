@@ -4,5 +4,5 @@ FLEXPATH=/home/pmatiello/Desktop/flex-builder/sdks/3.0.0/
 
 
 echo "Compiling with MXMLC..."
-mkdir -p ../html-template/plugins/captions/
-$FLEXPATH/bin/mxmlc ./com/jeroenwijering/plugins/Captions.as -sp ./ -o ../bin-debug/plugins/captions/captions.swf -use-network=false
+mkdir -p ../bin-debug/plugins/hipervideo/
+$FLEXPATH/bin/mxmlc ./com/jeroenwijering/plugins/Hipervideo.as -sp ./ -o ../bin-debug/plugins/hipervideo/hipervideo.swf -use-network=false
