@@ -163,15 +163,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 
 	/** Captions are loaded; now display them. **/
-	private function loaderHandler(evt:Event):void {
-		var ext:String = config['file'].substr(-3);
-		if(ext == 'srt' || ext == 'txt') {
-			captions = SRTParser.parseCaptions(String(evt.target.data));
-		} else { 
-			captions = TTParser.parseCaptions(XML(evt.target.data));
-		}
+	private function loaderHandler(evt:Event):void { 
+		captions = TTParser.parseCaptions(XML(evt.target.data));
 		if(captions.length == 0) {
-			Logger.log('Not a valid TimedText or SRT file.','captions');
+			Logger.log('Not a valid file.','hipervideo');
 		}
 	};
 
