@@ -109,7 +109,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			}
 		}
 		var cke:SharedObject = SharedObject.getLocal('com.jeroenwijering','/');
-		cke.data['captions.state'] = stt;
+		cke.data['hipervideo.state'] = stt;
 		cke.flush();
 	};
 
@@ -129,7 +129,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			button = view.getPlugin('dock').addButton(new DockIcon(),'is on',clickHandler);
 		} else if (view.getPlugin('controlbar')) {
 			icon = new ControlbarIcon();
-			view.getPlugin('controlbar').addButton(icon,'captions',clickHandler);
+			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 		}
 		hide(config['state']);
 	};
@@ -142,21 +142,21 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		config['file'] = undefined;
 		field.htmlText = '';
 		var file:String;
-		if (view.playlist[view.config['item']]['captions.file']){
-			file = view.playlist[view.config['item']]['captions.file'];
-		} else if (view.playlist[view.config['item']]['captions']){
-			file = view.playlist[view.config['item']]['captions']; 
-		} else if(view.config['captions.file']) {
-			file = view.config['captions.file'];
-		} else if(view.config['captions']) {
-			file = view.config['captions'];
+		if (view.playlist[view.config['item']]['hipervideo.file']){
+			file = view.playlist[view.config['item']]['hipervideo.file'];
+		} else if (view.playlist[view.config['item']]['hipervideo']){
+			file = view.playlist[view.config['item']]['hipervideo']; 
+		} else if(view.config['hipervideo.file']) {
+			file = view.config['hipervideo.file'];
+		} else if(view.config['hipervideo']) {
+			file = view.config['hipervideo'];
 		}
 		if(file) {
 			config['file'] = file;
 			try {
 				loader.load(new URLRequest(config['file']));
 			} catch (err:Error) {
-				Logger.log(err.message,'captions');
+				Logger.log(err.message,'hipervideo');
 			}
 		}
 	};
@@ -180,7 +180,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private function metaHandler(evt:ModelEvent):void {
 		var txt:String;
 		var fnd:Boolean;
-		if(evt.data.type == 'caption') {
+		if(evt.data.type == 'hipervideo') {
 			txt = evt.data.captions;
 			fnd = true;
 		} else if (evt.data.type == 'textdata') {
@@ -190,7 +190,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		if(fnd == true) {
 			field.htmlText = txt+' ';
 			resizeHandler();
-			Logger.log(txt,'caption');
+			Logger.log(txt,'hipervideo');
 		}
 	};
 
@@ -211,7 +211,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				current = i;
 				field.htmlText = captions[i]['text'];
 				resizeHandler();
-				Logger.log(captions[i]['text'],'caption');
+				Logger.log(captions[i]['text'],'hipervideo');
 				return;
 			}
 		}
