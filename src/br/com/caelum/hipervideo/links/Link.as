@@ -4,17 +4,17 @@ package br.com.caelum.hipervideo.links
 	{
 		
 		public var content:String;
-		public var startTime:int;
-		public var endTime:int;
-		public var topLeft_x:int;
-		public var topLeft_y:int;
-		public var bottomRight_x:int;
-		public var bottomRight_y:int;
+		public var startTime:Number;
+		public var endTime:Number;
+		public var topLeft_x:Number;
+		public var topLeft_y:Number;
+		public var bottomRight_x:Number;
+		public var bottomRight_y:Number;
 		
 		public function Link(content:String,
-							startTime:int, endTime:int,
-							topLeft_x:int, topLeft_y:int,
-							bottomRight_x:int, bottomRight_y:int)
+							startTime:Number, endTime:Number,
+							topLeft_x:Number, topLeft_y:Number,
+							bottomRight_x:Number, bottomRight_y:Number)
 		{
 			this.content = content;
 			this.startTime = startTime;
