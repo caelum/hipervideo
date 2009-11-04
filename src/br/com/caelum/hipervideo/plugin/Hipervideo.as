@@ -171,7 +171,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 			captions.push({begin:link.endTime, text:'',
-							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
+							topLeft_x:Infinity, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 		}
 		
