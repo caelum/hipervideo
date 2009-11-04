@@ -17,6 +17,8 @@ import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
+import mx.controls.Alert;
+
 
 public class Hipervideo extends MovieClip implements PluginInterface {
 
@@ -59,13 +61,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
 	};
 
-
-	/** Clicking the  hide button. **/
-	private function clickHandler(evt:MouseEvent):void {
-		hide(!config['state']);
-	};
-
-
+	
 	private function drawClip():void {
 		back = new MovieClip();
 		back.graphics.beginFill(0x000000,0.75);
@@ -79,12 +75,15 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		format.leading = 4;
 		field = new TextField();
 		field.border = true;
-		field.borderColor = 0xAAAAFF;
+		field.borderColor = 0xAAFFFF;
 		field.x = Infinity;
 		field.selectable = false;
 		field.multiline = true;
 		field.wordWrap = true;
 		field.defaultTextFormat = format;
+		field.mouseEnabled = true;
+		addEventListener(MouseEvent.CLICK, clickHandler);
+		field.addEventListener(MouseEvent.CLICK, clickHandler);
 		addChild(field);
 		if(config['back'] == false) {
 			back.alpha = 0;
@@ -125,10 +124,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		view.addModelListener(ModelEvent.STATE,stateHandler);
 		view.addModelListener(ModelEvent.META,metaHandler);
 		drawClip();
-		mouseEnabled = false;
-		mouseChildren = false;
 		if(view.config['dock']) {
-			button = view.getPlugin('dock').addButton(new DockIcon(),'is on',clickHandler);
+			button = view.getPlugin('dock').addButton(new DockIcon(),'is on', clickHandler);
 		} else if (view.getPlugin('controlbar')) {
 			icon = new ControlbarIcon();
 			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
@@ -221,7 +218,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
 				field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
 				field.x = captions[i]['topLeft_x'];
-				field.y = - captions[i]['bottomRight_y'];
+				field.y = - captions[i]['bottomRight_y']; 
 				resizeHandler();
 				Logger.log(captions[i]['text'],'hipervideo');
 				return;
@@ -229,6 +226,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	};
 
+	private function clickHandler(event:MouseEvent):void {
+		field.borderColor = 0xFFAAFF;
+	}
 
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
