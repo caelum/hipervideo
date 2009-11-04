@@ -3,15 +3,19 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import br.com.caelum.hipervideo.links.Link;
+			import br.com.caelum.hipervideo.links.XMLReader;
 			import mx.controls.Alert;
 		
 			private function fillTextArea():void {
-				textarea.text = "<videos><video id='1' name='abc xyz'><blah /></video><video id='2' name='123 ijk'><blah /></video></videos>";
+				textarea.text = ""
 			}
 		
 			private function parseXML():void {
-				var myXML:XML = new XML(textarea.text);
-				Alert.show(myXML.video[0].@id);
+				var links:Array = new XMLReader(new XML(textarea.text)).extract();
+				for each (var link:Link in links) {
+					Alert.show(link.content);
+				}
 			}
 		
 		]]>
