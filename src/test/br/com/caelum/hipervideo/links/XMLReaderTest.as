@@ -10,7 +10,7 @@ package test.br.com.caelum.hipervideo.links
 		private var xmlStr:String = ( <![CDATA[
 			<links>
 				<link>
-					<content type="text">Site da caelum</content>
+					<content type="text">Conteúdo em texto</content>
 					<startTime>00:00:10</startTime>
 					<endTime>00:01:20</endTime>
 					<topLeft>
@@ -23,7 +23,7 @@ package test.br.com.caelum.hipervideo.links
 					</bottomRight>
 				</link>
 				<link>
-					<content>Informacoes Gerais em um combo</content>
+					<content type="image">http://link-para-imagem.com</content>
 					<startTime>01:00:01</startTime>
 					<endTime>01:10:10.5</endTime>
 					<topLeft>
@@ -46,8 +46,8 @@ package test.br.com.caelum.hipervideo.links
 		}
 		
 		public function testReadLinkContents():void {
-			assertEquals("Site da caelum", linkArray[0].content);
-			assertEquals("Informacoes Gerais em um combo", linkArray[1].content);
+			assertEquals("Conteúdo em texto", linkArray[0].content);
+			assertEquals("http://link-para-imagem.com", linkArray[1].content);
 		}
 		
 		public function testReadLinkTime():void {
@@ -67,6 +67,12 @@ package test.br.com.caelum.hipervideo.links
 			assertEquals(1100, linkArray[1].bottomRight_x);
 			assertEquals(1130, linkArray[1].bottomRight_y);
 		}
+		
+		public function testVerifyContentType():void {
+			assertEquals("text", linkArray[0].contentType);
+			assertEquals("image", linkArray[1].contentType);
+		}
+
 		
 		public function testReadXMLWithNoLinks():void {
 			var xmlStr:String = ( <![CDATA[
@@ -89,6 +95,6 @@ package test.br.com.caelum.hipervideo.links
 			
 			assertEquals(0, linkArray.length);
 		}
-
+		
 	}
 }

@@ -4,6 +4,7 @@ package br.com.caelum.hipervideo.links
 	{
 		
 		public var content:String;
+		public var contentType:String;
 		public var startTime:Number;
 		public var endTime:Number;
 		public var topLeft_x:Number;
@@ -11,12 +12,13 @@ package br.com.caelum.hipervideo.links
 		public var bottomRight_x:Number;
 		public var bottomRight_y:Number;
 		
-		public function Link(content:String,
+		public function Link(content:String, contentType:String,
 							startTime:Number, endTime:Number,
 							topLeft_x:Number, topLeft_y:Number,
 							bottomRight_x:Number, bottomRight_y:Number)
 		{
 			this.content = content;
+			this.contentType = contentType;
 			this.startTime = startTime;
 			this.endTime = endTime;
 			this.topLeft_x = topLeft_x;
