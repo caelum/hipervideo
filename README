@@ -1,0 +1,25 @@
+----------------------------------------------------------------
+SIGA OS PASSOS ABAIXO, UM DE CADA VEZ, E NÃO PULE NENHUMA ETAPA.
+----------------------------------------------------------------
+
+Baixar Eclipse 3.3 ou 3.4
+
+Baixar plugin Flex Builder
+
+Instalar o plugin. Ele pedirá a localização do Eclipse.
+
+Baixe o projeto do Github.
+
+Importe para o Eclipse.
+
+Copie o arquivo build.sh.example da pasta src, criando um novo arquivo chamado build.sh, na mesma pasta.
+
+Altere a chave FLEXPATH, passando a localização do seu flex SDK.
+
+Faça um clean do projeto e verifique o console. Não pode aparecer mensagens de erros.
+
+Abra o browser e acesse o arquivo video.html, dentro da pasta bin-debug.
+Ex: file:///Users/nakamura/Documents/workspace_flex/hipervideo/bin-debug/video.html
+
+Deve aparecer um vídeo no canto superior esquerdo. 
+
