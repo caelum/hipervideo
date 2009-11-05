@@ -4,7 +4,6 @@ package br.com.caelum.hipervideo.links
 	
 	public class XMLReader
 	{
-		
 		private var xml:XML;
 		
 		public function XMLReader(xml:XML)
@@ -16,7 +15,8 @@ package br.com.caelum.hipervideo.links
 			var linkArray:Array = new Array();
 			for each (var link:XML in xml.link) {
 				linkArray.push(
-					new Link(link.content, link.content.@type,
+					new Link(link.content, link.content.@type, 
+							link.content.@textColor, link.content.@backgroundColor,
 							Strings.seconds(link.startTime), Strings.seconds(link.endTime),
 							link.topLeft.x, link.topLeft.y,
 							link.bottomRight.x, link.bottomRight.y)

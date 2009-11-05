@@ -17,6 +17,7 @@ import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
+import mx.styles.StyleManager;
 
 public class Hipervideo extends MovieClip implements PluginInterface {
 
@@ -84,6 +85,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		field.wordWrap = true;
 		field.defaultTextFormat = format;
 		field.mouseEnabled = true;
+		
 		addEventListener(MouseEvent.CLICK, clickHandler);
 		field.addEventListener(MouseEvent.CLICK, clickHandler);
 		
@@ -172,9 +174,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		/* Translate from link class to internal representation*/
 		for each (var link:Link in linkArray) {
 			captions.push({begin:link.startTime, content:link.content, contentType: link.contentType,
+							textColor: link.textColor, backgroundColor: link.backgroundColor,
+							hasBackgroundColor: link.hasBackgroundColor,
 							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 			captions.push({begin:link.endTime, content:null, contentType: link.contentType,
+							textColor: null, backgroundColor: null,
+							hasBackgroundColor: link.hasBackgroundColor,
 							topLeft_x:Infinity, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 		}
@@ -225,7 +231,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 						field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
 						field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
 						field.x = captions[i]['topLeft_x'];
-						field.y = - captions[i]['bottomRight_y']; 
+						field.y = - captions[i]['bottomRight_y'];
+						field.textColor = captions[i]['textColor'];
+						field.background = captions[i]['hasBackgroundColor'];
+						field.backgroundColor = captions[i]['backgroundColor'];
 						resizeHandler();
 					} else if (captions[i]['contentType'] == "image") {
 						child = addChild(img);

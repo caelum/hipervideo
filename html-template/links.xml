@@ -13,7 +13,7 @@
 		</bottomRight>
 	</link>
 	<link>
-		<content type="text"><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
+		<content type="text" textColor="0xFF0000" backgroundColor="0x0000FF" ><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
 		<startTime>00:00:02.5</startTime>
 		<endTime>00:00:04.00</endTime>
 		<topLeft>
