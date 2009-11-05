@@ -1,6 +1,6 @@
 <links>
 	<link>
-		<content><![CDATA[Esta legenda vem de um arquivo XML]]></content>
+		<content type="text"><![CDATA[Esta legenda vem de um arquivo XML]]></content>
 		<startTime>00:00:00.5</startTime>
 		<endTime>00:00:02</endTime>
 		<topLeft>
@@ -13,7 +13,7 @@
 		</bottomRight>
 	</link>
 	<link>
-		<content><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
+		<content type="text"><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
 		<startTime>00:00:02.5</startTime>
 		<endTime>00:00:04.00</endTime>
 		<topLeft>
@@ -26,12 +26,12 @@
 		</bottomRight>
 	</link>
 	<link>
-		<content><![CDATA[Mas a <b>formatação HTML</b> já <u>funciona.</u>]]></content>
+		<content type="image">controlbar.png</content>
 		<startTime>00:00:04.5</startTime>
 		<endTime>00:00:06.00</endTime>
 		<topLeft>
-			<x>175</x>
-			<y>100</y>
+			<x>20</x>
+			<y>20</y>
 		</topLeft>
 		<bottomRight>
 			<x>375</x>

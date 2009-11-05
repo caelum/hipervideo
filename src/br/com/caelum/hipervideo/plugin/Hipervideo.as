@@ -17,8 +17,6 @@ import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
-import mx.controls.Alert;
-
 
 public class Hipervideo extends MovieClip implements PluginInterface {
 
@@ -55,6 +53,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Reference to the dock button. **/
 	private var button:MovieClip;
 
+	private var img:Loader;
+	private var child:DisplayObject;
 
 	public function Hipervideo() {
 		loader = new URLLoader();
@@ -67,12 +67,14 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		back.graphics.beginFill(0x000000,0.75);
 		back.graphics.drawRect(0,0,400,20);
 		addChild(back);
+		
 		format = new TextFormat();
 		format.color = 0xFFFFFF;
 		format.size = config['fontsize'];
 		format.align = "center";
 		format.font = "_sans";
 		format.leading = 4;
+		
 		field = new TextField();
 		field.border = true;
 		field.borderColor = 0xAAFFFF;
@@ -84,7 +86,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		field.mouseEnabled = true;
 		addEventListener(MouseEvent.CLICK, clickHandler);
 		field.addEventListener(MouseEvent.CLICK, clickHandler);
-		addChild(field);
+		
+		img = new Loader();
+		
 		if(config['back'] == false) {
 			back.alpha = 0;
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
@@ -167,10 +171,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		/* Translate from link class to internal representation*/
 		for each (var link:Link in linkArray) {
-			captions.push({begin:link.startTime, text:link.content,
+			captions.push({begin:link.startTime, content:link.content, contentType: link.contentType,
 							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
-			captions.push({begin:link.endTime, text:'',
+			captions.push({begin:link.endTime, content:null, contentType: link.contentType,
 							topLeft_x:Infinity, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 		}
@@ -214,13 +218,26 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		for(var i:Number=0; i<captions.length; i++) {
 			if(captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
 				current = i;
-				field.htmlText = captions[i]['text'];
-				field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
-				field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
-				field.x = captions[i]['topLeft_x'];
-				field.y = - captions[i]['bottomRight_y']; 
-				resizeHandler();
-				Logger.log(captions[i]['text'],'hipervideo');
+				if (captions[i]['content'] != null) {
+					if (captions[i]['contentType'] == "text") {
+						child = addChild(field);	
+						field.htmlText = captions[i]['content'];
+						field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
+						field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
+						field.x = captions[i]['topLeft_x'];
+						field.y = - captions[i]['bottomRight_y']; 
+						resizeHandler();
+					} else if (captions[i]['contentType'] == "image") {
+						child = addChild(img);
+						img.load(new URLRequest(captions[i]['content']));
+						img.x = captions[i]['topLeft_x'];
+						img.y = - captions[i]['bottomRight_y'];
+					}
+				} else if (child != null) {
+					removeChild(child);
+					child = null;
+				}
+				Logger.log(captions[i]['content'],'hipervideo');
 				return;
 			}
 		}
