@@ -10,13 +10,42 @@
 
 	<!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
 	
-	<div id="preview" style="height: 260px;">
-		<object id="ply" height="260" width="400" type="application/x-shockwave-flash" name="ply" data="players/4.5.swf">
-			<param name="allowfullscreen" value="true"/>
-			<param name="allowscriptaccess" value="always"/>
-			<param name="flashvars" value="file=../video.flv&image=preview.jpg&height=260&width=400&plugins=plugins/hipervideo/hipervideo.swf&hipervideo.file=links.xml />
-		</object>
-	</div>
+	<div id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+	
+	<script type="text/javascript" src="swfobject.js"></script>
+	
+	<script type="text/javascript">
+            var s1 = new SWFObject("player-viral.swf","mpl","543","342","7","#8a8a8a");
+            s1.addParam('allowscriptaccess','always');
+            s1.addParam('allowfullscreen','true');
+            s1.addVariable('width','400');
+            s1.addVariable('height','260');
+            s1.addVariable('file','video.flv');
+            s1.addVariable('image','preview.jpg');
+            s1.addVariable('recommendations','http://test.video.lan/related/IouwhNQw/?xml=1');
+            s1.addVariable('repeat','list');
+            s1.addVariable('shuffle','false');
+            s1.addVariable('linkfromdisplay','true');
+            s1.addVariable('linktarget','_self');
+            s1.addVariable('javascriptid','delfivideo');
+            s1.addVariable('enablejs','true');
+            s1.addVariable('shownavigation','true');
+			s1.addParam('allownetworking','all');  
+			
+			s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf');
+			s1.addVariable('hipervideo.file', 'links.xml');
+							
+			//s1.addVariable('drelated.dxmlpath', 'relatedclips.xml'); //link to the XML containing related clips
+			//s1.addVariable('drelated.dposition', 'bottom'); // center, bottom, top
+			//s1.addVariable('drelated.dskin', 'skins/grayskin.swf'); //link to the skin
+			//s1.addVariable('drelated.dtarget', '_self'); // where to open the related videos when clicked on			
+			
+            s1.addVariable("autostart","false");
+            s1.addVariable("stretching","uniform");
+            s1.write("container");
+            
+    </script>
+	
 		
 	<!-- END OF THE PLAYER EMBEDDING -->
 
