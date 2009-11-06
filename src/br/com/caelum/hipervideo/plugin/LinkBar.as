@@ -3,6 +3,9 @@
 **/
 package br.com.caelum.hipervideo.plugin{
 
+import br.com.caelum.hipervideo.links.Link;
+import br.com.caelum.hipervideo.links.XMLReader;
+
 import com.jeroenwijering.events.*;
 
 import fl.transitions.*;
@@ -25,7 +28,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	/** initialize call for backward compatibility. **/
 	public var initialize:Function = initializePlugin;
 	
-	public var XMLLoader:URLLoader;
+	public var loader:URLLoader;
 	private var VideoXML:XML;
 	 
       private var _container:Object;
@@ -46,7 +49,6 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	  private var maxh:int;
 	 	  
       
-	
 	/** Constructor; nothing going on. **/
 	public function LinkBar() {
 		clip = this;
@@ -65,9 +67,9 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			loadMySkin();
 		}
 		//Otherwise move on to resizing stuff to match the clips measurements and load the thumbs
-		else{			
+		else{
 			resizeMe();
-			getRelatedClips(view.config['drelated.dxmlpath']);		
+			getRelatedClips(view.config['hipervideo.file']);		
 		}
 		view.addModelListener(ModelEvent.STATE,stateHandler);			
 	};
@@ -77,14 +79,13 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		var skinloader:Loader = new Loader();
 		skinloader.contentLoaderInfo.addEventListener(Event.COMPLETE,displaySkin);
 		skinloader.load(new URLRequest(view.config['drelated.dskin']));
-		
 	}
 	
 	/** The skin was loaded, display it, stretch it, and load the thumbs. **/	
 	private function displaySkin(e:Event):void{		
 		mySkin = e.target.content;
 		resizeMe();
-		getRelatedClips(view.config['drelated.dxmlpath']);		
+		getRelatedClips(view.config['hipervideo.file']);		
 	}
 	
 	/** Place the elements on stage, stretch and position them to meet our measurements. **/	
@@ -138,7 +139,6 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		Bg.y = 0;
 		
 		//Create a container object for the clips
-		//var mane:Container = new Container();
 		//var ContainerClass:Object = getDefinitionByName ("Container") as Class;
 		_container = clip.addChild(DisplayObject(new Sprite()));
 		
@@ -199,8 +199,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		var targetX:int;
 		if(showMe==true){
 			targetX = 0;
-		}
-		else{
+		} else {
 			targetX = -view.config['width'];		
 		}
 		var myTween:Object = new Tween(clip, "x", None.easeIn ,this.x,targetX,0.5,true)				
@@ -208,38 +207,41 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	
 	/** Load the XML for the related clips. **/		
 	private function getRelatedClips(path:String):void{
-		XMLLoader = new URLLoader();
-		XMLLoader.addEventListener(Event.COMPLETE,parseXML);
-		XMLLoader.load(new URLRequest(path));
+		loader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE,parseXML);
+		trace(path);
+		loader.load(new URLRequest(path));
 	}
 	
 	/** Parse the XML and do some magic with it. **/	
 	private function parseXML(e:Event):void {
-		VideoXML = new XML(e.target.data);
-		InfoElement["text"].text = VideoXML.title;
-		var VideoList:XMLList = VideoXML.video;
+		InfoElement["text"].text = "Todos os links";
+		 
+		var linkArray:Array = new XMLReader(new XML(e.target.data)).extract();
 		var i:int = 0
 		
-		//For each clip in xml, place an instance of the template to the container
-		for each(var video:XML in VideoList){
-			var VideoItem:Object = _container.addChild(DisplayObject(new TemplateClass()));
-			VideoItem["test"].text = video.title;
-			VideoItem.x = i*(VideoItem.thmask.width+5)+SpaceFromSides;			
-		
+		for each (var link:Link in linkArray) {
+			var item:Object = _container.addChild(DisplayObject(new TemplateClass()));
+			
+			item.x = i*(item.thmask.width+5)+SpaceFromSides;
+			
 			//Load the thumbnail
 			var thumbloader:Loader = new Loader();
 			thumbloader.contentLoaderInfo.addEventListener(Event.COMPLETE,resizeThumbs);
-			thumbloader.load(new URLRequest(video.thumb));			
-			VideoItem["holder_mc"].addChild(thumbloader);			
+			thumbloader.load(new URLRequest(link.thumbnail));
+			item["holder_mc"].addChild(thumbloader);
+			
+			item["test"].text = link.tooltip;
 			
 			//Make the clip remember what URL it should go to when clicked on
-			VideoItem.cliptarget = video.url;
+//			item.cliptarget = link.url;
 			
 			//Make the clickable area clickable
-			VideoItem.clickable.buttonMode = true;
-			VideoItem.clickable.addEventListener(MouseEvent.CLICK,playClip)
+			item.clickable.buttonMode = true;
+			item.clickable.addEventListener(MouseEvent.CLICK,playClip);
 			i++;
 		}
+		
 		// Set the min/max bounds for the shufflebuttons
 		shuffleBounds = [0-(i-4)*ClipWidth, 0]
 		
@@ -260,9 +262,9 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			  	e.target.content.width = e.target.width*ratio_y;
 			  	e.target.content.height = e.target.height*ratio_y;
 		  	}
-			
 	  	}
 	}
+	
 	// Guide the viewer to the link playing related clip when the clip thumb is clicked 
 	private function playClip(e:MouseEvent):void{
 		var request:URLRequest = new URLRequest(e.target.parent.cliptarget);

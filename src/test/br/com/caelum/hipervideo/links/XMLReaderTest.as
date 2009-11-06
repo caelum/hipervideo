@@ -111,7 +111,7 @@ package test.br.com.caelum.hipervideo.links
 		}
 		
 		public function testReadThumbnailDefaultWhenItIsNotInformed():void {
-			assertEquals("defaultThumb.jpg", linkArray[2].thumbnail);
+			assertEquals("thumbs/defaultThumb.jpg", linkArray[2].thumbnail);
 		}
 
 		public function testReadXMLWithNoLinks():void {

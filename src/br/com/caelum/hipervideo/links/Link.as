@@ -38,7 +38,7 @@ package br.com.caelum.hipervideo.links
 			}
 			this.tooltip = tooltip;
 			if (thumbnail == "") {
-				this.thumbnail = "defaultThumb.jpg";
+				this.thumbnail = "thumbs/defaultThumb.jpg";
 			} else {
 				this.thumbnail = thumbnail;
 			}
