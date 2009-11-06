@@ -5,18 +5,17 @@ package com.delfi.drelated{
 
 
 import com.jeroenwijering.events.*;
-import flash.display.*;
-//import flash.display.MovieClip;
-import flash.events.MouseEvent;
-import flash.events.Event;
-import flash.text.TextField;
-import flash.net.*;
-import flash.xml.*;
-import flash.utils.*;
-import flash.geom.*;
 
-import fl.transitions.*; 
-import fl.transitions.easing.*; 
+import fl.transitions.*;
+import fl.transitions.easing.*;
+
+import flash.display.*;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.*;
+import flash.net.*;
+import flash.utils.*;
+import flash.xml.*; 
 
 public class RelatedVideos extends MovieClip implements PluginInterface {
 
@@ -141,8 +140,9 @@ public class RelatedVideos extends MovieClip implements PluginInterface {
 		Bg.y = 0;
 		
 		//Create a container object for the clips
-		var ContainerClass:Object = getDefinitionByName ("Container") as Class;
-		_container = clip.addChild(DisplayObject(new ContainerClass()));
+		//var mane:Container = new Container();
+		//var ContainerClass:Object = getDefinitionByName ("Container") as Class;
+		_container = clip.addChild(DisplayObject(new Sprite()));
 		
 		//Analyse the dposition flashvar and place the elements according to it.
 		switch(view.config['drelated.dposition']) {
