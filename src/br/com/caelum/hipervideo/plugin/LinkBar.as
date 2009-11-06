@@ -6,6 +6,7 @@ package br.com.caelum.hipervideo.plugin{
 import br.com.caelum.hipervideo.links.Link;
 import br.com.caelum.hipervideo.links.XMLReader;
 
+import com.neoarchaic.ui.Tooltip;
 import com.jeroenwijering.events.*;
 
 import fl.transitions.*;
@@ -17,7 +18,9 @@ import flash.events.MouseEvent;
 import flash.geom.*;
 import flash.net.*;
 import flash.utils.*;
-import flash.xml.*; 
+import flash.xml.*;
+
+import mx.controls.ToolTip; 
 
 public class LinkBar extends MovieClip implements PluginInterface {
 
@@ -232,6 +235,8 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			item["holder_mc"].addChild(thumbloader);
 			
 			item["test"].text = link.tooltip;
+
+			Tooltip.subscribe(DisplayObject(item), link.tooltip, null);
 			
 			//Make the clip remember what URL it should go to when clicked on
 //			item.cliptarget = link.url;
