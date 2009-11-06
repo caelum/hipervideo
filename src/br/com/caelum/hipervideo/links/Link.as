@@ -7,6 +7,8 @@ package br.com.caelum.hipervideo.links
 		public var contentType:String;
 		public var textColor:uint;
 		public var backgroundColor:uint;
+		public var tooltip:String;
+		public var thumbnail:String;
 		public var startTime:Number;
 		public var endTime:Number;
 		public var topLeft_x:Number;
@@ -18,6 +20,7 @@ package br.com.caelum.hipervideo.links
 		
 		public function Link(content:String, contentType:String,
 							textColor:String, backgroundColor:String,
+							tooltip:String, thumbnail:String,
 							startTime:Number, endTime:Number,
 							topLeft_x:Number, topLeft_y:Number,
 							bottomRight_x:Number, bottomRight_y:Number)
@@ -32,6 +35,12 @@ package br.com.caelum.hipervideo.links
 			this.hasBackgroundColor = backgroundColor != "";
 			if (hasBackgroundColor) {
 				this.backgroundColor = uint(backgroundColor);
+			}
+			this.tooltip = tooltip;
+			if (thumbnail == "") {
+				this.thumbnail = "defaultThumb.jpg";
+			} else {
+				this.thumbnail = thumbnail;
 			}
 			this.startTime = startTime;
 			this.endTime = endTime;

@@ -1,8 +1,7 @@
 ﻿﻿/**
 * Show a YouTube searchbar that loads the results into the player.
 **/
-package com.delfi.drelated{
-
+package br.com.caelum.hipervideo.plugin{
 
 import com.jeroenwijering.events.*;
 
@@ -17,8 +16,7 @@ import flash.net.*;
 import flash.utils.*;
 import flash.xml.*; 
 
-public class RelatedVideos extends MovieClip implements PluginInterface {
-
+public class LinkBar extends MovieClip implements PluginInterface {
 
 	/** Reference to the View of the player. **/
 	private var view:AbstractView;
@@ -50,7 +48,7 @@ public class RelatedVideos extends MovieClip implements PluginInterface {
       
 	
 	/** Constructor; nothing going on. **/
-	public function RelatedVideos() {
+	public function LinkBar() {
 		clip = this;
 	};
 

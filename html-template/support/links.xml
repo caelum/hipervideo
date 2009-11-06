@@ -1,6 +1,8 @@
 <links>
 	<link>
 		<content type="text"><![CDATA[Esta legenda vem de um arquivo XML]]></content>
+		<tooltip></tooltip>
+		<thumbnail></thumbnail>
 		<startTime>00:00:00.5</startTime>
 		<endTime>00:00:02</endTime>
 		<topLeft>
@@ -14,6 +16,8 @@
 	</link>
 	<link>
 		<content type="text" textColor="0xFF0000" backgroundColor="0x0000FF" ><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
+		<tooltip></tooltip>
+		<thumbnail></thumbnail>
 		<startTime>00:00:02.5</startTime>
 		<endTime>00:00:04.00</endTime>
 		<topLeft>
@@ -27,6 +31,7 @@
 	</link>
 	<link>
 		<content type="image">controlbar.png</content>
+		<tooltip></tooltip>
 		<startTime>00:00:04.5</startTime>
 		<endTime>00:00:06.00</endTime>
 		<topLeft>
@@ -38,5 +43,4 @@
 			<y>50</y>
 		</bottomRight>
 	</link>
-	
 </links>

@@ -17,6 +17,7 @@ package br.com.caelum.hipervideo.links
 				linkArray.push(
 					new Link(link.content, link.content.@type, 
 							link.content.@textColor, link.content.@backgroundColor,
+							link.tooltip, link.thumbnail,
 							Strings.seconds(link.startTime), Strings.seconds(link.endTime),
 							link.topLeft.x, link.topLeft.y,
 							link.bottomRight.x, link.bottomRight.y)

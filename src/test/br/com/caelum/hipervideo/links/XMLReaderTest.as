@@ -11,6 +11,8 @@ package test.br.com.caelum.hipervideo.links
 			<links>
 				<link>
 					<content type="text">Conteúdo em texto</content>
+					<tooltip>Tooltip do link 1</tooltip>
+					<thumbnail>Thumbnail do link 1</thumbnail>
 					<startTime>00:00:10</startTime>
 					<endTime>00:01:20</endTime>
 					<topLeft>
@@ -24,6 +26,7 @@ package test.br.com.caelum.hipervideo.links
 				</link>
 				<link>
 					<content type="text" textColor="0xFF0000" backgroundColor="0xFFFFFF">Teste de cores</content>
+					<thumbnail>imagem_das_cores.jpg</thumbnail>
 					<startTime>00:00:10</startTime>
 					<endTime>00:01:20</endTime>
 					<topLeft>
@@ -96,6 +99,19 @@ package test.br.com.caelum.hipervideo.links
 			assertEquals(0xFF0000, linkArray[1].textColor);
 			assertEquals(0xFFFFFF, linkArray[1].backgroundColor);
 			assertEquals(true, linkArray[1].hasBackgroundColor);
+		}
+		
+		public function testReadTooltip():void {
+			assertEquals("Tooltip do link 1", linkArray[0].tooltip);
+		}
+		
+		public function testReadThumbnail():void {
+			assertEquals("Thumbnail do link 1", linkArray[0].thumbnail);
+			assertEquals("imagem_das_cores.jpg", linkArray[1].thumbnail);
+		}
+		
+		public function testReadThumbnailDefaultWhenItIsNotInformed():void {
+			assertEquals("defaultThumb.jpg", linkArray[2].thumbnail);
 		}
 
 		public function testReadXMLWithNoLinks():void {

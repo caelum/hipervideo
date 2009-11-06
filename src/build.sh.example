@@ -6,4 +6,4 @@ FLEXPATH=/home/pmatiello/Desktop/flex-builder/sdks/3.0.0/
 echo "Compiling with MXMLC..."
 mkdir -p ../bin-debug/plugins/hipervideo/
 $FLEXPATH/bin/mxmlc ./br/com/caelum/hipervideo/plugin/Hipervideo.as -sp ./ -o ../bin-debug/plugins/hipervideo/hipervideo.swf -use-network=false
-$FLEXPATH/bin/mxmlc ./com/delfi/drelated/RelatedVideos.as -sp ./ -library-path+=../libs/fl_package.swc -o ../bin-debug/plugins/hipervideo/drelated.swf -use-network=false -warnings=false
+$FLEXPATH/bin/mxmlc ./br/com/caelum/hipervideo/plugin/LinkBar.as -sp ./ -library-path+=../libs/fl_package.swc -o ../bin-debug/plugins/hipervideo/linkbar.swf -use-network=false -warnings=false
