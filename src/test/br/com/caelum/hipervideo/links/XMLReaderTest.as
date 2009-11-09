@@ -12,6 +12,7 @@ package test.br.com.caelum.hipervideo.links
 				<link>
 					<content type="text">Conteúdo em texto</content>
 					<tooltip>Tooltip do link 1</tooltip>
+					<url>http://algum-link.com</url>
 					<thumbnail>Thumbnail do link 1</thumbnail>
 					<startTime>00:00:10</startTime>
 					<endTime>00:01:20</endTime>
@@ -26,6 +27,7 @@ package test.br.com.caelum.hipervideo.links
 				</link>
 				<link>
 					<content type="text" textColor="0xFF0000" backgroundColor="0xFFFFFF">Teste de cores</content>
+					<url>http://link-qualquer.com</url>
 					<thumbnail>imagem_das_cores.jpg</thumbnail>
 					<startTime>00:00:10</startTime>
 					<endTime>00:01:20</endTime>
@@ -103,6 +105,15 @@ package test.br.com.caelum.hipervideo.links
 		
 		public function testReadTooltip():void {
 			assertEquals("Tooltip do link 1", linkArray[0].tooltip);
+		}
+		
+		public function testTooltipIsUrlIfNoTooltipSpecified():void {
+			assertEquals("http://link-qualquer.com", linkArray[1].tooltip);
+		}
+		
+		public function testReadLinkURL():void {
+			assertEquals("http://algum-link.com", linkArray[0].url);
+			assertEquals("http://link-qualquer.com", linkArray[1].url);
 		}
 		
 		public function testReadThumbnail():void {

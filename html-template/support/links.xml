@@ -1,7 +1,8 @@
 <links>
 	<link>
 		<content type="text"><![CDATA[Esta legenda vem de um arquivo XML]]></content>
-		<tooltip>Tooltip 1</tooltip>
+		<tooltip></tooltip>
+		<url>http://link1.com</url>
 		<thumbnail>thumbs/video10.jpg</thumbnail>
 		<startTime>00:00:00.5</startTime>
 		<endTime>00:00:02</endTime>
@@ -17,6 +18,7 @@
 	<link>
 		<content type="text" textColor="0xFF0000" backgroundColor="0x0000FF" ><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
 		<tooltip>Tooltip 2</tooltip>
+		<url>http://link2.com</url>
 		<thumbnail>thumbs/video11.jpg</thumbnail>
 		<startTime>00:00:02.5</startTime>
 		<endTime>00:00:04.00</endTime>
@@ -32,6 +34,7 @@
 	<link>
 		<content type="image">controlbar.png</content>
 		<tooltip>Tooltip 3</tooltip>
+		<url>http://link3.com</url>
 		<startTime>00:00:04.5</startTime>
 		<endTime>00:00:06.00</endTime>
 		<topLeft>
