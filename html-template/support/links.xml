@@ -17,7 +17,7 @@
 	</link>
 	<link>
 		<content type="text" textColor="0xFF0000" backgroundColor="0x0000FF" ><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
-		<tooltip>Tooltip 2</tooltip>
+		<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
 		<url>http://link2.com</url>
 		<thumbnail>thumbs/video11.jpg</thumbnail>
 		<startTime>00:00:02.5</startTime>

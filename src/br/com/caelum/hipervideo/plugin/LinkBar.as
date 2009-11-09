@@ -234,7 +234,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			thumbloader.load(new URLRequest(link.thumbnail));
 			item["holder_mc"].addChild(thumbloader);
 			
-			//item["test"].text = link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
+			item["test"].text = link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
 
 			Tooltip.subscribe(DisplayObject(item), link.tooltip, null);
 			
