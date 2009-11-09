@@ -137,7 +137,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		hide(config['state']);
 	};
 
-
 	/** Check for captions with a new item. **/
 	private function itemHandler(evt:ControllerEvent=null):void {
 		current = 0;
@@ -274,6 +273,15 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			visible = true;
 		} else {
 			visible = false;
+		}
+		if (view.config['state'] == ModelStates.PAUSED) {
+			trace("pause");
+			field.x = Infinity;
+			img.x = Infinity;
+		} else if (view.config['state'] == ModelStates.PLAYING) {
+			trace("play");
+			field.x = captions[current]['topLeft_x'];
+			img.x = captions[current]['topLeft_x'];
 		}
 	};
 
