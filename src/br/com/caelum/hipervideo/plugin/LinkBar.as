@@ -239,7 +239,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			Tooltip.subscribe(DisplayObject(item), link.tooltip, null);
 			
 			//Make the clip remember what URL it should go to when clicked on
-//			item.cliptarget = link.url;
+			item.cliptarget = link.url;
 			
 			//Make the clickable area clickable
 			item.clickable.buttonMode = true;
