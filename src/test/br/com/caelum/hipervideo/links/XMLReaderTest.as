@@ -8,133 +8,131 @@ package test.br.com.caelum.hipervideo.links
 	{
 		
 		private var xmlStr:String = ( <![CDATA[
-			<links>
-				<link>
-					<content type="text">Conteúdo em texto</content>
-					<tooltip>Tooltip do link 1</tooltip>
-					<url>http://algum-link.com</url>
-					<thumbnail>Thumbnail do link 1</thumbnail>
-					<startTime>00:00:10</startTime>
-					<endTime>00:01:20</endTime>
-					<topLeft>
-						<x>50</x>
-						<y>70</y>
-					</topLeft>
-					<bottomRight>
-						<x>100</x>
-						<y>130</y>
-					</bottomRight>
-				</link>
-				<link>
-					<content type="text" textColor="0xFF0000" backgroundColor="0xFFFFFF">Teste de cores</content>
-					<url>http://link-qualquer.com</url>
-					<thumbnail>imagem_das_cores.jpg</thumbnail>
-					<startTime>00:00:10</startTime>
-					<endTime>00:01:20</endTime>
-					<topLeft>
-						<x>50</x>
-						<y>70</y>
-					</topLeft>
-					<bottomRight>
-						<x>100</x>
-						<y>130</y>
-					</bottomRight>
-				</link>
-				<link>
-					<content type="image">http://link-para-imagem.com</content>
-					<startTime>01:00:01</startTime>
-					<endTime>01:10:10.5</endTime>
-					<topLeft>
-						<x>150</x>
-						<y>170</y>
-					</topLeft>
-					<bottomRight>
-						<x>1100</x>
-						<y>1130</y>
-					</bottomRight>
-				</link>
-			</links>
+			<elements>
+				<element>
+					<textContent>
+						Conteúdo em texto
+					</textContent>
+					
+					<link>
+						<tooltip>Tooltip do link 1</tooltip>
+						<url>http://algum-link.com</url>
+						<thumbnail>Thumbnail do link 1</thumbnail>
+					</link>
+					
+					<time start="00:00:10" duration="00:01:10"/>
+					<position x="50" y="70" height="60" width="50"/>
+				</element>
+				
+				<element>
+					<textContent color="0xFF0000" backgroundColor="0x0000FF">
+						Teste de cores
+					</textContent>
+					
+					<link>
+						<tooltip></tooltip>
+						<url>http://link-qualquer.com</url>
+						<thumbnail>imagem_das_cores.jpg</thumbnail>
+					</link>
+					
+					<time start="00:00:10" duration="00:01:10"/>
+					<position x="50" y="70" height="60" width="50"/>
+				</element>
+			
+				<element>
+					<imageContent>http://link-para-imagem.com</imageContent>
+					
+					<link>
+						<tooltip>Tooltip 3</tooltip>
+						<url>http://link1.com</url>
+						<thumbnail></thumbnail>
+					</link>
+					
+					<time start="01:00:01" duration="00:10:10.5"/>
+					<position x="150" y="170" height="960" width="950"/>
+				</element>
+			</elements>
 		]]> ).toString();
 
 		private var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-		private var linkArray:Array = xmlReader.extract();
+		private var elementArray:Array = xmlReader.extract();
 					
 		public function testReadCorrectNumberOfLinksFromXML():void {
-			assertEquals(3, linkArray.length);
+			assertEquals(3, elementArray.length);
 		}
 		
 		public function testReadLinkContents():void {
-			assertEquals("Conteúdo em texto", linkArray[0].content);
-			assertEquals("Teste de cores", linkArray[1].content);
-			assertEquals("http://link-para-imagem.com", linkArray[2].content);
+			assertEquals("Conteúdo em texto", elementArray[0].content);
+			assertEquals("Teste de cores", elementArray[1].content);
+			assertEquals("http://link-para-imagem.com", elementArray[2].content);
 		}
 		
 		public function testReadLinkTime():void {
-			assertEquals(10, linkArray[0].startTime);
-			assertEquals(80, linkArray[0].endTime);
-			assertEquals(3601, linkArray[2].startTime);
-			assertEquals(4210.5, linkArray[2].endTime);			
+			assertEquals(10, elementArray[0].start);
+			assertEquals(70, elementArray[0].duration);
+			assertEquals(3601, elementArray[2].start);
+			assertEquals(610.5, elementArray[2].duration);			
 		}
 		
 		public function testReadLinkPosition():void {
-			assertEquals(50, linkArray[0].topLeft_x);
-			assertEquals(70, linkArray[0].topLeft_y);
-			assertEquals(100, linkArray[0].bottomRight_x);
-			assertEquals(130, linkArray[0].bottomRight_y);
-			assertEquals(150, linkArray[2].topLeft_x);
-			assertEquals(170, linkArray[2].topLeft_y);
-			assertEquals(1100, linkArray[2].bottomRight_x);
-			assertEquals(1130, linkArray[2].bottomRight_y);
+			assertEquals(50, elementArray[0].x);
+			assertEquals(70, elementArray[0].y);
+			assertEquals(50, elementArray[0].width);
+			assertEquals(60, elementArray[0].height);
+			assertEquals(150, elementArray[2].x);
+			assertEquals(170, elementArray[2].y);
+			assertEquals(950, elementArray[2].width);
+			assertEquals(960, elementArray[2].height);
 		}
 		
-		public function testVerifyContentType():void {
-			assertEquals("text", linkArray[0].contentType);
-			assertEquals("text", linkArray[1].contentType);
-			assertEquals("image", linkArray[2].contentType);
-		}
+//		public function testVerifyContentType():void {
+//			assertEquals("text", elementArray[0].contentType);
+//			assertEquals("text", elementArray[1].contentType);
+//			assertEquals("image", elementArray[2].contentType);
+//		}
 		
 		public function testReadTextColor():void {
-			assertEquals(0xFFFFFF, linkArray[0].textColor);
-			assertEquals(0, linkArray[0].backgroundColor);
-			assertEquals(false, linkArray[0].hasBackgroundColor);
+			assertEquals(0xFFFFFF, elementArray[0].color);
+			assertEquals(0, elementArray[0].backgroundColor);
+			assertEquals(false, elementArray[0].hasBackgroundColor);
 			
-			assertEquals(0xFF0000, linkArray[1].textColor);
-			assertEquals(0xFFFFFF, linkArray[1].backgroundColor);
-			assertEquals(true, linkArray[1].hasBackgroundColor);
+			assertEquals(0xFF0000, elementArray[1].color);
+			assertEquals(0x0000FF, elementArray[1].backgroundColor);
+			assertEquals(true, elementArray[1].hasBackgroundColor);
 		}
 		
 		public function testReadTooltip():void {
-			assertEquals("Tooltip do link 1", linkArray[0].tooltip);
+			assertEquals("Tooltip do link 1", elementArray[0].link.tooltip);
 		}
 		
 		public function testTooltipIsUrlIfNoTooltipSpecified():void {
-			assertEquals("http://link-qualquer.com", linkArray[1].tooltip);
+			assertEquals("http://link-qualquer.com", elementArray[1].link.tooltip);
 		}
 		
 		public function testReadLinkURL():void {
-			assertEquals("http://algum-link.com", linkArray[0].url);
-			assertEquals("http://link-qualquer.com", linkArray[1].url);
+			assertEquals("http://algum-link.com", elementArray[0].link.url);
+			assertEquals("http://link-qualquer.com", elementArray[1].link.url);
 		}
 		
 		public function testReadThumbnail():void {
-			assertEquals("Thumbnail do link 1", linkArray[0].thumbnail);
-			assertEquals("imagem_das_cores.jpg", linkArray[1].thumbnail);
+			assertEquals("Thumbnail do link 1", elementArray[0].link.thumbnail);
+			assertEquals("imagem_das_cores.jpg", elementArray[1].link.thumbnail);
 		}
 		
 		public function testReadThumbnailDefaultWhenItIsNotInformed():void {
-			assertEquals("thumbs/defaultThumb.jpg", linkArray[2].thumbnail);
+			assertEquals("thumbs/defaultThumb.jpg", elementArray[2].link.thumbnail);
 		}
 
-		public function testReadXMLWithNoLinks():void {
+		public function testReadXMLWithNoElements():void {
 			var xmlStr:String = ( <![CDATA[
-				<links>
-				</links>
+				<elements>
+				</elements>
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var linkArray:Array = xmlReader.extract();
+			var elementArray:Array = xmlReader.extract();
 			
-			assertEquals(0, linkArray.length);
+			assertEquals(0, elementArray.length);
 		}
 		
 		public function testReadEmptyXML():void {
@@ -142,9 +140,9 @@ package test.br.com.caelum.hipervideo.links
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var linkArray:Array = xmlReader.extract();
+			var elementArray:Array = xmlReader.extract();
 			
-			assertEquals(0, linkArray.length);
+			assertEquals(0, elementArray.length);
 		}
 		
 	}

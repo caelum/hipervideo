@@ -13,14 +13,14 @@ package br.com.caelum.hipervideo.links
 		
 		public function extract():Array {
 			var linkArray:Array = new Array();
-			for each (var link:XML in xml.link) {
+			for each (var element:XML in xml.element) {
 				linkArray.push(
-					new Link(link.content, link.content.@type, 
-							link.content.@textColor, link.content.@backgroundColor,
-							link.tooltip, link.thumbnail, link.url,
-							Strings.seconds(link.startTime), Strings.seconds(link.endTime),
-							link.topLeft.x, link.topLeft.y,
-							link.bottomRight.x, link.bottomRight.y)
+					new Element(element.textContent, element.imageContent,
+							element.textContent.@color, element.textContent.@backgroundColor,
+							element.link.tooltip, element.link.thumbnail, element.link.url,
+							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
+							element.position.@x, element.position.@y,
+							element.position.@width, element.position.@height)
 				);
 			}
 			return linkArray;

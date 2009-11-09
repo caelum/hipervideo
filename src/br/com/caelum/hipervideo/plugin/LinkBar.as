@@ -3,7 +3,7 @@
 **/
 package br.com.caelum.hipervideo.plugin{
 
-import br.com.caelum.hipervideo.links.Link;
+import br.com.caelum.hipervideo.links.Element;
 import br.com.caelum.hipervideo.links.XMLReader;
 
 import com.neoarchaic.ui.Tooltip;
@@ -223,7 +223,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		var linkArray:Array = new XMLReader(new XML(e.target.data)).extract();
 		var i:int = 0
 		
-		for each (var link:Link in linkArray) {
+		for each (var link:Element in linkArray) {
 			var item:Object = _container.addChild(DisplayObject(new TemplateClass()));
 			
 			item.x = i*(item.thmask.width+5)+SpaceFromSides;

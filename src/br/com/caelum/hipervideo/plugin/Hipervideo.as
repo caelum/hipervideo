@@ -4,7 +4,7 @@
 package br.com.caelum.hipervideo.plugin {
 
 
-import br.com.caelum.hipervideo.links.Link;
+import br.com.caelum.hipervideo.links.Element;
 import br.com.caelum.hipervideo.links.XMLReader;
 
 import com.jeroenwijering.events.*;
@@ -169,17 +169,17 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		var linkArray:Array = new XMLReader(new XML(evt.target.data)).extract();
 		
 		/* Translate from link class to internal representation*/
-		for each (var link:Link in linkArray) {
-			captions.push({begin:link.startTime, content:link.content, contentType: link.contentType,
-							textColor: link.textColor, backgroundColor: link.backgroundColor,
+		for each (var link:Element in linkArray) {
+			captions.push({begin:link.start, content:link.content, contentType: link.contentType,
+							textColor: link.color, backgroundColor: link.backgroundColor,
 							hasBackgroundColor: link.hasBackgroundColor, url: link.url,
-							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
-							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
-			captions.push({begin:link.endTime, content:null, contentType: link.contentType,
+							topLeft_x:link.x, topLeft_y:link.y,
+							bottomRight_x:link.bottomRight_x, bottomRight_y:link.height});
+			captions.push({begin:link.duration, content:null, contentType: link.contentType,
 							textColor: null, backgroundColor: null, url: link.url,
 							hasBackgroundColor: link.hasBackgroundColor,
-							topLeft_x:Infinity, topLeft_y:link.topLeft_y,
-							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
+							topLeft_x:Infinity, topLeft_y:link.y,
+							bottomRight_x:link.bottomRight_x, bottomRight_y:link.height});
 		}
 		
 		if(captions.length == 0) {

@@ -3,7 +3,7 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import br.com.caelum.hipervideo.links.Link;
+			import br.com.caelum.hipervideo.links.Element;
 			import br.com.caelum.hipervideo.links.XMLReader;
 			import mx.controls.Alert;
 		
@@ -13,7 +13,7 @@
 		
 			private function parseXML():void {
 				var links:Array = new XMLReader(new XML(textarea.text)).extract();
-				for each (var link:Link in links) {
+				for each (var link:Element in links) {
 					Alert.show(link.content);
 				}
 			}
