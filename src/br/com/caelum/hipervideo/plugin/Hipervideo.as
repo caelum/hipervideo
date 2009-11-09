@@ -251,18 +251,16 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	};
 
 	private function clickHandler(event:MouseEvent):void {
-		var request:URLRequest = new URLRequest(captions[current]['url']);
-		
 		if(view.config['hipervideo.target']!=undefined){
 			try {
-			  navigateToURL(request, view.config['hipervideo.target']); 
+			  navigateToURL(new URLRequest(captions[current]['url']), view.config['hipervideo.target']); 
 			} catch (e:Error) {
 			  trace("Error occurred!");
 			}
 		}
 		else{
 			try {
-			  navigateToURL(request); 
+			  navigateToURL(new URLRequest(captions[current]['url'])); 
 			} catch (e:Error) {
 			  trace("Error occurred!");
 			}
