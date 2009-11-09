@@ -17,8 +17,6 @@ import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
-import mx.styles.StyleManager;
-
 public class Hipervideo extends MovieClip implements PluginInterface {
 
 
@@ -175,11 +173,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		for each (var link:Link in linkArray) {
 			captions.push({begin:link.startTime, content:link.content, contentType: link.contentType,
 							textColor: link.textColor, backgroundColor: link.backgroundColor,
-							hasBackgroundColor: link.hasBackgroundColor,
+							hasBackgroundColor: link.hasBackgroundColor, url: link.url,
 							topLeft_x:link.topLeft_x, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
 			captions.push({begin:link.endTime, content:null, contentType: link.contentType,
-							textColor: null, backgroundColor: null,
+							textColor: null, backgroundColor: null, url: link.url,
 							hasBackgroundColor: link.hasBackgroundColor,
 							topLeft_x:Infinity, topLeft_y:link.topLeft_y,
 							bottomRight_x:link.bottomRight_x, bottomRight_y:link.bottomRight_y});
@@ -253,7 +251,22 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	};
 
 	private function clickHandler(event:MouseEvent):void {
-		field.borderColor = 0xFFAAFF;
+		var request:URLRequest = new URLRequest(captions[current]['url']);
+		
+		if(view.config['hipervideo.target']!=undefined){
+			try {
+			  navigateToURL(request, view.config['hipervideo.target']); 
+			} catch (e:Error) {
+			  trace("Error occurred!");
+			}
+		}
+		else{
+			try {
+			  navigateToURL(request); 
+			} catch (e:Error) {
+			  trace("Error occurred!");
+			}
+		}
 	}
 
 	/** Check timing of the player to sync captions. **/

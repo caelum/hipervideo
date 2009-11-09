@@ -274,9 +274,9 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	private function playClip(e:MouseEvent):void{
 		var request:URLRequest = new URLRequest(e.target.parent.cliptarget);
 
-		if(view.config['drelated.dtarget']!=undefined){
+		if(view.config['hipervideo.target']!=undefined){
 			try {
-			  navigateToURL(request, view.config['drelated.dtarget']); 
+			  navigateToURL(request, view.config['hipervideo.target']); 
 			} catch (e:Error) {
 			  trace("Error occurred!");
 			}
