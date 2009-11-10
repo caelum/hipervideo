@@ -1,7 +1,7 @@
 <elements>
 
 	<element>
-		<textContent color="0xFF0000" backgroundColor="0x0000FF">
+		<textContent>
 			<![CDATA[Esta legenda vem de um arquivo XML]]>
 		</textContent>
 		
@@ -12,69 +12,35 @@
 		</link>
 		
 		<time start="00:00:00.5" duration="00:00:02"/>
-		<position x="0" y="50" height="200" width="200"/>
+		<position x="20" y="80" height="50" width="200"/>
+	</element>
+	
+	<element>
+		<textContent color="0xFF0000" backgroundColor="0x0000FF">
+			<![CDATA[Esta legenda vem de um arquivo XML]]>
+		</textContent>
+		
+		<link>
+			<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
+			<url>http://link2.com</url>
+			<thumbnail>thumbs/video11.jpg</thumbnail>
+		</link>
+		
+		<time start="00:00:02.5" duration="00:00:02"/>
+		<position x="100" y="40" height="50" width="200"/>
 	</element>
 
 	<element>
-		<imageContent>controlbar.png</imageContent>
+		<imageContent>thumbs/zina.gif</imageContent>
 		
 		<link>
-			<tooltip>Tooltip 3</tooltip>
-			<url>http://link1.com</url>
-			<thumbnail>thumbs/video10.jpg</thumbnail>
+			<tooltip>Ronaldo</tooltip>
+			<url>http://link3.com</url>
+			<thumbnail>thumbs/zina.gif</thumbnail>
 		</link>
 		
-		<time start="00:00:00.5" duration="00:00:02"/>
-		<position x="20" y="20" height="30" width="355"/>
+		<time start="00:00:05" duration="00:00:01"/>
+		<position x="200" y="20" height="30" width="355"/>
 	</element>
 
-
-	<link>
-		<content type="text"><![CDATA[Esta legenda vem de um arquivo XML]]></content>
-		<tooltip></tooltip>
-		<url>http://link1.com</url>
-		<thumbnail>thumbs/video10.jpg</thumbnail>
-		<startTime>00:00:00.5</startTime>
-		<endTime>00:00:02</endTime>
-		<topLeft>
-			<x>0</x>
-			<y>50</y>
-		</topLeft>
-		<bottomRight>
-			<x>200</x>
-			<y>0</y>
-		</bottomRight>
-	</link>
-	<link>
-		<content type="text" textColor="0xFF0000" backgroundColor="0x0000FF" ><![CDATA[O <i>formato</i> final ainda não está definido]]></content>
-		<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
-		<url>http://link2.com</url>
-		<thumbnail>thumbs/video11.jpg</thumbnail>
-		<startTime>00:00:02.5</startTime>
-		<endTime>00:00:04.00</endTime>
-		<topLeft>
-			<x>100</x>
-			<y>75</y>
-		</topLeft>
-		<bottomRight>
-			<x>300</x>
-			<y>25</y>
-		</bottomRight>
-	</link>
-	<link>
-		<content type="image">controlbar.png</content>
-		<tooltip>Tooltip 3</tooltip>
-		<url>http://link3.com</url>
-		<startTime>00:00:04.5</startTime>
-		<endTime>00:00:06.00</endTime>
-		<topLeft>
-			<x>20</x>
-			<y>20</y>
-		</topLeft>
-		<bottomRight>
-			<x>375</x>
-			<y>50</y>
-		</bottomRight>
-	</link>
-	
 </elements>

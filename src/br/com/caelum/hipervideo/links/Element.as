@@ -16,6 +16,7 @@ package br.com.caelum.hipervideo.links
 		public var height:Number;
 		
 		public var hasBackgroundColor:Boolean;
+		public var isText:Boolean;
 		
 		public var link:Link;
 		
@@ -25,7 +26,8 @@ package br.com.caelum.hipervideo.links
 							start:Number, duration:Number,
 							x:Number, y:Number,
 							width:Number, height:Number) {
-			this.content = textContent == "" ? imageContent : textContent;
+			this.isText = textContent != "";
+			this.content = isText ? textContent : imageContent;
 			this.color =  color == "" ? 0xFFFFFF : uint(color);
 			
 			if (backgroundColor != "") {

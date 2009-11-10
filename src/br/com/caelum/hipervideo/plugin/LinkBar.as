@@ -220,10 +220,10 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	private function parseXML(e:Event):void {
 		InfoElement["text"].text = "Todos os links";
 		 
-		var linkArray:Array = new XMLReader(new XML(e.target.data)).extract();
+		var elementArray:Array = new XMLReader(new XML(e.target.data)).extract();
 		var i:int = 0
 		
-		for each (var link:Element in linkArray) {
+		for each (var element:Element in elementArray) {
 			var item:Object = _container.addChild(DisplayObject(new TemplateClass()));
 			
 			item.x = i*(item.thmask.width+5)+SpaceFromSides;
@@ -231,15 +231,15 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			//Load the thumbnail
 			var thumbloader:Loader = new Loader();
 			thumbloader.contentLoaderInfo.addEventListener(Event.COMPLETE,resizeThumbs);
-			thumbloader.load(new URLRequest(link.thumbnail));
+			thumbloader.load(new URLRequest(element.link.thumbnail));
 			item["holder_mc"].addChild(thumbloader);
 			
-			item["test"].text = link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
+			item["test"].text = element.link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
 
-			Tooltip.subscribe(DisplayObject(item), link.tooltip, null);
+			Tooltip.subscribe(DisplayObject(item), element.link.tooltip, null);
 			
 			//Make the clip remember what URL it should go to when clicked on
-			item.cliptarget = link.url;
+			item.cliptarget = element.link.url;
 			
 			//Make the clickable area clickable
 			item.clickable.buttonMode = true;
@@ -274,6 +274,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	private function playClip(e:MouseEvent):void{
 		var request:URLRequest = new URLRequest(e.target.parent.cliptarget);
 
+		trace("inicio playClip");
 		if(view.config['hipervideo.target']!=undefined){
 			try {
 			  navigateToURL(request, view.config['hipervideo.target']); 
@@ -288,6 +289,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			  trace("Error occurred!");
 			}
 		}
+		trace("fim playClip");
 	}
 	
 	// Make the clips slide smoothly when shuffled

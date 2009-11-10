@@ -166,20 +166,20 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
-		var linkArray:Array = new XMLReader(new XML(evt.target.data)).extract();
+		var elementArray:Array = new XMLReader(new XML(evt.target.data)).extract();
 		
 		/* Translate from link class to internal representation*/
-		for each (var link:Element in linkArray) {
-			captions.push({begin:link.start, content:link.content, contentType: link.contentType,
-							textColor: link.color, backgroundColor: link.backgroundColor,
-							hasBackgroundColor: link.hasBackgroundColor, url: link.url,
-							topLeft_x:link.x, topLeft_y:link.y,
-							bottomRight_x:link.bottomRight_x, bottomRight_y:link.height});
-			captions.push({begin:link.duration, content:null, contentType: link.contentType,
-							textColor: null, backgroundColor: null, url: link.url,
-							hasBackgroundColor: link.hasBackgroundColor,
-							topLeft_x:Infinity, topLeft_y:link.y,
-							bottomRight_x:link.bottomRight_x, bottomRight_y:link.height});
+		for each (var element:Element in elementArray) {
+			captions.push({begin:element.start, content:element.content, isText: element.isText,
+							textColor: element.color, backgroundColor: element.backgroundColor,
+							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
+							topLeft_x:element.x, topLeft_y:element.y,
+							width:element.width, height:element.height});
+			captions.push({begin:(element.start + element.duration), content:null, isText: element.isText,
+							textColor: null, backgroundColor: null, url: element.link.url,
+							hasBackgroundColor: element.hasBackgroundColor,
+							topLeft_x:Infinity, topLeft_y:element.y,
+							width:element.width, height:element.height});
 		}
 		
 		if(captions.length == 0) {
@@ -222,24 +222,29 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			if(captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
 				current = i;
 				if (captions[i]['content'] != null) {
-					if (captions[i]['contentType'] == "text") {
-						child = addChild(field);	
+					trace("topLeft_y = " + captions[i]['topLeft_y']);
+					
+					if (captions[i]['isText']) {
+						trace("adicionando texto");
+						child = addChild(field);
 						field.htmlText = captions[i]['content'];
-						field.width = captions[i]['bottomRight_x'] - captions[i]['topLeft_x'];
-						field.height = captions[i]['topLeft_y'] - captions[i]['bottomRight_y'];
+						field.width = captions[i]['width'];
+						field.height = captions[i]['height'];
 						field.x = captions[i]['topLeft_x'];
-						field.y = - captions[i]['bottomRight_y'];
+						field.y = - captions[i]['topLeft_y'];
 						field.textColor = captions[i]['textColor'];
 						field.background = captions[i]['hasBackgroundColor'];
 						field.backgroundColor = captions[i]['backgroundColor'];
 						resizeHandler();
-					} else if (captions[i]['contentType'] == "image") {
+					} else {
+						trace("adicionando imagem");
 						child = addChild(img);
 						img.load(new URLRequest(captions[i]['content']));
 						img.x = captions[i]['topLeft_x'];
-						img.y = - captions[i]['bottomRight_y'];
+						img.y = - captions[i]['topLeft_y'];
 					}
 				} else if (child != null) {
+					trace("removendo imagem");
 					removeChild(child);
 					child = null;
 				}
@@ -275,11 +280,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			visible = false;
 		}
 		if (view.config['state'] == ModelStates.PAUSED) {
-			trace("pause");
 			field.x = Infinity;
 			img.x = Infinity;
 		} else if (view.config['state'] == ModelStates.PLAYING) {
-			trace("play");
 			field.x = captions[current]['topLeft_x'];
 			img.x = captions[current]['topLeft_x'];
 		}
