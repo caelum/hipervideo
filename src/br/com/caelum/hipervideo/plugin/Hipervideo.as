@@ -256,8 +256,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	}
 
-	private var reloadCaption:Boolean = false;
-
 	private function clickHandler(event:MouseEvent):void {
 		if (captions[current]['url'] == "") {
 			if (child != null) {
@@ -292,12 +290,14 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			visible = false;
 		}
 		if (view.config['state'] == ModelStates.PAUSED) {
+			field.x = Infinity;
+			img.x = Infinity;
 			if (child != null) {
 				removeChild(child);
 				child = null;
 			}
 		} else if (view.config['state'] == ModelStates.PLAYING) {
-			reloadCaption = true;
+			trace("[ PLAY ]");
 		}
 	};
 
@@ -307,10 +307,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		if(captions && captions.length > 0 && (
 			captions[current]['begin'] > pos || 
 			(captions[current+1] && captions[current+1]['begin'] < pos))) {
-			setCaption(pos);
-		}
-		if (reloadCaption) {
-			reloadCaption = false;
+			trace("Entrei! #1");
 			setCaption(pos);
 		}
 	};
