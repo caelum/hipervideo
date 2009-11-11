@@ -54,6 +54,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	private var img:Loader;
 	private var child:DisplayObject;
+	
+	private var forceReload:Boolean = false;
 
 	public function Hipervideo() {
 		loader = new URLLoader();
@@ -298,6 +300,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			}
 		} else if (view.config['state'] == ModelStates.PLAYING) {
 			trace("[ PLAY ]");
+			forceReload = true;
 		}
 	};
 
@@ -308,6 +311,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			captions[current]['begin'] > pos || 
 			(captions[current+1] && captions[current+1]['begin'] < pos))) {
 			trace("Entrei! #1");
+			setCaption(pos);
+		} else if (forceReload) {
+			forceReload = false;
 			setCaption(pos);
 		}
 	};
