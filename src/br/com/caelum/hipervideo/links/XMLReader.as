@@ -16,8 +16,12 @@ package br.com.caelum.hipervideo.links
 			for each (var element:XML in xml.element) {
 				linkArray.push(
 					new Element(element.textContent, element.imageContent,
+							new Link(
+								element.link.tooltip, 
+								element.link.thumbnail, 
+								element.link.url, 
+								Strings.seconds(element.link.time)),
 							element.textContent.@color, element.textContent.@backgroundColor,
-							element.link.tooltip, element.link.thumbnail, element.link.url,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
 							element.position.@x, element.position.@y,
 							element.position.@width, element.position.@height)

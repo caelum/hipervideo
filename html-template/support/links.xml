@@ -11,7 +11,7 @@
 			<thumbnail>thumbs/video10.jpg</thumbnail>
 		</link>
 		
-		<time start="00:00:00.5" duration="00:00:02"/>
+		<time start="00:00:01" duration="00:00:02"/>
 		<position x="20" y="80" height="50" width="200"/>
 	</element>
 	
@@ -35,7 +35,7 @@
 		
 		<link>
 			<tooltip>Ronaldo</tooltip>
-			<url>http://link3.com</url>
+			<time>00:00:00.5</time>
 			<thumbnail>thumbs/zina.gif</thumbnail>
 		</link>
 		

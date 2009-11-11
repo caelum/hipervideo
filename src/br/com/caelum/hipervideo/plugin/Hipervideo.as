@@ -88,6 +88,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		field.addEventListener(MouseEvent.CLICK, clickHandler);
 		
 		img = new Loader();
+		img.addEventListener(MouseEvent.CLICK, clickHandler);
 		
 		if(config['back'] == false) {
 			back.alpha = 0;
@@ -173,10 +174,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			captions.push({begin:element.start, content:element.content, isText: element.isText,
 							textColor: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
+							time: element.link.time,
 							topLeft_x:element.x, topLeft_y:element.y,
 							width:element.width, height:element.height});
 			captions.push({begin:(element.start + element.duration), content:null, isText: element.isText,
 							textColor: null, backgroundColor: null, url: element.link.url,
+							time: element.link.time,
 							hasBackgroundColor: element.hasBackgroundColor,
 							topLeft_x:Infinity, topLeft_y:element.y,
 							width:element.width, height:element.height});
@@ -221,58 +224,65 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		for(var i:Number=0; i<captions.length; i++) {
 			if(captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
 				current = i;
-				if (captions[i]['content'] != null) {
-					trace("topLeft_y = " + captions[i]['topLeft_y']);
-					
-					if (captions[i]['isText']) {
-						trace("adicionando texto");
-						child = addChild(field);
-						field.htmlText = captions[i]['content'];
-						field.width = captions[i]['width'];
-						field.height = captions[i]['height'];
-						field.x = captions[i]['topLeft_x'];
-						field.y = - captions[i]['topLeft_y'];
-						field.textColor = captions[i]['textColor'];
-						field.background = captions[i]['hasBackgroundColor'];
-						field.backgroundColor = captions[i]['backgroundColor'];
-						resizeHandler();
-					} else {
-						trace("adicionando imagem");
-						child = addChild(img);
-						img.load(new URLRequest(captions[i]['content']));
-						img.x = captions[i]['topLeft_x'];
-						img.y = - captions[i]['topLeft_y'];
-					}
-				} else if (child != null) {
-					trace("removendo imagem");
-					removeChild(child);
-					child = null;
-				}
+				drawElement(i);
 				Logger.log(captions[i]['content'],'hipervideo');
 				return;
 			}
 		}
 	};
-
-	private function clickHandler(event:MouseEvent):void {
-		if(view.config['hipervideo.target']!=undefined){
-			try {
-			  navigateToURL(new URLRequest(captions[current]['url']), view.config['hipervideo.target']); 
-			} catch (e:Error) {
-			  trace("Error occurred!");
+	
+	private function drawElement(i:Number):void {
+		if (captions[i]['content'] != null) {
+			if (captions[i]['isText']) {
+				child = addChild(field);
+				field.htmlText = captions[i]['content'];
+				field.width = captions[i]['width'];
+				field.height = captions[i]['height'];
+				field.x = captions[i]['topLeft_x'];
+				field.y = - captions[i]['topLeft_y'];
+				field.textColor = captions[i]['textColor'];
+				field.background = captions[i]['hasBackgroundColor'];
+				field.backgroundColor = captions[i]['backgroundColor'];
+				resizeHandler();
+			} else {
+				child = addChild(img);
+				img.load(new URLRequest(captions[i]['content']));
+				img.x = captions[i]['topLeft_x'];
+				img.y = - captions[i]['topLeft_y'];
 			}
-		}
-		else{
-			try {
-			  navigateToURL(new URLRequest(captions[current]['url'])); 
-			} catch (e:Error) {
-			  trace("Error occurred!");
-			}
+		} else if (child != null) {
+			removeChild(child);
+			child = null;
 		}
 	}
 
+	private var reloadCaption:Boolean = false;
+
+	private function clickHandler(event:MouseEvent):void {
+		trace("clickHandler");
+		if (captions[current]['url'] == "") {
+			removeChild(child);
+		} else {
+			if(view.config['hipervideo.target']!=undefined){
+				try {
+				  navigateToURL(new URLRequest(captions[current]['url']), view.config['hipervideo.target']); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+			else{
+				try {
+				  navigateToURL(new URLRequest(captions[current]['url'])); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+		}
+	}
+	
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
+		trace("stateHandler");
 		if((view.config['state'] == ModelStates.PLAYING ||
 		 	view.config['state'] == ModelStates.PAUSED) && config['state']) {
 			visible = true;
@@ -280,14 +290,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			visible = false;
 		}
 		if (view.config['state'] == ModelStates.PAUSED) {
-			field.x = Infinity;
-			img.x = Infinity;
+			removeChild(child);
 		} else if (view.config['state'] == ModelStates.PLAYING) {
-			field.x = captions[current]['topLeft_x'];
-			img.x = captions[current]['topLeft_x'];
+			reloadCaption = true;
 		}
 	};
-
 
 	/** Check timing of the player to sync captions. **/
 	private function timeHandler(evt:ModelEvent):void {
@@ -297,8 +304,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			(captions[current+1] && captions[current+1]['begin'] < pos))) {
 			setCaption(pos);
 		}
+		if (reloadCaption) {
+			reloadCaption = false;
+			setCaption(pos);
+		}
 	};
-
 
 };
 

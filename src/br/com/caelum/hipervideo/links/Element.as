@@ -20,9 +20,9 @@ package br.com.caelum.hipervideo.links
 		
 		public var link:Link;
 		
-		public function Element(textContent:String, imageContent:String, 
+		public function Element(textContent:String, imageContent:String,
+							link:Link, 
 							color:String, backgroundColor:String,
-							tooltip:String, thumbnail:String, url:String,
 							start:Number, duration:Number,
 							x:Number, y:Number,
 							width:Number, height:Number) {
@@ -42,8 +42,8 @@ package br.com.caelum.hipervideo.links
 			this.y = y;
 			this.width = width;
 			this.height = height;
-			
-			this.link = new Link(tooltip, thumbnail, url);
+			this.link = link;			
+		
 		}
 
 	}

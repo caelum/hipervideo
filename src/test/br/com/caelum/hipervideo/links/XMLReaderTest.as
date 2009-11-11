@@ -44,7 +44,7 @@ package test.br.com.caelum.hipervideo.links
 					
 					<link>
 						<tooltip>Tooltip 3</tooltip>
-						<url>http://link1.com</url>
+						<time>00:02:15</time>
 						<thumbnail></thumbnail>
 					</link>
 					
@@ -85,12 +85,6 @@ package test.br.com.caelum.hipervideo.links
 			assertEquals(960, elementArray[2].height);
 		}
 		
-//		public function testVerifyContentType():void {
-//			assertEquals("text", elementArray[0].contentType);
-//			assertEquals("text", elementArray[1].contentType);
-//			assertEquals("image", elementArray[2].contentType);
-//		}
-		
 		public function testReadTextColor():void {
 			assertEquals(0xFFFFFF, elementArray[0].color);
 			assertEquals(0, elementArray[0].backgroundColor);
@@ -112,6 +106,13 @@ package test.br.com.caelum.hipervideo.links
 		public function testReadLinkURL():void {
 			assertEquals("http://algum-link.com", elementArray[0].link.url);
 			assertEquals("http://link-qualquer.com", elementArray[1].link.url);
+			assertEquals("", elementArray[2].link.url);
+		}
+		
+		public function testReadLinkSeekPosition():void {
+			assertEquals(0, elementArray[0].link.time);
+			assertEquals(0, elementArray[1].link.time);
+			assertEquals(135, elementArray[2].link.time);
 		}
 		
 		public function testReadThumbnail():void {

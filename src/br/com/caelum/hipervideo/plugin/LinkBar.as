@@ -6,8 +6,8 @@ package br.com.caelum.hipervideo.plugin{
 import br.com.caelum.hipervideo.links.Element;
 import br.com.caelum.hipervideo.links.XMLReader;
 
-import com.neoarchaic.ui.Tooltip;
 import com.jeroenwijering.events.*;
+import com.neoarchaic.ui.Tooltip;
 
 import fl.transitions.*;
 import fl.transitions.easing.*;
@@ -18,9 +18,7 @@ import flash.events.MouseEvent;
 import flash.geom.*;
 import flash.net.*;
 import flash.utils.*;
-import flash.xml.*;
-
-import mx.controls.ToolTip; 
+import flash.xml.*; 
 
 public class LinkBar extends MovieClip implements PluginInterface {
 
@@ -239,7 +237,8 @@ public class LinkBar extends MovieClip implements PluginInterface {
 			Tooltip.subscribe(DisplayObject(item), element.link.tooltip, null);
 			
 			//Make the clip remember what URL it should go to when clicked on
-			item.cliptarget = element.link.url;
+			item.url = element.link.url;
+			item.time = element.link.time;
 			
 			//Make the clickable area clickable
 			item.clickable.buttonMode = true;
@@ -272,24 +271,28 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	
 	// Guide the viewer to the link playing related clip when the clip thumb is clicked 
 	private function playClip(e:MouseEvent):void{
-		var request:URLRequest = new URLRequest(e.target.parent.cliptarget);
-
-		trace("inicio playClip");
-		if(view.config['hipervideo.target']!=undefined){
-			try {
-			  navigateToURL(request, view.config['hipervideo.target']); 
-			} catch (e:Error) {
-			  trace("Error occurred!");
+		var item:Object = e.target.parent;
+		
+		if (item.url == "") {
+			view.sendEvent("SEEK", item.time);
+		} else {
+			var request:URLRequest = new URLRequest(item.url);
+	
+			if(view.config['hipervideo.target']!=undefined){
+				try {
+				  navigateToURL(request, view.config['hipervideo.target']); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+			else{
+				try {
+				  navigateToURL(request); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
 			}
 		}
-		else{
-			try {
-			  navigateToURL(request); 
-			} catch (e:Error) {
-			  trace("Error occurred!");
-			}
-		}
-		trace("fim playClip");
 	}
 	
 	// Make the clips slide smoothly when shuffled
