@@ -292,7 +292,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			visible = false;
 		}
 		if (view.config['state'] == ModelStates.PAUSED) {
-			removeChild(child);
+			if (child != null) {
+				removeChild(child);
+				child = null;
+			}
 		} else if (view.config['state'] == ModelStates.PLAYING) {
 			reloadCaption = true;
 		}
