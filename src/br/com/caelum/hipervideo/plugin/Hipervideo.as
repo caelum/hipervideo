@@ -259,9 +259,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var reloadCaption:Boolean = false;
 
 	private function clickHandler(event:MouseEvent):void {
-		trace("clickHandler");
 		if (captions[current]['url'] == "") {
-			removeChild(child);
+			if (child != null) {
+				removeChild(child);
+				child = null;
+			}
+			view.sendEvent("SEEK", captions[current]['time']);
 		} else {
 			if(view.config['hipervideo.target']!=undefined){
 				try {
@@ -282,7 +285,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
-		trace("stateHandler");
 		if((view.config['state'] == ModelStates.PLAYING ||
 		 	view.config['state'] == ModelStates.PAUSED) && config['state']) {
 			visible = true;
