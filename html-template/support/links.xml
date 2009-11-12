@@ -1,5 +1,39 @@
 <video>
 
+
+	<playlist>
+		<link>
+			<tooltip>Zina ?</tooltip>
+			<url>support/video.flv</url>
+			<thumbnail>thumbs/zina.gif</thumbnail>
+		</link>	
+		<link>
+			<tooltip>Caelum</tooltip>
+			<url>http://caelum.com.br</url>
+			<thumbnail>thumbs/video4.jpg</thumbnail>
+		</link>
+		<link>
+			<tooltip>Zina ?</tooltip>
+			<url>support/video.flv</url>
+			<thumbnail>thumbs/zina.gif</thumbnail>
+		</link>	
+		<link>
+			<tooltip>Caelum</tooltip>
+			<url>http://caelum.com.br</url>
+			<thumbnail>thumbs/video4.jpg</thumbnail>
+		</link>
+		<link>
+			<tooltip>Zina ?</tooltip>
+			<url>support/video.flv</url>
+			<thumbnail>thumbs/zina.gif</thumbnail>
+		</link>	
+		<link>
+			<tooltip>Caelum</tooltip>
+			<url>http://caelum.com.br</url>
+			<thumbnail>thumbs/video4.jpg</thumbnail>
+		</link>
+	</playlist>
+
 	<elements>
 	
 		<element>
@@ -30,6 +64,32 @@
 			
 			<time start="00:00:02.5" duration="00:00:02"/>
 			<position x="100" y="40" height="50" width="200"/>
+		</element>
+	
+		<element>
+			<imageContent>thumbs/zina.gif</imageContent>
+			
+			<link>
+				<tooltip>Ronaldo</tooltip>
+				<time>00:00:00.5</time>
+				<thumbnail>thumbs/zina.gif</thumbnail>
+			</link>
+			
+			<time start="00:00:05" duration="00:00:01"/>
+			<position x="200" y="20" height="30" width="355"/>
+		</element>
+	
+		<element>
+			<imageContent>thumbs/zina.gif</imageContent>
+			
+			<link>
+				<tooltip>Ronaldo</tooltip>
+				<time>00:00:00.5</time>
+				<thumbnail>thumbs/zina.gif</thumbnail>
+			</link>
+			
+			<time start="00:00:05" duration="00:00:01"/>
+			<position x="200" y="20" height="30" width="355"/>
 		</element>
 	
 		<element>
