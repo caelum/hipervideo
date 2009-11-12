@@ -11,10 +11,11 @@ package br.com.caelum.hipervideo.links
 			this.xml = xml;
 		}
 		
-		public function extract():Array {
-			var linkArray:Array = new Array();
-			for each (var element:XML in xml.element) {
-				linkArray.push(
+		public function extract():Video {
+			var elements:Array = new Array();
+			var playlist:Array = new Array();
+			for each (var element:XML in xml.elements.element) {
+				elements.push(
 					new Element(element.textContent, element.imageContent,
 							new Link(
 								element.link.tooltip, 
@@ -27,7 +28,13 @@ package br.com.caelum.hipervideo.links
 							element.position.@width, element.position.@height)
 				);
 			}
-			return linkArray;
+			
+			for each (var link:XML in xml.playlist.link) {
+				playlist.push(
+					new Link(link.tooltip, link.thumbnail, link.url, link.time));
+			}
+
+			return new Video(elements, playlist);
 		}
 
 	}

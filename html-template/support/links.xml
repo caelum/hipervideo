@@ -1,46 +1,50 @@
-<elements>
+<video>
 
-	<element>
-		<textContent>
-			<![CDATA[Esta legenda vem de um arquivo XML]]>
-		</textContent>
-		
-		<link>
-			<tooltip></tooltip>
-			<url>http://link1.com</url>
-			<thumbnail>thumbs/video10.jpg</thumbnail>
-		</link>
-		
-		<time start="00:00:01" duration="00:00:02"/>
-		<position x="20" y="80" height="50" width="200"/>
-	</element>
+	<elements>
 	
-	<element>
-		<textContent color="0xFF0000" backgroundColor="0x0000FF">
-			<![CDATA[Esta legenda vem de um arquivo XML]]>
-		</textContent>
+		<element>
+			<textContent>
+				<![CDATA[<i>Esta legenda vem de um arquivo XML</i>]]>
+			</textContent>
+			
+			<link>
+				<tooltip></tooltip>
+				<url>http://link1.com</url>
+				<thumbnail>thumbs/video10.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:01" duration="00:00:02"/>
+			<position x="20" y="80" height="50" width="200"/>
+		</element>
 		
-		<link>
-			<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
-			<url>http://link2.com</url>
-			<thumbnail>thumbs/video11.jpg</thumbnail>
-		</link>
-		
-		<time start="00:00:02.5" duration="00:00:02"/>
-		<position x="100" y="40" height="50" width="200"/>
-	</element>
+		<element>
+			<textContent color="0xFF0000" backgroundColor="0x0000FF">
+				<![CDATA[Esta legenda vem de um arquivo XML]]>
+			</textContent>
+			
+			<link>
+				<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
+				<url>http://link2.com</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:02.5" duration="00:00:02"/>
+			<position x="100" y="40" height="50" width="200"/>
+		</element>
+	
+		<element>
+			<imageContent>thumbs/zina.gif</imageContent>
+			
+			<link>
+				<tooltip>Ronaldo</tooltip>
+				<time>00:00:00.5</time>
+				<thumbnail>thumbs/zina.gif</thumbnail>
+			</link>
+			
+			<time start="00:00:05" duration="00:00:01"/>
+			<position x="200" y="20" height="30" width="355"/>
+		</element>
+	
+	</elements>
 
-	<element>
-		<imageContent>thumbs/zina.gif</imageContent>
-		
-		<link>
-			<tooltip>Ronaldo</tooltip>
-			<time>00:00:01.5</time>
-			<thumbnail>thumbs/zina.gif</thumbnail>
-		</link>
-		
-		<time start="00:00:05" duration="00:00:01"/>
-		<position x="200" y="20" height="30" width="355"/>
-	</element>
-
-</elements>
+</video>

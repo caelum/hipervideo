@@ -2,60 +2,98 @@ package test.br.com.caelum.hipervideo.links
 {
 	import asunit.framework.TestCase;
 	
+	import br.com.caelum.hipervideo.links.Video;
 	import br.com.caelum.hipervideo.links.XMLReader;
-	
+		
 	public class XMLReaderTest extends TestCase
 	{
 		
 		private var xmlStr:String = ( <![CDATA[
-			<elements>
-				<element>
-					<textContent>
-						Conteúdo em texto
-					</textContent>
-					
-					<link>
-						<tooltip>Tooltip do link 1</tooltip>
-						<url>http://algum-link.com</url>
-						<thumbnail>Thumbnail do link 1</thumbnail>
-					</link>
-					
-					<time start="00:00:10" duration="00:01:10"/>
-					<position x="50" y="70" height="60" width="50"/>
-				</element>
+			<video>
 				
-				<element>
-					<textContent color="0xFF0000" backgroundColor="0x0000FF">
-						Teste de cores
-					</textContent>
-					
+				<playlist>
 					<link>
-						<tooltip></tooltip>
-						<url>http://link-qualquer.com</url>
-						<thumbnail>imagem_das_cores.jpg</thumbnail>
-					</link>
-					
-					<time start="00:00:10" duration="00:01:10"/>
-					<position x="50" y="70" height="60" width="50"/>
-				</element>
-			
-				<element>
-					<imageContent>http://link-para-imagem.com</imageContent>
-					
+						<tooltip>playlist 1</tooltip>
+						<url>algum-video.flv</url>
+						<thumbnail>thumb1.jpg</thumbnail>
+					</link>	
 					<link>
-						<tooltip>Tooltip 3</tooltip>
-						<time>00:02:15</time>
-						<thumbnail></thumbnail>
+						<tooltip>playlist 2</tooltip>
+						<url>algum-outro-video.flv</url>
+						<thumbnail>thumb2.jpg</thumbnail>
 					</link>
+				</playlist>
+								
+				<elements>
+					<element>
+						<textContent>
+							Conteúdo em texto
+						</textContent>
+						
+						<link>
+							<tooltip>Tooltip do link 1</tooltip>
+							<url>http://algum-link.com</url>
+							<thumbnail>Thumbnail do link 1</thumbnail>
+						</link>
+						
+						<time start="00:00:10" duration="00:01:10"/>
+						<position x="50" y="70" height="60" width="50"/>
+					</element>
 					
-					<time start="01:00:01" duration="00:10:10.5"/>
-					<position x="150" y="170" height="960" width="950"/>
-				</element>
-			</elements>
+					<element>
+						<textContent color="0xFF0000" backgroundColor="0x0000FF">
+							Teste de cores
+						</textContent>
+						
+						<link>
+							<tooltip></tooltip>
+							<url>http://link-qualquer.com</url>
+							<thumbnail>imagem_das_cores.jpg</thumbnail>
+						</link>
+						
+						<time start="00:00:10" duration="00:01:10"/>
+						<position x="50" y="70" height="60" width="50"/>
+					</element>
+				
+					<element>
+						<imageContent>http://link-para-imagem.com</imageContent>
+						
+						<link>
+							<tooltip>Tooltip 3</tooltip>
+							<time>00:02:15</time>
+							<thumbnail></thumbnail>
+						</link>
+						
+						<time start="01:00:01" duration="00:10:10.5"/>
+						<position x="150" y="170" height="960" width="950"/>
+					</element>
+				</elements>
+			</video>
 		]]> ).toString();
 
 		private var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-		private var elementArray:Array = xmlReader.extract();
+		private var video:Video = xmlReader.extract()
+		private var elementArray:Array = video.elements;
+		private var playlistArray:Array = video.playlist;
+		
+		public function testReadCorrectNumberOfPlaylistItens():void {
+			assertEquals(2, playlistArray.length);
+		}
+		
+		public function testReadPLaylistItemTooltip():void {
+			assertEquals("playlist 1", playlistArray[0].tooltip);
+			assertEquals("playlist 2", playlistArray[1].tooltip);
+		}
+		
+		public function testReadPLaylistItemThumbnail():void {
+			assertEquals("thumb1.jpg", playlistArray[0].thumbnail);
+			assertEquals("thumb2.jpg", playlistArray[1].thumbnail);
+		}
+		
+		public function testReadPlaylistItemUrl():void {
+			assertEquals("algum-video.flv", playlistArray[0].url);
+			assertEquals("algum-outro-video.flv", playlistArray[1].url);
+		}
 					
 		public function testReadCorrectNumberOfLinksFromXML():void {
 			assertEquals(3, elementArray.length);
@@ -126,14 +164,21 @@ package test.br.com.caelum.hipervideo.links
 
 		public function testReadXMLWithNoElements():void {
 			var xmlStr:String = ( <![CDATA[
-				<elements>
-				</elements>
+				<video>
+					<playlist>
+					</playlist>
+					<elements>
+					</elements>
+				</video>
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var elementArray:Array = xmlReader.extract();
+			var video:Video = xmlReader.extract();
+			var elementArray:Array = video.elements;
+			var playlistArray:Array = video.playlist;
 			
 			assertEquals(0, elementArray.length);
+			assertEquals(0, playlistArray.length);
 		}
 		
 		public function testReadEmptyXML():void {
@@ -141,9 +186,12 @@ package test.br.com.caelum.hipervideo.links
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var elementArray:Array = xmlReader.extract();
+			var video:Video = xmlReader.extract();
+			var elementArray:Array = video.elements;
+			var playlistArray:Array = video.playlist;
 			
 			assertEquals(0, elementArray.length);
+			assertEquals(0, playlistArray.length);
 		}
 		
 	}

@@ -4,6 +4,7 @@
 package br.com.caelum.hipervideo.plugin{
 
 import br.com.caelum.hipervideo.links.Element;
+import br.com.caelum.hipervideo.links.Video;
 import br.com.caelum.hipervideo.links.XMLReader;
 
 import com.jeroenwijering.events.*;
@@ -217,8 +218,9 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	/** Parse the XML and do some magic with it. **/	
 	private function parseXML(e:Event):void {
 		InfoElement["text"].text = "Todos os links";
-		 
-		var elementArray:Array = new XMLReader(new XML(e.target.data)).extract();
+		
+		var video:Video = new XMLReader(new XML(e.target.data)).extract();
+		var elementArray:Array = video.elements;
 		var i:int = 0
 		
 		for each (var element:Element in elementArray) {
