@@ -21,8 +21,8 @@ import flash.text.*;
 public class Hipervideo extends MovieClip implements PluginInterface {
 
 
-	[Embed(source="../../../../../controlbar.png")]
-	private const ControlbarIcon:Class;
+//	[Embed(source="../../../../../controlbar.png")]
+//	private const ControlbarIcon:Class;
 	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
 
@@ -38,8 +38,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var loader:URLLoader;
 	/** Reference to the MVC view. **/
 	private var view:AbstractView;
-	/** Icon for the controlbar. **/
-	private var icon:Bitmap;
+//	/** Icon for the controlbar. **/
+//	private var icon:Bitmap;
 	/** Reference to the textfield. **/
 	public var field:TextField;
 	/** Reference to the background graphic. **/
@@ -108,13 +108,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			if(button) { 
 				button.field.text = 'is on'; 
 			} else { 
-				icon.alpha = 1;
+//				icon.alpha = 1;
 			}
 		} else { 
 			if(button) { 
 				button.field.text = 'is off'; 
 			} else {
-				icon.alpha = 0.3;
+//				icon.alpha = 0.3;
 			}
 		}
 		var cke:SharedObject = SharedObject.getLocal('com.jeroenwijering','/');
@@ -135,8 +135,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		if(view.config['dock']) {
 			button = view.getPlugin('dock').addButton(new DockIcon(),'is on', clickHandler);
 		} else if (view.getPlugin('controlbar')) {
-			icon = new ControlbarIcon();
-			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
+//			icon = new ControlbarIcon();
+//			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 		}
 		hide(config['state']);
 	};

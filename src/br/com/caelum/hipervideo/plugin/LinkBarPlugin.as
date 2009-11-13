@@ -5,11 +5,13 @@ package br.com.caelum.hipervideo.plugin {
 	
 	import com.jeroenwijering.events.AbstractView;
 	import com.jeroenwijering.events.ModelEvent;
+	import com.jeroenwijering.events.ModelStates;
 	import com.jeroenwijering.events.PluginInterface;
 	
-	import flash.display.Loader;
+	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
@@ -19,42 +21,45 @@ package br.com.caelum.hipervideo.plugin {
 		/** Reference to the View of the player. **/
 		private var view:AbstractView;
 		
-		private var mySkin:Object;
-		
 		private var links:LinkBar;
 		private var playlist:LinkBar;
+		
+		[Embed(source="../../../../../controlbar.png")]
+		private const ControlbarIcon:Class;
+		
+		/** Icon for the controlbar. **/
+		private var icon:Bitmap;
 
 		public function initializePlugin(view:AbstractView):void {
 			this.view = view;
 		
-			//If the custom skin is defined, load it in
-			if (view.config['drelated.dskin'] != undefined){
-				loadMySkin();
-			}
-			view.addModelListener(ModelEvent.STATE,stateHandler);			
-		};
+			icon = new ControlbarIcon();
+			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 		
-		/** Initialize the skin swf loading **/	
-		private function loadMySkin():void{
-			var skinloader:Loader = new Loader();
-			skinloader.contentLoaderInfo.addEventListener(Event.COMPLETE, displaySkin);
-			skinloader.load(new URLRequest(view.config['drelated.dskin']));
-		}
-		
-		/** The skin was loaded, display it, stretch it, and load the thumbs. **/	
-		private function displaySkin(e:Event):void{		
-			mySkin = e.target.content;
-			var loader:URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE,parseXML);
+			view.addModelListener(ModelEvent.STATE,stateHandler);
 			
-			trace(view.config['hipervideo.file']);
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, parseXML);
 			loader.load(new URLRequest(view.config['hipervideo.file']));
+			trace(view.config['hipervideo.file']);
+		};
+
+		private function clickHandler(event:MouseEvent):void {
+			painelAtivo = !painelAtivo;
+			trace("painelAtivo = " + painelAtivo);
 		}
+		
+		private var painelAtivo:Boolean;
 		
 		/** Slide the plugin in when movie complete or paused. **/
 		public function stateHandler(evt:ModelEvent):void {
-			links.stateHandler(evt);
-//			playlist.stateHandler(evt);
+			if (painelAtivo) {
+				trace("playlist");
+				playlist.stateHandler(evt);
+			} else {
+				trace("links");
+				links.stateHandler(evt);
+			}
 		}
 		
 		/** Parse the XML and do some magic with it. **/	
@@ -66,8 +71,8 @@ package br.com.caelum.hipervideo.plugin {
 				linkArray.push(element.link);
 			}
 			
-			links = new LinkBar(linkArray, view, mySkin, this);
-//			playlist = new LinkBar(video.playlist, view, mySkin);
+			playlist = new LinkBar(video.playlist, view, this);
+			links = new LinkBar(linkArray, view, this);
 		}
 
 	}

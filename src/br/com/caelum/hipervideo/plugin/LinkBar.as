@@ -45,18 +45,23 @@ public class LinkBar extends MovieClip {
 	  private var maxw:int;
 	  private var maxh:int;
 	 	  
-      
+    	
+    	private var links:Array;
+    	
 	/** Constructor; nothing going on. **/
-	public function LinkBar(links:Array, view:AbstractView, mySkin:Object, clip:MovieClip) {
+	public function LinkBar(links:Array, view:AbstractView, clip:MovieClip) {
 		this.clip = clip;
 		this.view = view;
-		this.mySkin = mySkin;
-		
+
 		//set the original position of the thumbs
 		targX = 0;
 		
-		resizeMe();
-		create(links);
+		//If the custom skin is defined, load it in
+		if (view.config['drelated.dskin'] != undefined){
+			loadMySkin();
+		}
+		
+		this.links = links;
 	};
 
 
@@ -201,6 +206,8 @@ public class LinkBar extends MovieClip {
 		square.graphics.drawRect(SpaceFromSides, 0, SpaceNeeded, view.config['height']);
 		clip.addChild(square);			
 		_container.mask = square;
+		
+		create(links);
 	}
 	
 	/** Slide the plugin in when movie complete or paused. **/
@@ -216,12 +223,26 @@ public class LinkBar extends MovieClip {
 			case ModelStates.COMPLETED:
 				SlideMe(true);
 				break;			
-		}	
+		}
+	}	
+	
+	/** Initialize the skin swf loading **/	
+	private function loadMySkin():void{
+		var skinloader:Loader = new Loader();
+		skinloader.contentLoaderInfo.addEventListener(Event.COMPLETE, displaySkin);
+		skinloader.load(new URLRequest(view.config['drelated.dskin']));
 	}
+	
+	/** The skin was loaded, display it, stretch it, and load the thumbs. **/	
+	private function displaySkin(e:Event):void{
+		mySkin = e.target.content;
+		
+		resizeMe();
+	}
+
 	
 	/** Slide the plugin to the center stage when the movie is paused or complete. **/	
 	private function SlideMe(showMe:Boolean):void{
-		trace("slide me = " + showMe)
 		var targetX:int;
 		if (showMe){
 			targetX = 0;
