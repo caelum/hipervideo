@@ -47,7 +47,16 @@ public class LinkBar extends MovieClip {
 	 	  
     	
     	private var links:Array;
-    	
+    
+    public function setVisible(v:Boolean):void {
+    	_container.visible = v;
+    	Bg.visible = v;
+    	Cover.visible = v;
+    	ShuffleLeft.visible = v;
+    	ShuffleRight.visible = v;
+    	InfoElement.visible = v;
+    }
+    
 	/** Constructor; nothing going on. **/
 	public function LinkBar(links:Array, view:AbstractView, clip:MovieClip) {
 		this.clip = clip;

@@ -55,9 +55,13 @@ package br.com.caelum.hipervideo.plugin {
 		public function stateHandler(evt:ModelEvent):void {
 			if (painelAtivo) {
 				trace("playlist");
+				playlist.setVisible(true);
+				links.setVisible(false);
 				playlist.stateHandler(evt);
 			} else {
 				trace("links");
+				links.setVisible(true);
+				playlist.setVisible(false);
 				links.stateHandler(evt);
 			}
 		}
