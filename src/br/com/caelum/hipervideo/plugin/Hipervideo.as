@@ -301,7 +301,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				child = null;
 			}
 		} else if (view.config['state'] == ModelStates.PLAYING) {
-			trace("[ PLAY ]");
 			forceReload = true;
 		}
 	};
@@ -312,7 +311,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		if(captions && captions.length > 0 && (
 			captions[current]['begin'] > pos || 
 			(captions[current+1] && captions[current+1]['begin'] < pos))) {
-			trace("Entrei! #1");
 			setCaption(pos);
 		} else if (forceReload) {
 			forceReload = false;

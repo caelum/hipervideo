@@ -3,9 +3,7 @@
 **/
 package br.com.caelum.hipervideo.plugin{
 
-import br.com.caelum.hipervideo.links.Element;
-import br.com.caelum.hipervideo.links.Video;
-import br.com.caelum.hipervideo.links.XMLReader;
+import br.com.caelum.hipervideo.links.Link;
 
 import com.jeroenwijering.events.*;
 import com.neoarchaic.ui.Tooltip;
@@ -21,18 +19,16 @@ import flash.net.*;
 import flash.utils.*;
 import flash.xml.*; 
 
-public class LinkBar extends MovieClip implements PluginInterface {
+public class LinkBar extends MovieClip {
 
-	/** Reference to the View of the player. **/
-	private var view:AbstractView;
 	/** Reference to the graphics. **/
 	private var clip:MovieClip;	
-	/** initialize call for backward compatibility. **/
-	public var initialize:Function = initializePlugin;
 	
-	public var loader:URLLoader;
-	private var VideoXML:XML;
-	 
+	/** Reference to the View of the player. **/
+	private var view:AbstractView;
+	private var mySkin:Object;
+	private var targX:int;
+	
       private var _container:Object;
 	  private var ShuffleLeft:Object;
       private var ShuffleRight:Object;
@@ -44,54 +40,65 @@ public class LinkBar extends MovieClip implements PluginInterface {
 	  private var SpaceFromSides:int;
 	  private var ClipsVisible:int;
 	  private var ClipWidth:int;
-	  private var targX:int;
 	  private var shuffleBounds:Array;
-	  private var mySkin:Object;
+	  
 	  private var maxw:int;
 	  private var maxh:int;
 	 	  
       
 	/** Constructor; nothing going on. **/
-	public function LinkBar() {
-		clip = this;
-	};
-
-
-	/** The initialize call is invoked by the player View. **/
-	public function initializePlugin(vie:AbstractView):void {
-		view = vie;
+	public function LinkBar(links:Array, view:AbstractView, mySkin:Object, clip:MovieClip) {
+		this.clip = clip;
+		this.view = view;
+		this.mySkin = mySkin;
 		
 		//set the original position of the thumbs
 		targX = 0;
 		
-		//If the custom skin is defined, load it in
-		if(view.config['drelated.dskin']!=undefined){
-			loadMySkin();
-		}
-		//Otherwise move on to resizing stuff to match the clips measurements and load the thumbs
-		else{
-			resizeMe();
-			getRelatedClips(view.config['hipervideo.file']);		
-		}
-		view.addModelListener(ModelEvent.STATE,stateHandler);			
-	};
-	
-	/** Initialize the skin swf loading **/	
-	private function loadMySkin():void{
-		var skinloader:Loader = new Loader();
-		skinloader.contentLoaderInfo.addEventListener(Event.COMPLETE,displaySkin);
-		skinloader.load(new URLRequest(view.config['drelated.dskin']));
-	}
-	
-	/** The skin was loaded, display it, stretch it, and load the thumbs. **/	
-	private function displaySkin(e:Event):void{		
-		mySkin = e.target.content;
 		resizeMe();
-		getRelatedClips(view.config['hipervideo.file']);		
+		create(links);
+	};
+
+
+	private function create(links:Array):void {
+		InfoElement["text"].text = "Todos os links";
+		var i:int = 0;
+		
+		for each (var link:Link in links) {
+			var item:Object = _container.addChild(DisplayObject(new TemplateClass()));
+			
+			item.x = i*(item.thmask.width+5)+SpaceFromSides;
+			
+			//Load the thumbnail
+			var thumbloader:Loader = new Loader();
+			thumbloader.contentLoaderInfo.addEventListener(Event.COMPLETE,resizeThumbs);
+			thumbloader.load(new URLRequest(link.thumbnail));
+			item["holder_mc"].addChild(thumbloader);
+			
+			item["test"].text = link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
+
+			Tooltip.subscribe(DisplayObject(item), link.tooltip, null);
+			
+			//Make the clip remember what URL it should go to when clicked on
+			item.url = link.url;
+			item.time = link.time;
+			
+			//Make the clickable area clickable
+			item.clickable.buttonMode = true;
+			item.clickable.addEventListener(MouseEvent.CLICK,playClip);
+			i++;
+		}
+		
+		// Set the min/max bounds for the shufflebuttons
+		shuffleBounds = [0-(i-4)*ClipWidth, 0]
+		
+		// Add the container enterframe event listner to move the clips when targX is changed
+		_container.addEventListener(Event.ENTER_FRAME,shiftClips);
 	}
+
 	
 	/** Place the elements on stage, stretch and position them to meet our measurements. **/	
-	private function resizeMe():void{
+	public function resizeMe():void{
 		
 		/**If the skin is defined, load the elements from the skin movieclip. 
 		The bits and pieces are:
@@ -196,64 +203,34 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		_container.mask = square;
 	}
 	
+	/** Slide the plugin in when movie complete or paused. **/
+	public function stateHandler(evt:ModelEvent):void {
+		switch(evt.data.newstate) {
+			case ModelStates.BUFFERING:
+			case ModelStates.PLAYING:
+				SlideMe(false);
+				break;
+			case ModelStates.PAUSED:
+				SlideMe(true);
+				break;
+			case ModelStates.COMPLETED:
+				SlideMe(true);
+				break;			
+		}	
+	}
+	
 	/** Slide the plugin to the center stage when the movie is paused or complete. **/	
 	private function SlideMe(showMe:Boolean):void{
+		trace("slide me = " + showMe)
 		var targetX:int;
-		if(showMe==true){
+		if (showMe){
 			targetX = 0;
 		} else {
 			targetX = -view.config['width'];		
 		}
-		var myTween:Object = new Tween(clip, "x", None.easeIn ,this.x,targetX,0.5,true)				
+		var myTween:Object = new Tween(clip, "x", None.easeIn ,clip.x,targetX,0.5,true)				
 	}
 	
-	/** Load the XML for the related clips. **/		
-	private function getRelatedClips(path:String):void{
-		loader = new URLLoader();
-		loader.addEventListener(Event.COMPLETE,parseXML);
-		trace(path);
-		loader.load(new URLRequest(path));
-	}
-	
-	/** Parse the XML and do some magic with it. **/	
-	private function parseXML(e:Event):void {
-		InfoElement["text"].text = "Todos os links";
-		
-		var video:Video = new XMLReader(new XML(e.target.data)).extract();
-		var elementArray:Array = video.elements;
-		var i:int = 0
-		
-		for each (var element:Element in elementArray) {
-			var item:Object = _container.addChild(DisplayObject(new TemplateClass()));
-			
-			item.x = i*(item.thmask.width+5)+SpaceFromSides;
-			
-			//Load the thumbnail
-			var thumbloader:Loader = new Loader();
-			thumbloader.contentLoaderInfo.addEventListener(Event.COMPLETE,resizeThumbs);
-			thumbloader.load(new URLRequest(element.link.thumbnail));
-			item["holder_mc"].addChild(thumbloader);
-			
-			item["test"].text = element.link.tooltip;	// DESCOMENTE PARA TER TOOLTIP EMBAIXO DA FIGURA
-
-			Tooltip.subscribe(DisplayObject(item), element.link.tooltip, null);
-			
-			//Make the clip remember what URL it should go to when clicked on
-			item.url = element.link.url;
-			item.time = element.link.time;
-			
-			//Make the clickable area clickable
-			item.clickable.buttonMode = true;
-			item.clickable.addEventListener(MouseEvent.CLICK,playClip);
-			i++;
-		}
-		
-		// Set the min/max bounds for the shufflebuttons
-		shuffleBounds = [0-(i-4)*ClipWidth, 0]
-		
-		// Add the container enterframe event listner to move the clips when targX is changed
-		_container.addEventListener(Event.ENTER_FRAME,shiftClips);
-	}
 	
 	//Make the loaded thumb images smaller if it's ridiculously big
 	private function resizeThumbs(e:Event):void{		
@@ -302,21 +279,7 @@ public class LinkBar extends MovieClip implements PluginInterface {
 		e.target.x -= (e.target.x-targX)/5;
 	}
 	
-	/** Slide the plugin in when movie complete or paused. **/
-	private function stateHandler(evt:ModelEvent):void { 
-		switch(evt.data.newstate) {
-			case ModelStates.BUFFERING:
-			case ModelStates.PLAYING:
-				SlideMe(false);
-				break;
-			case ModelStates.PAUSED:
-				SlideMe(true);
-				break;
-			case ModelStates.COMPLETED:
-				SlideMe(true);
-				break;			
-		}	
-	}
+	
 	
 	//Shuffle left;
 	function shuffleleft(e:MouseEvent):void{
