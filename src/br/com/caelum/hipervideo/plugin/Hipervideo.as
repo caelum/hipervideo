@@ -79,7 +79,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		field = new TextField();
 		field.border = true;
-		field.borderColor = 0xAAFFFF;
+		field.borderColor = 0xAAAAAA;
 		field.x = Infinity;
 		field.selectable = false;
 		field.multiline = true;

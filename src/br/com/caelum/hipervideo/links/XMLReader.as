@@ -34,7 +34,7 @@ package br.com.caelum.hipervideo.links
 					new Link(link.tooltip, link.thumbnail, link.url, link.time));
 			}
 
-			return new Video(elements, playlist);
+			return new Video(elements, playlist, xml.playlist.@current);
 		}
 
 	}

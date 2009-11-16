@@ -11,7 +11,7 @@ package test.br.com.caelum.hipervideo.links
 		private var xmlStr:String = ( <![CDATA[
 			<video>
 				
-				<playlist>
+				<playlist current="2">
 					<link>
 						<tooltip>playlist 1</tooltip>
 						<url>algum-video.flv</url>
@@ -75,6 +75,10 @@ package test.br.com.caelum.hipervideo.links
 		private var video:Video = xmlReader.extract()
 		private var elementArray:Array = video.elements;
 		private var playlistArray:Array = video.playlist;
+		
+		public function testReadCurrentPlaylistItem():void {
+			assertEquals(2, video.current);
+		}
 		
 		public function testReadCorrectNumberOfPlaylistItens():void {
 			assertEquals(2, playlistArray.length);

@@ -3,34 +3,24 @@
 
 	<playlist>
 		<link>
-			<tooltip>Zina ?</tooltip>
-			<url>support/video.flv</url>
-			<thumbnail>thumbs/zina.gif</thumbnail>
+			<tooltip>Tubarão</tooltip>
+			<url>http://caelum.com.br</url>
+			<thumbnail>thumbs/video6.jpg</thumbnail>
 		</link>	
 		<link>
-			<tooltip>Caelum</tooltip>
+			<tooltip>Porco-espinho</tooltip>
 			<url>http://caelum.com.br</url>
-			<thumbnail>thumbs/video4.jpg</thumbnail>
+			<thumbnail>thumbs/video3.jpg</thumbnail>
 		</link>
 		<link>
-			<tooltip>Zina ?</tooltip>
-			<url>support/video.flv</url>
-			<thumbnail>thumbs/zina.gif</thumbnail>
+			<tooltip>Borrão</tooltip>
+			<url>http://caelum.com.br</url>
+			<thumbnail>thumbs/video11.jpg</thumbnail>
 		</link>	
 		<link>
-			<tooltip>Caelum</tooltip>
+			<tooltip>Carro</tooltip>
 			<url>http://caelum.com.br</url>
-			<thumbnail>thumbs/video4.jpg</thumbnail>
-		</link>
-		<link>
-			<tooltip>Zina ?</tooltip>
-			<url>support/video.flv</url>
-			<thumbnail>thumbs/zina.gif</thumbnail>
-		</link>	
-		<link>
-			<tooltip>Caelum</tooltip>
-			<url>http://caelum.com.br</url>
-			<thumbnail>thumbs/video4.jpg</thumbnail>
+			<thumbnail>thumbs/video12.jpg</thumbnail>
 		</link>
 	</playlist>
 
@@ -38,12 +28,12 @@
 	
 		<element>
 			<textContent>
-				<![CDATA[<i>Esta legenda vem de um arquivo XML</i>]]>
+				<![CDATA[Esta legenda é fornecida por um arquivo XML]]>
 			</textContent>
 			
 			<link>
 				<tooltip></tooltip>
-				<url>http://link1.com</url>
+				<url>http://caelum.com.br</url>
 				<thumbnail>thumbs/video10.jpg</thumbnail>
 			</link>
 			
@@ -52,44 +42,18 @@
 		</element>
 		
 		<element>
-			<textContent color="0xFF0000" backgroundColor="0x0000FF">
-				<![CDATA[Esta legenda vem de um arquivo XML]]>
+			<textContent color="0x0000FF" backgroundColor="0xEEEEEE">
+				<![CDATA[Podemos usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
 			</textContent>
 			
 			<link>
-				<tooltip>Esta é a Tooltip 2. E ela é bastante comprida.</tooltip>
-				<url>http://link2.com</url>
+				<tooltip>Uma tooltip para este link.</tooltip>
+				<url>http://caelum.com.br</url>
 				<thumbnail>thumbs/video11.jpg</thumbnail>
 			</link>
 			
 			<time start="00:00:02.5" duration="00:00:02"/>
 			<position x="100" y="40" height="50" width="200"/>
-		</element>
-	
-		<element>
-			<imageContent>thumbs/zina.gif</imageContent>
-			
-			<link>
-				<tooltip>Ronaldo</tooltip>
-				<time>00:00:00.5</time>
-				<thumbnail>thumbs/zina.gif</thumbnail>
-			</link>
-			
-			<time start="00:00:05" duration="00:00:01"/>
-			<position x="200" y="20" height="30" width="355"/>
-		</element>
-	
-		<element>
-			<imageContent>thumbs/zina.gif</imageContent>
-			
-			<link>
-				<tooltip>Ronaldo</tooltip>
-				<time>00:00:00.5</time>
-				<thumbnail>thumbs/zina.gif</thumbnail>
-			</link>
-			
-			<time start="00:00:05" duration="00:00:01"/>
-			<position x="200" y="20" height="30" width="355"/>
 		</element>
 	
 		<element>

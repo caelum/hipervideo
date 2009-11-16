@@ -5,11 +5,13 @@ package br.com.caelum.hipervideo.links
 		
 		public var elements:Array;
 		public var playlist:Array;
+		public var current:Number;
 		
-		public function Video(elements:Array, playlist:Array)
+		public function Video(elements:Array, playlist:Array, current:Number)
 		{
 			this.elements = elements;
 			this.playlist = playlist;
+			this.current = current;
 		}
 
 	}
