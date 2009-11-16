@@ -60,6 +60,7 @@ package br.com.caelum.hipervideo.plugin {
 		
 		/** Slide the plugin in when movie complete or paused. **/
 		public function stateHandler(evt:ModelEvent=undefined):void {
+			clickHandler(null);
 			if (painelAtivo) {
 				playlist.stateHandler(evt);
 			} else {
