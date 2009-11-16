@@ -114,7 +114,7 @@ public class LinkBar extends MovieClip {
 	
 	/** Place the elements on stage, stretch and position them to meet our measurements. **/	
 	public function resizeMe():void{
-		
+		var offset = 0;
 		/**If the skin is defined, load the elements from the skin movieclip. 
 		The bits and pieces are:
 			Bg - the large semitransparent layer that's stretched to exact same size and video
@@ -167,13 +167,16 @@ public class LinkBar extends MovieClip {
 		_container = clip.addChild(DisplayObject(new Sprite()));
 		
 		//Analyse the dposition flashvar and place the elements according to it.
+		if (view.config['fullscreen']) {
+			offset = 35;
+		}
 		switch(view.config['drelated.dposition']) {
 			case 'bottom':
-				_container.y = view.config['height']-SampleItem.height;
-				Cover.y = view.config['height']-SampleItem.height-5-InfoElement.height;
-				InfoElement.y = view.config['height']-SampleItem.height-5-InfoElement.height
-				ShuffleLeft.y = view.config['height']-SampleItem.height;
-				ShuffleRight.y = view.config['height']-SampleItem.height;
+				_container.y = view.config['height']-SampleItem.height-offset;
+				Cover.y = view.config['height']-SampleItem.height-5-InfoElement.height-offset;
+				InfoElement.y = view.config['height']-SampleItem.height-5-InfoElement.height-offset;
+				ShuffleLeft.y = view.config['height']-SampleItem.height-offset;
+				ShuffleRight.y = view.config['height']-SampleItem.height-offset;
 				break;
 			case 'center':
 				_container.y = (view.config['height']/2)-(SampleItem.height/2);

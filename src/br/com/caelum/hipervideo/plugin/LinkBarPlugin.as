@@ -4,8 +4,8 @@ package br.com.caelum.hipervideo.plugin {
 	import br.com.caelum.hipervideo.links.XMLReader;
 	
 	import com.jeroenwijering.events.AbstractView;
+	import com.jeroenwijering.events.ControllerEvent;
 	import com.jeroenwijering.events.ModelEvent;
-	import com.jeroenwijering.events.ModelStates;
 	import com.jeroenwijering.events.PluginInterface;
 	
 	import flash.display.Bitmap;
@@ -21,10 +21,10 @@ package br.com.caelum.hipervideo.plugin {
 		/** Reference to the View of the player. **/
 		private var view:AbstractView;
 		
-		private var links:LinkBar;
-		private var playlist:LinkBar;
+		private var links:LinkBar = null;
+		private var playlist:LinkBar = null;
 		
-		private var painelAtivo:Boolean;
+		private var painelAtivo:Boolean = false;
 		
 		[Embed(source="../../../../../controlbar.png")]
 		private const ControlbarIcon:Class;
@@ -39,6 +39,7 @@ package br.com.caelum.hipervideo.plugin {
 			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 		
 			view.addModelListener(ModelEvent.STATE,stateHandler);
+			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, parseXML);
@@ -58,11 +59,21 @@ package br.com.caelum.hipervideo.plugin {
 		}
 		
 		/** Slide the plugin in when movie complete or paused. **/
-		public function stateHandler(evt:ModelEvent):void {
+		public function stateHandler(evt:ModelEvent=undefined):void {
 			if (painelAtivo) {
 				playlist.stateHandler(evt);
 			} else {
 				links.stateHandler(evt);
+			}
+		}
+		
+		private function resizeHandler(evt:ControllerEvent=undefined):void {
+			if (playlist != null && links != null) {
+				playlist.setVisible(false);
+				playlist.resizeMe();
+				links.setVisible(false);
+				links.resizeMe();
+				clickHandler(null);
 			}
 		}
 		
