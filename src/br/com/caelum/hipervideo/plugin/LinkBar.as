@@ -29,36 +29,27 @@ public class LinkBar extends MovieClip {
 	private var mySkin:Object;
 	private var targX:int;
 	
-      private var _container:Object;
-	  private var ShuffleLeft:Object;
-      private var ShuffleRight:Object;
-      private var Cover:Object;
-	  private var InfoElement:Object;
-      private var Bg:Object;
-      private var TemplateClass:Object;
-	  private var SampleItem:Object;
-	  private var SpaceFromSides:int;
-	  private var ClipsVisible:int;
-	  private var ClipWidth:int;
-	  private var shuffleBounds:Array;
-	  
-	  private var maxw:int;
-	  private var maxh:int;
+	private var _container:Object;
+	private var ShuffleLeft:Object;
+	private var ShuffleRight:Object;
+	private var Cover:Object;
+	private var InfoElement:Object;
+	private var Bg:Object;
+	private var TemplateClass:Object;
+	private var SampleItem:Object;
+	private var SpaceFromSides:int;
+	private var ClipsVisible:int;
+	private var ClipWidth:int;
+	private var shuffleBounds:Array;
+	 
+	private var maxw:int;
+	private var maxh:int;
 	 	  
-    	
-    	private var links:Array;
+    private var title:String;	
+    private var links:Array;
     
-    public function setVisible(v:Boolean):void {
-    	_container.visible = v;
-    	Bg.visible = v;
-    	Cover.visible = v;
-    	ShuffleLeft.visible = v;
-    	ShuffleRight.visible = v;
-    	InfoElement.visible = v;
-    }
-    
-	/** Constructor; nothing going on. **/
-	public function LinkBar(links:Array, view:AbstractView, clip:MovieClip) {
+	public function LinkBar(title:String, links:Array, view:AbstractView, clip:MovieClip) {
+		this.title = title;
 		this.clip = clip;
 		this.view = view;
 
@@ -72,10 +63,20 @@ public class LinkBar extends MovieClip {
 		
 		this.links = links;
 	};
+	
+    public function setVisible(v:Boolean):void {
+    	_container.visible = v;
+    	Bg.visible = v;
+    	Cover.visible = v;
+    	ShuffleLeft.visible = v;
+    	ShuffleRight.visible = v;
+    	InfoElement.visible = v;
+    }
+
 
 
 	private function create(links:Array):void {
-		InfoElement["text"].text = "Todos os links";
+		InfoElement["text"].text = this.title;
 		var i:int = 0;
 		
 		for each (var link:Link in links) {

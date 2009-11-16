@@ -75,8 +75,8 @@ package br.com.caelum.hipervideo.plugin {
 				linkArray.push(element.link);
 			}
 			
-			playlist = new LinkBar(video.playlist, view, this);
-			links = new LinkBar(linkArray, view, this);
+			playlist = new LinkBar("Playlist", video.playlist, view, this);
+			links = new LinkBar("Links", linkArray, view, this);
 		}
 
 	}
