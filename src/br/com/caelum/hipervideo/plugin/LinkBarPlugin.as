@@ -24,6 +24,8 @@ package br.com.caelum.hipervideo.plugin {
 		private var links:LinkBar;
 		private var playlist:LinkBar;
 		
+		private var painelAtivo:Boolean;
+		
 		[Embed(source="../../../../../controlbar.png")]
 		private const ControlbarIcon:Class;
 		
@@ -46,20 +48,22 @@ package br.com.caelum.hipervideo.plugin {
 
 		private function clickHandler(event:MouseEvent):void {
 			painelAtivo = !painelAtivo;
-			trace("painelAtivo = " + painelAtivo);
+			if (painelAtivo) {
+				playlist.setVisible(true);
+				links.setVisible(false);
+			} else {
+				links.setVisible(true);
+				playlist.setVisible(false);
+			}
 		}
-		
-		private var painelAtivo:Boolean;
 		
 		/** Slide the plugin in when movie complete or paused. **/
 		public function stateHandler(evt:ModelEvent):void {
 			if (painelAtivo) {
-				trace("playlist");
 				playlist.setVisible(true);
 				links.setVisible(false);
 				playlist.stateHandler(evt);
 			} else {
-				trace("links");
 				links.setVisible(true);
 				playlist.setVisible(false);
 				links.stateHandler(evt);
