@@ -75,7 +75,7 @@ public class LinkBar extends MovieClip {
 
 
 
-	private function create(links:Array):void {
+	private function create(links:Array, ClipsVisible:Number):void {
 		InfoElement["text"].text = this.title;
 		var i:int = 0;
 		
@@ -105,7 +105,7 @@ public class LinkBar extends MovieClip {
 		}
 		
 		// Set the min/max bounds for the shufflebuttons
-		shuffleBounds = [0-(i-4)*ClipWidth, 0]
+		shuffleBounds = [0-(i-ClipsVisible)*ClipWidth, 0]
 		
 		// Add the container enterframe event listner to move the clips when targX is changed
 		_container.addEventListener(Event.ENTER_FRAME,shiftClips);
@@ -220,7 +220,7 @@ public class LinkBar extends MovieClip {
 		clip.addChild(square);			
 		_container.mask = square;
 		
-		create(links);
+		create(links, ClipsVisible);
 	}
 	
 	/** Slide the plugin in when movie complete or paused. **/
