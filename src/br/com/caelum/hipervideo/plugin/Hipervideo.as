@@ -4,8 +4,6 @@
 package br.com.caelum.hipervideo.plugin {
 
 
-import br.com.caelum.hipervideo.links.Action;
-import br.com.caelum.hipervideo.links.ActionType;
 import br.com.caelum.hipervideo.links.Element;
 import br.com.caelum.hipervideo.links.Video;
 import br.com.caelum.hipervideo.links.XMLReader;
@@ -59,8 +57,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var child:DisplayObject;
 	
 	private var forceReload:Boolean = false;
-	private var actions:Array;
-	private var lastPos:Number;
 
 	private function drawClip():void {
 		loader = new URLLoader();
@@ -173,8 +169,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
 		var video:Video = new XMLReader(new XML(evt.target.data)).extract();
-		var elementArray:Array = video.elements;
-		actions = video.actions; 
+		var elementArray:Array = video.elements; 
 		
 		/* Translate from Element class to internal representation*/
 		for each (var element:Element in elementArray) {
@@ -324,20 +319,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			forceReload = false;
 			setCaption(pos);
 		}
-		for (var next:Number = 0; next < actions.length; next++) {
-			if (actions[next].time < pos && actions[next].time >= lastPos) {
-				performAction(actions[next]);
-				break;
-			}
-		}
-		lastPos = pos;
 	};
 	
-	private function performAction(action:Action):void {
-		if (action.type == ActionType.PAUSE) {
-			view.sendEvent("PLAY");
-		}
-	}
 
 };
 

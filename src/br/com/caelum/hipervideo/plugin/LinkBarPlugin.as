@@ -1,4 +1,6 @@
 package br.com.caelum.hipervideo.plugin {
+	import br.com.caelum.hipervideo.links.Action;
+	import br.com.caelum.hipervideo.links.ActionType;
 	import br.com.caelum.hipervideo.links.Element;
 	import br.com.caelum.hipervideo.links.Video;
 	import br.com.caelum.hipervideo.links.XMLReader;
@@ -25,6 +27,8 @@ package br.com.caelum.hipervideo.plugin {
 		private var playlist:LinkBar = null;
 		
 		private var painelAtivo:Boolean = false;
+		private var lastPos:Number;
+		private var actions:Array;
 		
 		[Embed(source="../../../../../controlbar.png")]
 		private const ControlbarIcon:Class;
@@ -37,7 +41,7 @@ package br.com.caelum.hipervideo.plugin {
 		
 			icon = new ControlbarIcon();
 			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
-		
+			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			
@@ -89,7 +93,27 @@ package br.com.caelum.hipervideo.plugin {
 			
 			playlist = new LinkBar("Playlist", video.playlist, view, this);
 			links = new LinkBar("Links", linkArray, view, this);
+			actions = video.actions;
 		}
+		
+		/** Check timing of the player to sync captions. **/
+		private function timeHandler(evt:ModelEvent):void {
+			var pos:Number = evt.data.position;
+			for (var next:Number = 0; next < actions.length; next++) {
+				if (actions[next].time < pos && actions[next].time >= lastPos) {
+					performAction(actions[next]);
+					break;
+				}
+			}
+			lastPos = pos;
+		};
+		
+		private function performAction(action:Action):void {
+			if (action.type == ActionType.PAUSE) {
+				view.sendEvent("PLAY");
+			}
+		}
+
 
 	}
 }
