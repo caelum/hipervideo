@@ -29,6 +29,7 @@ package br.com.caelum.hipervideo.plugin {
 		private var painelAtivo:Boolean = false;
 		private var lastPos:Number;
 		private var actions:Array;
+		private var stopPainel:Boolean = false;
 		
 		[Embed(source="../../../../../controlbar.png")]
 		private const ControlbarIcon:Class;
@@ -64,11 +65,15 @@ package br.com.caelum.hipervideo.plugin {
 		
 		/** Slide the plugin in when movie complete or paused. **/
 		public function stateHandler(evt:ModelEvent=undefined):void {
-			clickHandler(null);
-			if (painelAtivo) {
-				playlist.stateHandler(evt);
+			if (stopPainel) {
+				stopPainel = false;
 			} else {
-				links.stateHandler(evt);
+				clickHandler(null);
+				if (painelAtivo) {
+					playlist.stateHandler(evt);
+				} else {
+					links.stateHandler(evt);
+				}
 			}
 		}
 		
@@ -110,6 +115,7 @@ package br.com.caelum.hipervideo.plugin {
 		
 		private function performAction(action:Action):void {
 			if (action.type == ActionType.PAUSE) {
+				stopPainel = true;
 				view.sendEvent("PLAY");
 			}
 		}
