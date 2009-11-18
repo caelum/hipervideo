@@ -2,6 +2,7 @@ package test.br.com.caelum.hipervideo.links
 {
 	import asunit.framework.TestCase;
 	
+	import br.com.caelum.hipervideo.links.ActionType;
 	import br.com.caelum.hipervideo.links.Video;
 	import br.com.caelum.hipervideo.links.XMLReader;
 		
@@ -23,6 +24,11 @@ package test.br.com.caelum.hipervideo.links
 						<thumbnail>thumb2.jpg</thumbnail>
 					</link>
 				</playlist>
+				
+				<actions>
+					<pause at="00:00:17" />
+					<pause at="00:00:21" />
+				</actions>
 								
 				<elements>
 					<element>
@@ -75,6 +81,18 @@ package test.br.com.caelum.hipervideo.links
 		private var video:Video = xmlReader.extract()
 		private var elementArray:Array = video.elements;
 		private var playlistArray:Array = video.playlist;
+		private var actionArray:Array = video.actions;
+		
+		public function testReadCorrectNumberOfActions():void {
+			assertEquals(2, actionArray.length);
+		}
+		
+		public function testReadPauses():void {
+			assertEquals(ActionType.PAUSE, actionArray[0].type);
+			assertEquals(17, actionArray[0].time);
+			assertEquals(ActionType.PAUSE, actionArray[1].type);
+			assertEquals(21, actionArray[1].time);
+		}
 		
 		public function testReadCurrentPlaylistItem():void {
 			assertEquals(2, video.current);

@@ -13,6 +13,7 @@ package br.com.caelum.hipervideo.links
 		
 		public function extract():Video {
 			var elements:Array = new Array();
+			var actions:Array = new Array();
 			var playlist:Array = new Array();
 			for each (var element:XML in xml.elements.element) {
 				elements.push(
@@ -33,8 +34,14 @@ package br.com.caelum.hipervideo.links
 				playlist.push(
 					new Link(link.tooltip, link.thumbnail, link.url, link.time));
 			}
+			
+			for each (var action:XML in xml.actions.pause) {
+				trace(action.@at);
+				actions.push(
+					new Action(ActionType.PAUSE, Strings.seconds(action.@at)));
+			}
 
-			return new Video(elements, playlist, xml.playlist.@current);
+			return new Video(elements, actions, playlist, xml.playlist.@current);
 		}
 
 	}
