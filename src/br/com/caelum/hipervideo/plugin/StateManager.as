@@ -18,7 +18,7 @@ package br.com.caelum.hipervideo.plugin {
 	import flash.net.URLRequest;
 	
 	
-	public class LinkBarPlugin extends MovieClip implements PluginInterface {
+	public class StateManager extends MovieClip implements PluginInterface {
 
 		/** Reference to the View of the player. **/
 		private var view:AbstractView;
