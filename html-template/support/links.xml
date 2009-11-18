@@ -25,7 +25,7 @@
 	</playlist>
 	
 	<actions>
-		<pause at="00:00:05" />
+		<pause at="00:00:05.05" />
 	</actions>
 
 	<elements>

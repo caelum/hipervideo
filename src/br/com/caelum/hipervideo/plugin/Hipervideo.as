@@ -59,9 +59,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var child:DisplayObject;
 	
 	private var forceReload:Boolean = false;
-	private var lastTick:Number = 0;
 	private var actions:Array;
-	private var nextAction:Number = 0;
+	private var lastPos:Number;
 
 	private function drawClip():void {
 		loader = new URLLoader();
@@ -325,14 +324,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			forceReload = false;
 			setCaption(pos);
 		}
-		if (nextAction >= actions.length) {
-			nextAction = -1
-		};
-		if (nextAction >= 0 && actions[nextAction].time < pos && actions[nextAction].time >= lastTick) {
-			performAction(actions[nextAction]);
-			nextAction++;
-		} 
-		lastTick = pos;
+		for (var next:Number = 0; next < actions.length; next++) {
+			if (actions[next].time < pos && actions[next].time >= lastPos) {
+				performAction(actions[next]);
+				break;
+			}
+		}
+		lastPos = pos;
 	};
 	
 	private function performAction(action:Action):void {
