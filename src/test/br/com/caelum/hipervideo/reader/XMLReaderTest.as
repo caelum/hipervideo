@@ -1,10 +1,10 @@
-package test.br.com.caelum.hipervideo.links
+package test.br.com.caelum.hipervideo.reader
 {
 	import asunit.framework.TestCase;
 	
-	import br.com.caelum.hipervideo.links.ActionType;
-	import br.com.caelum.hipervideo.links.Video;
-	import br.com.caelum.hipervideo.links.XMLReader;
+	import br.com.caelum.hipervideo.model.ActionType;
+	import br.com.caelum.hipervideo.model.Video;
+	import br.com.caelum.hipervideo.reader.XMLReader;
 		
 	public class XMLReaderTest extends TestCase
 	{

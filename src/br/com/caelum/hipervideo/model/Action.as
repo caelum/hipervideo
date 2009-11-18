@@ -1,4 +1,4 @@
-package br.com.caelum.hipervideo.links
+package br.com.caelum.hipervideo.model
 {	
 	public class Action
 	{

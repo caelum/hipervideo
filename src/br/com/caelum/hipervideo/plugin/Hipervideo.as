@@ -1,12 +1,9 @@
-/**
-* Plugin for playing closed captions and a closed audiodescription with a video.
-**/
 package br.com.caelum.hipervideo.plugin {
 
 
-import br.com.caelum.hipervideo.links.Element;
-import br.com.caelum.hipervideo.links.Video;
-import br.com.caelum.hipervideo.links.XMLReader;
+import br.com.caelum.hipervideo.model.Element;
+import br.com.caelum.hipervideo.model.Video;
+import br.com.caelum.hipervideo.reader.XMLReader;
 
 import com.jeroenwijering.events.*;
 import com.jeroenwijering.parsers.*;

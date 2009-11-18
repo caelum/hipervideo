@@ -1,9 +1,7 @@
-﻿﻿/**
-* Show a YouTube searchbar that loads the results into the player.
-**/
-package br.com.caelum.hipervideo.plugin{
+﻿﻿package br.com.caelum.hipervideo.plugin
+{
 
-import br.com.caelum.hipervideo.links.Link;
+import br.com.caelum.hipervideo.model.Link;
 
 import com.jeroenwijering.events.*;
 import com.neoarchaic.ui.Tooltip;

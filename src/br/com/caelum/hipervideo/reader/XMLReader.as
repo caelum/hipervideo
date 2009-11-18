@@ -1,5 +1,11 @@
-package br.com.caelum.hipervideo.links
+package br.com.caelum.hipervideo.reader
 {
+	import br.com.caelum.hipervideo.model.Action;
+	import br.com.caelum.hipervideo.model.ActionType;
+	import br.com.caelum.hipervideo.model.Element;
+	import br.com.caelum.hipervideo.model.Link;
+	import br.com.caelum.hipervideo.model.Video;
+	
 	import com.jeroenwijering.utils.Strings;
 	
 	public class XMLReader
@@ -36,7 +42,6 @@ package br.com.caelum.hipervideo.links
 			}
 			
 			for each (var action:XML in xml.actions.pause) {
-				trace(action.@at);
 				actions.push(
 					new Action(ActionType.PAUSE, Strings.seconds(action.@at)));
 			}
