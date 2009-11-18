@@ -23,6 +23,10 @@
 			<thumbnail>thumbs/video12.jpg</thumbnail>
 		</link>
 	</playlist>
+	
+	<actions>
+		<pause at="00:00:05" />
+	</actions>
 
 	<elements>
 	
