@@ -45,12 +45,17 @@ package br.com.caelum.hipervideo.plugin {
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
+			view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 			
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, parseXML);
 			loader.load(new URLRequest(view.config['hipervideo.file']));
 			trace(view.config['hipervideo.file']);
 		};
+		
+		private function seekHandler(evt:ControllerEvent):void {
+			lastPos = Infinity;
+		}
 
 		private function clickHandler(event:MouseEvent):void {
 			painelAtivo = !painelAtivo;

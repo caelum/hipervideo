@@ -125,6 +125,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		view.addModelListener(ModelEvent.TIME,timeHandler);
 		view.addModelListener(ModelEvent.STATE,stateHandler);
 		view.addModelListener(ModelEvent.META,metaHandler);
+		
 		drawClip();
 		
 		if (view.config['dock']) {
