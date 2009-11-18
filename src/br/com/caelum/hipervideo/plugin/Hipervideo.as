@@ -58,13 +58,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	private var forceReload:Boolean = false;
 
-	public function Hipervideo() {
+	private function drawClip():void {
 		loader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
-	};
-
-	
-	private function drawClip():void {
+		
 		back = new MovieClip();
 		back.graphics.beginFill(0x000000,0.75);
 		back.graphics.drawRect(0,0,400,20);
@@ -107,13 +104,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		if(config['state']) {
 			if(button) { 
 				button.field.text = 'is on'; 
-			} else { 
+//			} else { 
 //				icon.alpha = 1;
 			}
 		} else { 
 			if(button) { 
 				button.field.text = 'is off'; 
-			} else {
+//			} else {
 //				icon.alpha = 0.3;
 			}
 		}
@@ -126,17 +123,15 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Initing the plugin. **/
 	public function initializePlugin(vie:AbstractView):void {
 		view = vie;
-		view.addControllerListener(ControllerEvent.ITEM,itemHandler);
+//		view.addControllerListener(ControllerEvent.ITEM,itemHandler);
 		view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 		view.addModelListener(ModelEvent.TIME,timeHandler);
 		view.addModelListener(ModelEvent.STATE,stateHandler);
 		view.addModelListener(ModelEvent.META,metaHandler);
 		drawClip();
-		if(view.config['dock']) {
+		
+		if (view.config['dock']) {
 			button = view.getPlugin('dock').addButton(new DockIcon(),'is on', clickHandler);
-		} else if (view.getPlugin('controlbar')) {
-//			icon = new ControlbarIcon();
-//			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 		}
 		hide(config['state']);
 	};
@@ -148,16 +143,19 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		config['file'] = undefined;
 		field.htmlText = '';
 		var file:String;
-		if (view.playlist[view.config['item']]['hipervideo.file']){
-			file = view.playlist[view.config['item']]['hipervideo.file'];
-		} else if (view.playlist[view.config['item']]['hipervideo']){
-			file = view.playlist[view.config['item']]['hipervideo']; 
-		} else if(view.config['hipervideo.file']) {
-			file = view.config['hipervideo.file'];
-		} else if(view.config['hipervideo']) {
-			file = view.config['hipervideo'];
-		}
-		if(file) {
+		
+//		if (view.playlist[view.config['item']]['hipervideo.file']){
+//			file = view.playlist[view.config['item']]['hipervideo.file'];
+//		} else if (view.playlist[view.config['item']]['hipervideo']){
+//			file = view.playlist[view.config['item']]['hipervideo']; 
+//		} else if (view.config['hipervideo.file']) {
+//			file = view.config['hipervideo.file'];
+//		} else if (view.config['hipervideo']) {
+//			file = view.config['hipervideo'];
+//		}
+		file = view.config['hipervideo.file'];
+
+		if (file) {
 			config['file'] = file;
 			try {
 				loader.load(new URLRequest(config['file']));
@@ -189,7 +187,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 							width:element.width, height:element.height});
 		}
 		
-		if(captions.length == 0) {
+		if (captions.length == 0) {
 			Logger.log('Not a valid file.','hipervideo');
 		}
 	};
@@ -199,20 +197,23 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private function metaHandler(evt:ModelEvent):void {
 		var txt:String;
 		var fnd:Boolean;
-		if(evt.data.type == 'hipervideo') {
+		
+		if (evt.data.type == 'hipervideo') {
 			txt = evt.data.captions;
 			fnd = true;
 		} else if (evt.data.type == 'textdata') {
 			txt = evt.data.text;
 			fnd = true;
 		}
-		if(fnd == true) {
+		
+		if (fnd) {
 			field.htmlText = txt+' ';
 			resizeHandler();
 			Logger.log(txt,'hipervideo');
 		}
 	};
 
+	private var xmlLoaded:Boolean;
 
 	/** Resize the captions if the display changes. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
@@ -220,6 +221,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		width = view.config['width'];
 		scaleY = scaleX;
 		y = view.config['height']-height;
+		
+		if (!xmlLoaded) {
+			itemHandler(evt);
+			xmlLoaded = true;
+		}
 	};
 
 
@@ -257,6 +263,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		} else if (child != null) {
 			removeChild(child);
 			child = null;
+//			view.sendEvent("PLAY", captions[i]['time']);
 		}
 	}
 
@@ -268,14 +275,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			}
 			view.sendEvent("SEEK", captions[current]['time']);
 		} else {
-			if(view.config['hipervideo.target']!=undefined){
+			if (view.config['hipervideo.target'] != undefined){
 				try {
 				  navigateToURL(new URLRequest(captions[current]['url']), view.config['hipervideo.target']); 
 				} catch (e:Error) {
 				  trace("Error occurred!");
 				}
-			}
-			else{
+			} else {
 				try {
 				  navigateToURL(new URLRequest(captions[current]['url'])); 
 				} catch (e:Error) {
@@ -287,12 +293,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
-		if((view.config['state'] == ModelStates.PLAYING ||
-		 	view.config['state'] == ModelStates.PAUSED) && config['state']) {
-			visible = true;
-		} else {
-			visible = false;
-		}
+		visible = 
+			(view.config['state'] == ModelStates.PLAYING || view.config['state'] == ModelStates.PAUSED) 
+				&& config['state'];
+		 	
 		if (view.config['state'] == ModelStates.PAUSED) {
 			field.x = Infinity;
 			img.x = Infinity;
@@ -308,9 +312,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Check timing of the player to sync captions. **/
 	private function timeHandler(evt:ModelEvent):void {
 		var pos:Number = evt.data.position;
-		if(captions && captions.length > 0 && (
-			captions[current]['begin'] > pos || 
-			(captions[current+1] && captions[current+1]['begin'] < pos))) {
+		if (captions && captions.length > 0 && (
+			captions[current]['begin'] >= pos || (captions[current+1] && captions[current+1]['begin'] < pos))) {
 			setCaption(pos);
 		} else if (forceReload) {
 			forceReload = false;
