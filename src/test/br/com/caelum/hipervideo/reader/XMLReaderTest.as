@@ -8,7 +8,6 @@ package test.br.com.caelum.hipervideo.reader
 		
 	public class XMLReaderTest extends TestCase
 	{
-		
 		private var xmlStr:String = ( <![CDATA[
 			<video>
 				
@@ -51,7 +50,7 @@ package test.br.com.caelum.hipervideo.reader
 							Teste de cores
 						</textContent>
 						
-						<link>
+						<link activity_id="act_id1">
 							<tooltip></tooltip>
 							<url>http://link-qualquer.com</url>
 							<thumbnail>imagem_das_cores.jpg</thumbnail>
@@ -64,7 +63,7 @@ package test.br.com.caelum.hipervideo.reader
 					<element>
 						<imageContent>http://link-para-imagem.com</imageContent>
 						
-						<link>
+						<link activity_id="act_id2">
 							<tooltip>Tooltip 3</tooltip>
 							<time>00:02:15</time>
 							<thumbnail></thumbnail>
@@ -182,6 +181,12 @@ package test.br.com.caelum.hipervideo.reader
 		
 		public function testReadThumbnailDefaultWhenItIsNotInformed():void {
 			assertEquals("thumbs/defaultThumb.jpg", elementArray[2].link.thumbnail);
+		}
+		
+		public function testReadLinkActivityId():void {
+			assertEquals("", elementArray[0].link.activityId);
+			assertEquals("act_id1", elementArray[1].link.activityId);
+			assertEquals("act_id2", elementArray[2].link.activityId);
 		}
 
 		public function testReadXMLWithNoElements():void {

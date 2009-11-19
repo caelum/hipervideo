@@ -52,7 +52,7 @@
 				<![CDATA[Podemos usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
 			</textContent>
 			
-			<link>
+			<link activity_id="atividade regitrada">
 				<tooltip>Uma tooltip para este link.</tooltip>
 				<url>http://caelum.com.br</url>
 				<thumbnail>thumbs/video11.jpg</thumbnail>
@@ -65,7 +65,7 @@
 		<element>
 			<imageContent>thumbs/zina.gif</imageContent>
 			
-			<link>
+			<link activity_id="Ronaldo">
 				<tooltip>Ronaldo</tooltip>
 				<time>00:00:00.5</time>
 				<thumbnail>thumbs/zina.gif</thumbnail>

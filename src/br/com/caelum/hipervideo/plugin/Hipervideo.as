@@ -11,18 +11,15 @@ import com.jeroenwijering.utils.Logger;
 
 import flash.display.*;
 import flash.events.*;
+import flash.external.ExternalInterface;
 import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
 public class Hipervideo extends MovieClip implements PluginInterface {
 
-
-//	[Embed(source="../../../../../controlbar.png")]
-//	private const ControlbarIcon:Class;
 	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
-
 
 	/** List with configuration settings. **/
 	public var config:Object = {
@@ -35,8 +32,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var loader:URLLoader;
 	/** Reference to the MVC view. **/
 	private var view:AbstractView;
-//	/** Icon for the controlbar. **/
-//	private var icon:Bitmap;
 	/** Reference to the textfield. **/
 	public var field:TextField;
 	/** Reference to the background graphic. **/
@@ -81,34 +76,28 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		field.defaultTextFormat = format;
 		field.mouseEnabled = true;
 		
-		addEventListener(MouseEvent.CLICK, clickHandler);
 		field.addEventListener(MouseEvent.CLICK, clickHandler);
 		
 		img = new Loader();
 		img.addEventListener(MouseEvent.CLICK, clickHandler);
 		
-		if(config['back'] == false) {
+		if (config['back'] == false) {
 			back.alpha = 0;
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
 		}
 	};
 
-
 	/** Show/hide the captions **/
 	public function hide(stt:Boolean):void {
 		config['state'] = stt;
 		visible = config['state'];
-		if(config['state']) {
+		if (config['state']) {
 			if(button) { 
 				button.field.text = 'is on'; 
-//			} else { 
-//				icon.alpha = 1;
 			}
 		} else { 
 			if(button) { 
 				button.field.text = 'is off'; 
-//			} else {
-//				icon.alpha = 0.3;
 			}
 		}
 		var cke:SharedObject = SharedObject.getLocal('com.jeroenwijering','/');
@@ -116,11 +105,9 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		cke.flush();
 	};
 
-
 	/** Initing the plugin. **/
 	public function initializePlugin(vie:AbstractView):void {
 		view = vie;
-//		view.addControllerListener(ControllerEvent.ITEM,itemHandler);
 		view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 		view.addModelListener(ModelEvent.TIME,timeHandler);
 		view.addModelListener(ModelEvent.STATE,stateHandler);
@@ -142,15 +129,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		field.htmlText = '';
 		var file:String;
 		
-//		if (view.playlist[view.config['item']]['hipervideo.file']){
-//			file = view.playlist[view.config['item']]['hipervideo.file'];
-//		} else if (view.playlist[view.config['item']]['hipervideo']){
-//			file = view.playlist[view.config['item']]['hipervideo']; 
-//		} else if (view.config['hipervideo.file']) {
-//			file = view.config['hipervideo.file'];
-//		} else if (view.config['hipervideo']) {
-//			file = view.config['hipervideo'];
-//		}
 		file = view.config['hipervideo.file'];
 
 		if (file) {
@@ -163,23 +141,21 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	};
 
-
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
 		var video:Video = new XMLReader(new XML(evt.target.data)).extract();
 		var elementArray:Array = video.elements; 
 		
-		/* Translate from Element class to internal representation*/
 		for each (var element:Element in elementArray) {
 			captions.push({begin:element.start, content:element.content, isText: element.isText,
 							textColor: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
-							time: element.link.time,
+							time: element.link.time, activityId: element.link.activityId,
 							topLeft_x:element.x, topLeft_y:element.y,
 							width:element.width, height:element.height});
 			captions.push({begin:(element.start + element.duration), content:null, isText: element.isText,
 							textColor: null, backgroundColor: null, url: element.link.url,
-							time: element.link.time,
+							time: element.link.time, activityId: element.link.activityId,
 							hasBackgroundColor: element.hasBackgroundColor,
 							topLeft_x:Infinity, topLeft_y:element.y,
 							width:element.width, height:element.height});
@@ -189,7 +165,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			Logger.log('Not a valid file.','hipervideo');
 		}
 	};
-
 
 	/** Check for captions in metadata. **/
 	private function metaHandler(evt:ModelEvent):void {
@@ -226,11 +201,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	};
 
-
 	/** Set a caption on screen. **/
 	private function setCaption(pos:Number):void {
-		for(var i:Number=0; i<captions.length; i++) {
-			if(captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
+		for (var i:Number=0; i<captions.length; i++) {
+			if (captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
 				current = i;
 				drawElement(i);
 				Logger.log(captions[i]['content'],'hipervideo');
@@ -261,11 +235,14 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		} else if (child != null) {
 			removeChild(child);
 			child = null;
-//			view.sendEvent("PLAY", captions[i]['time']);
 		}
 	}
 
 	private function clickHandler(event:MouseEvent):void {
+		if (captions[current]['activityId'] != "") {
+			ExternalInterface.call('logActivity', captions[current]['activityId']);
+		}
+		
 		if (captions[current]['url'] == "") {
 			if (child != null) {
 				removeChild(child);
@@ -318,9 +295,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			setCaption(pos);
 		}
 	};
-	
 
 };
-
 
 }
