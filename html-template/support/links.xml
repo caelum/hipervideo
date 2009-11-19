@@ -1,6 +1,5 @@
 <video>
 
-
 	<playlist>
 		<link>
 			<tooltip>Tubarão</tooltip>
@@ -14,9 +13,9 @@
 		</link>
 		<link>
 			<tooltip>Borrão</tooltip>
-			<url>http://caelum.com.br</url>
+			<url>support/video.flv</url>
 			<thumbnail>thumbs/video11.jpg</thumbnail>
-		</link>	
+		</link>
 		<link>
 			<tooltip>Carro</tooltip>
 			<url>http://caelum.com.br</url>
@@ -26,6 +25,9 @@
 	
 	<actions>
 		<pause at="00:00:05.05" />
+	</actions>
+	<actions>
+		<pause at="00:00:08" />
 	</actions>
 
 	<elements>
