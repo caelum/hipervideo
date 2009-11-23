@@ -56,7 +56,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		back = new MovieClip();
 		back.graphics.beginFill(0x000000,0.75);
-		back.graphics.drawRect(0,0,400,20);
+		back.graphics.drawRect(0,0,400,0);
 		addChild(back);
 		
 		format = new TextFormat();
