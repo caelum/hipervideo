@@ -12,7 +12,6 @@ import com.jeroenwijering.utils.Logger;
 import flash.display.*;
 import flash.events.*;
 import flash.external.ExternalInterface;
-import flash.filters.DropShadowFilter;
 import flash.net.*;
 import flash.text.*;
 
@@ -32,14 +31,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var loader:URLLoader;
 	/** Reference to the MVC view. **/
 	private var view:AbstractView;
-	/** Reference to the textfield. **/
-	public var field:TextField;
 	/** Reference to the background graphic. **/
 	private var back:MovieClip;
 	/** The array the captions are loaded into. **/
 	private var captions:Array;
-	/** Textformat entry for the captions. **/
-	private var format:TextFormat;
 	/** Currently active caption. **/
 	private var current:Number;
 	/** Reference to the dock button. **/
@@ -58,32 +53,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		back.graphics.beginFill(0x000000,0.75);
 		back.graphics.drawRect(0,0,400,0);
 		addChild(back);
-		
-		format = new TextFormat();
-		format.color = 0xFFFFFF;
-		format.size = config['fontsize'];
-		format.align = "center";
-		format.font = "_sans";
-		format.leading = 4;
-		
-		field = new TextField();
-		field.border = true;
-		field.borderColor = 0xAAAAAA;
-		field.x = Infinity;
-		field.selectable = false;
-		field.multiline = true;
-		field.wordWrap = true;
-		field.defaultTextFormat = format;
-		field.mouseEnabled = true;
-		
-		field.addEventListener(MouseEvent.CLICK, clickHandler);
-		
+				
 		img = new Loader();
 		img.addEventListener(MouseEvent.CLICK, clickHandler);
 		
 		if (config['back'] == false) {
 			back.alpha = 0;
-			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
 		}
 	};
 
@@ -126,7 +101,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		current = 0;
 		captions = new Array();
 		config['file'] = undefined;
-		field.htmlText = '';
+		//field.htmlText = '';
 		var file:String;
 		
 		file = view.config['hipervideo.file'];
@@ -147,18 +122,13 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		var elementArray:Array = video.elements; 
 		
 		for each (var element:Element in elementArray) {
-			captions.push({begin:element.start, content:element.content, isText: element.isText,
+			captions.push({begin:element.start, end:element.start + element.duration, 
+							content:element.content, isText: element.isText,
 							textColor: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
 							time: element.link.time, activityId: element.link.activityId,
 							topLeft_x:element.x, topLeft_y:element.y,
-							width:element.width, height:element.height});
-			captions.push({begin:(element.start + element.duration), content:null, isText: element.isText,
-							textColor: null, backgroundColor: null, url: element.link.url,
-							time: element.link.time, activityId: element.link.activityId,
-							hasBackgroundColor: element.hasBackgroundColor,
-							topLeft_x:Infinity, topLeft_y:element.y,
-							width:element.width, height:element.height});
+							width:element.width, height:element.height, active:false});
 		}
 		
 		if (captions.length == 0) {
@@ -180,7 +150,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 		
 		if (fnd) {
-			field.htmlText = txt+' ';
+			//field.htmlText = txt+' ';
 			resizeHandler();
 			Logger.log(txt,'hipervideo');
 		}
@@ -190,7 +160,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Resize the captions if the display changes. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
-		back.height = field.height + 10;
+		//back.height = field.height + 10;
 		width = view.config['width'];
 		scaleY = scaleX;
 		y = view.config['height']-height;
@@ -204,7 +174,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Set a caption on screen. **/
 	private function setCaption(pos:Number):void {
 		for (var i:Number=0; i<captions.length; i++) {
-			if (captions[i]['begin'] < pos && (i == captions.length - 1 || captions[i+1]['begin'] > pos)) {
+			if (captions[i]['begin'] < pos) {
 				current = i;
 				drawElement(i);
 				Logger.log(captions[i]['content'],'hipervideo');
@@ -216,15 +186,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private function drawElement(i:Number):void {
 		if (captions[i]['content'] != null) {
 			if (captions[i]['isText']) {
-				child = addChild(field);
-				field.htmlText = captions[i]['content'];
-				field.width = captions[i]['width'];
-				field.height = captions[i]['height'];
-				field.x = captions[i]['topLeft_x'];
-				field.y = - captions[i]['topLeft_y'];
-				field.textColor = captions[i]['textColor'];
-				field.background = captions[i]['hasBackgroundColor'];
-				field.backgroundColor = captions[i]['backgroundColor'];
+				new Field(captions[i], this, view);
 				resizeHandler();
 			} else {
 				child = addChild(img);
@@ -273,7 +235,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				&& config['state'];
 		 	
 		if (view.config['state'] == ModelStates.PAUSED) {
-			field.x = Infinity;
+			//field.x = Infinity;
 			img.x = Infinity;
 			if (child != null) {
 				removeChild(child);
@@ -287,12 +249,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Check timing of the player to sync captions. **/
 	private function timeHandler(evt:ModelEvent):void {
 		var pos:Number = evt.data.position;
-		if (captions && captions.length > 0 && (
-			captions[current]['begin'] >= pos || (captions[current+1] && captions[current+1]['begin'] < pos))) {
-			setCaption(pos);
-		} else if (forceReload) {
-			forceReload = false;
-			setCaption(pos);
+		for (var i:Number = 0; i < captions.length; i++) {
+			if (captions[i]['begin'] < pos && captions[i]['end'] > pos && captions[i]['active'] == false) {
+				trace("ok!");
+				drawElement(i);
+			}
 		}
 	};
 
