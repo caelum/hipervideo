@@ -1,14 +1,10 @@
-﻿﻿package br.com.caelum.hipervideo.plugin
-{
+﻿﻿package br.com.caelum.hipervideo.plugin {
 
 import br.com.caelum.hipervideo.model.Link;
-
 import com.jeroenwijering.events.*;
 import com.neoarchaic.ui.Tooltip;
-
 import fl.transitions.*;
 import fl.transitions.easing.*;
-
 import flash.display.*;
 import flash.events.Event;
 import flash.events.MouseEvent;

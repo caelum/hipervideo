@@ -1,6 +1,5 @@
 package br.com.caelum.hipervideo.plugin {
 
-
 import br.com.caelum.hipervideo.model.Action;
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
