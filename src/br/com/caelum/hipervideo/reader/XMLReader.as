@@ -28,24 +28,20 @@ package br.com.caelum.hipervideo.reader
 				var color:uint;
 				var thickness:Number = 1;
 				
-				trace("==================");
-				trace(element.children().contains(<frame/>));
-				trace("==================");
-				
-				if (element.textContent.toString().length != 0) {
+				if ("textContent" in element) {
 					content = element.textContent;
 					type = ElementType.TEXT;
 					color = element.textContent.@color.toString().length == 0 ? 0xFFFFFF : uint(element.textContent.@color);
-				} else if (element.imageContent.toString().length != 0) {
+				} else if ("imageContent" in element) {
 					content = element.imageContent;
 					type = ElementType.IMAGE;
 					color = 0xFFFFFF;
-				} else if (element.frame.toString().length != 0) {
+				} else if ("frame" in element) {
 					content = element.frame;
 					type = ElementType.FRAME;
 					color = element.frame.@color.toString().length == 0 ? 0x0000FF : uint(element.frame.@color);
 					thickness = element.geometry.@thickness.toString().length == 0 ? 1 : element.geometry.@thickness;
-				} else {
+				} else if ("underline" in element) {
 					content = "";
 					type = ElementType.UNDERLINE;
 					color = element.underline.@color.toString().length == 0 ? 0x0000FF : uint(element.underline.@color);
