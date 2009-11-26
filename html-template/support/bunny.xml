@@ -60,7 +60,7 @@
 			</link>
 			
 			<time start="00:00:02.5" duration="00:00:02"/>
-			<geometry x="70" y="20" height="30" width="250"/>
+			<geometry x="70" y="20" height="50" width="250"/>
 		</element>
 	
 		<element>
@@ -79,7 +79,7 @@
 		<element>
 			<frame thickness="6"/>
 			
-			<link>
+			<link action="pause">
 				<tooltip></tooltip>
 				<url>http://caelum.com.br</url>
 				<thumbnail>thumbs/video10.jpg</thumbnail>

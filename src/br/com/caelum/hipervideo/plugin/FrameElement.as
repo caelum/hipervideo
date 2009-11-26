@@ -31,13 +31,17 @@ package br.com.caelum.hipervideo.plugin
 			
 			var offset:Number = element.thickness / 2;
 			
+			graphics.beginFill(0xFFFFFF, 0);
+			graphics.drawRect(0, 0, element.width, element.height);
+			graphics.endFill();
 			graphics.lineStyle(element.thickness, element.color, 1, false, "normal", null, JointStyle.BEVEL);
 			graphics.moveTo(0+offset, 0+offset)
 			graphics.lineTo(element.width-offset, 0+offset);
 			graphics.lineTo(element.width-offset, element.height-offset);
 			graphics.lineTo(0+offset, element.height-offset);
 			graphics.lineTo(0+offset, 0+offset);
-						
+			
+			this.addEventListener(MouseEvent.CLICK, clickHandler);
 			child = clip.parent.addChild(this);
 
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
@@ -68,7 +72,7 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {
-//			clip.elementStateHandler(this, field, evt);
+			clip.elementStateHandler(this, this, evt);
 		}
 
 	}
