@@ -47,9 +47,10 @@ package br.com.caelum.hipervideo.plugin {
 			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
-			view.addViewListener(ViewEvent.NEXT,nextHandler);
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addControllerListener(ControllerEvent.SEEK, seekHandler);
+			
+			view.config['StateManager'] = this;
 			
 			loader.addEventListener(Event.COMPLETE, parseXML);
 			loader.load(new URLRequest(view.config['hipervideo.file']));
@@ -93,14 +94,13 @@ package br.com.caelum.hipervideo.plugin {
 					break;
 			}
 		}
-
-		private function nextHandler(evt:ViewEvent):void {
-			if (evt.type == ViewEvent.NEXT) {
-				loadNextVideo();
-			}
-		}
 		
 		private function loadNextVideo():void {
+			notifyNextVideo();
+			view.config['Hipervideo'].notifyNextVideo();
+		}
+		
+		public function notifyNextVideo():void {
 			if (view.config['next'] != null && view.config['next'] != "") {
 				view.config['hipervideo.file'] = view.config['next'];
 				playlist.die();

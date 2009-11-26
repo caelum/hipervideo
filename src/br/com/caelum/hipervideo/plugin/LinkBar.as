@@ -97,6 +97,7 @@ public class LinkBar extends MovieClip {
 			//Make the clip remember what URL it should go to when clicked on
 			item.url = link.url;
 			item.time = link.time;
+			item.video = link.video;
 			
 			//Make the clickable area clickable
 			item.clickable.buttonMode = true;
@@ -282,9 +283,12 @@ public class LinkBar extends MovieClip {
 	// Guide the viewer to the link playing related clip when the clip thumb is clicked 
 	private function playClip(e:MouseEvent):void{
 		var item:Object = e.target.parent;
-		
-		if (item.url == "") {
+		if (item.url == "" && item.video == "") {
 			view.sendEvent("SEEK", item.time);
+		} else if (item.video != "") {
+			view.config['next'] = item.video;
+			view.config['HipervideoPlugin'].notifyNextVideo();
+			view.config['StateManager'].notifyNextVideo();
 		} else {
 			var request:URLRequest = new URLRequest(item.url);
 	

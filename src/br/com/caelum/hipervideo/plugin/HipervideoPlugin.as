@@ -44,6 +44,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		view.addModelListener(ModelEvent.META,metaHandler);
 		view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 		
+		view.config['HipervideoPlugin'] = this;
+		
 		drawClip();
 		disablePauseClick();
 	};
@@ -88,6 +90,11 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	};
 		
 	private function loadNextVideo():void {
+		notifyNextVideo();
+		view.config['StateManager'].notifyNextVideo();
+	}
+	
+	public function notifyNextVideo():void {
 		if (view.config['next'] != null && view.config['next'] != "") {
 			view.config['hipervideo.file'] = view.config['next'];
 			drawClip();
