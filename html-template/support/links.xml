@@ -51,7 +51,7 @@
 				<![CDATA[Podemos usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
 			</textContent>
 			
-			<link activity_id="Element">
+			<link activity_id="#ActID#">
 				<tooltip>Uma tooltip para este link.</tooltip>
 				<thumbnail>thumbs/video11.jpg</thumbnail>
 			</link>
