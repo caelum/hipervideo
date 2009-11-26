@@ -35,8 +35,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var back:MovieClip;
 	/** The array the captions are loaded into. **/
 	private var captions:Array;
-	/** Currently active caption. **/
-	private var current:Number;
 
 	private function drawClip():void {
 		loader = new URLLoader();
@@ -77,10 +75,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Check for captions with a new item. **/
 	private function itemHandler(evt:ControllerEvent=null):void {
-		current = 0;
 		captions = new Array();
 		config['file'] = undefined;
-		//field.htmlText = '';
 		var file:String;
 		
 		file = view.config['hipervideo.file'];
