@@ -18,6 +18,8 @@ import flash.events.*;
 import flash.external.ExternalInterface;
 import flash.net.*;
 import flash.text.*;
+import flash.utils.clearInterval;
+import flash.utils.setInterval;
 
 public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
@@ -104,7 +106,16 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 
 	/** Captions are loaded; now display them. **/
-	private function loaderHandler(evt:Event):void { 
+	private function loaderHandler(evt:Event):void {
+		
+		function autoplay():void {
+			if (view.config['hipervideo.autoplay'] == true) {
+				view.sendEvent(ControllerEvent.PLAY);	
+			}
+			clearInterval(sleep);
+			view.config['hipervideo.autoplay'] = false;
+		}
+		 
 		var hipervideo:Hipervideo = new XMLReader(new XML(evt.target.data)).extract();
 		captions = hipervideo.elements;
 		actions = hipervideo.actions; 
@@ -120,6 +131,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		}
 		
 		view.config['next'] = hipervideo.next;
+		
+		var sleep:uint = setInterval(autoplay, 1000);
 	};
 	
 	/** Quando a posicao do vídeo for alterada pela barra de busca,
