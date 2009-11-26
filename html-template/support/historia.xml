@@ -78,7 +78,7 @@
 		<element>
 			<underline color="0x0000FF"/>
 			
-			<link>
+			<link activity_id="eniac">
 				<tooltip>ENIAC</tooltip>
 				<time>00:09:13</time>
 				<thumbnail>thumbs/video11.jpg</thumbnail>

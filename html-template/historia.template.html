@@ -1,0 +1,69 @@
+<param name="flashvars" value="file=../video.flv&height=260&width=400&plugins=plugins/flashvars/flashvars.swf"/>
+
+<!-- saved from url=(0014)about:internet -->
+<html>
+	<head>
+		<title>Projeto Hipervideo - Exemplo</title>	
+	</head>
+
+	<body>
+	
+		<!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
+		
+		<div id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+		
+		<script type="text/javascript" src="support/swfobject.js"></script>
+		
+		<script type="text/javascript">
+		s1 = new SWFObject("support/player-viral.swf","mpl","543","342","7","#8a8a8a");
+		s1.addParam('allowscriptaccess','always');
+		s1.addParam('allowfullscreen','true');
+		s1.addParam('allownetworking','all');
+		s1.addVariable('width','400');
+		s1.addVariable('height','260');
+//		s1.addVariable('file','bunny.flv');
+		s1.addVariable('image','support/preview.jpg');
+		s1.addVariable('recommendations','http://test.video.lan/related/IouwhNQw/?xml=1');
+		s1.addVariable('repeat','list');
+		s1.addVariable('shuffle','false');
+		s1.addVariable('linkfromdisplay','true');
+		s1.addVariable('linktarget','_self');
+		s1.addVariable('javascriptid','delfivideo');
+		s1.addVariable('enablejs','true');
+		s1.addVariable('shownavigation','true');
+		s1.addVariable('icons','false');
+		s1.addVariable("autostart","false");
+		s1.addVariable("stretching","uniform");
+		
+		s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
+		
+		s1.addVariable('hipervideo.file', 'support/historia.xml');
+		s1.addVariable('hipervideo.target', '_self'); // where to open the related videos when clicked on
+		s1.addVariable('hipervideo.barposition', 'bottom'); // center, bottom, top
+		s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); //link to the skin			
+		
+		s1.write("container");
+		</script>
+
+		<!-- END OF THE PLAYER EMBEDDING -->
+	
+		<script type="text/javascript">
+			function logActivity(id, time) {
+				if (id == "eniac") {
+					return({
+						id: 'Element',
+						value: {
+							begin:'00:09:13', duration: '00:00:07', 
+							content: 'Voltar!', type: 'TEXT',
+							color: '0xFF0000', backgroundColor: '',
+							hasBackgroundColor: false, url: '',
+							time: time, activityId: '', action: '',
+							x:20, y:50,
+							width:100, height:100, active:false }
+					});
+				}
+			}
+		</script>
+	
+	</body>
+</html>

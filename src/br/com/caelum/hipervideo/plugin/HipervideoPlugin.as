@@ -3,7 +3,6 @@ package br.com.caelum.hipervideo.plugin {
 
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
-import br.com.caelum.hipervideo.model.ElementType;
 import br.com.caelum.hipervideo.model.Hipervideo;
 import br.com.caelum.hipervideo.model.Link;
 import br.com.caelum.hipervideo.reader.XMLReader;
@@ -213,15 +212,17 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	}
 	
 	public function receive_notification_from_activity_log(response:Object):void {
-		trace(response['id'] + " - " + response['value']);
-		
+		trace("porras");
+		trace((response['id'] == "Element"));
 		if (response['id'] == "Element") {
+			trace("entrou no ife");
 			var data:Object = response['value'];
 			var newElement:Element = new Element(
-				ElementType.TEXT, data['content'],
+				data['type'], data['content'],
 				new Link("", "", "", "", "", 0, "", ""),
-				uint(data['textColor']), "", data['begin'], data['end'],
-				data['topLeft_x'], data['topLeft_y'], data['width'], data['height']);
+				uint(data['color']), data['backgroundColor'], Strings.seconds(data['begin']),
+				Strings.seconds(data['duration']),
+				data['x'], data['y'], data['width'], data['height']);
 			newElement.active = data['active'];
 			
 			drawElement(newElement);
