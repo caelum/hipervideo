@@ -37,8 +37,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private var captions:Array;
 	/** Currently active caption. **/
 	private var current:Number;
-	/** Reference to the dock button. **/
-	private var button:MovieClip;
 
 	private function drawClip():void {
 		loader = new URLLoader();
@@ -59,15 +57,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	public function hide(stt:Boolean):void {
 		config['state'] = stt;
 		visible = config['state'];
-		if (config['state']) {
-			if(button) { 
-				button.field.text = 'is on'; 
-			}
-		} else { 
-			if(button) { 
-				button.field.text = 'is off'; 
-			}
-		}
 		var cke:SharedObject = SharedObject.getLocal('com.jeroenwijering','/');
 		cke.data['hipervideo.state'] = stt;
 		cke.flush();
