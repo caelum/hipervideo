@@ -8,6 +8,7 @@ package br.com.caelum.hipervideo.plugin {
 	import com.jeroenwijering.events.AbstractView;
 	import com.jeroenwijering.events.ControllerEvent;
 	import com.jeroenwijering.events.ModelEvent;
+	import com.jeroenwijering.events.ModelStates;
 	import com.jeroenwijering.events.PluginInterface;
 	
 	import flash.display.Bitmap;
@@ -29,7 +30,6 @@ package br.com.caelum.hipervideo.plugin {
 		private var painelAtivo:Boolean = false;
 		private var lastPos:Number;
 		private var actions:Array;
-		private var stopPainel:Boolean = false;
 		
 		[Embed(source="../../../../../controlbar.png")]
 		private const ControlbarIcon:Class;
@@ -50,7 +50,8 @@ package br.com.caelum.hipervideo.plugin {
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, parseXML);
 			loader.load(new URLRequest(view.config['hipervideo.file']));
-			trace(view.config['hipervideo.file']);
+			
+			view.config['autoPaused'] = false;
 		};
 		
 		private function seekHandler(evt:ControllerEvent):void {
@@ -70,15 +71,16 @@ package br.com.caelum.hipervideo.plugin {
 		
 		/** Slide the plugin in when movie complete or paused. **/
 		public function stateHandler(evt:ModelEvent=undefined):void {
-			if (stopPainel) {
-				stopPainel = false;
-			} else {
+			if (!view.config['autoPaused']) {
 				clickHandler(null);
 				if (painelAtivo) {
 					playlist.stateHandler(evt);
 				} else {
 					links.stateHandler(evt);
 				}
+			}
+			if (evt.data.newstate == ModelStates.PLAYING) {
+				view.config['autoPaused'] = false;
 			}
 		}
 		
@@ -120,7 +122,7 @@ package br.com.caelum.hipervideo.plugin {
 		
 		private function performAction(action:Action):void {
 			if (action.type == ActionType.PAUSE) {
-				stopPainel = true;
+				view.config['autoPaused'] = true;
 				view.sendEvent("PLAY");
 			}
 		}

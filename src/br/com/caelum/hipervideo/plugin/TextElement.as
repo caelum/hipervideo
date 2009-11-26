@@ -3,6 +3,7 @@ package br.com.caelum.hipervideo.plugin
 	import com.jeroenwijering.events.AbstractView;
 	import com.jeroenwijering.events.ControllerEvent;
 	import com.jeroenwijering.events.ModelEvent;
+	import com.jeroenwijering.events.ModelStates;
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -58,6 +59,7 @@ package br.com.caelum.hipervideo.plugin
 			child = clip.parent.addChild(newTextField(data));
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
+			view.addModelListener(ModelEvent.STATE,stateHandler);
 			resizeHandler(null);
 		}
 		
@@ -81,7 +83,22 @@ package br.com.caelum.hipervideo.plugin
 		private function clickHandler(event:MouseEvent):void {
 			clip.clickHandler(data);
 		}
-
+		
+		private function stateHandler(evt:ModelEvent):void {
+			switch(evt.data.newstate) {
+				case ModelStates.PLAYING:
+					field.visible = true;
+					break;
+				case ModelStates.PAUSED:
+					if (!view.config['autoPaused']) {
+						field.visible = false;	
+					}
+					break;
+				case ModelStates.COMPLETED:
+					field.visible = false;
+					break;			
+			}
+		}
 
 	}
 }

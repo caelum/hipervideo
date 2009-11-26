@@ -24,10 +24,10 @@
 	</playlist>
 	
 	<actions>
-		<pause at="00:00:05.05" />
+		<pause at="00:00:03.05" />
 	</actions>
 	<actions>
-		<pause at="00:00:08" />
+		<pause at="00:00:05" />
 	</actions>
 
 	<elements>
