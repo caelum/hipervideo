@@ -40,11 +40,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Reference to the dock button. **/
 	private var button:MovieClip;
 
-	private var img:Loader;
-	private var child:DisplayObject;
-	
-	private var forceReload:Boolean = false;
-
 	private function drawClip():void {
 		loader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
@@ -53,9 +48,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		back.graphics.beginFill(0x000000,0.75);
 		back.graphics.drawRect(0,0,400,0);
 		addChild(back);
-				
-		img = new Loader();
-		img.addEventListener(MouseEvent.CLICK, clickHandler);
+		
 		
 		if (config['back'] == false) {
 			back.alpha = 0;
@@ -90,9 +83,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		drawClip();
 		
-		if (view.config['dock']) {
-			button = view.getPlugin('dock').addButton(new DockIcon(),'is on', clickHandler);
-		}
 		hide(config['state']);
 	};
 
@@ -150,7 +140,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 		
 		if (fnd) {
-			//field.htmlText = txt+' ';
 			resizeHandler();
 			Logger.log(txt,'hipervideo');
 		}
@@ -160,7 +149,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Resize the captions if the display changes. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
-		//back.height = field.height + 10;
 		width = view.config['width'];
 		scaleY = scaleX;
 		y = view.config['height']-height;
@@ -181,7 +169,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	}
 
-	private function clickHandler(event:MouseEvent):void {
+/* 	private function clickHandler(event:MouseEvent):void {
 		if (captions[current]['activityId'] != "") {
 			ExternalInterface.call('logActivity', captions[current]['activityId']);
 		}
@@ -208,23 +196,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			}
 		}
 	}
-	
+ */	
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
 		visible = 
 			(view.config['state'] == ModelStates.PLAYING || view.config['state'] == ModelStates.PAUSED) 
 				&& config['state'];
-		 	
-		if (view.config['state'] == ModelStates.PAUSED) {
-			//field.x = Infinity;
-			img.x = Infinity;
-			if (child != null) {
-				removeChild(child);
-				child = null;
-			}
-		} else if (view.config['state'] == ModelStates.PLAYING) {
-			forceReload = true;
-		}
 	};
 
 	/** Check timing of the player to sync captions. **/
