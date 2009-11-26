@@ -126,7 +126,9 @@ Também é possível exibir uma imagem sobre o vídeo durante um intervalo de te
 
 A tag <tt>&lt;imageContent&gt;</tt> também suporta o atributo <tt>alpha</tt> para definir o nível de transparência:
 
+<pre>
 <imageContent alpha="0.4">arquivo-de-imagem.jpg</imageContent>
+</pre>
 
 h3. Outros tipos de elementos
 
