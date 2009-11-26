@@ -10,7 +10,7 @@ package br.com.caelum.hipervideo.plugin
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	public class Field extends MovieClip
+	public class TextElement extends MovieClip
 	{
 		private var data:Object;
 		private var endTime:Number;
@@ -24,7 +24,7 @@ package br.com.caelum.hipervideo.plugin
 			format.color = 0xFFFFFF;
 			format.size = 14;
 			format.align = "center";
-			format.font = "_sans";
+			format.font = "arial";
 			format.leading = 4;
 			
 			field = new TextField();
@@ -48,7 +48,7 @@ package br.com.caelum.hipervideo.plugin
 			return field;
 		}
 		
-		public function Field(data:Object, clip:MovieClip, view:AbstractView)
+		public function TextElement(data:Object, clip:MovieClip, view:AbstractView)
 		{
 			this.data = data;
 			this.clip = clip;
@@ -75,7 +75,7 @@ package br.com.caelum.hipervideo.plugin
 				view.removeControllerListener(ControllerEvent.RESIZE,resizeHandler);
 				data['active'] = false;
 			}
-		}		
+		}
 
 	}
 }

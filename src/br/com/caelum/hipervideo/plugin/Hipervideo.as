@@ -170,33 +170,14 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			xmlLoaded = true;
 		}
 	};
-
-	/** Set a caption on screen. **/
-	private function setCaption(pos:Number):void {
-		for (var i:Number=0; i<captions.length; i++) {
-			if (captions[i]['begin'] < pos) {
-				current = i;
-				drawElement(i);
-				Logger.log(captions[i]['content'],'hipervideo');
-				return;
-			}
-		}
-	};
 	
 	private function drawElement(i:Number):void {
-		if (captions[i]['content'] != null) {
-			if (captions[i]['isText']) {
-				new Field(captions[i], this, view);
-				resizeHandler();
-			} else {
-				child = addChild(img);
-				img.load(new URLRequest(captions[i]['content']));
-				img.x = captions[i]['topLeft_x'];
-				img.y = - captions[i]['topLeft_y'];
-			}
-		} else if (child != null) {
-			removeChild(child);
-			child = null;
+		if (captions[i]['isText']) {
+			new TextElement(captions[i], this, view);
+			resizeHandler();
+		} else {
+			new ImageElement(captions[i], this, view);
+			resizeHandler();
 		}
 	}
 
@@ -251,7 +232,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		var pos:Number = evt.data.position;
 		for (var i:Number = 0; i < captions.length; i++) {
 			if (captions[i]['begin'] < pos && captions[i]['end'] > pos && captions[i]['active'] == false) {
-				trace("ok!");
 				drawElement(i);
 			}
 		}
