@@ -6,6 +6,7 @@ package br.com.caelum.hipervideo.plugin
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -43,7 +44,7 @@ package br.com.caelum.hipervideo.plugin
 			field.backgroundColor = data['backgroundColor'];
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
 			
-			//field.addEventListener(MouseEvent.CLICK, clickHandler);
+			field.addEventListener(MouseEvent.CLICK, clickHandler);
 			
 			return field;
 		}
@@ -76,6 +77,11 @@ package br.com.caelum.hipervideo.plugin
 				data['active'] = false;
 			}
 		}
+		
+		private function clickHandler(event:MouseEvent):void {
+			clip.clickHandler(data);
+		}
+
 
 	}
 }

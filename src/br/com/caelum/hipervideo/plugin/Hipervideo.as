@@ -154,34 +154,6 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	}
 
-/* 	private function clickHandler(event:MouseEvent):void {
-		if (captions[current]['activityId'] != "") {
-			ExternalInterface.call('logActivity', captions[current]['activityId']);
-		}
-		
-		if (captions[current]['url'] == "") {
-			if (child != null) {
-				removeChild(child);
-				child = null;
-			}
-			view.sendEvent("SEEK", captions[current]['time']);
-		} else {
-			if (view.config['hipervideo.target'] != undefined){
-				try {
-				  navigateToURL(new URLRequest(captions[current]['url']), view.config['hipervideo.target']); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			} else {
-				try {
-				  navigateToURL(new URLRequest(captions[current]['url'])); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			}
-		}
-	}
- */	
 	/** Check timing of the player to sync captions. **/
 	private function stateHandler(evt:ModelEvent):void {
 		visible = 
@@ -198,6 +170,31 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 			}
 		}
 	};
+	
+	public function clickHandler(data:Object):void {
+		if (data['activityId'] != "") {
+			ExternalInterface.call('logActivity', data['activityId']);
+		}
+		
+		if (data['url'] == "") {
+			view.sendEvent("SEEK", data['time']);
+		} else {
+			if (view.config['hipervideo.target'] != undefined){
+				try {
+				  navigateToURL(new URLRequest(data['url']), view.config['hipervideo.target']); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			} else {
+				try {
+				  navigateToURL(new URLRequest(data['url'])); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+		}
+	}
+
 
 };
 

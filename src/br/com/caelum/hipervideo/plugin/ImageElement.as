@@ -7,6 +7,7 @@ package br.com.caelum.hipervideo.plugin
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	
 	public class ImageElement extends MovieClip
@@ -24,7 +25,7 @@ package br.com.caelum.hipervideo.plugin
 			image.load(new URLRequest(data['content']));
 			child = addChild(image);
 			
-			//field.addEventListener(MouseEvent.CLICK, clickHandler);
+			image.addEventListener(MouseEvent.CLICK, clickHandler);
 			
 			return image;
 		}
@@ -56,6 +57,10 @@ package br.com.caelum.hipervideo.plugin
 				view.removeControllerListener(ControllerEvent.RESIZE,resizeHandler);
 				data['active'] = false;
 			}
+		}
+		
+		private function clickHandler(event:MouseEvent):void {
+			clip.clickHandler(data);
 		}
 
 	}
