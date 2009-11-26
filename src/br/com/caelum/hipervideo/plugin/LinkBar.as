@@ -74,8 +74,8 @@ public class LinkBar extends MovieClip {
     	ShuffleRight.visible = v;
     	InfoElement.visible = v;
     }
-
-	private function create(links:Array, ClipsVisible:Number):void {
+    
+    	private function create(links:Array, ClipsVisible:Number):void {
 		InfoElement["text"].text = this.title;
 		var i:int = 0;
 		
@@ -111,7 +111,6 @@ public class LinkBar extends MovieClip {
 		// Add the container enterframe event listner to move the clips when targX is changed
 		_container.addEventListener(Event.ENTER_FRAME,shiftClips);
 	}
-
 	
 	/** Place the elements on stage, stretch and position them to meet our measurements. **/	
 	public function resizeMe():void{
@@ -232,11 +231,39 @@ public class LinkBar extends MovieClip {
 				SlideMe(false);
 				break;
 			case ModelStates.PAUSED:
-//			case ModelStates.COMPLETED:
 				SlideMe(true);
 				break;			
 		}
-	}	
+	}
+	
+	// Guide the viewer to the link playing related clip when the clip thumb is clicked 
+	private function playClip(e:MouseEvent):void{
+		var item:Object = e.target.parent;
+		if (item.url == "" && item.video == "") {
+			view.sendEvent("SEEK", item.time);
+		} else if (item.video != "") {
+			view.config['next'] = item.video;
+			view.config['HipervideoPlugin'].notifyNextVideo();
+			view.config['StateManager'].notifyNextVideo();
+		} else {
+			var request:URLRequest = new URLRequest(item.url);
+	
+			if(view.config['hipervideo.target']!=undefined){
+				try {
+				  navigateToURL(request, view.config['hipervideo.target']); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+			else{
+				try {
+				  navigateToURL(request); 
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
+		}
+	}
 	
 	/** Initialize the skin swf loading **/	
 	private function loadMySkin():void{
@@ -279,36 +306,7 @@ public class LinkBar extends MovieClip {
 		  	}
 	  	}
 	}
-	
-	// Guide the viewer to the link playing related clip when the clip thumb is clicked 
-	private function playClip(e:MouseEvent):void{
-		var item:Object = e.target.parent;
-		if (item.url == "" && item.video == "") {
-			view.sendEvent("SEEK", item.time);
-		} else if (item.video != "") {
-			view.config['next'] = item.video;
-			view.config['HipervideoPlugin'].notifyNextVideo();
-			view.config['StateManager'].notifyNextVideo();
-		} else {
-			var request:URLRequest = new URLRequest(item.url);
-	
-			if(view.config['hipervideo.target']!=undefined){
-				try {
-				  navigateToURL(request, view.config['hipervideo.target']); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			}
-			else{
-				try {
-				  navigateToURL(request); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			}
-		}
-	}
-	
+		
 	// Make the clips slide smoothly when shuffled
 	private function shiftClips(e:Event):void{
 		e.target.x -= (e.target.x-targX)/5;

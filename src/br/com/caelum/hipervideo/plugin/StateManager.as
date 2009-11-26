@@ -58,6 +58,20 @@ package br.com.caelum.hipervideo.plugin {
 			view.config['autoPaused'] = false;
 		};
 		
+		/** Parse the XML and do some magic with it. **/	
+		private function parseXML(e:Event):void {
+			var video:Hipervideo = new XMLReader(new XML(e.target.data)).extract();
+			
+			var linkArray:Array = new Array();
+			for each (var element:Element in video.elements) {
+				linkArray.push(element.link);
+			}
+			
+			playlist = new LinkBar("Playlist", video.playlist, view, this);
+			links = new LinkBar("Links", linkArray, view, this);
+			actions = video.actions;
+		}
+		
 		private function seekHandler(evt:ControllerEvent):void {
 			lastPos = Infinity;
 		}
@@ -95,21 +109,7 @@ package br.com.caelum.hipervideo.plugin {
 			}
 		}
 		
-		private function loadNextVideo():void {
-			notifyNextVideo();
-			view.config['Hipervideo'].notifyNextVideo();
-		}
-		
-		public function notifyNextVideo():void {
-			if (view.config['next'] != null && view.config['next'] != "") {
-				view.config['hipervideo.file'] = view.config['next'];
-				playlist.die();
-				links.die();
-				loader.load(new URLRequest(view.config['hipervideo.file']));
-			}
-		}
-		
-		private function resizeHandler(evt:ControllerEvent=undefined):void {
+				private function resizeHandler(evt:ControllerEvent=undefined):void {
 			if (playlist != null && links != null) {
 				playlist.setVisible(false);
 				playlist.resizeMe();
@@ -117,20 +117,6 @@ package br.com.caelum.hipervideo.plugin {
 				links.resizeMe();
 				clickHandler(null);
 			}
-		}
-		
-		/** Parse the XML and do some magic with it. **/	
-		private function parseXML(e:Event):void {
-			var video:Hipervideo = new XMLReader(new XML(e.target.data)).extract();
-			
-			var linkArray:Array = new Array();
-			for each (var element:Element in video.elements) {
-				linkArray.push(element.link);
-			}
-			
-			playlist = new LinkBar("Playlist", video.playlist, view, this);
-			links = new LinkBar("Links", linkArray, view, this);
-			actions = video.actions;
 		}
 		
 		/** Check timing of the player to sync captions. **/
@@ -145,6 +131,20 @@ package br.com.caelum.hipervideo.plugin {
 			lastPos = pos;
 		};
 		
+		private function loadNextVideo():void {
+			notifyNextVideo();
+			view.config['HipervideoPlugin'].notifyNextVideo();
+		}
+		
+		public function notifyNextVideo():void {
+			if (view.config['next'] != null && view.config['next'] != "") {
+				view.config['hipervideo.file'] = view.config['next'];
+				playlist.die();
+				links.die();
+				loader.load(new URLRequest(view.config['hipervideo.file']));
+			}
+		}
+				
 		private function performAction(action:Action):void {
 			if (action.type == ActionType.PAUSE) {
 				view.config['autoPaused'] = true;
