@@ -78,6 +78,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		view.addModelListener(ModelEvent.TIME,timeHandler);
 		view.addModelListener(ModelEvent.STATE,stateHandler);
 		view.addModelListener(ModelEvent.META,metaHandler);
+		view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 		
 		drawClip();
 		
@@ -130,6 +131,10 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		
 		view.config['next'] = hipervideo.next;
 	};
+	
+	private function seekHandler(evt:ControllerEvent):void {
+		lastPos = Infinity;
+	}
 
 	/** Check for captions in metadata. **/
 	private function metaHandler(evt:ModelEvent):void {
