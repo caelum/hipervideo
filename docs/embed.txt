@@ -34,4 +34,5 @@ s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); // BAR SKIN
 
 s1.write("container");
 </script>
+
 <!-- END OF THE PLAYER EMBEDDING -->

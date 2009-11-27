@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Longtail Video Player com plugin de hipervideo</title>
+</head>
+<body>
+<h1>Longtail Video Player com plugin de hipervideo</h1>
+
+<h2>Adicionado o player a uma página</h2>
+
+<p>Para adicionar o player do Longtail Video, acrescido dos plugins para
+hipervideo, é necessário colar na página o código presente no arquivo
+embed.txt, presente no mesmo diretório deste documento.</p>
+
+<p>Além disto, os arquivos player-viral.swf e swfobject.js devem estar presentes
+no subdiretório ./support, relativo ao caminho do diretório que contém o
+arquivo html a ser alterado. Este diretório pode ser alterado se o código em
+embed.txt for alterado coerentemente, nas linhas comentadas com:</p>
+	<ul>
+		<li><tt>// PLAYER PATH HERE</tt></li>
+		<li><tt>// SWFOBJECT.JS PATH HERE</tt></li>
+	</ul>  
+
+<h2>Variáveis do Longtail Video Player</h2>
+
+<p>No código do embed.txt são definidas algumas variáveis do player, incluindo a
+localização do arquivo de vídeo a ser reproduzido. Esta configuração é
+determinada pela variável 'file', definida na linha comentada com:</p>
+	<ul>
+		<li><tt>// VIDEO FILENAME HERE</tt></li>
+	</ul>
+
+<p>Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é
+determinada pela variável 'image', definida na linha comentada com:</p>
+	<ul>
+		<li><tt>// VIDEO PREVIEW IMAGE HERE</tt></li>
+	</ul>
+
+<p>Mais informações sobre as variáveis do Longtail Video Player podem ser
+obtidas no <a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.</p>
+
+<h2>Variáveis do plugin de hipervídeo</h2>
+
+<p>Os dados de hipervideo são fornecidos por um arquivo XML que também deve
+ser informado como uma variável do player: 'hipervideo.file'. Esta é
+definida na linha comentada com:</p>
+	<ul>
+		<li><tt>// HIPERVIDEO DATA FILE HERE</tt></li>
+	</ul>
+
+<p>Os links http podem ser abertos na janela em que o player está ou em uma nova
+janela. Este comportamento é determinado pela variável 'hipervideo.target',
+definida na linha comentada com:</p>
+	<ul>
+		<li><tt>// LINK TARGET HERE</tt></li>
+	</ul>
+
+<p>Os valores possíveis são:</p>
+
+<table border="0" cellpadding="5">
+	<tr><td><tt>_self</tt></td><td>Abre na mesma janela</td></tr>
+	<tr><td><tt>_blank</tt></td><td>Abre em uma nova janela</td></tr>
+</table>
+
+<p>O posicionamento das barras de vídeos relacionados e de links é determinado
+pela variável 'hipervideo.barposition', definida na linha comentada com:</p>
+	<ul>
+		<li><tt>// BAR POSITION</tt></li>
+	</ul>
+	
+<p>Os valores possíveis são:</p>
+
+<table border="0" cellpadding="5">
+	<tr><td><tt>bottom</tt></td><td>Parte inferior da janela de exibição do vídeo</td></tr>
+	<tr><td><tt>center</tt></td><td>Parte central da janela de exibição do vídeo</td></tr>
+	<tr><td><tt>top</tt></td><td>Parte superior da janela de exibição do vídeo</td></tr>
+</table>
+
+</body>
+</html>
