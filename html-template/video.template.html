@@ -3,56 +3,55 @@
 <!-- saved from url=(0014)about:internet -->
 <html>
 	<head>
-		<title></title>	
+		<title>Projeto Hipervideo - Exemplo</title>	
 	</head>
 
-<body>
-
-	<!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
+	<body>
 	
-	<div id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+		<!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
+		
+		<div id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+		
+		<script type="text/javascript" src="support/swfobject.js"></script>
+		
+		<script type="text/javascript">
+		var s1 = new SWFObject("support/player-viral.swf","mpl","543","342","7","#8a8a8a");
+		s1.addParam('allowscriptaccess','always');
+		s1.addParam('allowfullscreen','true');
+		s1.addVariable('width','400');
+		s1.addVariable('height','260');
+		s1.addVariable('file','bunny.flv');
+		s1.addVariable('image','preview.jpg');
+		s1.addVariable('recommendations','http://test.video.lan/related/IouwhNQw/?xml=1');
+		s1.addVariable('repeat','list');
+		s1.addVariable('shuffle','false');
+		s1.addVariable('linkfromdisplay','true');
+		s1.addVariable('linktarget','_self');
+		s1.addVariable('javascriptid','delfivideo');
+		s1.addVariable('enablejs','true');
+		s1.addVariable('shownavigation','true');
+		s1.addVariable('icons','false');
+		s1.addParam('allownetworking','all');  
+		
+		s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
+		
+		s1.addVariable('hipervideo.file', 'support/links.xml');
+		s1.addVariable('hipervideo.target', '_self'); // where to open the related videos when clicked on
+		
+		s1.addVariable('hipervideo.barposition', 'center'); // center, bottom, top
+		s1.addVariable('drelated.dskin', 'skins/grayskin.swf'); //link to the skin			
+		
+		s1.addVariable("autostart","false");
+		s1.addVariable("stretching","uniform");
+		s1.write("container");
+		</script>
+		<!-- END OF THE PLAYER EMBEDDING -->
 	
-	<script type="text/javascript" src="support/swfobject.js"></script>
+		<script type="text/javascript">
+			function logActivity(id) {
+				alert(id);
+			}
+		</script>
 	
-	<script type="text/javascript">
-            var s1 = new SWFObject("support/player-viral.swf","mpl","543","342","7","#8a8a8a");
-            s1.addParam('allowscriptaccess','always');
-            s1.addParam('allowfullscreen','true');
-            s1.addVariable('width','400');
-            s1.addVariable('height','260');
-            s1.addVariable('file','bunny.flv');
-            s1.addVariable('image','preview.jpg');
-            s1.addVariable('recommendations','http://test.video.lan/related/IouwhNQw/?xml=1');
-            s1.addVariable('repeat','list');
-            s1.addVariable('shuffle','false');
-            s1.addVariable('linkfromdisplay','true');
-            s1.addVariable('linktarget','_self');
-            s1.addVariable('javascriptid','delfivideo');
-            s1.addVariable('enablejs','true');
-            s1.addVariable('shownavigation','true');
-            s1.addVariable('icons','false');
-			s1.addParam('allownetworking','all');  
-			
-			s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
-			
-			s1.addVariable('hipervideo.file', 'support/links.xml');
-			s1.addVariable('hipervideo.target', '_self'); // where to open the related videos when clicked on
-			
-			s1.addVariable('drelated.dposition', 'bottom'); // center, bottom, top
-			s1.addVariable('drelated.dskin', 'skins/grayskin.swf'); //link to the skin			
-			
-            s1.addVariable("autostart","false");
-            s1.addVariable("stretching","uniform");
-            s1.write("container");
-            
-    </script>
-	
-	<script type="text/javascript">
-		function logActivity(id) {
-			alert(id);
-		}
-	</script>
-	<!-- END OF THE PLAYER EMBEDDING -->
-
-</body>
+	</body>
 </html>

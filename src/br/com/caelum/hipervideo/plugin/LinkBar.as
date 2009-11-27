@@ -164,11 +164,11 @@ public class LinkBar extends MovieClip {
 		//var ContainerClass:Object = getDefinitionByName ("Container") as Class;
 		_container = clip.addChild(DisplayObject(new Sprite()));
 		
-		//Analyse the dposition flashvar and place the elements according to it.
+		//Analyse the position flashvar and place the elements according to it.
 		if (view.config['fullscreen']) {
 			offset = 35;
 		}
-		switch(view.config['drelated.dposition']) {
+		switch(view.config['hipervideo.barposition']) {
 			case 'bottom':
 				_container.y = view.config['height']-SampleItem.height-offset;
 				Cover.y = view.config['height']-SampleItem.height-5-InfoElement.height-offset;
