@@ -55,7 +55,7 @@ public class LinkBar extends MovieClip {
 		targX = 0;
 		
 		//If the custom skin is defined, load it in
-		if (view.config['drelated.dskin'] != undefined){
+		if (view.config['hipervideo.barskin'] != undefined){
 			loadMySkin();
 		}
 		
@@ -121,7 +121,7 @@ public class LinkBar extends MovieClip {
 			infoelement - MovieClip containing textfield with the title for the clips shown
 			template - Videoitem
 		**/
-		if(view.config['drelated.dskin']!=undefined){
+		if(view.config['hipervideo.barskin']!=undefined){
 			Bg = clip.addChild(mySkin.Bg);
 			Cover = clip.addChild(mySkin.Cover);		
 			ShuffleLeft = clip.addChild(mySkin.shuffle_left);
@@ -241,7 +241,7 @@ public class LinkBar extends MovieClip {
 	private function loadMySkin():void{
 		var skinloader:Loader = new Loader();
 		skinloader.contentLoaderInfo.addEventListener(Event.COMPLETE, displaySkin);
-		skinloader.load(new URLRequest(view.config['drelated.dskin']));
+		skinloader.load(new URLRequest(view.config['hipervideo.barskin']));
 	}
 	
 	/** The skin was loaded, display it, stretch it, and load the thumbs. **/	
