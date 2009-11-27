@@ -1,0 +1,47 @@
+PLUGIN DE HIPERVIDEO PARA LONGTAIL VIDEO
+-------------------------------------------------------------------------------
+
+ADICIONANDO O PLAYER A UMA PÁGINA
+
+Para adicionar o player do Longtail Video, acrescido dos plugins para
+hipervideo, é necessário colar na página o código presente no arquivo
+embed.txt, presente no mesmo diretório deste documento.
+
+Além disto, os arquivos player-viral.swf e swfobject.js devem estar presentes
+no subdiretório ./support, relativo ao caminho do diretório que contém o
+arquivo html a ser alterado. Este diretório pode ser alterado se o código em
+embed.txt for alterado coerentemente, nas linhas comentadas com:
+	// PLAYER PATH HERE
+	// SWFOBJECT.JS PATH HERE  
+
+
+VARIÁVEIS DO LONGTAIL VIDEO PLAYER
+
+No código do embed.txt são definidas algumas variáveis do player, incluindo a
+localização do arquivo de vídeo a ser reproduzido. Esta configuração é
+determinada pela variável 'file', definida na linha comentada com:
+	// VIDEO FILENAME HERE
+
+Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é
+determinada pela variável 'image', definida na linha comentada com:
+	// VIDEO PREVIEW IMAGE HERE
+
+Mais informações sobre as variáveis do Longtail Video Player podem ser
+obtidas no site do produto:
+	http://developer.longtailvideo.com/trac/wiki/FlashVars
+
+
+VARIÁVEIS DO PLUGIN DE HIPERVIDEO
+
+Os dados de hipervideo são fornecidos por um arquivo XML que também deve
+ser informado como uma variável do player: 'hipervideo.file'. Esta é
+definida na linha comentada com:
+	// HIPERVIDEO DATA FILE HERE
+
+Os links http podem ser abertos na janela em que o player está ou em uma
+nova janela. Este comportamento é determinado pela variável
+'hipervideo.target', definido na linha comentada com:
+	 // LINK TARGET HERE
+Os valores possíveis são:
+	_self	--	para abrir na mesma janela;
+	_blank	--	para abrir em uma outra janela.
