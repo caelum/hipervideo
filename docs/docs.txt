@@ -38,10 +38,18 @@ ser informado como uma variável do player: 'hipervideo.file'. Esta é
 definida na linha comentada com:
 	// HIPERVIDEO DATA FILE HERE
 
-Os links http podem ser abertos na janela em que o player está ou em uma
-nova janela. Este comportamento é determinado pela variável
-'hipervideo.target', definido na linha comentada com:
+Os links http podem ser abertos na janela em que o player está ou em uma nova
+janela. Este comportamento é determinado pela variável 'hipervideo.target',
+definida na linha comentada com:
 	 // LINK TARGET HERE
 Os valores possíveis são:
 	_self	--	para abrir na mesma janela;
 	_blank	--	para abrir em uma outra janela.
+
+O posicionamento das barras de vídeos relacionados e de links é determinado
+pela variável 'hipervideo.barposition', definida na linha comentada com:
+	// BAR POSITION
+Os valores possíveis são:
+	bottom	--	parte inferior do vídeo;
+	center	--	parte central do vídeo;
+	top		--	parte superior do vídeo.

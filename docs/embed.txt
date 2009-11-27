@@ -26,10 +26,10 @@ s1.addParam('allownetworking','all');
 s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
 
 s1.addVariable('hipervideo.file', 'support/links.xml');	// HIPERVIDEO DATA FILE HERE
-s1.addVariable('hipervideo.target', '_self'); // where to open the related videos when clicked on
+s1.addVariable('hipervideo.target', '_self'); // LINK TARGET HERE
 
-s1.addVariable('hipervideo.barposition', 'bottom'); // center, bottom, top
-s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); //link to the skin			
+s1.addVariable('hipervideo.barposition', 'bottom'); // BAR POSITION
+s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); // BAR SKIN			
 
 s1.addVariable("autostart","false");
 s1.addVariable("stretching","uniform");
