@@ -8,6 +8,7 @@
 var s1 = new SWFObject("support/player-viral.swf","mpl","543","342","7","#8a8a8a"); // PLAYER PATH HERE
 s1.addParam('allowscriptaccess','always');
 s1.addParam('allowfullscreen','true');
+s1.addParam('allownetworking','all');
 s1.addVariable('width','400');
 s1.addVariable('height','260');
 s1.addVariable('file','video.flv');	// VIDEO FILENAME HERE
@@ -20,19 +21,17 @@ s1.addVariable('linktarget','_self');
 s1.addVariable('javascriptid','delfivideo');
 s1.addVariable('enablejs','true');
 s1.addVariable('shownavigation','true');
-s1.addVariable('icons','false');
-s1.addParam('allownetworking','all');  
+s1.addVariable('icons','false');  
+s1.addVariable("autostart","false");
+s1.addVariable("stretching","uniform");
 
 s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
 
 s1.addVariable('hipervideo.file', 'support/links.xml');	// HIPERVIDEO DATA FILE HERE
 s1.addVariable('hipervideo.target', '_self'); // LINK TARGET HERE
-
 s1.addVariable('hipervideo.barposition', 'bottom'); // BAR POSITION
 s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); // BAR SKIN			
 
-s1.addVariable("autostart","false");
-s1.addVariable("stretching","uniform");
 s1.write("container");
 </script>
 <!-- END OF THE PLAYER EMBEDDING -->
