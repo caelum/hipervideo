@@ -19,15 +19,32 @@ de hipervideo.</p>
 hipervideo, é necessário colar na página o código presente no arquivo
 <tt><a href="embed.txt">embed.txt</a></tt>, presente no mesmo diretório deste documento.</p>
 
-<p>Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>hipervideo.swf</tt>,
-<tt>statemanager.swf</tt> e <tt>swfobject.js</tt> devem estar presentes
+<p>Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>,
+<tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes
 no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o
-arquivo html a ser alterado. Este diretório pode ser alterado se o código em
+arquivo <tt>html</tt> a ser alterado. Este diretório pode ser alterado se o código em
 <tt>embed.txt</tt> for alterado coerentemente, nas linhas comentadas com:</p>
 	<ul>
 		<li><tt>// PLAYER PATH HERE</tt></li>
 		<li><tt>// SWFOBJECT.JS PATH HERE</tt></li>
-	</ul>  
+	</ul>
+
+<p>Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais
+compõem o plugin de hipervideo e precisam ser compilados separadamente.</p>
+
+<h2>Compilação do plugin</h2>
+
+<p>Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode
+ser obtido gratuitamente na página de
+<a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.</p>
+
+<p>Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição no
+diretório <tt>src/</tt> deve ser copiado para um novo arquivo <tt>build.sh</tt>. Este,
+por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como
+a localização da instalação local SDK do Flex.</p>
+
+<p>Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que será
+criado no diretório <tt>/bin-debug/plugins/hipervideo/</tt>.
 
 <h2>Variáveis do Longtail Video Player</h2>
 
