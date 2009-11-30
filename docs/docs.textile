@@ -9,8 +9,8 @@ h2. Adicionado o player a uma página
 Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo <tt><a href="embed.txt">embed.txt</a></tt>, presente no mesmo diretório deste documento.
 
 Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>, <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o arquivo <tt>html</tt> a ser  alterado. Este diretório pode ser alterado se o código em <tt>embed.txt</tt> for alterado coerentemente, nas linhas comentadas com:
-	* <tt>// PLAYER PATH HERE</tt>
-	* <tt>// SWFOBJECT.JS PATH HERE</tt>
+* <tt>// PLAYER PATH HERE</tt>
+* <tt>// SWFOBJECT.JS PATH HERE</tt>
 
 Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais compõem o plugin de hipervideo e precisam ser compilados separadamente.
 
@@ -26,31 +26,31 @@ Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que s
 h2. Variáveis do Longtail Video Player
 
 No código do <tt>embed.txt</tt> são definidas algumas variáveis do player, incluindo a localização do arquivo de vídeo a ser reproduzido. Esta configuração é determinada pela variável <tt>file</tt>, definida na linha comentada com:
-	* <tt>// VIDEO FILENAME HERE</tt>
+* <tt>// VIDEO FILENAME HERE</tt>
 
 Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é determinada pela variável <tt>image</tt>, definida na linha comentada com:
-	* <li><tt>// VIDEO PREVIEW IMAGE HERE</tt>
+* <li><tt>// VIDEO PREVIEW IMAGE HERE</tt>
 
 Mais informações sobre as variáveis do Longtail Video Player podem ser obtidas no <a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.
 
 h2. Variáveis do plugin de hipervideo
 
 Os dados de hipervideo são fornecidos por um arquivo XML que também deve ser informado como uma variável do player: <tt>hipervideo.file</tt>. Esta é definida na linha comentada com:
-	* <tt>// HIPERVIDEO DATA FILE HERE</tt>
+* <tt>// HIPERVIDEO DATA FILE HERE</tt>
 
 Os links http podem ser abertos na janela em que o player está ou em uma nova janela. Este comportamento é determinado pela variável <tt>hipervideo.target</tt>, definida na linha comentada com:
-	* <tt>// LINK TARGET HERE</tt>
+* <tt>// LINK TARGET HERE</tt>
 
 Os valores possíveis são:
 
-	| <tt>_self</tt> | Abre na mesma janela | 
-	| <tt>_blank</tt> | Abre em uma nova janela |
+| <tt>_self</tt> | Abre na mesma janela | 
+| <tt>_blank</tt> | Abre em uma nova janela |
 
 O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.barposition</tt>, definida na linha comentada com:
-	* <tt>// BAR POSITION</tt>
+* <tt>// BAR POSITION</tt>
 	
 Os valores possíveis são:
 
-	| <tt>bottom</tt> | Parte inferior da janela de exibição do vídeo | 
-	| <tt>center</tt> | Parte central da janela de exibição do vídeo | 
-	| <tt>top</tt> | Parte superior da janela de exibição do vídeo | 
+| <tt>bottom</tt> | Parte inferior da janela de exibição do vídeo | 
+| <tt>center</tt> | Parte central da janela de exibição do vídeo | 
+| <tt>top</tt> | Parte superior da janela de exibição do vídeo | 
