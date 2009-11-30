@@ -4,7 +4,7 @@ h1. Longtail Video Player com plugin de hipervideo
 
 Este documento descreve o procedimento necessário para o uso e configuração do <a href="http://longtailvideo.com/">Longtail Video Player</a> acrescido do plugin de hipervideo. 
 
-h2. Adicionado o player a uma página
+h2. Adicionando o player a uma página
 
 Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo <tt><a href="embed.html">embed.html</a></tt>, presente no mesmo diretório deste documento.
 
@@ -92,7 +92,7 @@ A tag <tt>url</tt> indica a abertura de uma referência externa.
 </link>
 </pre>
 
-A tag <tt>time</tt>, nesse caso, indica um salto para o momento 01:01:05 do vídeo. 
+A tag <tt>time</tt>, nesse caso, indica um salto para o momento 1 hora, 1 minuto e 5 segundos do vídeo. 
 
 O parâmetro opcional activity_id, se presente, será passado como argumento para a função logActivity (caso o link seja clicado durante a execução).
 
