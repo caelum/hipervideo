@@ -55,9 +55,9 @@ Os valores possíveis são:
 |<tt>center</tt>|Parte central da janela de exibição do vídeo|
 |<tt>top</tt>|Parte superior da janela de exibição do vídeo|
 
-h2. Formato do xml
+h2. Formato do XML
 
-Os elementos de hipervideo são definidos por um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. Este arquivo deve seguir um formato conforme o exemplo abaixo:
+Os elementos de hipervideo são descritos em um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. Este arquivo deve ser escrito conforme o exemplo abaixo:
 
 <pre>
 <video>
@@ -108,5 +108,6 @@ Os elementos de hipervideo são definidos por um arquivo xml, determinado pela v
 	</elements>
 
 </video>
-
 </pre>
+
+Um exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>. 
