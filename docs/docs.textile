@@ -60,52 +60,53 @@ h2. Formato do xml
 Os elementos de hipervideo são definidos por um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. Este arquivo deve seguir um formato conforme o exemplo abaixo:
 
 <pre>
-	<video>
+<video>
 
-		<!-- vídeos relacionados -->
-		<playlist>
+	<!-- vídeos relacionados -->
+	<playlist>
+		<link>
+			<tooltip>Tooltip para barra de links relacionados</tooltip>
+			<url>http://url_para_algo.com.br</url>
+			<thumbnail>thumbnail_do_link.jpg</thumbnail>
+		</link>	
+		...
+	</playlist>
+
+	<!-- ações realizadas automaticamente pelo player -->
+	<actions>
+		<pause at="hh:mm:ss" /> <!-- pausar automaticamente a execução do vídeo no instante hh:mm:ss -->
+		...
+	</actions>
+	
+	<!-- elementos exibidos durante a exibição do vídeo -->
+	<elements>
+		<!-- elementos de texto -->
+		<element>
+			<textContent>
+				<![CDATA[Um texto podendo usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
+			</textContent>
 			<link>
-				<tooltip>Tooltip para barra de links relacionados</tooltip>
+				<tooltip>Tooltip para barra de links do vídeo</tooltip>
 				<url>http://url_para_algo.com.br</url>
 				<thumbnail>thumbnail_do_link.jpg</thumbnail>
-			</link>	
-			...
-		</playlist>
+			</link>
+			<time start="início" duration="fim"/><!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
+			<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/> <!-- valores para x, y, height e width em pixels -->	
+		</element>
+		<!-- elementos de imagem -->
+		<element>
+			<imageContent>imagem.gif</imageContent>
+			<link activity_id="parametro_do_log"><!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
+				<tooltip>Tooltip para barra de links do vídeo</tooltip>
+				<url>http://url_para_algo.com.br</url>
+				<thumbnail>thumbnail_do_link.jpg</thumbnail>
+			</link>
+			<time start="início" duration="fim"/>
+			<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/>
+		</element>
+		...
+	</elements>
 
-		<!-- ações realizadas automaticamente pelo player -->
-		<actions>
-			<pause at="hh:mm:ss" /> <!-- pausar automaticamente a execução do vídeo no instante hh:mm:ss -->
-			...
-		</actions>
-		
-		<!-- elementos exibidos durante a exibição do vídeo -->
-		<elements>
-			<!-- elementos de texto -->
-			<element>
-				<textContent>
-					<![CDATA[Um texto podendo usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
-				</textContent>
-				<link>
-					<tooltip>Tooltip para barra de links do vídeo</tooltip>
-					<url>http://url_para_algo.com.br</url>
-					<thumbnail>thumbnail_do_link.jpg</thumbnail>
-				</link>
-				<time start="início" duration="fim"/><!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
-				<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/> <!-- valores para x, y, height e width em pixels -->	
-			</element>
-			<!-- elementos de imagem -->
-			<element>
-				<imageContent>imagem.gif</imageContent>
-				<link activity_id="parametro_do_log"><!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
-					<tooltip>Tooltip para barra de links do vídeo</tooltip>
-					<url>http://url_para_algo.com.br</url>
-					<thumbnail>thumbnail_do_link.jpg</thumbnail>
-				</link>
-				<time start="início" duration="fim"/>
-				<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/>
-			</element>
-			...
-		</elements>
+</video>
 
-	</video>
 </pre>
