@@ -43,14 +43,14 @@ Os links http podem ser abertos na janela em que o player está ou em uma nova j
 
 Os valores possíveis são:
 
-| <tt>_self</tt> | Abre na mesma janela | 
-| <tt>_blank</tt> | Abre em uma nova janela |
+|<tt>_self</tt>|Abre na mesma janela|
+|<tt>_blank</tt>|Abre em uma nova janela|
 
 O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.barposition</tt>, definida na linha comentada com:
 * <tt>// BAR POSITION</tt>
 	
 Os valores possíveis são:
 
-| <tt>bottom</tt> | Parte inferior da janela de exibição do vídeo | 
-| <tt>center</tt> | Parte central da janela de exibição do vídeo | 
-| <tt>top</tt> | Parte superior da janela de exibição do vídeo | 
+|<tt>bottom</tt>|Parte inferior da janela de exibição do vídeo|
+|<tt>center</tt>|Parte central da janela de exibição do vídeo|
+|<tt>top</tt>|Parte superior da janela de exibição do vídeo|
