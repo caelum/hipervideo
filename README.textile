@@ -1,0 +1,16 @@
+h1. Longtail Video Player com plugin de hipervideo
+
+h2. Sumário
+
+Plugin de hipervídeo para o <a href="http://longtailvideo.com/">Longtail Video Player</a>.
+
+h2. Autores
+
+* <a href="http://github.com/guilhermesilveira">Guilherme Silveira</a>
+* <a href="http://github.com/pmatiello">Pedro Matiello</a>
+* <a href="http://github.com/nakamura">Ricardo Nakamura</a>
+
+Produzido por <a href="http://github.com/caelum">Caelum</a> sobre o código de:
+
+* <a href="http://www.longtailvideo.com/addons/plugins/84/Captions">Jeroen Wijering</a>
+* <a href="http://github.com/jawngee/JW-Player-DRelated-Plugin">Jon Gilkison</a>
