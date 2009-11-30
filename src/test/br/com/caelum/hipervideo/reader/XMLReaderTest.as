@@ -63,7 +63,7 @@ package test.br.com.caelum.hipervideo.reader
 					<element>
 						<imageContent>http://link-para-imagem.com</imageContent>
 						
-						<link activity_id="act_id2">
+						<link activity_id="act_id2" action="play">
 							<tooltip>Tooltip 3</tooltip>
 							<time>00:02:15</time>
 							<thumbnail></thumbnail>
@@ -72,6 +72,7 @@ package test.br.com.caelum.hipervideo.reader
 						<time start="01:00:01" duration="00:10:10.5"/>
 						<position x="150" y="170" height="960" width="950"/>
 					</element>
+					
 				</elements>
 			</video>
 		]]> ).toString();
@@ -187,6 +188,12 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals("", elementArray[0].link.activityId);
 			assertEquals("act_id1", elementArray[1].link.activityId);
 			assertEquals("act_id2", elementArray[2].link.activityId);
+		}
+		
+		public function testReadLinkAction():void {
+			assertEquals(ActionType.NOTHING, elementArray[0].link.action);
+			assertEquals(ActionType.NOTHING, elementArray[1].link.action);
+			assertEquals(ActionType.PLAY, elementArray[2].link.action);
 		}
 
 		public function testReadXMLWithNoElements():void {

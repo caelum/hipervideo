@@ -29,7 +29,8 @@ package br.com.caelum.hipervideo.reader
 								element.link.tooltip, 
 								element.link.thumbnail, 
 								element.link.url, 
-								Strings.seconds(element.link.time)),
+								Strings.seconds(element.link.time), 
+								ActionType.fromValue(element.link.@action)),
 							element.textContent.@color, element.textContent.@backgroundColor,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
 							element.position.@x, element.position.@y,
@@ -39,7 +40,7 @@ package br.com.caelum.hipervideo.reader
 			
 			for each (var link:XML in xml.playlist.link) {
 				playlist.push(
-					new Link("", link.tooltip, link.thumbnail, link.url, link.time));
+					new Link("", link.tooltip, link.thumbnail, link.url, link.time, ActionType.NOTHING));
 			}
 			
 			for each (var action:XML in xml.actions.pause) {
