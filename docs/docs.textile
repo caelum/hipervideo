@@ -60,13 +60,13 @@ Os itens exibidos durante a execução do vídeo são descritos em um arquivo xm
 
 h3. Pause
 
-Indica uma interrupção na execução do vídeo.
+Indica uma interrupção na execução do vídeo. Por exemplo:
 
 <pre>
-<pause at="hh:mm:ss" />
+<pause at="00:01:05" />
 </pre>
 
-O formato de tempo hh:mm:ss indica Horas:Minutos:Segundos, contados a partir do início do vídeo.
+Especifica uma pausa no instante 1 minuto e 5 segundos do vídeo.
 
 Opcionalmente, podemos usar um valor não inteiro para os segundos (por exemplo, 01:12:20.5).
 
@@ -75,34 +75,50 @@ h3. Link
 Indica uma ação a ser executada.
 
 <pre>
-<link [activity_id="parametro"]>
+<link>
 	<tooltip>Tooltip do link</tooltip>
-	<url>http://url.para.um.site</url> || <time>hh:mm:ss</time>
+	<url>http://url.para.um.site</url>
 	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
 </link>
 </pre>
 
-As tags <tt>url</tt> e <tt>time</tt> são mutuamente exclusivas. A primeira indica a abertura de uma referência externa e a segunda indica um salto para um momento do vídeo.
+A tag <tt>url</tt> indica a abertura de uma referência externa.
+
+<pre>
+<link activity_id="parametro">
+	<tooltip>Tooltip do link</tooltip>
+	<time>01:01:05</time>
+	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+</link>
+</pre>
+
+A tag <tt>time</tt>, nesse caso, indica um salto para o momento 01:01:05 do vídeo. 
+
+O parâmetro opcional activity_id, se presente, será passado como argumento para a função logActivity (caso o link seja clicado durante a execução).
 
 h3. Time
 
 Indica um intervalo de tempo.
 
 <pre>
-<time start="início" duration="fim"/>
+<time start="00:02:00" duration="00:05:00"/>
 </pre>
 
-Os valores de início e fim da exibição do elemento devem ser escritos em formato hh:mm:ss.
+Especifica um intervalo de tempo do segundo ao quinto minuto do vídeo.
 
 h3. Position
 
 Indica uma posição na janela de exibição do vídeo.
 
 <pre>
-<position x="X" y="Y" height="altura" width="largura"/>
+<position x="10" y="20" height="100" width="200"/>
 </pre>
 
-Os valores de X e Y indicam respectivamente as coordenadas horizontal e vertical do canto superior esquerdo do item. Todos os valores são entendidos em pixels.
+Os valores de x="10" e y="20" indicam, respectivamente, as coordenadas horizontal e vertical do canto superior esquerdo do item. 
+
+Os valores height="100" e width="200" indicam, respectivamente, a altura e a largura do item.
+
+Todos os valores são entendidos em pixels.
 
 h3. Text Content
 
@@ -126,18 +142,27 @@ Indica uma imagem como conteúdo.
 
 h3. Element
 
-Indica um elemento de hipervideo.
+Indica um elemento de hipervideo. Esse elemento pode ser de texto, por exemplo:
 
 <pre>
 <element>
-	<textContent> || <imageContent>
+	<textContent>
 	<link>
 	<time>
 	<position>
 </element>
 </pre>
 
-As tags <tt>textContent</tt> e <tt>imageContent</tt> são mutualmente exclusivas.
+Ou de imagem:
+
+<pre>
+<element>
+	<imageContent>
+	<link>
+	<time>
+	<position>
+</element>
+</pre>
 
 h3. Playlist
 
@@ -200,17 +225,21 @@ Pequeno exemplo do arquivo XML.
 	<playlist>
 		<link>
 			<tooltip>Tooltip para barra de links relacionados</tooltip>
-			<url>http://url_para_algo.com.br</url>
+			<url>http://url.para.algo.com.br</url>
 			<thumbnail>thumbnail_do_link.jpg</thumbnail>
 		</link>	
-		...
+		<link>
+			<tooltip>Segundo tooltip</tooltip>
+			<url>http://outra.url.para.algo.com.br</url>
+			<thumbnail>outro_thumbnail_do_link.jpg</thumbnail>
+		</link>
 	</playlist>
 
 	<!-- ações realizadas automaticamente pelo player -->
 	<actions>
-		<!-- pausar automaticamente a execução do vídeo no instante hh:mm:ss -->
-		<pause at="hh:mm:ss" />
-		...
+		<!-- pausar automaticamente a execução do vídeo nos instantes 00:01:03 e 00:02:15 -->
+		<pause at="00:01:03" />
+		<pause at="00:02:15" />
 	</actions>
 	
 	<!-- elementos exibidos durante a exibição do vídeo -->
@@ -226,9 +255,9 @@ Pequeno exemplo do arquivo XML.
 				<thumbnail>thumbnail_do_link.jpg</thumbnail>
 			</link>
 			<!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
-			<time start="início" duration="fim"/>
+			<time start="00:04:10" duration="00:03:00"/>
 			<!-- valores para x, y, height e width em pixels -->	
-			<position x="X" y="Y" height="altura" width="largura"/>
+			<position x="10" y="30" height="200" width="300"/>
 		</element>
 		<!-- elementos de imagem -->
 		<element>
@@ -236,16 +265,15 @@ Pequeno exemplo do arquivo XML.
 			<!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
 			<link activity_id="parametro_do_log">
 				<tooltip>Tooltip para barra de links do vídeo</tooltip>
-				<!-- quando clicado irá para a posição hh:mm:ss do vídeo -->
-				<time>hh:mm:ss</time>
+				<!-- quando clicado irá para a posição 01:12:44 do vídeo -->
+				<time>01:12:44</time>
 				<thumbnail>thumbnail_do_link.jpg</thumbnail>
 			</link>
-			<time start="início" duration="fim"/>
-			<position x="X" y="Y" height="altura" width="largura"/>
+			<time start="00:25:32" duration="00:10:00"/>
+			<position x="5" y="130" height="30" width="40"/>
 		</element>
-		...
 	</elements>
 </video>
 </pre>
 
-Um exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>.
+Outro exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>.
