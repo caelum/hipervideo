@@ -18,8 +18,7 @@ h2. Compilação do plugin
 
 Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode ser obtido gratuitamente na página de <a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.
 
-Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no diretório <tt>src/</tt> e deve ser copiado para um novo arquivo <tt>build.sh</tt>. Este, por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como
-a localização da instalação local SDK do Flex.
+Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no diretório <tt>src/</tt> e deve ser copiado para um novo arquivo <tt>build.sh</tt>. Este, por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como a localização da instalação local SDK do Flex.
 
 Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que será criado no diretório <tt>/bin-debug/plugins/hipervideo/</tt>.
 
