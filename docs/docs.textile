@@ -56,11 +56,146 @@ Os valores possíveis são:
 
 h2. Formato do XML
 
-Os elementos de hipervideo são descritos em um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. Este arquivo deve ser escrito conforme o exemplo abaixo:
+Os itens exibidos durante a execução do vídeo são descritos em um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. As tags mais elementares, que serão combinadas de forma a compor estes itens, são:
+
+h3. Pause
+
+Indica uma interrupção na execução do vídeo.
+
+<pre>
+<pause at="hh:mm:ss" />
+</pre>
+
+O formato de tempo hh:mm:ss indica Horas:Minutos:Segundos, contados a partir do início do vídeo.
+
+Opcionalmente, podemos usar um valor não inteiro para os segundos (por exemplo, 01:12:20.5).
+
+h3. Link
+
+Indica uma ação a ser executada.
+
+<pre>
+<link [activity_id="parametro"]>
+	<tooltip>Tooltip do link</tooltip>
+	<url>http://url.para.um.site</url> || <time>hh:mm:ss</time>
+	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+</link>
+</pre>
+
+As tags <tt>url</tt> e <tt>time</tt> são mutuamente exclusivas. A primeira indica a abertura de uma referência externa e a segunda indica um salto para um momento do vídeo.
+
+h3. Time
+
+Indica um intervalo de tempo.
+
+<pre>
+<time start="início" duration="fim"/>
+</pre>
+
+Os valores de início e fim da exibição do elemento devem ser escritos em formato hh:mm:ss.
+
+h3. Position
+
+Indica uma posição na janela de exibição do vídeo.
+
+<pre>
+<position x="X" y="Y" height="altura" width="largura"/>
+</pre>
+
+Os valores de X e Y indicam respectivamente as coordenadas horizontal e vertical do canto superior esquerdo do item. Todos os valores são entendidos em pixels.
+
+h3. Text Content
+
+Indica um conteúdo textual.
+
+<pre>
+<textContent>
+	<![CDATA[Um texto podendo usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
+</textContent>
+</pre>
+
+Apenas negrito, itálico e sublinhado são suportados como formatação.
+
+h3. Image Content
+
+Indica uma imagem como conteúdo.
+
+<pre>
+	<imageContent>imagem.gif</imageContent>
+</pre>
+
+h3. Element
+
+Indica um elemento de hipervideo.
+
+<pre>
+<element>
+	<textContent> || <imageContent>
+	<link>
+	<time>
+	<position>
+</element>
+</pre>
+
+As tags <tt>textContent</tt> e <tt>imageContent</tt> são mutualmente exclusivas.
+
+h3. Playlist
+
+Indica uma coleção de vídeos relacionados.
+
+<pre>
+<playlist>
+	<link>
+	<link>
+	...
+	<link>
+</playlist>
+</pre>
+
+h3. Actions
+
+Indica as ações a serem realizadas durante a execução do vídeo
+
+<pre>
+<actions>
+	<pause>
+	<pause>
+	...
+	<pause>
+</actions>
+</pre>
+
+h3. Elements
+
+Indica uma coleção de elementos a serem exibidos durante a execução do vídeo.
+
+<pre>
+<elements>
+	<element>
+	<element>
+	...
+	<element>
+</elements>
+</pre>
+
+h3. Video
+
+Indica a raiz do arquivo xml.
 
 <pre>
 <video>
+	<playlist>
+	<actions>
+	<elements>
+</video>
+</pre>
 
+h2. Exemplo do XML
+
+Pequeno exemplo do arquivo XML.
+
+<pre>
+<video>
 	<!-- vídeos relacionados -->
 	<playlist>
 		<link>
@@ -73,7 +208,8 @@ Os elementos de hipervideo são descritos em um arquivo xml, determinado pela va
 
 	<!-- ações realizadas automaticamente pelo player -->
 	<actions>
-		<pause at="hh:mm:ss" /> <!-- pausar automaticamente a execução do vídeo no instante hh:mm:ss -->
+		<!-- pausar automaticamente a execução do vídeo no instante hh:mm:ss -->
+		<pause at="hh:mm:ss" />
 		...
 	</actions>
 	
@@ -89,24 +225,27 @@ Os elementos de hipervideo são descritos em um arquivo xml, determinado pela va
 				<url>http://url_para_algo.com.br</url>
 				<thumbnail>thumbnail_do_link.jpg</thumbnail>
 			</link>
-			<time start="início" duration="fim"/><!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
-			<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/> <!-- valores para x, y, height e width em pixels -->	
+			<!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
+			<time start="início" duration="fim"/>
+			<!-- valores para x, y, height e width em pixels -->	
+			<position x="X" y="Y" height="altura" width="largura"/>
 		</element>
 		<!-- elementos de imagem -->
 		<element>
 			<imageContent>imagem.gif</imageContent>
-			<link activity_id="parametro_do_log"><!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
+			<!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
+			<link activity_id="parametro_do_log">
 				<tooltip>Tooltip para barra de links do vídeo</tooltip>
-				<url>http://url_para_algo.com.br</url>
+				<!-- quando clicado irá para a posição hh:mm:ss do vídeo -->
+				<time>hh:mm:ss</time>
 				<thumbnail>thumbnail_do_link.jpg</thumbnail>
 			</link>
 			<time start="início" duration="fim"/>
-			<position x="canto superior esquerdo, coordenada x" y="canto superior esquerdo, coordenada y" height="altura" width="largura"/>
+			<position x="X" y="Y" height="altura" width="largura"/>
 		</element>
 		...
 	</elements>
-
 </video>
 </pre>
 
-Um exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>. 
+Um exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>.
