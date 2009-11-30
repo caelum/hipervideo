@@ -1,99 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Longtail Video Player com plugin de hipervideo</title>
-</head>
-<body>
-<h1>Longtail Video Player com plugin de hipervideo</h1>
+h1. Longtail Video Player com plugin de hipervideo
 
 <hr />
 
-<p>Este documento descreve o procedimento necessário para o uso e configuração do
+Este documento descreve o procedimento necessário para o uso e configuração do
 <a href="http://longtailvideo.com/">Longtail Video Player</a> acrescido do plugin
-de hipervideo.</p> 
+de hipervideo. 
 
-<h2>Adicionado o player a uma página</h2>
+h2. Adicionado o player a uma página
 
-<p>Para adicionar o player do Longtail Video, acrescido dos plugins para
+Para adicionar o player do Longtail Video, acrescido dos plugins para
 hipervideo, é necessário colar na página o código do arquivo
-<tt><a href="embed.txt">embed.txt</a></tt>, presente no mesmo diretório deste documento.</p>
+<tt><a href="embed.txt">embed.txt</a></tt>, presente no mesmo diretório deste documento.
 
-<p>Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>,
+Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>,
 <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes
 no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o
 arquivo <tt>html</tt> a ser alterado. Este diretório pode ser alterado se o código em
-<tt>embed.txt</tt> for alterado coerentemente, nas linhas comentadas com:</p>
+<tt>embed.txt</tt> for alterado coerentemente, nas linhas comentadas com:
 	<ul>
 		<li><tt>// PLAYER PATH HERE</tt></li>
 		<li><tt>// SWFOBJECT.JS PATH HERE</tt></li>
 	</ul>
 
-<p>Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais
-compõem o plugin de hipervideo e precisam ser compilados separadamente.</p>
+Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais
+compõem o plugin de hipervideo e precisam ser compilados separadamente.
 
-<h2>Compilação do plugin</h2>
+h2. Compilação do plugin
 
-<p>Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode
+Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode
 ser obtido gratuitamente na página de
-<a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.</p>
+<a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.
 
-<p>Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no
+Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no
 diretório <tt>src/</tt> e deve ser copiado para um novo arquivo <tt>build.sh</tt>. Este,
 por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como
-a localização da instalação local SDK do Flex.</p>
+a localização da instalação local SDK do Flex.
 
-<p>Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que será
+Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que será
 criado no diretório <tt>/bin-debug/plugins/hipervideo/</tt>.
 
-<h2>Variáveis do Longtail Video Player</h2>
+h2. Variáveis do Longtail Video Player
 
-<p>No código do <tt>embed.txt</tt> são definidas algumas variáveis do player, incluindo a
+No código do <tt>embed.txt</tt> são definidas algumas variáveis do player, incluindo a
 localização do arquivo de vídeo a ser reproduzido. Esta configuração é
-determinada pela variável <tt>file</tt>, definida na linha comentada com:</p>
+determinada pela variável <tt>file</tt>, definida na linha comentada com:
 	<ul>
 		<li><tt>// VIDEO FILENAME HERE</tt></li>
 	</ul>
 
-<p>Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é
-determinada pela variável <tt>image</tt>, definida na linha comentada com:</p>
+Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é
+determinada pela variável <tt>image</tt>, definida na linha comentada com:
 	<ul>
 		<li><tt>// VIDEO PREVIEW IMAGE HERE</tt></li>
 	</ul>
 
-<p>Mais informações sobre as variáveis do Longtail Video Player podem ser
-obtidas no <a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.</p>
+Mais informações sobre as variáveis do Longtail Video Player podem ser
+obtidas no <a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.
 
-<h2>Variáveis do plugin de hipervideo</h2>
+h2. Variáveis do plugin de hipervideo
 
-<p>Os dados de hipervideo são fornecidos por um arquivo XML que também deve
+Os dados de hipervideo são fornecidos por um arquivo XML que também deve
 ser informado como uma variável do player: <tt>hipervideo.file</tt>. Esta é
-definida na linha comentada com:</p>
+definida na linha comentada com:
 	<ul>
 		<li><tt>// HIPERVIDEO DATA FILE HERE</tt></li>
 	</ul>
 
-<p>Os links http podem ser abertos na janela em que o player está ou em uma nova
+Os links http podem ser abertos na janela em que o player está ou em uma nova
 janela. Este comportamento é determinado pela variável <tt>hipervideo.target</tt>,
-definida na linha comentada com:</p>
+definida na linha comentada com:
 	<ul>
 		<li><tt>// LINK TARGET HERE</tt></li>
 	</ul>
 
-<p>Os valores possíveis são:</p>
+Os valores possíveis são:
 
 <table border="0" cellpadding="5">
 	<tr><td><tt>_self</tt></td><td>Abre na mesma janela</td></tr>
 	<tr><td><tt>_blank</tt></td><td>Abre em uma nova janela</td></tr>
 </table>
 
-<p>O posicionamento das barras de vídeos relacionados e de links é determinado
-pela variável <tt>hipervideo.barposition</tt>, definida na linha comentada com:</p>
+O posicionamento das barras de vídeos relacionados e de links é determinado
+pela variável <tt>hipervideo.barposition</tt>, definida na linha comentada com:
 	<ul>
 		<li><tt>// BAR POSITION</tt></li>
 	</ul>
 	
-<p>Os valores possíveis são:</p>
+Os valores possíveis são:
 
 <table border="0" cellpadding="5">
 	<tr><td><tt>bottom</tt></td><td>Parte inferior da janela de exibição do vídeo</td></tr>
