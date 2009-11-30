@@ -6,9 +6,9 @@ Este documento descreve o procedimento necessário para o uso e configuração d
 
 h2. Adicionado o player a uma página
 
-Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo <tt><a href="embed.txt">embed.txt</a></tt>, presente no mesmo diretório deste documento.
+Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo <tt><a href="embed.html">embed.html</a></tt>, presente no mesmo diretório deste documento.
 
-Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>, <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o arquivo <tt>html</tt> a ser  alterado. Este diretório pode ser alterado se o código em <tt>embed.txt</tt> for alterado coerentemente, nas linhas comentadas com:
+Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>, <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o arquivo <tt>html</tt> a ser  alterado. Este diretório pode ser alterado se o código em <tt>embed.html</tt> for alterado coerentemente, nas linhas comentadas com:
 * <tt>// PLAYER PATH HERE</tt>
 * <tt>// SWFOBJECT.JS PATH HERE</tt>
 
@@ -25,7 +25,7 @@ Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que s
 
 h2. Variáveis do Longtail Video Player
 
-No código do <tt>embed.txt</tt> são definidas algumas variáveis do player, incluindo a localização do arquivo de vídeo a ser reproduzido. Esta configuração é determinada pela variável <tt>file</tt>, definida na linha comentada com:
+No código do <tt>embed.html</tt> são definidas algumas variáveis do player, incluindo a localização do arquivo de vídeo a ser reproduzido. Esta configuração é determinada pela variável <tt>file</tt>, definida na linha comentada com:
 * <tt>// VIDEO FILENAME HERE</tt>
 
 Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é determinada pela variável <tt>image</tt>, definida na linha comentada com:
