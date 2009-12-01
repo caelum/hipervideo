@@ -24,8 +24,9 @@
 	</playlist>
 	
 	<actions>
-		<pause at="00:00:03.05" />
-		<pause at="00:00:05" />
+		<pause at="00:00:08.05" />
+		<pause at="00:00:10.05" />
+		<pause at="00:00:12" />
 	</actions>
 
 	<elements>
@@ -70,6 +71,18 @@
 			</link>
 			
 			<time start="00:00:05" duration="00:00:01"/>
+			<position x="200" y="90" height="30" width="355"/>
+		</element>
+	
+		<element>
+			<imageContent>thumbs/play.jpg</imageContent>
+			
+			<link action="play">
+				<tooltip>Simples play</tooltip>
+				<thumbnail>thumbs/play.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:08" duration="00:00:01"/>
 			<position x="200" y="90" height="30" width="355"/>
 		</element>
 	

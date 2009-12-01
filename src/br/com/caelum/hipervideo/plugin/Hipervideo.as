@@ -104,6 +104,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 							textColor: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
 							time: element.link.time, activityId: element.link.activityId,
+							action: element.link.action,
 							topLeft_x:element.x, topLeft_y:element.y,
 							width:element.width, height:element.height, active:false});
 		}
@@ -149,11 +150,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	private function drawElement(i:Number):void {
 		if (captions[i]['isText']) {
 			new TextElement(captions[i], this, view);
-			resizeHandler();
 		} else {
 			new ImageElement(captions[i], this, view);
-			resizeHandler();
 		}
+		resizeHandler();
 	}
 
 	/** Check timing of the player to sync captions. **/
@@ -175,11 +175,17 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	};
 	
-	public function clickHandler(data:Object):void {
+	public function clickHandler(data:Object, clip:MovieClip):void {
 		if (data['activityId'] != "") {
 			ExternalInterface.call('logActivity', data['activityId'], currentTime);
 		}
 		
+		if (data['action'] != "") {
+			clip.shouldRemove = true;
+			view.sendEvent("PLAY");
+			return;
+		}
+
 		if (data['url'] == "") {
 			view.sendEvent("SEEK", data['time']);
 		} else {
@@ -197,6 +203,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				}
 			}
 		}
+	
 	}
 
 

@@ -11,17 +11,17 @@ package br.com.caelum.hipervideo.plugin
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	
-	public class ImageElement extends MovieClip
-	{
+	public class ImageElement extends MovieClip {
+		
 		private var data:Object;
 		private var endTime:Number;
 		private var clip:MovieClip;
 		private var view:AbstractView;
 		private var image:Loader;
 		private var child:DisplayObject;
+		public var shouldRemove:Boolean;
 		
 		private function newImage(data:Object):Loader {
-			
 			image = new Loader();
 			image.load(new URLRequest(data['content']));
 			child = addChild(image);
@@ -30,8 +30,7 @@ package br.com.caelum.hipervideo.plugin
 			return image;
 		}
 		
-		public function ImageElement(data:Object, clip:MovieClip, view:AbstractView)
-		{
+		public function ImageElement(data:Object, clip:MovieClip, view:AbstractView) {
 			this.data = data;
 			this.clip = clip;
 			this.view = view;
@@ -61,22 +60,25 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function clickHandler(event:MouseEvent):void {
-			clip.clickHandler(data);
+			clip.clickHandler(data, this);
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {
-			switch(evt.data.newstate) {
+			switch (evt.data.newstate) {
 				case ModelStates.PLAYING:
-					image.visible = true;
+					if (shouldRemove)
+						image.visible = false;
+					else
+						image.visible = true;
 					break;
 				case ModelStates.PAUSED:
 					if (!view.config['autoPaused']) {
-						image.visible = false;	
+						image.visible = false;
 					}
 					break;
 				case ModelStates.COMPLETED:
 					image.visible = false;
-					break;			
+					break;
 			}
 		}
 

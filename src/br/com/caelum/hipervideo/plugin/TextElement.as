@@ -20,6 +20,7 @@ package br.com.caelum.hipervideo.plugin
 		private var view:AbstractView;
 		private var field:TextField;
 		private var child:DisplayObject;
+		public var shouldRemove:Boolean;
 		
 		private function newTextField(data:Object):TextField {
 			var format:TextFormat = new TextFormat();
@@ -81,13 +82,16 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function clickHandler(event:MouseEvent):void {
-			clip.clickHandler(data);
+			clip.clickHandler(data, this);
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {
-			switch(evt.data.newstate) {
+			switch (evt.data.newstate) {
 				case ModelStates.PLAYING:
-					field.visible = true;
+					if (shouldRemove) 
+						field.visible = false;
+					else
+						field.visible = true;
 					break;
 				case ModelStates.PAUSED:
 					if (!view.config['autoPaused']) {
@@ -96,7 +100,7 @@ package br.com.caelum.hipervideo.plugin
 					break;
 				case ModelStates.COMPLETED:
 					field.visible = false;
-					break;			
+					break;
 			}
 		}
 
