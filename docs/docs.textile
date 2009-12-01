@@ -96,6 +96,15 @@ A tag <tt>time</tt>, nesse caso, indica um salto para o momento 1 hora, 1 minuto
 
 O parâmetro opcional activity_id, se presente, será passado como argumento para a função logActivity (caso o link seja clicado durante a execução).
 
+Podemos também passar um parâmetro chamado action com o valor de play, para que o link funcione como um botão de play, ou seja, se clicado, o vídeo continuará executando normalmente, como se fosse o botão de play do vídeo.
+
+<pre>
+<link action="play">
+	<tooltip>Tooltip do link</tooltip>
+	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+</link>
+</pre>
+
 h3. Time
 
 Indica um intervalo de tempo.
