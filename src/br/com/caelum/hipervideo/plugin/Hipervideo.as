@@ -36,6 +36,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** The array the captions are loaded into. **/
 	private var captions:Array;
 
+	private var currentTime:Number;
+
 	private function drawClip():void {
 		loader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
@@ -164,6 +166,8 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	/** Check timing of the player to sync captions. **/
 	private function timeHandler(evt:ModelEvent):void {
 		var pos:Number = evt.data.position;
+		currentTime = pos;
+		
 		for (var i:Number = 0; i < captions.length; i++) {
 			if (captions[i]['begin'] < pos && captions[i]['end'] > pos && captions[i]['active'] == false) {
 				drawElement(i);
@@ -173,7 +177,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	public function clickHandler(data:Object):void {
 		if (data['activityId'] != "") {
-			ExternalInterface.call('logActivity', data['activityId']);
+			ExternalInterface.call('logActivity', data['activityId'], currentTime);
 		}
 		
 		if (data['url'] == "") {
