@@ -148,11 +148,11 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		}
 	};
 	
-	private function drawElement(i:Number):void {
-		if (captions[i]['isText']) {
-			new TextElement(captions[i], this, view);
+	private function drawElement(caption:Object):void {
+		if (caption['isText']) {
+			new TextElement(caption, this, view);
 		} else {
-			new ImageElement(captions[i], this, view);
+			new ImageElement(caption, this, view);
 		}
 		resizeHandler();
 	}
@@ -171,25 +171,24 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 		for (var i:Number = 0; i < captions.length; i++) {
 			if (captions[i]['begin'] < pos && captions[i]['end'] > pos && captions[i]['active'] == false) {
-				drawElement(i);
+				drawElement(captions[i]);
 			}
 		}
 	};
 	
 	public function clickHandler(data:Object, clip:MovieClip):void {
 		if (data['activityId'] != "") {
-			receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime));
+			if (receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime)))
+				return;
 		}
-		trace(data['action']);
+		
 		if (data['action'] == ActionType.PLAY) {
 			clip.shouldRemove = true;
 			view.sendEvent("PLAY");
 			return;
 		}
 
-		if (data['url'] == "") {
-			view.sendEvent("SEEK", data['time']);
-		} else {
+		if (data['url'] != "") {
 			if (view.config['hipervideo.target'] != undefined){
 				try {
 				  navigateToURL(new URLRequest(data['url']), view.config['hipervideo.target']); 
@@ -203,25 +202,20 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				  trace("Error occurred!");
 				}
 			}
+		} else if (data['time'] != ""){
+			view.sendEvent("SEEK", data['time']);
 		}
 		
 	}
 	
-	public function receive_notification_from_activity_log(values:Object):void {
-		trace(values['id'] + " - " + values['value']);
+	public function receive_notification_from_activity_log(response:Object):Boolean {
+		trace(response['id'] + " - " + response['value']);
 		
-		if (values['id'] == "partial_grade") {
-			trace("partial grade");
-			captions.push({begin:currentTime, end:currentTime + 2, 
-							content:values['value'], isText: true,
-							textColor: 0xFFFFFF, backgroundColor: 0xEEEEEE,
-							hasBackgroundColor: false, url: "",
-							time: "", activityId: "",
-							action: "",
-							topLeft_x:20, topLeft_y:50,
-							width:50, height:200, active:false});
-			drawElement(captions.length - 1);
+		if (response['id'] == "Element") {
+			drawElement(response['value']);
 		}
+		
+		return (response['stopPropagation'] == true);
 	}
 	
 	public function elementStateHandler(element:Object, item:Object, evt:ModelEvent):void {

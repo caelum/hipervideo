@@ -50,8 +50,18 @@
 		<script type="text/javascript">
 			function logActivity(id, time) {
 				//alert('id = ' + id  + ' time = ' + time);
-				//sendTextToFlash("partial_grade", "Deu certo!");
-				return {"id": id, "value": "abc"};
+				return({
+					id: id, 
+					stopPropagation: true, 
+					value: {
+						begin:time, end: time + 5, 
+						content: "Nota: A+", isText: true,
+						textColor: '0xFF0000', backgroundColor: '',
+						hasBackgroundColor: false, url: "",
+						time: "", activityId: "", action: "",
+						topLeft_x:20, topLeft_y:50,
+						width:100, height:100, active:false}
+				});
 			}
 		</script>
 	
