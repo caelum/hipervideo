@@ -1,6 +1,7 @@
 package br.com.caelum.hipervideo.plugin {
 
 
+import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
 import br.com.caelum.hipervideo.model.Video;
 import br.com.caelum.hipervideo.reader.XMLReader;
@@ -177,10 +178,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	public function clickHandler(data:Object, clip:MovieClip):void {
 		if (data['activityId'] != "") {
-			ExternalInterface.call('logActivity', data['activityId'], currentTime);
+			receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime));
 		}
-		
-		if (data['action'] != "") {
+		trace(data['action']);
+		if (data['action'] == ActionType.PLAY) {
 			clip.shouldRemove = true;
 			view.sendEvent("PLAY");
 			return;
@@ -203,9 +204,44 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 				}
 			}
 		}
-	
+		
 	}
-
+	
+	public function receive_notification_from_activity_log(values:Object):void {
+		trace(values['id'] + " - " + values['value']);
+		
+		if (values['id'] == "partial_grade") {
+			trace("partial grade");
+			captions.push({begin:currentTime, end:currentTime + 2, 
+							content:values['value'], isText: true,
+							textColor: 0xFFFFFF, backgroundColor: 0xEEEEEE,
+							hasBackgroundColor: false, url: "",
+							time: "", activityId: "",
+							action: "",
+							topLeft_x:20, topLeft_y:50,
+							width:50, height:200, active:false});
+			drawElement(captions.length - 1);
+		}
+	}
+	
+	public function elementStateHandler(element:Object, item:Object, evt:ModelEvent):void {
+		switch (evt.data.newstate) {
+			case ModelStates.PLAYING:
+				if (element.shouldRemove) 
+					item.visible = false;
+				else
+					item.visible = true;
+				break;
+			case ModelStates.PAUSED:
+				if (!view.config['autoPaused']) {
+					item.visible = false;	
+				}
+				break;
+			case ModelStates.COMPLETED:
+				item.visible = false;
+				break;
+		}
+	}
 
 };
 

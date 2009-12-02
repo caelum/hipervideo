@@ -86,22 +86,7 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {
-			switch (evt.data.newstate) {
-				case ModelStates.PLAYING:
-					if (shouldRemove) 
-						field.visible = false;
-					else
-						field.visible = true;
-					break;
-				case ModelStates.PAUSED:
-					if (!view.config['autoPaused']) {
-						field.visible = false;	
-					}
-					break;
-				case ModelStates.COMPLETED:
-					field.visible = false;
-					break;
-			}
+			clip.elementStateHandler(this, field, evt);
 		}
 
 	}

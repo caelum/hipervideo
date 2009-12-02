@@ -51,7 +51,7 @@
 				<![CDATA[Podemos usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
 			</textContent>
 			
-			<link activity_id="atividade regitrada">
+			<link activity_id="partial_grade">
 				<tooltip>Uma tooltip para este link.</tooltip>
 				<url>http://caelum.com.br</url>
 				<thumbnail>thumbs/video11.jpg</thumbnail>
