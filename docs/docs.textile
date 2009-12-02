@@ -116,7 +116,7 @@ Aqui, temos:
 * id, determinando o tipo da resposta
 * value, determinando a resposta em si
 
-Se <tt>id='Element'</tt>, retornamos um novo Element para ser exibido no vídeo, como visto no exemplo acima.
+Se <tt>id='Element'</tt>, <tt>value</tt> é entendido como um novo <tt>Element</tt> para ser exibido no vídeo, e deve ser descrito como visto no exemplo acima.
 
 Podemos também passar um parâmetro chamado action com o valor de play, para que o link funcione como um botão de play, ou seja, se clicado, o vídeo continuará executando normalmente, como se fosse o botão de play do vídeo.
 
