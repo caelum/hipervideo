@@ -178,8 +178,7 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 	
 	public function clickHandler(data:Object, clip:MovieClip):void {
 		if (data['activityId'] != "") {
-			if (receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime)))
-				return;
+			receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime));
 		}
 		
 		if (data['action'] == ActionType.PLAY) {
@@ -208,14 +207,12 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 		
 	}
 	
-	public function receive_notification_from_activity_log(response:Object):Boolean {
+	public function receive_notification_from_activity_log(response:Object):void {
 		trace(response['id'] + " - " + response['value']);
 		
 		if (response['id'] == "Element") {
 			drawElement(response['value']);
 		}
-		
-		return (response['stopPropagation'] == true);
 	}
 	
 	public function elementStateHandler(element:Object, item:Object, evt:ModelEvent):void {
