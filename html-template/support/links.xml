@@ -1,4 +1,6 @@
-<video>
+<hipervideo>
+
+	<video file="bunny.flv" /> 
 
 	<playlist>
 		<link>
@@ -87,4 +89,4 @@
 	
 	</elements>
 
-</video>
+</hipervideo>

@@ -4,7 +4,7 @@ package br.com.caelum.hipervideo.reader
 	import br.com.caelum.hipervideo.model.ActionType;
 	import br.com.caelum.hipervideo.model.Element;
 	import br.com.caelum.hipervideo.model.Link;
-	import br.com.caelum.hipervideo.model.Video;
+	import br.com.caelum.hipervideo.model.Hipervideo;
 	
 	import com.jeroenwijering.utils.Strings;
 	
@@ -17,7 +17,7 @@ package br.com.caelum.hipervideo.reader
 			this.xml = xml;
 		}
 		
-		public function extract():Video {
+		public function extract():Hipervideo {
 			var elements:Array = new Array();
 			var actions:Array = new Array();
 			var playlist:Array = new Array();
@@ -48,7 +48,7 @@ package br.com.caelum.hipervideo.reader
 					new Action(ActionType.PAUSE, Strings.seconds(action.@at)));
 			}
 
-			return new Video(elements, actions, playlist, xml.playlist.@current);
+			return new Hipervideo(xml.video.@file, elements, actions, playlist, xml.playlist.@current);
 		}
 
 	}

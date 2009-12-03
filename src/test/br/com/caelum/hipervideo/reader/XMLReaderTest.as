@@ -3,13 +3,14 @@ package test.br.com.caelum.hipervideo.reader
 	import asunit.framework.TestCase;
 	
 	import br.com.caelum.hipervideo.model.ActionType;
-	import br.com.caelum.hipervideo.model.Video;
+	import br.com.caelum.hipervideo.model.Hipervideo;
 	import br.com.caelum.hipervideo.reader.XMLReader;
 		
 	public class XMLReaderTest extends TestCase
 	{
 		private var xmlStr:String = ( <![CDATA[
-			<video>
+			<hipervideo>
+				<video file="support/bunny.flv"/>
 				
 				<playlist current="2">
 					<link>
@@ -74,14 +75,18 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 				</elements>
-			</video>
+			</hipervideo>
 		]]> ).toString();
 
 		private var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-		private var video:Video = xmlReader.extract()
-		private var elementArray:Array = video.elements;
-		private var playlistArray:Array = video.playlist;
-		private var actionArray:Array = video.actions;
+		private var hipervideo:Hipervideo = xmlReader.extract()
+		private var elementArray:Array = hipervideo.elements;
+		private var playlistArray:Array = hipervideo.playlist;
+		private var actionArray:Array = hipervideo.actions;
+		
+		public function testReadVideoFileName():void {
+			assertEquals("support/bunny.flv", hipervideo.video);
+		}
 		
 		public function testReadCorrectNumberOfActions():void {
 			assertEquals(2, actionArray.length);
@@ -95,7 +100,7 @@ package test.br.com.caelum.hipervideo.reader
 		}
 		
 		public function testReadCurrentPlaylistItem():void {
-			assertEquals(2, video.current);
+			assertEquals(2, hipervideo.current);
 		}
 		
 		public function testReadCorrectNumberOfPlaylistItens():void {
@@ -207,7 +212,7 @@ package test.br.com.caelum.hipervideo.reader
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var video:Video = xmlReader.extract();
+			var video:Hipervideo = xmlReader.extract();
 			var elementArray:Array = video.elements;
 			var playlistArray:Array = video.playlist;
 			
@@ -220,7 +225,7 @@ package test.br.com.caelum.hipervideo.reader
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
-			var video:Video = xmlReader.extract();
+			var video:Hipervideo = xmlReader.extract();
 			var elementArray:Array = video.elements;
 			var playlistArray:Array = video.playlist;
 			

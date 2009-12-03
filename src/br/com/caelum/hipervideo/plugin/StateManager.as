@@ -2,7 +2,7 @@ package br.com.caelum.hipervideo.plugin {
 	import br.com.caelum.hipervideo.model.Action;
 	import br.com.caelum.hipervideo.model.ActionType;
 	import br.com.caelum.hipervideo.model.Element;
-	import br.com.caelum.hipervideo.model.Video;
+	import br.com.caelum.hipervideo.model.Hipervideo;
 	import br.com.caelum.hipervideo.reader.XMLReader;
 	
 	import com.jeroenwijering.events.AbstractView;
@@ -96,7 +96,7 @@ package br.com.caelum.hipervideo.plugin {
 		
 		/** Parse the XML and do some magic with it. **/	
 		private function parseXML(e:Event):void {
-			var video:Video = new XMLReader(new XML(e.target.data)).extract();
+			var video:Hipervideo = new XMLReader(new XML(e.target.data)).extract();
 			
 			var linkArray:Array = new Array();
 			for each (var element:Element in video.elements) {

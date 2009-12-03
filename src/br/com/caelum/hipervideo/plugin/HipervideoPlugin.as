@@ -3,7 +3,7 @@ package br.com.caelum.hipervideo.plugin {
 
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
-import br.com.caelum.hipervideo.model.Video;
+import br.com.caelum.hipervideo.model.Hipervideo;
 import br.com.caelum.hipervideo.reader.XMLReader;
 
 import com.jeroenwijering.events.*;
@@ -16,7 +16,7 @@ import flash.external.ExternalInterface;
 import flash.net.*;
 import flash.text.*;
 
-public class Hipervideo extends MovieClip implements PluginInterface {
+public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
@@ -96,8 +96,10 @@ public class Hipervideo extends MovieClip implements PluginInterface {
 
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
-		var video:Video = new XMLReader(new XML(evt.target.data)).extract();
-		var elementArray:Array = video.elements; 
+		var hipervideo:Hipervideo = new XMLReader(new XML(evt.target.data)).extract();
+		var elementArray:Array = hipervideo.elements; 
+		
+		view.sendEvent(ViewEvent.LOAD, hipervideo.video);
 		
 		for each (var element:Element in elementArray) {
 			captions.push({begin:element.start, end:element.start + element.duration, 
