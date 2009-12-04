@@ -231,7 +231,7 @@ public class LinkBar extends MovieClip {
 				SlideMe(false);
 				break;
 			case ModelStates.PAUSED:
-			case ModelStates.COMPLETED:
+//			case ModelStates.COMPLETED:
 				SlideMe(true);
 				break;			
 		}
