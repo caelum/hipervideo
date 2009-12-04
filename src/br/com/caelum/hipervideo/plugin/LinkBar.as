@@ -62,6 +62,10 @@ public class LinkBar extends MovieClip {
 		this.links = links;
 	};
 	
+	public function die():void {
+		clip.removeChild(DisplayObject(_container));
+	}
+	
     public function setVisible(v:Boolean):void {
     	_container.visible = v;
     	Bg.visible = v;
@@ -70,8 +74,6 @@ public class LinkBar extends MovieClip {
     	ShuffleRight.visible = v;
     	InfoElement.visible = v;
     }
-
-
 
 	private function create(links:Array, ClipsVisible:Number):void {
 		InfoElement["text"].text = this.title;
@@ -229,8 +231,6 @@ public class LinkBar extends MovieClip {
 				SlideMe(false);
 				break;
 			case ModelStates.PAUSED:
-				SlideMe(true);
-				break;
 			case ModelStates.COMPLETED:
 				SlideMe(true);
 				break;			
@@ -250,7 +250,6 @@ public class LinkBar extends MovieClip {
 		
 		resizeMe();
 	}
-
 	
 	/** Slide the plugin to the center stage when the movie is paused or complete. **/	
 	private function SlideMe(showMe:Boolean):void{
@@ -311,8 +310,6 @@ public class LinkBar extends MovieClip {
 		e.target.x -= (e.target.x-targX)/5;
 	}
 	
-	
-	
 	//Shuffle left;
 	function shuffleleft(e:MouseEvent):void{
 		targX += ClipWidth;
@@ -336,6 +333,5 @@ public class LinkBar extends MovieClip {
 	}
 
 }
-
 
 }

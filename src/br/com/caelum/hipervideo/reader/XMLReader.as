@@ -48,7 +48,7 @@ package br.com.caelum.hipervideo.reader
 					new Action(ActionType.PAUSE, Strings.seconds(action.@at)));
 			}
 
-			return new Hipervideo(xml.video.@file, elements, actions, playlist, xml.playlist.@current);
+			return new Hipervideo(xml.video.@file, xml.next.@file, elements, actions, playlist);
 		}
 
 	}

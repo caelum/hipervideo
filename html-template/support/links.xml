@@ -1,6 +1,8 @@
 <hipervideo>
 
 	<video file="bunny.flv" /> 
+	
+	<next file="support/next.xml" />
 
 	<playlist>
 		<link>

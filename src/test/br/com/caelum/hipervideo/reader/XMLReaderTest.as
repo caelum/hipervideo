@@ -11,6 +11,7 @@ package test.br.com.caelum.hipervideo.reader
 		private var xmlStr:String = ( <![CDATA[
 			<hipervideo>
 				<video file="support/bunny.flv"/>
+				<next file="support/next.xml"/>
 				
 				<playlist current="2">
 					<link>
@@ -84,6 +85,10 @@ package test.br.com.caelum.hipervideo.reader
 		private var playlistArray:Array = hipervideo.playlist;
 		private var actionArray:Array = hipervideo.actions;
 		
+		public function testReadNextXmlFile():void {
+			assertEquals("support/next.xml", hipervideo.next);
+		}
+		
 		public function testReadVideoFileName():void {
 			assertEquals("support/bunny.flv", hipervideo.video);
 		}
@@ -98,11 +103,7 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(ActionType.PAUSE, actionArray[1].type);
 			assertEquals(21, actionArray[1].time);
 		}
-		
-		public function testReadCurrentPlaylistItem():void {
-			assertEquals(2, hipervideo.current);
-		}
-		
+
 		public function testReadCorrectNumberOfPlaylistItens():void {
 			assertEquals(2, playlistArray.length);
 		}

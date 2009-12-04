@@ -36,6 +36,10 @@ package br.com.caelum.hipervideo.plugin {
 		
 		/** Icon for the controlbar. **/
 		private var icon:Bitmap;
+		
+		private var loader:URLLoader = new URLLoader();
+		
+		private var next:String;
 
 		public function initializePlugin(view:AbstractView):void {
 			this.view = view;
@@ -47,7 +51,6 @@ package br.com.caelum.hipervideo.plugin {
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 			
-			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, parseXML);
 			loader.load(new URLRequest(view.config['hipervideo.file']));
 			
@@ -79,8 +82,24 @@ package br.com.caelum.hipervideo.plugin {
 					links.stateHandler(evt);
 				}
 			}
+			
 			if (evt.data.newstate == ModelStates.PLAYING) {
 				view.config['autoPaused'] = false;
+			}
+			
+			switch (evt.data.newstate) {
+				case ModelStates.COMPLETED:
+					loadNextVideo();
+					break;
+			}
+		}
+		
+		private function loadNextVideo():void {
+			if (next != "") {
+				view.config['hipervideo.file'] = next;
+				playlist.die();
+				links.die();
+				loader.load(new URLRequest(view.config['hipervideo.file']));
 			}
 		}
 		
@@ -106,6 +125,8 @@ package br.com.caelum.hipervideo.plugin {
 			playlist = new LinkBar("Playlist", video.playlist, view, this);
 			links = new LinkBar("Links", linkArray, view, this);
 			actions = video.actions;
+			
+			next = video.next;
 		}
 		
 		/** Check timing of the player to sync captions. **/
@@ -126,7 +147,6 @@ package br.com.caelum.hipervideo.plugin {
 				view.sendEvent("PLAY");
 			}
 		}
-
 
 	}
 }

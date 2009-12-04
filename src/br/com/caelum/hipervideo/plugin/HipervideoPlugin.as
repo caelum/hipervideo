@@ -38,6 +38,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	private var captions:Array;
 
 	private var currentTime:Number;
+	
+	private var next:String = "";
 
 	private function drawClip():void {
 		loader = new URLLoader();
@@ -47,7 +49,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		back.graphics.beginFill(0x000000,0.75);
 		back.graphics.drawRect(0,0,400,0);
 		addChild(back);
-		
 		
 		if (config['back'] == false) {
 			back.alpha = 0;
@@ -83,6 +84,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		var file:String;
 		
 		file = view.config['hipervideo.file'];
+		trace("lendo arquivo " + file);
 
 		if (file) {
 			config['file'] = file;
@@ -115,6 +117,12 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		if (captions.length == 0) {
 			Logger.log('Not a valid file.','hipervideo');
 		}
+		
+		if (next !=  "") {
+			view.sendEvent(ViewEvent.NEXT);
+		}
+		
+		next = hipervideo.next;
 	};
 
 	/** Check for captions in metadata. **/
@@ -164,7 +172,21 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		visible = 
 			(view.config['state'] == ModelStates.PLAYING || view.config['state'] == ModelStates.PAUSED) 
 				&& config['state'];
+		switch (evt.data.newstate) {
+			case ModelStates.COMPLETED:
+				loadNextVideo();
+				break;
+		}
 	};
+	
+	private function loadNextVideo():void {
+		if (next != "") {
+			view.config['hipervideo.file'] = next;
+			drawClip();
+			xmlLoaded = false;
+			resizeHandler();
+		}
+	}
 
 	/** Check timing of the player to sync captions. **/
 	private function timeHandler(evt:ModelEvent):void {
