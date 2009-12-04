@@ -44,7 +44,7 @@ package test.br.com.caelum.hipervideo.reader
 						</link>
 						
 						<time start="00:00:10" duration="00:01:10"/>
-						<position x="50" y="70" height="60" width="50"/>
+						<geometry x="50" y="70" height="60" width="50"/>
 					</element>
 					
 					<element>
@@ -59,7 +59,7 @@ package test.br.com.caelum.hipervideo.reader
 						</link>
 						
 						<time start="00:00:10" duration="00:01:10"/>
-						<position x="50" y="70" height="60" width="50"/>
+						<geometry x="50" y="70" height="60" width="50"/>
 					</element>
 				
 					<element>
@@ -72,7 +72,7 @@ package test.br.com.caelum.hipervideo.reader
 						</link>
 						
 						<time start="01:00:01" duration="00:10:10.5"/>
-						<position x="150" y="170" height="960" width="950"/>
+						<geometry x="150" y="170" height="960" width="950"/>
 					</element>
 					
 				</elements>
@@ -140,7 +140,7 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(610.5, elementArray[2].duration);			
 		}
 		
-		public function testReadLinkPosition():void {
+		public function testReadLinkGeometry():void {
 			assertEquals(50, elementArray[0].x);
 			assertEquals(70, elementArray[0].y);
 			assertEquals(50, elementArray[0].width);

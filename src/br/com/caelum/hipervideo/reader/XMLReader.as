@@ -33,8 +33,8 @@ package br.com.caelum.hipervideo.reader
 								ActionType.fromValue(element.link.@action)),
 							element.textContent.@color, element.textContent.@backgroundColor,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
-							element.position.@x, element.position.@y,
-							element.position.@width, element.position.@height)
+							element.geometry.@x, element.geometry.@y,
+							element.geometry.@width, element.geometry.@height)
 				);
 			}
 			
