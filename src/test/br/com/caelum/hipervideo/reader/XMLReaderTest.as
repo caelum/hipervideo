@@ -3,6 +3,7 @@ package test.br.com.caelum.hipervideo.reader
 	import asunit.framework.TestCase;
 	
 	import br.com.caelum.hipervideo.model.ActionType;
+	import br.com.caelum.hipervideo.model.ElementType;
 	import br.com.caelum.hipervideo.model.Hipervideo;
 	import br.com.caelum.hipervideo.reader.XMLReader;
 		
@@ -75,6 +76,18 @@ package test.br.com.caelum.hipervideo.reader
 						<geometry x="150" y="170" height="960" width="950"/>
 					</element>
 					
+					<element>
+						<underline/>
+						
+						<link activity_id="#ActID#">
+							<tooltip>Tooltip do underline.</tooltip>
+							<thumbnail>thumbs/video10.jpg</thumbnail>
+						</link>
+						
+						<time start="00:00:01" duration="00:00:08"/>
+						<geometry x="30" y="100" height="50" width="200"/>
+					</element>
+					
 				</elements>
 			</hipervideo>
 		]]> ).toString();
@@ -108,12 +121,12 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(2, playlistArray.length);
 		}
 		
-		public function testReadPLaylistItemTooltip():void {
+		public function testReadPlaylistItemTooltip():void {
 			assertEquals("playlist 1", playlistArray[0].tooltip);
 			assertEquals("playlist 2", playlistArray[1].tooltip);
 		}
 		
-		public function testReadPLaylistItemThumbnail():void {
+		public function testReadPlaylistItemThumbnail():void {
 			assertEquals("thumb1.jpg", playlistArray[0].thumbnail);
 			assertEquals("thumb2.jpg", playlistArray[1].thumbnail);
 		}
@@ -124,7 +137,7 @@ package test.br.com.caelum.hipervideo.reader
 		}
 					
 		public function testReadCorrectNumberOfLinksFromXML():void {
-			assertEquals(3, elementArray.length);
+			assertEquals(4, elementArray.length);
 		}
 		
 		public function testReadLinkContents():void {
@@ -200,6 +213,13 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(ActionType.NOTHING, elementArray[0].link.action);
 			assertEquals(ActionType.NOTHING, elementArray[1].link.action);
 			assertEquals(ActionType.PLAY, elementArray[2].link.action);
+		}
+		
+		public function testReadElementType():void {
+			assertEquals(ElementType.TEXT, elementArray[0].type);
+			assertEquals(ElementType.TEXT, elementArray[1].type);
+			assertEquals(ElementType.IMAGE, elementArray[2].type);
+			assertEquals(ElementType.UNDERLINE, elementArray[3].type);
 		}
 
 		public function testReadXMLWithNoElements():void {

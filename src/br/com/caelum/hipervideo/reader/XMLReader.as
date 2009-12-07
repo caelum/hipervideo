@@ -3,8 +3,9 @@ package br.com.caelum.hipervideo.reader
 	import br.com.caelum.hipervideo.model.Action;
 	import br.com.caelum.hipervideo.model.ActionType;
 	import br.com.caelum.hipervideo.model.Element;
-	import br.com.caelum.hipervideo.model.Link;
+	import br.com.caelum.hipervideo.model.ElementType;
 	import br.com.caelum.hipervideo.model.Hipervideo;
+	import br.com.caelum.hipervideo.model.Link;
 	
 	import com.jeroenwijering.utils.Strings;
 	
@@ -22,8 +23,23 @@ package br.com.caelum.hipervideo.reader
 			var actions:Array = new Array();
 			var playlist:Array = new Array();
 			for each (var element:XML in xml.elements.element) {
+				
+				var content:String;
+				var type:String;
+				trace("> "+ element.textContent.toString());
+				if (element.textContent.toString().length != 0) {
+					content = element.textContent;
+					type = ElementType.TEXT;
+				} else if (element.imageContent.toString().length != 0) {
+					content = element.imageContent;
+					type = ElementType.IMAGE;
+				} else {
+					content = "";
+					type = ElementType.UNDERLINE;
+				}
+				
 				elements.push(
-					new Element(element.textContent, element.imageContent,
+					new Element(type, content,
 							new Link(
 								element.link.@activity_id,
 								element.link.tooltip, 

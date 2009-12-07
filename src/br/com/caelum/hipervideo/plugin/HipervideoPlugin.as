@@ -3,6 +3,7 @@ package br.com.caelum.hipervideo.plugin {
 
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
+import br.com.caelum.hipervideo.model.ElementType;
 import br.com.caelum.hipervideo.model.Hipervideo;
 import br.com.caelum.hipervideo.reader.XMLReader;
 
@@ -105,13 +106,13 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		
 		for each (var element:Element in elementArray) {
 			captions.push({begin:element.start, end:element.start + element.duration, 
-							content:element.content, isText: element.isText,
+							content:element.content, type:element.type,
 							textColor: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
 							time: element.link.time, activityId: element.link.activityId,
 							action: element.link.action,
 							topLeft_x:element.x, topLeft_y:element.y,
-							width:element.width, height:element.height, active:false});
+							width:element.width, height:element.height, active:false, element:element});
 		}
 		
 		if (captions.length == 0) {
@@ -159,11 +160,14 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	};
 	
 	private function drawElement(caption:Object):void {
-		if (caption['isText']) {
+		if (caption['type'] == ElementType.TEXT) {
 			new TextElement(caption, this, view);
-		} else {
+		} else if (caption['type'] == ElementType.IMAGE) {
 			new ImageElement(caption, this, view);
+		} else {
+			new UnderlineElement(caption, this, view);
 		}
+//		caption['element'].build();
 		resizeHandler();
 	}
 

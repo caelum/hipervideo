@@ -2,6 +2,7 @@ package br.com.caelum.hipervideo.model
 {
 	public class Element
 	{
+		public var type:String;
 		
 		public var content:String;
 		public var color:uint;
@@ -16,18 +17,17 @@ package br.com.caelum.hipervideo.model
 		public var height:Number;
 		
 		public var hasBackgroundColor:Boolean;
-		public var isText:Boolean;
 		
 		public var link:Link;
 		
-		public function Element(textContent:String, imageContent:String,
+		public function Element(type:String, content:String,
 							link:Link, 
 							color:String, backgroundColor:String,
 							start:Number, duration:Number,
 							x:Number, y:Number,
 							width:Number, height:Number) {
-			this.isText = textContent != "";
-			this.content = isText ? textContent : imageContent;
+			this.type = type;
+			this.content = content;
 			this.color =  color == "" ? 0xFFFFFF : uint(color);
 			
 			if (backgroundColor != "") {
