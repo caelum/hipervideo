@@ -26,16 +26,20 @@ package br.com.caelum.hipervideo.reader
 				
 				var content:String;
 				var type:String;
-				trace("> "+ element.textContent.toString());
+				var color:uint;
+				
 				if (element.textContent.toString().length != 0) {
 					content = element.textContent;
 					type = ElementType.TEXT;
+					color = element.textContent.@color.toString().length == 0 ? 0xFFFFFF : uint(element.textContent.@color);
 				} else if (element.imageContent.toString().length != 0) {
 					content = element.imageContent;
 					type = ElementType.IMAGE;
+					color = 0xFFFFFF;
 				} else {
 					content = "";
 					type = ElementType.UNDERLINE;
+					color = element.underline.@color.toString().length == 0 ? 0xFFFFFF : uint(element.underline.@color);
 				}
 				
 				elements.push(
@@ -47,7 +51,7 @@ package br.com.caelum.hipervideo.reader
 								element.link.url, 
 								Strings.seconds(element.link.time), 
 								ActionType.fromValue(element.link.@action)),
-							element.textContent.@color, element.textContent.@backgroundColor,
+							color, element.textContent.@backgroundColor,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
 							element.geometry.@x, element.geometry.@y,
 							element.geometry.@width, element.geometry.@height)

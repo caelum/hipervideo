@@ -77,7 +77,7 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 					<element>
-						<underline/>
+						<underline color="0xF0F0F0"/>
 						
 						<link activity_id="#ActID#">
 							<tooltip>Tooltip do underline.</tooltip>
@@ -220,6 +220,10 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(ElementType.TEXT, elementArray[1].type);
 			assertEquals(ElementType.IMAGE, elementArray[2].type);
 			assertEquals(ElementType.UNDERLINE, elementArray[3].type);
+		}
+		
+		public function testReadUnderlineColor():void {
+			assertEquals("0xF0F0F0", elementArray[3].color);		
 		}
 
 		public function testReadXMLWithNoElements():void {

@@ -41,7 +41,7 @@ package br.com.caelum.hipervideo.plugin
 			field.htmlText = data['content'];
 			field.width = data['width'];
 			field.height = data['height'];
-			field.textColor = data['textColor'];
+			field.textColor = data['color'];
 			field.background = data['hasBackgroundColor'];
 			field.backgroundColor = data['backgroundColor'];
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));

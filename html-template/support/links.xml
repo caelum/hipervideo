@@ -65,7 +65,7 @@
 		</element>
 	
 		<element>
-			<underline/>
+			<underline color="0xFF0000"/>
 			
 			<link activity_id="#ActID#">
 				<tooltip>Tooltip do underline.</tooltip>

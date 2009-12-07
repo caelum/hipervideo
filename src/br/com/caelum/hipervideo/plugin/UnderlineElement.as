@@ -29,7 +29,7 @@ package br.com.caelum.hipervideo.plugin
 			line.width = data['width'];
 			line.height = HEIGHT;
 			line.background = true;
-			line.backgroundColor = 0xFF0000;
+			line.backgroundColor = data['color'];
 			
 			clickArea = new TextField();
 			clickArea.width = data['width'];

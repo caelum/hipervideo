@@ -22,13 +22,13 @@ package br.com.caelum.hipervideo.model
 		
 		public function Element(type:String, content:String,
 							link:Link, 
-							color:String, backgroundColor:String,
+							color:uint, backgroundColor:String,
 							start:Number, duration:Number,
 							x:Number, y:Number,
 							width:Number, height:Number) {
 			this.type = type;
 			this.content = content;
-			this.color =  color == "" ? 0xFFFFFF : uint(color);
+			this.color =  color;
 			
 			if (backgroundColor != "") {
 				this.hasBackgroundColor = true;

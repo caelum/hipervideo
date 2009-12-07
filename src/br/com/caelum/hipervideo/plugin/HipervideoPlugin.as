@@ -107,7 +107,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		for each (var element:Element in elementArray) {
 			captions.push({begin:element.start, end:element.start + element.duration, 
 							content:element.content, type:element.type,
-							textColor: element.color, backgroundColor: element.backgroundColor,
+							color: element.color, backgroundColor: element.backgroundColor,
 							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
 							time: element.link.time, activityId: element.link.activityId,
 							action: element.link.action,
