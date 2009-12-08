@@ -16,7 +16,7 @@
 			
 			<link>
 				<tooltip>Windows</tooltip>
-				<url>http://www.codeblocks.org/downloads/5</url>
+				<url target="_blank">http://www.codeblocks.org/downloads/5</url>
 				<thumbnail>thumbs/Download-icon.png</thumbnail>
 			</link>
 			

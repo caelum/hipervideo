@@ -55,7 +55,7 @@ package test.br.com.caelum.hipervideo.reader
 						
 						<link activity_id="act_id1">
 							<tooltip></tooltip>
-							<url>http://link-qualquer.com</url>
+							<url target="_blank">http://link-qualquer.com</url>
 							<thumbnail>imagem_das_cores.jpg</thumbnail>
 						</link>
 						
@@ -230,6 +230,11 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadVideoLink():void {
 			assertEquals("", elementArray[2].link.video);
 			assertEquals("outro.xml", elementArray[3].link.video);
+		}
+		
+		public function testReadTargetLink():void {
+			assertEquals("_self", elementArray[0].link.target);
+			assertEquals("_blank", elementArray[1].link.target);
 		}
 
 		public function testReadXMLWithNoElements():void {

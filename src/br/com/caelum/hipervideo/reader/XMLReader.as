@@ -48,6 +48,7 @@ package br.com.caelum.hipervideo.reader
 								element.link.tooltip, 
 								element.link.thumbnail, 
 								element.link.url, 
+								element.link.url.@target,
 								Strings.seconds(element.link.time), 
 								element.link.video,
 								ActionType.fromValue(element.link.@action)),
@@ -60,7 +61,7 @@ package br.com.caelum.hipervideo.reader
 			
 			for each (var link:XML in xml.playlist.link) {
 				playlist.push(
-					new Link("", link.tooltip, link.thumbnail, link.url, link.time, link.video, ActionType.NOTHING));
+					new Link("", link.tooltip, link.thumbnail, link.url, link.url.@target, link.time, link.video, ActionType.NOTHING));
 			}
 			
 			for each (var action:XML in xml.actions.pause) {

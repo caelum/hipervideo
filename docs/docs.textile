@@ -83,6 +83,19 @@ Indica uma ação a ser executada.
 </pre>
 
 A tag <tt>url</tt> indica a abertura de uma referência externa.
+Essa tag aceita o modo de abertura da referência externa através da tag target. Os valores aceitos são:
+* _blank, a referência será aberta em uma nova janela
+* _self, a referência será aberta na mesma janela. Esse é o valor padrão.
+
+Um exemplo de uso ficaria assim:
+
+<pre>
+<link>
+	<tooltip>Tooltip do link</tooltip>
+	<url target="_blank">http://url.para.um.site</url>
+	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+</link>
+</pre>
 
 <pre>
 <link activity_id="parametro">

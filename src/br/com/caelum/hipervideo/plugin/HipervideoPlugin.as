@@ -198,18 +198,10 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		}
 
 		if (element.link.url != "") {
-			if (view.config['hipervideo.target'] != undefined){
-				try {
-				  navigateToURL(new URLRequest(element.link.url), view.config['hipervideo.target']); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			} else {
-				try {
-				  navigateToURL(new URLRequest(element.link.url)); 
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
+			try {
+			  navigateToURL(new URLRequest(element.link.url), element.link.target); 
+			} catch (e:Error) {
+			  trace("Error occurred!");
 			}
 		} else if (element.link.time != 0){
 			view.sendEvent("SEEK", element.link.time);
@@ -227,7 +219,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			var data:Object = response['value'];
 			var newElement:Element = new Element(
 				ElementType.TEXT, data['content'],
-				new Link("", "", "", "", 0, "", ""),
+				new Link("", "", "", "", "", 0, "", ""),
 				uint(data['textColor']), "", data['begin'], data['end'],
 				data['topLeft_x'], data['topLeft_y'], data['width'], data['height']);
 			newElement.active = data['active'];
