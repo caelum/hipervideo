@@ -127,6 +127,17 @@ Podemos também passar um parâmetro chamado action com o valor de play, para qu
 </link>
 </pre>
 
+Podemos também passar qual será o vídeo a ser executado quando o elemento for clicado.
+O vídeo DEVE SER OBRIGATORIAMENTE um xml, que indicará qual será o vídeo a ser exibido e todas os itens dele.
+
+<pre>
+<link>
+	<tooltip>Tooltip do link</tooltip>
+	<video>outro.video.xml</video>
+	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+</link>
+</pre>
+
 h3. Time
 
 Indica um intervalo de tempo.

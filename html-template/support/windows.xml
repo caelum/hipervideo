@@ -1,0 +1,38 @@
+<hipervideo>
+
+	<video file="windows.flv" /> 
+	
+	<playlist>
+	</playlist>
+	
+	<actions>
+		<pause at="00:00:10"/>
+	</actions>
+
+	<elements>
+	
+		<element>
+			<imageContent>thumbs/Download-icon.png</imageContent>
+			
+			<link>
+				<tooltip>Windows</tooltip>
+				<url>http://www.codeblocks.org/downloads/5</url>
+				<thumbnail>thumbs/Download-icon.png</thumbnail>
+			</link>
+			
+			<time start="00:00:02" duration="00:00:08"/>
+			<geometry x="340" y="20" height="60" width="60"/>
+		</element>
+		
+		<element>
+			<textContent>
+				<![CDATA[Baixar Code::Blocks]]>
+			</textContent>
+			
+			<time start="00:00:02" duration="00:00:08"/>
+			<geometry x="300" y="60" height="60" width="100"/>
+		</element>
+		
+	</elements>
+
+</hipervideo>

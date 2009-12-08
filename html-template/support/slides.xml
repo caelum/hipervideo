@@ -1,0 +1,42 @@
+<hipervideo>
+
+	<video file="slides.flv" /> 
+	
+	<playlist>
+	</playlist>
+	
+	<actions>
+		<pause at="00:00:51" />
+	</actions>
+
+	<elements>
+	
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Windows</tooltip>
+				<video>support/windows.xml</video>
+				<thumbnail>thumbs/video10.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:43" duration="00:00:08"/>
+			<geometry x="67" y="120" height="30" width="97"/>
+		</element>
+		
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Linux</tooltip>
+				<video>support/linux.xml</video>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:43" duration="00:00:09"/>
+			<geometry x="204" y="120" height="30" width="132"/>
+		</element>
+	
+	</elements>
+
+</hipervideo>

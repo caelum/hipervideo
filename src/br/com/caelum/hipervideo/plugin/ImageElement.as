@@ -9,6 +9,7 @@ package br.com.caelum.hipervideo.plugin
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	
@@ -26,10 +27,16 @@ package br.com.caelum.hipervideo.plugin
 			image = new Loader();
 			image.load(new URLRequest(element.content));
 			child = addChild(image);
+			image.contentLoaderInfo.addEventListener(Event.COMPLETE, resizeImage);
 			
 			image.addEventListener(MouseEvent.CLICK, clickHandler);
 			return image;
 		}
+		
+		private function resizeImage(e:Event):void {
+	        image.width = element.width;
+	        image.height = element.height;
+		} 
 		
 		public function ImageElement(data:Element, clip:MovieClip, view:AbstractView) {
 			this.element = data;

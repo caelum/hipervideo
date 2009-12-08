@@ -213,6 +213,9 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			}
 		} else if (element.link.time != 0){
 			view.sendEvent("SEEK", element.link.time);
+		} else if (element.link.video != "") {
+			next = element.link.video;
+			loadNextVideo();
 		}
 		
 	}
@@ -224,7 +227,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			var data:Object = response['value'];
 			var newElement:Element = new Element(
 				ElementType.TEXT, data['content'],
-				new Link("", "", "", "", 0, ""),
+				new Link("", "", "", "", 0, "", ""),
 				uint(data['textColor']), "", data['begin'], data['end'],
 				data['topLeft_x'], data['topLeft_y'], data['width'], data['height']);
 			newElement.active = data['active'];
