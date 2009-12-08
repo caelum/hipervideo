@@ -1,5 +1,7 @@
 package br.com.caelum.hipervideo.plugin
 {
+	import br.com.caelum.hipervideo.model.Element;
+	
 	import com.jeroenwijering.events.AbstractView;
 	import com.jeroenwijering.events.ControllerEvent;
 	import com.jeroenwijering.events.ModelEvent;
@@ -11,12 +13,12 @@ package br.com.caelum.hipervideo.plugin
 	
 	public class UnderlineElement extends MovieClip	{
 		
-		private var data:Object;
+		private var element:Element;
 		private var endTime:Number;
 		private var clip:MovieClip;
 		private var view:AbstractView;
-		private var childL:DisplayObject;
-		private var childA:DisplayObject;
+		private var childLine:DisplayObject;
+		private var childArea:DisplayObject;
 		public var shouldRemove:Boolean;
 		
 		private var line:TextField;
@@ -24,28 +26,28 @@ package br.com.caelum.hipervideo.plugin
 		
 		private var HEIGHT:Number = 2;
 		
-		private function newUnderline(data:Object):void {
+		private function newUnderline():void {
 			line = new TextField();
-			line.width = data['width'];
+			line.width = element.width;
 			line.height = HEIGHT;
 			line.background = true;
-			line.backgroundColor = data['color'];
+			line.backgroundColor = element.color;
 			
 			clickArea = new TextField();
-			clickArea.width = data['width'];
-			clickArea.height = data['height'];
+			clickArea.width = element.width;
+			clickArea.height = element.height;
 			
 			clickArea.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
-		public function UnderlineElement(data:Object, clip:MovieClip, view:AbstractView) {
-			this.data = data;
+		public function UnderlineElement(data:Element, clip:MovieClip, view:AbstractView) {
+			this.element = data;
 			this.clip = clip;
 			this.view = view;
-			data['active'] = true;
-			newUnderline(data);
-			childL = clip.parent.addChild(line);
-			childA = clip.parent.addChild(clickArea);
+			element.active = true;
+			newUnderline();
+			childLine = clip.parent.addChild(line);
+			childArea = clip.parent.addChild(clickArea);
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
@@ -53,10 +55,10 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function resizeHandler(evt:ControllerEvent=undefined):void {
-			clickArea.x = data['topLeft_x'] * clip.scaleX;
-			clickArea.y = data['topLeft_y'] * clip.scaleY;
-			line.x = data['topLeft_x'] * clip.scaleX;
-			line.y = ( data['topLeft_y'] + data['height'] - HEIGHT) * clip.scaleY;
+			clickArea.x = element.x * clip.scaleX;
+			clickArea.y = element.y * clip.scaleY;
+			line.x = element.x * clip.scaleX;
+			line.y = ( element.y + element.height - HEIGHT) * clip.scaleY;
 			
 			clickArea.scaleX = clip.scaleX;
 			clickArea.scaleY = clip.scaleY;
@@ -66,17 +68,17 @@ package br.com.caelum.hipervideo.plugin
 		
 		private function timeHandler(evt:ModelEvent):void {
 			var pos:Number = evt.data.position;
-			if (pos > data['end'] || pos < data['begin']) {
-				clip.parent.removeChild(childL);
-				clip.parent.removeChild(childA);
+			if (pos > element.end || pos < element.start) {
+				clip.parent.removeChild(childLine);
+				clip.parent.removeChild(childArea);
 				view.removeModelListener(ModelEvent.TIME,timeHandler);
 				view.removeControllerListener(ControllerEvent.RESIZE,resizeHandler);
-				data['active'] = false;
+				element.active = false;
 			}
 		}
 		
 		private function clickHandler(event:MouseEvent):void {
-			clip.clickHandler(data, this);
+			clip.clickHandler(element, this);
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {

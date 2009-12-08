@@ -9,12 +9,11 @@ package br.com.caelum.hipervideo.reader
 	
 	import com.jeroenwijering.utils.Strings;
 	
-	public class XMLReader
-	{
+	public class XMLReader {
+		
 		private var xml:XML;
 		
-		public function XMLReader(xml:XML)
-		{
+		public function XMLReader(xml:XML) {
 			this.xml = xml;
 		}
 		
@@ -22,8 +21,8 @@ package br.com.caelum.hipervideo.reader
 			var elements:Array = new Array();
 			var actions:Array = new Array();
 			var playlist:Array = new Array();
+			
 			for each (var element:XML in xml.elements.element) {
-				
 				var content:String;
 				var type:String;
 				var color:uint;

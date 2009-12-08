@@ -137,12 +137,12 @@ Indica um intervalo de tempo.
 
 Especifica um intervalo de tempo do segundo ao quinto minuto do vídeo.
 
-h3. Position
+h3. Geometry
 
 Indica uma posição na janela de exibição do vídeo.
 
 <pre>
-<position x="10" y="20" height="100" width="200"/>
+<geometry x="10" y="20" height="100" width="200"/>
 </pre>
 
 Os valores de x="10" e y="20" indicam, respectivamente, as coordenadas horizontal e vertical do canto superior esquerdo do item. 
@@ -168,8 +168,18 @@ h3. Image Content
 Indica uma imagem como conteúdo.
 
 <pre>
-	<imageContent>imagem.gif</imageContent>
+<imageContent>imagem.gif</imageContent>
 </pre>
+
+h3. Underline
+
+Indica uma área que ficará sublinhada, simulando um link. 
+
+<pre>
+<underline color="0x0000FF"/>
+</pre>
+
+É possível definir a cor do sublinhado através do atributo color, na tag underline.
 
 h3. Element
 

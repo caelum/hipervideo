@@ -1,9 +1,10 @@
 package br.com.caelum.hipervideo.plugin
 {
+	import br.com.caelum.hipervideo.model.Element;
+	
 	import com.jeroenwijering.events.AbstractView;
 	import com.jeroenwijering.events.ControllerEvent;
 	import com.jeroenwijering.events.ModelEvent;
-	import com.jeroenwijering.events.ModelStates;
 	
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -12,9 +13,9 @@ package br.com.caelum.hipervideo.plugin
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	public class TextElement extends MovieClip
-	{
-		private var data:Object;
+	public class TextElement extends MovieClip {
+		
+		private var element:Element;
 		private var endTime:Number;
 		private var clip:MovieClip;
 		private var view:AbstractView;
@@ -22,13 +23,14 @@ package br.com.caelum.hipervideo.plugin
 		private var child:DisplayObject;
 		public var shouldRemove:Boolean;
 		
-		private function newTextField(data:Object):TextField {
+		private function newTextField():TextField {
 			var format:TextFormat = new TextFormat();
 			format.color = 0xFFFFFF;
 			format.size = 14;
 			format.align = "center";
 			format.font = "arial";
 			format.leading = 4;
+			format.display = "Hand";
 			
 			field = new TextField();
 			field.x = Infinity;
@@ -38,12 +40,12 @@ package br.com.caelum.hipervideo.plugin
 			field.defaultTextFormat = format;
 			field.mouseEnabled = true;
 			
-			field.htmlText = data['content'];
-			field.width = data['width'];
-			field.height = data['height'];
-			field.textColor = data['color'];
-			field.background = data['hasBackgroundColor'];
-			field.backgroundColor = data['backgroundColor'];
+			field.htmlText = element.content;
+			field.width = element.width;
+			field.height = element.height;
+			field.textColor = element.color;
+			field.background = element.hasBackgroundColor;
+			field.backgroundColor = element.backgroundColor;
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
 			
 			field.addEventListener(MouseEvent.CLICK, clickHandler);
@@ -51,13 +53,12 @@ package br.com.caelum.hipervideo.plugin
 			return field;
 		}
 		
-		public function TextElement(data:Object, clip:MovieClip, view:AbstractView)
-		{
-			this.data = data;
+		public function TextElement(data:Element, clip:MovieClip, view:AbstractView) {
+			this.element = data;
 			this.clip = clip;
 			this.view = view;
-			data['active'] = true;
-			child = clip.parent.addChild(newTextField(data));
+			element.active = true;
+			child = clip.parent.addChild(newTextField());
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
@@ -67,22 +68,22 @@ package br.com.caelum.hipervideo.plugin
 		private function resizeHandler(evt:ControllerEvent=undefined):void {
 			field.scaleX = clip.scaleX;
 			field.scaleY = clip.scaleY;
-			field.x = data['topLeft_x'] * clip.scaleX;
-			field.y = data['topLeft_y'] * clip.scaleY;
+			field.x = element.x * clip.scaleX;
+			field.y = element.y * clip.scaleY;
 		}
 		
 		private function timeHandler(evt:ModelEvent):void {
 			var pos:Number = evt.data.position;
-			if (pos > data['end'] || pos < data['begin']) {
+			if (pos > element.end || pos < element.start) {
 				clip.parent.removeChild(child);
 				view.removeModelListener(ModelEvent.TIME,timeHandler);
 				view.removeControllerListener(ControllerEvent.RESIZE,resizeHandler);
-				data['active'] = false;
+				element.active = false;
 			}
 		}
 		
 		private function clickHandler(event:MouseEvent):void {
-			clip.clickHandler(data, this);
+			clip.clickHandler(element, this);
 		}
 		
 		private function stateHandler(evt:ModelEvent):void {

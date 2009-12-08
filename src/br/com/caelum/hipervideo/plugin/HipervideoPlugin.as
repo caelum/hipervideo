@@ -5,6 +5,7 @@ import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
 import br.com.caelum.hipervideo.model.ElementType;
 import br.com.caelum.hipervideo.model.Hipervideo;
+import br.com.caelum.hipervideo.model.Link;
 import br.com.caelum.hipervideo.reader.XMLReader;
 
 import com.jeroenwijering.events.*;
@@ -80,7 +81,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	/** Check for captions with a new item. **/
 	private function itemHandler(evt:ControllerEvent=null):void {
-		captions = new Array();
 		config['file'] = undefined;
 		var file:String;
 		
@@ -100,20 +100,9 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
 		var hipervideo:Hipervideo = new XMLReader(new XML(evt.target.data)).extract();
-		var elementArray:Array = hipervideo.elements; 
+		captions = hipervideo.elements; 
 		
 		view.sendEvent(ViewEvent.LOAD, hipervideo.video);
-		
-		for each (var element:Element in elementArray) {
-			captions.push({begin:element.start, end:element.start + element.duration, 
-							content:element.content, type:element.type,
-							color: element.color, backgroundColor: element.backgroundColor,
-							hasBackgroundColor: element.hasBackgroundColor, url: element.link.url,
-							time: element.link.time, activityId: element.link.activityId,
-							action: element.link.action,
-							topLeft_x:element.x, topLeft_y:element.y,
-							width:element.width, height:element.height, active:false, element:element});
-		}
 		
 		if (captions.length == 0) {
 			Logger.log('Not a valid file.','hipervideo');
@@ -160,14 +149,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	};
 	
 	private function drawElement(caption:Object):void {
-		if (caption['type'] == ElementType.TEXT) {
-			new TextElement(caption, this, view);
-		} else if (caption['type'] == ElementType.IMAGE) {
-			new ImageElement(caption, this, view);
-		} else {
-			new UnderlineElement(caption, this, view);
-		}
-//		caption['element'].build();
+		caption.build(this, view);
 		resizeHandler();
 	}
 
@@ -198,39 +180,39 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		currentTime = pos;
 		
 		for (var i:Number = 0; i < captions.length; i++) {
-			if (captions[i]['begin'] < pos && captions[i]['end'] > pos && captions[i]['active'] == false) {
+			if (captions[i].start < pos && captions[i].end > pos && !captions[i].active) {
 				drawElement(captions[i]);
 			}
 		}
 	};
 	
-	public function clickHandler(data:Object, clip:MovieClip):void {
-		if (data['activityId'] != "") {
-			receive_notification_from_activity_log(ExternalInterface.call('logActivity', data['activityId'], currentTime));
+	public function clickHandler(element:Element, clip:MovieClip):void {
+		if (element.link.activityId != "") {
+			receive_notification_from_activity_log(ExternalInterface.call('logActivity', element.link.activityId, currentTime));
 		}
 		
-		if (data['action'] == ActionType.PLAY) {
+		if (element.link.action == ActionType.PLAY) {
 			clip.shouldRemove = true;
 			view.sendEvent("PLAY");
 			return;
 		}
 
-		if (data['url'] != "") {
+		if (element.link.url != "") {
 			if (view.config['hipervideo.target'] != undefined){
 				try {
-				  navigateToURL(new URLRequest(data['url']), view.config['hipervideo.target']); 
+				  navigateToURL(new URLRequest(element.link.url), view.config['hipervideo.target']); 
 				} catch (e:Error) {
 				  trace("Error occurred!");
 				}
 			} else {
 				try {
-				  navigateToURL(new URLRequest(data['url'])); 
+				  navigateToURL(new URLRequest(element.link.url)); 
 				} catch (e:Error) {
 				  trace("Error occurred!");
 				}
 			}
-		} else if (data['time'] != ""){
-			view.sendEvent("SEEK", data['time']);
+		} else if (element.link.time != 0){
+			view.sendEvent("SEEK", element.link.time);
 		}
 		
 	}
@@ -239,7 +221,15 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		trace(response['id'] + " - " + response['value']);
 		
 		if (response['id'] == "Element") {
-			drawElement(response['value']);
+			var data:Object = response['value'];
+			var newElement:Element = new Element(
+				ElementType.TEXT, data['content'],
+				new Link("", "", "", "", 0, ""),
+				uint(data['textColor']), "", data['begin'], data['end'],
+				data['topLeft_x'], data['topLeft_y'], data['width'], data['height']);
+			newElement.active = data['active'];
+			
+			drawElement(newElement);
 		}
 	}
 	
