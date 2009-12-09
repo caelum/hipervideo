@@ -1,0 +1,158 @@
+<hipervideo>
+
+	<video file="historia.flv" />
+
+	<playlist>
+	</playlist>
+	
+	<actions>
+	</actions>
+
+	<elements>
+	
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Claude Shannon</tooltip>
+				<url>http://en.wikipedia.org/wiki/Claude_Shannon</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:00:44" duration="00:00:21"/>
+			<geometry x="125" y="45" height="180" width="130"/>
+		</element>
+		
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Contagem manual</tooltip>
+				<url>http://matematica.com.sapo.pt/contar2.htm</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:01:11" duration="00:01:05"/>
+			<geometry x="60" y="75" height="85" width="130"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Ábaco Romano</tooltip>
+				<url>http://pt.wikipedia.org/wiki/%C3%81baco</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:01:45" duration="00:00:31"/>
+			<geometry x="195" y="50" height="130" width="150"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Números Hindus</tooltip>
+				<url>http://en.wikipedia.org/wiki/Number</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:02:17" duration="00:00:44"/>
+			<geometry x="42" y="75" height="70" width="212"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Al-Khwarismi</tooltip>
+				<url>http://en.wikipedia.org/wiki/Muhammad_ibn_M%C5%ABs%C4%81_al-Khw%C4%81rizm%C4%AB</url>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:02:38" duration="00:00:23"/>
+			<geometry x="255" y="47" height="145" width="98"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>ENIAC</tooltip>
+				<time>00:09:13</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:13:08" duration="00:00:16"/>
+			<geometry x="130" y="50" height="172" width="130"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>O que é informação</tooltip>
+				<time>00:00:17</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:14:34" duration="00:00:08"/>
+			<geometry x="120" y="48" height="25" width="160"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Os Números e o Ábaco</tooltip>
+				<time>00:01:08</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:14:34" duration="00:00:08"/>
+			<geometry x="120" y="80" height="25" width="160"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Ciência e os cálculos</tooltip>
+				<time>00:03:03</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:14:34" duration="00:00:08"/>
+			<geometry x="120" y="113" height="25" width="160"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>Máquinas de calcular</tooltip>
+				<time>00:03:53</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:14:34" duration="00:00:08"/>
+			<geometry x="120" y="147" height="25" width="160"/>
+		</element>
+
+		<element>
+			<underline color="0x0000FF"/>
+			
+			<link>
+				<tooltip>A revolução industrial</tooltip>
+				<time>00:04:51</time>
+				<thumbnail>thumbs/video11.jpg</thumbnail>
+			</link>
+			
+			<time start="00:14:34" duration="00:00:08"/>
+			<geometry x="120" y="181" height="25" width="160"/>
+		</element>
+
+	</elements>
+
+</hipervideo>
