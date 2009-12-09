@@ -10,6 +10,7 @@ import br.com.caelum.hipervideo.reader.XMLReader;
 import com.jeroenwijering.events.*;
 import com.jeroenwijering.parsers.*;
 import com.jeroenwijering.utils.Logger;
+import com.jeroenwijering.utils.Strings;
 
 import flash.display.*;
 import flash.events.*;
@@ -218,9 +219,20 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			trace("entrou no ife");
 			var data:Object = response['value'];
 			var newElement:Element = new Element(
-				data['type'], data['content'],
-				new Link("", "", "", "", "", 0, "", ""),
-				uint(data['color']), data['backgroundColor'], Strings.seconds(data['begin']),
+				data['type'], 
+				data['content'],
+				new Link(
+					data['link']['activityId'], 
+					data['link']['tooltip'], 
+					data['link']['thumbnail'], 
+					data['link']['url'], 
+					data['link']['target'], 
+					data['link']['time'], 
+					data['link']['video'], 
+					data['link']['action']),
+				uint(data['color']), 
+				data['backgroundColor'], 
+				Strings.seconds(data['begin']),
 				Strings.seconds(data['duration']),
 				data['x'], data['y'], data['width'], data['height']);
 			newElement.active = data['active'];
