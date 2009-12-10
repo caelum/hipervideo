@@ -14,7 +14,7 @@
 		<element>
 			<imageContent>thumbs/Download-icon.png</imageContent>
 			
-			<link>
+			<link action="pause">
 				<tooltip>Windows</tooltip>
 				<url target="_blank">http://www.codeblocks.org/downloads/5</url>
 				<thumbnail>thumbs/Download-icon.png</thumbnail>

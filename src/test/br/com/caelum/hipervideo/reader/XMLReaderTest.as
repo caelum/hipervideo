@@ -53,7 +53,7 @@ package test.br.com.caelum.hipervideo.reader
 							Teste de cores
 						</textContent>
 						
-						<link activity_id="act_id1">
+						<link activity_id="act_id1" action="pause">
 							<tooltip></tooltip>
 							<url target="_blank">http://link-qualquer.com</url>
 							<thumbnail>imagem_das_cores.jpg</thumbnail>
@@ -212,7 +212,7 @@ package test.br.com.caelum.hipervideo.reader
 		
 		public function testReadLinkAction():void {
 			assertEquals(ActionType.NOTHING, elementArray[0].link.action);
-			assertEquals(ActionType.NOTHING, elementArray[1].link.action);
+			assertEquals(ActionType.PAUSE, elementArray[1].link.action);
 			assertEquals(ActionType.PLAY, elementArray[2].link.action);
 		}
 		

@@ -41,8 +41,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	private var currentTime:Number;
 	
-	private var next:String = "";
-
 	private function drawClip():void {
 		loader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE,loaderHandler);
@@ -108,11 +106,13 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			Logger.log('Not a valid file.','hipervideo');
 		}
 		
-		if (next !=  "") {
+		trace("view.config['next'] = " + view.config['next']);
+		
+		if (view.config['next'] != null && view.config['next'] != "") {
 			view.sendEvent(ViewEvent.NEXT);
 		}
 		
-		next = hipervideo.next;
+		view.config['next'] = hipervideo.next;
 	};
 
 	/** Check for captions in metadata. **/
@@ -166,8 +166,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	};
 	
 	private function loadNextVideo():void {
-		if (next != "") {
-			view.config['hipervideo.file'] = next;
+		if (view.config['next'] != null && view.config['next'] != "") {
+			view.config['hipervideo.file'] = view.config['next'];
 			drawClip();
 			xmlLoaded = false;
 			resizeHandler();
@@ -191,13 +191,15 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			receive_notification_from_activity_log(ExternalInterface.call('logActivity', element.link.activityId, currentTime));
 		}
 		
-		if (element.link.action == ActionType.PLAY) {
-			clip.shouldRemove = true;
-			view.sendEvent("PLAY");
-			return;
+		if (element.link.action == ActionType.PLAY || element.link.action == ActionType.PAUSE) {
+			if (element.link.action == ActionType.PLAY) {
+				clip.shouldRemove = true;
+			}
+			view.config['autoPaused'] = true;
+			view.sendEvent(ControllerEvent.PLAY);
 		}
 
-		if (element.link.url != "") {
+		if (element.link.url != null && element.link.url != "") {
 			try {
 			  navigateToURL(new URLRequest(element.link.url), element.link.target); 
 			} catch (e:Error) {
@@ -206,17 +208,14 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		} else if (element.link.time != 0){
 			view.sendEvent("SEEK", element.link.time);
 		} else if (element.link.video != "") {
-			next = element.link.video;
+			trace("alguem clicou em alguma coisa");
+			view.config['next'] = element.link.video;
 			loadNextVideo();
 		}
-		
 	}
 	
 	public function receive_notification_from_activity_log(response:Object):void {
-		trace("porras");
-		trace((response['id'] == "Element"));
-		if (response['id'] == "Element") {
-			trace("entrou no ife");
+		if (response != null && response['id'] == "Element") {
 			var data:Object = response['value'];
 			var newElement:Element = new Element(
 				data['type'], 

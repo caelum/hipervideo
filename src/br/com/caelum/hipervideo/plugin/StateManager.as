@@ -10,6 +10,7 @@ package br.com.caelum.hipervideo.plugin {
 	import com.jeroenwijering.events.ModelEvent;
 	import com.jeroenwijering.events.ModelStates;
 	import com.jeroenwijering.events.PluginInterface;
+	import com.jeroenwijering.events.ViewEvent;
 	
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
@@ -39,8 +40,6 @@ package br.com.caelum.hipervideo.plugin {
 		
 		private var loader:URLLoader = new URLLoader();
 		
-		private var next:String;
-
 		public function initializePlugin(view:AbstractView):void {
 			this.view = view;
 		
@@ -48,6 +47,7 @@ package br.com.caelum.hipervideo.plugin {
 			view.getPlugin('controlbar').addButton(icon,'hipervideo',clickHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);
+			view.addViewListener(ViewEvent.NEXT,nextHandler);
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 			
@@ -93,10 +93,20 @@ package br.com.caelum.hipervideo.plugin {
 					break;
 			}
 		}
+
+		private function nextHandler(evt:ViewEvent):void {
+			trace(evt.type);
+			trace(ViewEvent.NEXT);
+			trace(evt.type == ViewEvent.NEXT);
+			if (evt.type == ViewEvent.NEXT) {
+				trace("entrou");
+				loadNextVideo();
+			}
+		}
 		
 		private function loadNextVideo():void {
-			if (next != "") {
-				view.config['hipervideo.file'] = next;
+			if (view.config['next'] != null && view.config['next'] != "") {
+				view.config['hipervideo.file'] = view.config['next'];
 				playlist.die();
 				links.die();
 				loader.load(new URLRequest(view.config['hipervideo.file']));
@@ -125,8 +135,6 @@ package br.com.caelum.hipervideo.plugin {
 			playlist = new LinkBar("Playlist", video.playlist, view, this);
 			links = new LinkBar("Links", linkArray, view, this);
 			actions = video.actions;
-			
-			next = video.next;
 		}
 		
 		/** Check timing of the player to sync captions. **/
@@ -144,7 +152,7 @@ package br.com.caelum.hipervideo.plugin {
 		private function performAction(action:Action):void {
 			if (action.type == ActionType.PAUSE) {
 				view.config['autoPaused'] = true;
-				view.sendEvent("PLAY");
+				view.sendEvent(ControllerEvent.PLAY);
 			}
 		}
 
