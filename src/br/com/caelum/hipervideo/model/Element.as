@@ -23,6 +23,7 @@ package br.com.caelum.hipervideo.model
 		public var y:Number;
 		public var width:Number;
 		public var height:Number;
+		public var thickness:Number;
 		
 		public var hasBackgroundColor:Boolean;
 		
@@ -35,7 +36,7 @@ package br.com.caelum.hipervideo.model
 							color:uint, backgroundColor:String,
 							start:Number, duration:Number,
 							x:Number, y:Number,
-							width:Number, height:Number) {
+							width:Number, height:Number, thickness:Number) {
 			this.type = type;
 			this.content = content;
 			this.color =  color;
@@ -53,6 +54,7 @@ package br.com.caelum.hipervideo.model
 			this.y = y;
 			this.width = width;
 			this.height = height;
+			this.thickness = thickness;
 			this.link = link;			
 		}
 		

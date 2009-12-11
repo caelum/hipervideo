@@ -7,10 +7,9 @@ package br.com.caelum.hipervideo.plugin
 	import com.jeroenwijering.events.ModelEvent;
 	
 	import flash.display.DisplayObject;
+	import flash.display.JointStyle;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	
-	import mx.skins.Border;
 	
 	public class FrameElement extends MovieClip {
 		
@@ -22,7 +21,6 @@ package br.com.caelum.hipervideo.plugin
 		private var child:DisplayObject;
 
 		public function FrameElement(data:Element, clip:MovieClip, view:AbstractView) {
-			trace("frame element");
 			this.element = data;
 			this.clip = clip;
 			this.view = view;
@@ -31,13 +29,15 @@ package br.com.caelum.hipervideo.plugin
 			width = element.width;
 			height = element.height;
 			
-			graphics.lineStyle(1, element.color, 1);
-			graphics.moveTo(0, 0)
-			graphics.lineTo(element.width, 0);
-			graphics.lineTo(element.width, element.height);
-			graphics.lineTo(0, element.height);
-			graphics.lineTo(0, 0);
+			var offset:Number = element.thickness / 2;
 			
+			graphics.lineStyle(element.thickness, element.color, 1, false, "normal", null, JointStyle.BEVEL);
+			graphics.moveTo(0+offset, 0+offset)
+			graphics.lineTo(element.width-offset, 0+offset);
+			graphics.lineTo(element.width-offset, element.height-offset);
+			graphics.lineTo(0+offset, element.height-offset);
+			graphics.lineTo(0+offset, 0+offset);
+						
 			child = clip.parent.addChild(this);
 
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);

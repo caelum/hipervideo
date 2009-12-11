@@ -233,7 +233,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 				data['backgroundColor'], 
 				Strings.seconds(data['begin']),
 				Strings.seconds(data['duration']),
-				data['x'], data['y'], data['width'], data['height']);
+				data['x'], data['y'], data['width'], data['height'], 1);
 			newElement.active = data['active'];
 			
 			drawElement(newElement);

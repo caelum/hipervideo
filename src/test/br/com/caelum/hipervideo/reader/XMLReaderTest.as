@@ -90,7 +90,7 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 					<element>
-						<frame color="0xFF0000" backgroundColor="corDeFundo">Conteudo</frame>
+						<frame/>
 						
 						<link activity_id="#ActID#">
 							<tooltip>Tooltip do underline.</tooltip>
@@ -100,6 +100,13 @@ package test.br.com.caelum.hipervideo.reader
 						
 						<time start="00:00:01" duration="00:00:08"/>
 						<geometry x="30" y="100" height="50" width="200"/>
+					</element>
+					
+					<element>
+						<frame color="0xFF0000"/>
+						
+						<time start="00:00:01" duration="00:00:08"/>
+						<geometry x="30" y="100" height="50" width="200" thickness="4"/>
 					</element>
 					
 				</elements>
@@ -148,10 +155,6 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadPlaylistItemUrl():void {
 			assertEquals("algum-video.flv", playlistArray[0].url);
 			assertEquals("algum-outro-video.flv", playlistArray[1].url);
-		}
-					
-		public function testReadCorrectNumberOfLinksFromXML():void {
-			assertEquals(5, elementArray.length);
 		}
 		
 		public function testReadLinkContents():void {
@@ -235,6 +238,7 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(ElementType.IMAGE, elementArray[2].type);
 			assertEquals(ElementType.UNDERLINE, elementArray[3].type);
 			assertEquals(ElementType.FRAME, elementArray[4].type);
+			assertEquals(ElementType.FRAME, elementArray[5].type);
 		}
 		
 		public function testReadUnderlineColor():void {
@@ -252,7 +256,13 @@ package test.br.com.caelum.hipervideo.reader
 		}
 		
 		public function testReadBorderColor():void {
-			assertEquals("0xFF0000", elementArray[4].color);
+			assertEquals("0x0000FF", elementArray[4].color);
+			assertEquals("0xFF0000", elementArray[5].color);
+		}
+		
+		public function testReadFrameBorderThickness():void {
+			assertEquals(1, elementArray[4].thickness);
+			assertEquals(4, elementArray[5].thickness);
 		}
 
 		public function testReadXMLWithNoElements():void {

@@ -26,6 +26,7 @@ package br.com.caelum.hipervideo.reader
 				var content:String;
 				var type:String;
 				var color:uint;
+				var thickness:Number = 1;
 				
 				if (element.textContent.toString().length != 0) {
 					content = element.textContent;
@@ -39,6 +40,7 @@ package br.com.caelum.hipervideo.reader
 					content = element.frame;
 					type = ElementType.FRAME;
 					color = element.frame.@color.toString().length == 0 ? 0x0000FF : uint(element.frame.@color);
+					thickness = element.geometry.@thickness.toString().length == 0 ? 1 : element.geometry.@thickness;
 				} else {
 					content = "";
 					type = ElementType.UNDERLINE;
@@ -59,7 +61,7 @@ package br.com.caelum.hipervideo.reader
 							color, element.textContent.@backgroundColor,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
 							element.geometry.@x, element.geometry.@y,
-							element.geometry.@width, element.geometry.@height)
+							element.geometry.@width, element.geometry.@height, thickness)
 				);
 			}
 			

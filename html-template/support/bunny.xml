@@ -78,7 +78,7 @@
 		</element>
 	
 		<element>
-			<frame>abcd</frame>
+			<frame/>
 			
 			<link>
 				<tooltip></tooltip>
@@ -87,7 +87,7 @@
 			</link>
 			
 			<time start="00:00:06" duration="00:00:04"/>
-			<geometry x="100" y="100" height="150" width="150"/>
+			<geometry x="100" y="100" height="150" width="150" thickness="6"/>
 		</element>
 	
 		<element>
