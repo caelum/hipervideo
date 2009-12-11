@@ -28,6 +28,10 @@ package br.com.caelum.hipervideo.reader
 				var color:uint;
 				var thickness:Number = 1;
 				
+				trace("==================");
+				trace(element.children().contains(<frame/>));
+				trace("==================");
+				
 				if (element.textContent.toString().length != 0) {
 					content = element.textContent;
 					type = ElementType.TEXT;
