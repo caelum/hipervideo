@@ -35,10 +35,14 @@ package br.com.caelum.hipervideo.reader
 					content = element.imageContent;
 					type = ElementType.IMAGE;
 					color = 0xFFFFFF;
+				} else if (element.frame.toString().length != 0) {
+					content = element.frame;
+					type = ElementType.FRAME;
+					color = element.frame.@color.toString().length == 0 ? 0x0000FF : uint(element.frame.@color);
 				} else {
 					content = "";
 					type = ElementType.UNDERLINE;
-					color = element.underline.@color.toString().length == 0 ? 0xFFFFFF : uint(element.underline.@color);
+					color = element.underline.@color.toString().length == 0 ? 0x0000FF : uint(element.underline.@color);
 				}
 				
 				elements.push(

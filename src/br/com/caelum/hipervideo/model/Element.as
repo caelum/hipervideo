@@ -1,5 +1,6 @@
 package br.com.caelum.hipervideo.model
 {
+	import br.com.caelum.hipervideo.plugin.FrameElement;
 	import br.com.caelum.hipervideo.plugin.ImageElement;
 	import br.com.caelum.hipervideo.plugin.TextElement;
 	import br.com.caelum.hipervideo.plugin.UnderlineElement;
@@ -60,6 +61,8 @@ package br.com.caelum.hipervideo.model
 				return new TextElement(this, plugin, view);
 			} else if (type == ElementType.IMAGE) {
 				return new ImageElement(this, plugin, view);
+			} else if (type == ElementType.FRAME) {
+				return new FrameElement(this, plugin, view);
 			} else {
 				return new UnderlineElement(this, plugin, view);
 			}
