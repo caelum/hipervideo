@@ -196,7 +196,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 				clip.shouldRemove = true;
 			}
 			view.config['autoPaused'] = true;
-			view.sendEvent(ControllerEvent.PLAY);
+			view.sendEvent(ControllerEvent.PLAY, element.link.action == ActionType.PLAY);
 		}
 
 		if (element.link.url != null && element.link.url != "") {

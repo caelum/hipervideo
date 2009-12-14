@@ -28,7 +28,6 @@
 	</playlist>
 	
 	<actions>
-		<pause at="00:00:08.05" />
 		<pause at="00:00:10.05" />
 		<pause at="00:00:12" />
 	</actions>
@@ -106,7 +105,7 @@
 		<element>
 			<imageContent>thumbs/play.jpg</imageContent>
 			
-			<link action="play">
+			<link action="pause">
 				<tooltip>Simples play</tooltip>
 				<thumbnail>thumbs/play.jpg</thumbnail>
 			</link>
