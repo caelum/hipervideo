@@ -103,10 +103,10 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 					<element>
-						<frame color="0xFF0000"/>
+						<frame color="0xFF0000" thickness="4"/>
 						
 						<time start="00:00:01" duration="00:00:08"/>
-						<geometry x="30" y="100" height="50" width="200" thickness="4"/>
+						<geometry x="30" y="100" height="50" width="200"/>
 					</element>
 					
 				</elements>

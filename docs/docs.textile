@@ -197,6 +197,16 @@ Indica uma área que ficará sublinhada, simulando um link.
 
 É possível definir a cor do sublinhado através do atributo color, na tag underline.
 
+h3. Frame
+
+Indica uma área delimitada por uma borda. 
+
+<pre>
+<frame color="0x0000FF"/>
+</pre>
+
+É possível definir a cor do sublinhado através do atributo color, na tag frame.
+
 h3. Element
 
 Indica um elemento de hipervideo. Esse elemento pode ser de texto, por exemplo:
