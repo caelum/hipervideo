@@ -205,7 +205,13 @@ Indica uma área delimitada por uma borda.
 <frame color="0x0000FF"/>
 </pre>
 
-É possível definir a cor do sublinhado através do atributo color, na tag frame.
+É possível definir a cor da borda através do atributo color, na tag frame.
+
+É possível também definir a espessura da borda através do atributo thickness. Essa espessura é medida em pixels.
+
+<pre>
+<frame color="0x0000FF" thickness="2"/>
+</pre>
 
 h3. Element
 
