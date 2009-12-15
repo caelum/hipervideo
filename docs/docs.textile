@@ -82,15 +82,15 @@ Para exibir texto sobre o vídeo, especificamos um elemento de texto no XML. Al�
 </hipervideo>
 </pre>
 
-A tag <tt><time></tt> determina o momento inicial da exibição pela propriedade <tt>start</tt> e a duração desta pela propriedade <tt>duration</tt>.
+A tag <tt>&lt;time&gt;</tt> determina o momento inicial da exibição pela propriedade <tt>start</tt> e a duração desta pela propriedade <tt>duration</tt>.
 	
-Com a tag <tt><geometry></tt> determinamos o posicionamento do elemento (usando <tt>x</tt> e <tt>y</tt>), a largura e a altura (usando <tt>width</tt> e <tt>height</tt>, respectivamente).
+Com a tag <tt>&lt;geometry&gt;</tt> determinamos o posicionamento do elemento (usando <tt>x</tt> e <tt>y</tt>), a largura e a altura (usando <tt>width</tt> e <tt>height</tt>, respectivamente).
 
-Opcionalmente, podemos definir a cor do texto e do fundo deste elemento. Para isso, basta alterar a tag <tt><textContent></tt>, como abaixo:
+Opcionalmente, podemos definir a cor do texto e do fundo deste elemento. Para isso, basta alterar a tag <tt>&lt;textContent&gt;</tt>, como abaixo:
 
-<tt><textContent color="0xFF0000" backgroundColor="0xFFFFFF" /></tt>
+<tt>&lt;textContent color="0xFF0000" backgroundColor="0xFFFFFF" /&gt;</tt>
 
-Podemos especificar quantos elementos de texto quisermos dentro da tag <tt><elements></tt>.
+Podemos especificar quantos elementos de texto quisermos dentro da tag <tt>&lt;elements&gt;</tt>.
 
 h3. Exibindo uma imagem sobre o vídeo
 
@@ -144,7 +144,7 @@ No caso do frame, a propriedade <tt>thickness</tt>, que determina a espessura da
 
 h3. Links nos elementos
 
-Podemos especificar um link a ser aberto quando um elemento for clicado. Este pode ser apontar para uma página, para uma posição específica do vídeo, ou mesmo para outro hipervídeo. Este comportamento é especificado pela tag <tt><link></tt>, que deve pertencer a um <tt><element></tt>.
+Podemos especificar um link a ser aberto quando um elemento for clicado. Este pode ser apontar para uma página, para uma posição específica do vídeo, ou mesmo para outro hipervídeo. Este comportamento é especificado pela tag <tt>&lt;link&gt;</tt>, que deve pertencer a um <tt>&lt;element&gt;</tt>.
 
 Para configurar a ação de abrir uma página, fazemos:
 
@@ -173,7 +173,7 @@ Para configurar a ação de abrir uma página, fazemos:
 </hipervideo>
 </pre>
 
-Alterando a tag <tt><link></tt>, é possível forçar a ida a outra posição do vídeo:
+Alterando a tag <tt>&lt;link&gt;</tt>, é possível forçar a ida a outra posição do vídeo:
 
 <pre>
 <link>
@@ -194,6 +194,16 @@ Analogamente, o carregamento de outro hipervídeo se faz com a seguinte alteraç
 </pre>
 
 Todas as tags dentro de link são opcionais.
+
+
+
+
+
+
+
+
+
+
 
 h3. Pause
 
