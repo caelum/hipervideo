@@ -37,7 +37,7 @@ h2. Variáveis do plugin de hipervideo
 Os dados de hipervideo são fornecidos por um arquivo XML que também deve ser informado como uma variável do player: <tt>hipervideo.file</tt>. Esta é definida na linha comentada com:
 * <tt>// HIPERVIDEO DATA FILE HERE</tt>
 
-O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.barposition</tt>, definida na linha comentada com:
+O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.ubarposition</tt>, definida na linha comentada com:
 * <tt>// BAR POSITION</tt>
 	
 Os valores possíveis são:
@@ -48,7 +48,133 @@ Os valores possíveis são:
 
 h2. Formato do XML
 
-Os itens exibidos durante a execução do vídeo são descritos em um arquivo xml, determinado pela variável <tt>hipervideo.file</tt>. As tags mais elementares, que serão combinadas de forma a compor estes itens, são:
+O arquivo XML com as informações de reprodução do hipervídeo é especificado pela variável <tt>hipervideo.file</tt>. Este arquivo determina o vídeo a ser executado, os elementos a serem exibidos e as ações a serem realizadas automaticamente pelo player.
+
+h3. Definindo o vídeo a ser reproduzido
+
+O hipervídeo é composto de um vídeo comum acrescido de elementos de hipermídia. Para definir um hipervídeo composto apenas de um vídeo comum, fazemos:
+
+<pre>
+<hipervideo>
+	<video file="video.flv" />
+</hipervideo>
+</pre>
+
+h3. Exibindo texto sobre o vídeo
+
+Para exibir texto sobre o vídeo, especificamos um elemento de texto no XML. Além do texto em questão, é necessário especificar seu posicionamento, dimensões e o intervalo de tempo em que a exibição será feita.
+
+<pre>
+<hipervideo>
+	<video file="bunny.flv" />
+	
+	<elements>
+
+		<element>
+			<textContent>
+				<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
+			</textContent>
+			<time start="00:00:01" duration="00:00:04"/>
+			<geometry x="68" y="200" height="50" width="270"/>
+		</element>
+
+	</elements>
+</hipervideo>
+</pre>
+
+A tag <tt><time></tt> determina o momento inicial da exibição pela propriedade <tt>start</tt> e a duração desta pela propriedade <tt>duration</tt>.
+	
+Com a tag <tt><geometry></tt> determinamos o posicionamento do elemento - <tt>x</tt>, <tt>y</tt> - a largura e a altura - <tt>width</tt>, <tt>height</tt>.
+
+Opcionalmente, podemos definir a cor do texto e do fundo deste elemento. Para isso, basta alterar a tag <tt><textContent></tt>, como abaixo:
+
+<tt><textContent color="0xFF0000" backgroundColor="0xFFFFFF" /></tt>
+
+Podemos especificar quantos elementos de texto quisermos dentro da tag <tt><elements></tt>.
+
+h3. Exibindo uma imagem sobre o vídeo
+
+Também é possível exibir uma imagem sobre o vídeo durante um intervalo de tempo. O exemplo abaixo acrescenta um elemento de imagem ao hipervídeo anteriormente definido.
+
+<pre>
+<hipervideo>
+	<video file="bunny.flv" />
+	
+	<elements>
+
+		<element>
+			<textContent>
+				<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
+			</textContent>
+			<time start="00:00:01" duration="00:00:04"/>
+			<geometry x="68" y="200" height="50" width="270"/>
+		</element>
+		
+		<element>
+			<imageContent>arquivo-de-imagem.jpg</imageContent>	
+			<time start="00:00:08" duration="00:00:01"/>
+			<geometry x="200" y="90" height="200" width="200"/>
+		</element>
+		
+	</elements>
+</hipervideo>
+</pre>
+
+h3. Outros tipos de elementos
+
+Além de texto e imagem, podemos sublinhar ou delimitar por uma borda uma região do vídeo.
+
+<pre>
+<element>
+	<underline color="0x0000FF"/>
+	<time start="00:00:06.5" duration="00:00:02.5"/>
+	<geometry x="55" y="80" height="50" width="295"/>
+</element>
+
+A propriedade color, que determina a cor da linha do sublinhado, pode ser omitida.
+
+<element>
+	<frame thickness="6"/>
+	<time start="00:00:06" duration="00:00:04"/>
+	<geometry x="100" y="100" height="150" width="150"/>
+</element>
+</pre>
+
+A propriedade thickness, que determina a espessura da borda, pode ser omitida.
+
+h3. Ações sobre os elementos
+
+Podemos especificar uma ação a ser executada quando um elemento for clicado.
+Essa ação pode ser abrir uma página, fazer o play ou o pause do vídeo, ou até abrir outro vídeo.
+
+Para configurar a ação de abrir uma página, fazemos:
+
+<pre>
+<hipervideo>
+	<video file="bunny.flv" />
+	
+	<elements>
+
+		<element>
+			<textContent>
+				<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
+			</textContent>
+			<link>
+				<tooltip>Tooltip do link</tooltip>
+				<url>http://url.para.um.site</url>
+				<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+			</link>
+			<time start="00:00:01" duration="00:00:04"/>
+			<geometry x="68" y="200" height="50" width="270"/>
+		</element>
+
+	</elements>
+</hipervideo>
+</pre>
+
+A tag <tt><link></tt> é a que utilizamos para configurar a ação. Essa tag aceita opcionalmente as configurações de tooltip e de thumbnail.
+
+
 
 h3. Pause
 
@@ -115,6 +241,7 @@ Opcionalmente, a função logActivity pode devolver uma resposta. Essa resposta 
 		topLeft_x:20, topLeft_y:50,
 		width:100, height:100, active:false}
 }
+
 </pre>
 
 Aqui, temos:
