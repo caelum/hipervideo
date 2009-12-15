@@ -142,34 +142,27 @@ Em ambos os casos, a propriedade <tt>color</tt>, que determina a cor da linha do
 
 No caso do frame, a propriedade <tt>thickness</tt>, que determina a espessura da borda, também pode ser omitida.
 
-h3. Links nos elementos
+h3. Colocando links nos elementos
 
 Podemos especificar um link a ser aberto quando um elemento for clicado. Este pode ser apontar para uma página, para uma posição específica do vídeo, ou mesmo para outro hipervídeo. Este comportamento é especificado pela tag <tt>&lt;link&gt;</tt>, que deve pertencer a um <tt>&lt;element&gt;</tt>.
 
-Para configurar a ação de abrir uma página, fazemos:
+Para abrir uma página, fazemos:
 
 <pre>
-<hipervideo>
-	<video file="bunny.flv" />
-	
-	<elements>
+<element>
+	<textContent>
+		<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
+	</textContent>
 
-		<element>
-			<textContent>
-				<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
-			</textContent>
+	<link>
+		<tooltip>Tooltip do link</tooltip>
+		<url>http://url.para.um.site</url>
+		<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+	</link>
 
-			<link>
-				<tooltip>Tooltip do link</tooltip>
-				<url>http://url.para.um.site</url>
-				<thumbnail>thumbnail.representando.link.jpg</thumbnail>
-			</link>
-
-			<time start="00:00:01" duration="00:00:04"/>
-			<geometry x="68" y="200" height="50" width="270"/>
-		</element>
-
-	</elements>
+	<time start="00:00:01" duration="00:00:04"/>
+	<geometry x="68" y="200" height="50" width="270"/>
+</element>
 </hipervideo>
 </pre>
 
@@ -195,10 +188,38 @@ Analogamente, o carregamento de outro hipervídeo se faz com a seguinte alteraç
 
 Todas as tags dentro de link são opcionais.
 
+h3. Associando ações aos elementos
 
+Além de abrir URLs, podemos também executar algumas ações com cliques em elementos.
 
+Para pausar a execução do vídeo, fazemos:
 
+<pre>
+<link action="pause">
+	<!-- demais tags opcionais -->
+</link>
+</pre>
 
+E para forçar a execução do vídeo, fazemos:
+
+<pre>
+<link action="play">
+	<!-- demais tags opcionais -->
+</link>
+</pre>
+
+h3. Forçando o vídeo a realizar ações automaticamente
+
+Podemos determinar ações a serem realizadas, automaticamente, em um dado momento da execução do vídeo.
+
+No momento, a única ação automática suportada é a de pausar a execução do vídeo. Por exemplo:
+
+<pre>
+<actions>
+	<pause at="00:00:10.05" />
+	<pause at="00:00:12" />
+</actions>
+</pre>
 
 
 
