@@ -167,6 +167,7 @@ Para abrir uma página, fazemos:
 </pre>
 
 A tag <tt>&lt;url&gt;</tt> aceita a propriedade <tt>target</tt>, que indica onde a página deve ser aberta:
+
 |<tt>_self</tt>|A referência será aberta na mesma janela. Esse é o valor padrão|
 |<tt>_blank</tt>|A referência será aberta em uma nova janela|
 
