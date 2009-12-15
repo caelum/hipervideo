@@ -151,7 +151,7 @@ Para abrir uma página, fazemos:
 <pre>
 <element>
 	<textContent>
-		<![CDATA[Texto a ser exibido. Podemos formatá-lo com <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>.]]>
+		<![CDATA[Texto a ser exibido.]]>
 	</textContent>
 
 	<link>
@@ -165,6 +165,11 @@ Para abrir uma página, fazemos:
 </element>
 </hipervideo>
 </pre>
+
+A tag <tt>&lt;url&gt;</tt> aceita a propriedade <tt>target</tt>, que indica onde a página deve ser aberta:
+
+|<tt>_self</tt>|A referência será aberta na mesma janela. Esse é o valor padrão|
+|<tt>_blank</tt>|A referência será aberta em uma nova janela|
 
 Alterando a tag <tt>&lt;link&gt;</tt>, é possível forçar a ida a outra posição do vídeo:
 
@@ -208,322 +213,86 @@ E para forçar a execução do vídeo, fazemos:
 </link>
 </pre>
 
-h3. Forçando o vídeo a realizar ações automaticamente
+h3. Realizando ações automaticamente
 
 Podemos determinar ações a serem realizadas, automaticamente, em um dado momento da execução do vídeo.
 
 No momento, a única ação automática suportada é a de pausar a execução do vídeo. Por exemplo:
 
 <pre>
-<actions>
-	<pause at="00:00:10.05" />
-	<pause at="00:00:12" />
-</actions>
+<hipervideo>
+	<video file="video.flv"/>
+	
+	<actions>
+		<pause at="00:00:10.05" />
+		<pause at="00:00:12" />
+	</actions>
+	
+</hipervideo>
 </pre>
 
+h3. Começando um outro vídeo após o término do atual
 
-
-
-
-
-h3. Pause
-
-Indica uma interrupção na execução do vídeo. Por exemplo:
+Podemos determinar que, após o fim da execução do vídeo atual, um outro hipervídeo seja carregado e executado automaticamente.
 
 <pre>
-<pause at="00:01:05" />
+<hipervideo>
+	<video file="video.flv"/>
+	
+	<next file="outro.video.xml"/>
+</hipervideo>
 </pre>
 
-Especifica uma pausa no instante 1 minuto e 5 segundos do vídeo.
+h3. Chamando função Javascript
 
-Opcionalmente, podemos usar um valor não inteiro para os segundos (por exemplo, 01:12:20.5).
-
-h3. Link
-
-Indica uma ação a ser executada.
+A tag <tt>&lt;link&gt;</tt>, visto anteriormente, tem ainda outra propriedade opcional chamada <tt>activity_id</tt>. Essa propriedade indica que será executado a função Javascript com a assinatura <tt>function log_activity(activity_id, current_time)</tt>.
 
 <pre>
-<link>
-	<tooltip>Tooltip do link</tooltip>
-	<url>http://url.para.um.site</url>
-	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
+<link activity_id="parametro_para_a_funcao">
+	<!-- demais tags opcionais -->
 </link>
 </pre>
 
-A tag <tt>url</tt> indica a abertura de uma referência externa.
-Essa tag aceita o modo de abertura da referência externa através da tag target. Os valores aceitos são:
-* _blank, a referência será aberta em uma nova janela
-* _self, a referência será aberta na mesma janela. Esse é o valor padrão.
-
-Um exemplo de uso ficaria assim:
-
-<pre>
-<link>
-	<tooltip>Tooltip do link</tooltip>
-	<url target="_blank">http://url.para.um.site</url>
-	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
-</link>
-</pre>
-
-<pre>
-<link activity_id="parametro">
-	<tooltip>Tooltip do link</tooltip>
-	<time>01:01:05</time>
-	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
-</link>
-</pre>
-
-A tag <tt>time</tt>, nesse caso, indica um salto para o momento 1 hora, 1 minuto e 5 segundos do vídeo. 
-
-O parâmetro opcional activity_id, se presente, será passado como argumento para a função logActivity (caso o link seja clicado durante a execução).
-
-Opcionalmente, a função logActivity pode devolver uma resposta. Essa resposta deve ser um Hash contendo dois pares, por exemplo:
+Esta função, opcionalmente, pode retornar um elemento, de qualquer tipo, para exibição no vídeo. Este deve ser um dicionário chave/valor (hash), no seguinte formato:
 
 <pre>
 {
 	id: 'Element', 
 	value: {
-		begin: 00:00:01, end: 00:00:05, 
-		content: "Nota: A+", isText: true,
-		textColor: '0xFF0000', backgroundColor: '',
-		hasBackgroundColor: false, url: "",
-		time: "", activityId: "", action: "",
-		topLeft_x:20, topLeft_y:50,
-		width:100, height:100, active:false}
+		begin:time, duration: "00:00:05", 
+		content: 'Voltar!', type: 'TEXT',
+		color: '0xFF0000', backgroundColor: '',
+		x:20, y:50,
+		width:100, height:100, active:false,
+		link: {
+			url: '', time: time, 
+			activityId: '', action: ''
+		}
+	}
 }
-
 </pre>
 
-Aqui, temos:
-* id, determinando o tipo da resposta
-* value, determinando a resposta em si
+A chave <tt>link</tt> é opcional, assim como qualquer uma de suas chaves internas.
 
-Se <tt>id='Element'</tt>, <tt>value</tt> é entendido como um novo <tt>Element</tt> para ser exibido no vídeo, e deve ser descrito como visto no exemplo acima.
+h3. Vídeos relacionados
 
-Podemos também passar um parâmetro chamado action com o valor de play, para que o link funcione como um botão de play, ou seja, se clicado, o vídeo continuará executando normalmente, como se fosse o botão de play do vídeo.
+Podemos especificar uma coleção de vídeos relacionados através da tag <tt>&lt;playlist&gt;</tt>.
 
 <pre>
-<link action="play">
-	<tooltip>Tooltip do link</tooltip>
-	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
-</link>
-</pre>
-
-Podemos também passar qual será o vídeo a ser executado quando o elemento for clicado.
-O vídeo DEVE SER OBRIGATORIAMENTE um xml, que indicará qual será o vídeo a ser exibido e todas os itens dele.
-
-<pre>
-<link>
-	<tooltip>Tooltip do link</tooltip>
-	<video>outro.video.xml</video>
-	<thumbnail>thumbnail.representando.link.jpg</thumbnail>
-</link>
-</pre>
-
-h3. Time
-
-Indica um intervalo de tempo.
-
-<pre>
-<time start="00:02:00" duration="00:05:00"/>
-</pre>
-
-Especifica um intervalo de tempo do segundo ao quinto minuto do vídeo.
-
-h3. Geometry
-
-Indica uma posição na janela de exibição do vídeo.
-
-<pre>
-<geometry x="10" y="20" height="100" width="200"/>
-</pre>
-
-Os valores de x="10" e y="20" indicam, respectivamente, as coordenadas horizontal e vertical do canto superior esquerdo do item. 
-
-Os valores height="100" e width="200" indicam, respectivamente, a altura e a largura do item.
-
-Todos os valores são entendidos em pixels.
-
-h3. Text Content
-
-Indica um conteúdo textual.
-
-<pre>
-<textContent>
-	<![CDATA[Um texto podendo usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
-</textContent>
-</pre>
-
-Apenas negrito, itálico e sublinhado são suportados como formatação.
-
-h3. Image Content
-
-Indica uma imagem como conteúdo.
-
-<pre>
-<imageContent>imagem.gif</imageContent>
-</pre>
-
-h3. Underline
-
-Indica uma área que ficará sublinhada, simulando um link. 
-
-<pre>
-<underline color="0x0000FF"/>
-</pre>
-
-É possível definir a cor do sublinhado através do atributo color, na tag underline.
-
-h3. Frame
-
-Indica uma área delimitada por uma borda. 
-
-<pre>
-<frame color="0x0000FF"/>
-</pre>
-
-É possível definir a cor da borda através do atributo color, na tag frame.
-
-É possível também definir a espessura da borda através do atributo thickness. Essa espessura é medida em pixels.
-
-<pre>
-<frame color="0x0000FF" thickness="2"/>
-</pre>
-
-h3. Element
-
-Indica um elemento de hipervideo. Esse elemento pode ser de texto, por exemplo:
-
-<pre>
-<element>
-	<textContent>
-	<link>
-	<time>
-	<position>
-</element>
-</pre>
-
-Ou de imagem:
-
-<pre>
-<element>
-	<imageContent>
-	<link>
-	<time>
-	<position>
-</element>
-</pre>
-
-h3. Playlist
-
-Indica uma coleção de vídeos relacionados.
-
-<pre>
-<playlist>
-	<link>
-	<link>
-	...
-	<link>
-</playlist>
-</pre>
-
-h3. Actions
-
-Indica as ações a serem realizadas durante a execução do vídeo
-
-<pre>
-<actions>
-	<pause>
-	<pause>
-	...
-	<pause>
-</actions>
-</pre>
-
-h3. Elements
-
-Indica uma coleção de elementos a serem exibidos durante a execução do vídeo.
-
-<pre>
-<elements>
-	<element>
-	<element>
-	...
-	<element>
-</elements>
-</pre>
-
-h3. Video
-
-Indica a raiz do arquivo xml.
-
-<pre>
-<video>
-	<playlist>
-	<actions>
-	<elements>
-</video>
-</pre>
-
-h2. Exemplo do XML
-
-Pequeno exemplo do arquivo XML.
-
-<pre>
-<video>
-	<!-- vídeos relacionados -->
+<hipervideo>
 	<playlist>
 		<link>
-			<tooltip>Tooltip para barra de links relacionados</tooltip>
-			<url>http://url.para.algo.com.br</url>
-			<thumbnail>thumbnail_do_link.jpg</thumbnail>
-		</link>	
+			<tooltip>vídeo relacionado 1</tooltip>
+			<url>http://url.do.video1.com.br</url>
+			<thumbnail>imagem.do.jpg</thumbnail>
+		</link>
 		<link>
-			<tooltip>Segundo tooltip</tooltip>
-			<url>http://outra.url.para.algo.com.br</url>
-			<thumbnail>outro_thumbnail_do_link.jpg</thumbnail>
+			<tooltip>vídeo relacionado 2</tooltip>
+			<url>http://outra.url.com.br</url>
+			<thumbnail>thumbs/video3.jpg</thumbnail>
 		</link>
 	</playlist>
-
-	<!-- ações realizadas automaticamente pelo player -->
-	<actions>
-		<!-- pausar automaticamente a execução do vídeo nos instantes 00:01:03 e 00:02:15 -->
-		<pause at="00:01:03" />
-		<pause at="00:02:15" />
-	</actions>
-	
-	<!-- elementos exibidos durante a exibição do vídeo -->
-	<elements>
-		<!-- elementos de texto -->
-		<element>
-			<textContent>
-				<![CDATA[Um texto podendo usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
-			</textContent>
-			<link>
-				<tooltip>Tooltip para barra de links do vídeo</tooltip>
-				<url>http://url_para_algo.com.br</url>
-				<thumbnail>thumbnail_do_link.jpg</thumbnail>
-			</link>
-			<!-- os valores de início e fim da exibição do elemento, em formato hh:mm:ss -->
-			<time start="00:04:10" duration="00:03:00"/>
-			<!-- valores para x, y, height e width em pixels -->	
-			<position x="10" y="30" height="200" width="300"/>
-		</element>
-		<!-- elementos de imagem -->
-		<element>
-			<imageContent>imagem.gif</imageContent>
-			<!-- quando clicado irá executar a função logActivity com o argumento parametro_do_log -->
-			<link activity_id="parametro_do_log">
-				<tooltip>Tooltip para barra de links do vídeo</tooltip>
-				<!-- quando clicado irá para a posição 01:12:44 do vídeo -->
-				<time>01:12:44</time>
-				<thumbnail>thumbnail_do_link.jpg</thumbnail>
-			</link>
-			<time start="00:25:32" duration="00:10:00"/>
-			<position x="5" y="130" height="30" width="40"/>
-		</element>
-	</elements>
-</video>
+</hipervideo>
 </pre>
 
-Outro exemplo concreto <a href="../html-template/support/links.xml">também está disponível</a>.
+Outro exemplo concreto <a href="../html-template/support/bunny.xml">também está disponível</a>.
