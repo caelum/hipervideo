@@ -1,0 +1,80 @@
+<param name="flashvars" value="file=../video.flv&height=260&width=400&plugins=plugins/flashvars/flashvars.swf"/>
+
+<!-- saved from url=(0014)about:internet -->
+<html>
+	<head>
+		<title>Projeto Hipervideo - Exemplo</title>	
+	</head>
+
+	<body>
+	
+		<!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE -->
+		
+		<div id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</div>
+		
+		<script type="text/javascript" src="support/swfobject.js"></script>
+		
+		<script type="text/javascript">
+		var s1 = new SWFObject("support/player-viral.swf","mpl","543","342","7","#8a8a8a");
+		s1.addParam('allowscriptaccess','always');
+		s1.addParam('allowfullscreen','true');
+		s1.addParam('allownetworking','all');
+		s1.addVariable('width','400');
+		s1.addVariable('height','260');
+//		s1.addVariable('file','bunny.flv');
+		s1.addVariable('image','support/preview.jpg');
+		s1.addVariable('recommendations','http://test.video.lan/related/IouwhNQw/?xml=1');
+		s1.addVariable('repeat','list');
+		s1.addVariable('shuffle','false');
+		s1.addVariable('linkfromdisplay','true');
+		s1.addVariable('linktarget','_self');
+		s1.addVariable('javascriptid','delfivideo');
+		s1.addVariable('enablejs','true');
+		s1.addVariable('shownavigation','true');
+		s1.addVariable('icons','false');
+		s1.addVariable("autostart","false");
+		s1.addVariable("stretching","uniform");
+		
+		s1.addVariable('plugins', 'plugins/hipervideo/hipervideo.swf, plugins/hipervideo/statemanager.swf');
+		
+		s1.addVariable('hipervideo.file', 'support/aula19.xml');
+		s1.addVariable('hipervideo.barposition', 'bottom'); // center, bottom, top
+		s1.addVariable('hipervideo.barskin', 'skins/grayskin.swf'); //link to the skin			
+		
+		s1.write("container");
+		</script>
+
+		<!-- END OF THE PLAYER EMBEDDING -->
+	
+		<script type="text/javascript">
+			function logActivity(id, time) {
+				var cor;
+				var conteudo;
+				
+				if (id == "#win") {
+					cor = "0x00FF00";
+					conteudo = "Acertou";
+				} else {
+					cor = "0xFF0000";
+					conteudo = "Errou";
+				}
+				
+				return({
+					id: 'Element', 
+					value: {
+						begin:time, duration: "00:00:02", 
+						content: conteudo, type: 'TEXT',
+						color: cor, backgroundColor: '',
+						x:175, y:120,
+						width:100, height:30, active:false,
+						link: {}
+					}
+				});
+			}
+		</script>
+	
+	</body>
+</html>
+
+
+

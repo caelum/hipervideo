@@ -27,7 +27,7 @@ package br.com.caelum.hipervideo.plugin
 			var format:TextFormat = new TextFormat();
 			format.color = 0xFFFFFF;
 			format.size = 14;
-			format.align = "center";
+			format.align = "left";
 			format.font = "arial";
 			format.leading = 4;
 			format.display = "Hand";

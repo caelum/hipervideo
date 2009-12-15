@@ -1,0 +1,267 @@
+<hipervideo>
+
+	<video file="bunny.flv" /> 
+	
+	<actions>
+		<pause at="00:00:01.39"/>
+		<pause at="00:00:03.39"/>
+		<pause at="00:00:05.39"/>
+		<pause at="00:00:07.39"/>
+		<pause at="00:00:09.39"/>
+	</actions>
+
+	<elements>
+	
+		<!--  Questao 1 -->
+		<element>
+			<textContent backgroundColor="0x000000">
+				<![CDATA[Pergunta 1: O que acontece com o seguinte código?
+public class Teste{
+	public static void main(String[] args) {
+		byte b1 = 5;
+		byte b2 = 3;
+		byte b3 = b1 + b2;
+	}
+}]]>
+			</textContent>
+			
+			<time start="00:00:01" duration="00:00:00.5"/>
+			<geometry x="0" y="0" height="150" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[a) Não compila]]>
+			</textContent>
+			
+			<link activity_id="#win" action="play">
+			</link>
+			
+			<time start="00:00:01" duration="00:00:00.5"/>
+			<geometry x="0" y="155" height="30" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[b) Compila e roda normalmente]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:01" duration="00:00:00.5"/>
+			<geometry x="0" y="190" height="30" width="400"/>
+		</element>
+		
+		<!--  Questao 2 -->
+		<element>
+			<textContent backgroundColor="0x000000">
+				<![CDATA[Pergunta 2: O que acontece com o seguinte código?
+public class Teste{
+	int teste = 1;
+	public static void main(String[] args) {
+		System.out.println(teste);
+	}
+}]]>
+			</textContent>
+			
+			<time start="00:00:03" duration="00:00:00.5"/>
+			<geometry x="0" y="0" height="150" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[a) Não compila]]>
+			</textContent>
+			
+			<link activity_id="#win" action="play">
+			</link>
+			
+			<time start="00:00:03" duration="00:00:00.5"/>
+			<geometry x="0" y="155" height="30" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[b) Compila e roda normalmente]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:03" duration="00:00:00.5"/>
+			<geometry x="0" y="190" height="30" width="400"/>
+		</element>
+		
+		<!--  Questao 3 -->
+		<element>
+			<textContent backgroundColor="0x000000">
+				<![CDATA[Pergunta 3: O que acontece com o seguinte código?
+class Teste{
+	public static void main(String[] args) {
+		switch(1) {
+			default: System.out.print("default");
+			case 1: System.out.print("1");
+			case 2: System.out.print("2");
+		}	}	}]]>
+			</textContent>
+			
+			<time start="00:00:05" duration="00:00:00.5"/>
+			<geometry x="0" y="0" height="150" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[a) Imprime 1]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:05" duration="00:00:00.5"/>
+			<geometry x="0" y="155" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[b) Imprime 12]]>
+			</textContent>
+			
+			<link activity_id="#win" action="play">
+			</link>
+			
+			<time start="00:00:05" duration="00:00:00.5"/>
+			<geometry x="0" y="180" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[c) Imprime default12]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:05" duration="00:00:00.5"/>
+			<geometry x="0" y="205" height="20" width="400"/>
+		</element>
+		
+		<!--  Questao 4 -->
+		<element>
+			<textContent backgroundColor="0x000000">
+				<![CDATA[Pergunta 4: O que acontece com o seguinte código?
+class Teste{
+	public static void main(String[] args) {
+		Integer i = 10;
+		Integer j = 10;
+		System.out.println(i == j);
+}	}]]>
+			</textContent>
+			
+			<time start="00:00:07" duration="00:00:00.5"/>
+			<geometry x="0" y="0" height="150" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[a) Não compila]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:07" duration="00:00:00.5"/>
+			<geometry x="0" y="155" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[b) Compila, roda e imprime false]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:07" duration="00:00:00.5"/>
+			<geometry x="0" y="180" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[c) Compila, roda e imprime true]]>
+			</textContent>
+			
+			<link activity_id="#win" action="play">
+			</link>
+			
+			<time start="00:00:07" duration="00:00:00.5"/>
+			<geometry x="0" y="205" height="20" width="400"/>
+		</element>
+		
+		<!--  Questao 5 -->
+		<element>
+			<textContent backgroundColor="0x000000">
+				<![CDATA[Pergunta 5: O que acontece com o seguinte código?
+class Teste{
+	public static void main(String[] args) {
+		String a = "teste";
+		a.replaceAll("t", "1");
+		System.out.println(a);
+}	}]]>
+			</textContent>
+			
+			<time start="00:00:09" duration="00:00:00.5"/>
+			<geometry x="0" y="0" height="120" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[a) Não compila]]>
+			</textContent>
+			
+			<link activity_id="#fail" action="play">
+			</link>
+			
+			<time start="00:00:09" duration="00:00:00.5"/>
+			<geometry x="0" y="125" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[b) Compila, roda e imprime teste]]>
+			</textContent>
+			
+			<link activity_id="#win" action="play">
+			</link>
+			
+			<time start="00:00:09" duration="00:00:00.5"/>
+			<geometry x="0" y="150" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[c) Compila, roda e imprime 1este]]>
+			</textContent>
+			
+			<link activity_id="#false" action="play">
+			</link>
+			
+			<time start="00:00:09" duration="00:00:00.5"/>
+			<geometry x="0" y="175" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent backgroundColor="0x0000FF">
+				<![CDATA[d) Compila, roda e imprime 1es1e]]>
+			</textContent>
+			
+			<link activity_id="#false" action="play">
+			</link>
+			
+			<time start="00:00:09" duration="00:00:00.5"/>
+			<geometry x="0" y="200" height="20" width="400"/>
+		</element>
+		
+	</elements>
+
+</hipervideo>
