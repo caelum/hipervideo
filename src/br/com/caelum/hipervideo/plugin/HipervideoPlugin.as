@@ -106,8 +106,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			Logger.log('Not a valid file.','hipervideo');
 		}
 		
-		trace("view.config['next'] = " + view.config['next']);
-		
 		if (view.config['next'] != null && view.config['next'] != "") {
 			view.sendEvent(ViewEvent.NEXT);
 		}
@@ -215,28 +213,32 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	}
 	
 	public function receive_notification_from_activity_log(response:Object):void {
-		if (response != null && response['id'] == "Element") {
-			var data:Object = response['value'];
-			var newElement:Element = new Element(
-				data['type'], 
-				data['content'],
-				new Link(
-					data['link']['activityId'], 
-					data['link']['tooltip'], 
-					data['link']['thumbnail'], 
-					data['link']['url'], 
-					data['link']['target'], 
-					data['link']['time'], 
-					data['link']['video'], 
-					data['link']['action']),
-				uint(data['color']), 
-				data['backgroundColor'], 
-				Strings.seconds(data['begin']),
-				Strings.seconds(data['duration']),
-				data['x'], data['y'], data['width'], data['height'], 1);
-			newElement.active = data['active'];
-			
-			drawElement(newElement);
+		if (response != null) {
+			for each (var elem:Object in response) {
+				if (elem['id'] == "Element") { 
+					var data:Object = elem['value'];
+					var newElement:Element = new Element(
+						data['type'], 
+						data['content'],
+						new Link(
+							data['link']['activityId'], 
+							data['link']['tooltip'], 
+							data['link']['thumbnail'], 
+							data['link']['url'], 
+							data['link']['target'], 
+							data['link']['time'], 
+							data['link']['video'], 
+							data['link']['action']),
+						uint(data['color']), 
+						data['backgroundColor'], 
+						Strings.seconds(data['begin']),
+						Strings.seconds(data['duration']),
+						data['x'], data['y'], data['width'], data['height'], 1);
+					newElement.active = data['active'];
+					
+					drawElement(newElement);
+				}
+			}
 		}
 	}
 	

@@ -47,6 +47,8 @@
 		<!-- END OF THE PLAYER EMBEDDING -->
 	
 		<script type="text/javascript">
+			nota = 0;
+			
 			function logActivity(id, time) {
 				var cor;
 				var conteudo;
@@ -54,20 +56,38 @@
 				if (id == "#win") {
 					cor = "0x00FF00";
 					conteudo = "Acertou";
+					nota++;
 				} else {
 					cor = "0xFF0000";
 					conteudo = "Errou";
 				}
+
+				if (time > 16) {
+					alert(nota);
+					conteudo = conteudo + " nota = " + nota;
+				}
 				
 				return({
-					id: 'Element', 
-					value: {
-						begin:time, duration: "00:00:02", 
-						content: conteudo, type: 'TEXT',
-						color: cor, backgroundColor: '',
-						x:175, y:120,
-						width:100, height:30, active:false,
-						link: {}
+					1:{
+						id: 'Element', 
+						value: {
+							begin:time, duration: "00:00:02", 
+							content: conteudo, type: 'TEXT',
+							color: cor, backgroundColor: '',
+							x:175, y:120,
+							width:130, height:30, active:false,
+							link: {}
+						}}, 
+					2:{
+						id: 'Element', 
+						value: {
+							begin:time, duration: "00:00:02", 
+							content: "mimimimi", type: 'TEXT',
+							color: cor, backgroundColor: '',
+							x:175, y:160,
+							width:130, height:30, active:false,
+							link: {}
+						}
 					}
 				});
 			}
