@@ -12,8 +12,10 @@ package br.com.caelum.hipervideo.model
 	public class Element {
 		public var type:String;
 		public var content:String;
+		
 		public var color:uint;
 		public var backgroundColor:uint;
+		public var alpha:Number;
 		
 		public var start:Number;
 		public var duration:Number;
@@ -33,13 +35,14 @@ package br.com.caelum.hipervideo.model
 		
 		public function Element(type:String, content:String,
 							link:Link, 
-							color:uint, backgroundColor:String,
+							color:uint, backgroundColor:String, alpha:Number,
 							start:Number, duration:Number,
 							x:Number, y:Number,
 							width:Number, height:Number, thickness:Number) {
 			this.type = type;
 			this.content = content;
 			this.color =  color;
+			this.alpha = alpha;
 			
 			if (backgroundColor != "") {
 				this.hasBackgroundColor = true;

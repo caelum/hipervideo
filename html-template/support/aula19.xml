@@ -14,7 +14,7 @@
 	
 		<!--  Questao 1 -->
 		<element>
-			<textContent backgroundColor="0x000000">
+			<textContent backgroundColor="0x000000" alpha="0.85">
 				<![CDATA[Pergunta 1: O que acontece com o seguinte código?
 public class Teste{
 	public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[a) Não compila]]>
 			</textContent>
 			
@@ -42,7 +42,7 @@ public class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[b) Compila e roda normalmente]]>
 			</textContent>
 			
@@ -64,7 +64,7 @@ public class Teste{
 		
 		<!--  Questao 2 -->
 		<element>
-			<textContent backgroundColor="0x000000">
+			<textContent backgroundColor="0x000000" alpha="0.85">
 				<![CDATA[Pergunta 2: O que acontece com o seguinte código?
 public class Teste{
 	int teste = 1;
@@ -79,7 +79,7 @@ public class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[a) Não compila]]>
 			</textContent>
 			
@@ -91,7 +91,7 @@ public class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[b) Compila e roda normalmente]]>
 			</textContent>
 			
@@ -113,7 +113,7 @@ public class Teste{
 		
 		<!--  Questao 3 -->
 		<element>
-			<textContent backgroundColor="0x000000">
+			<textContent backgroundColor="0x000000" alpha="0.85">
 				<![CDATA[Pergunta 3: O que acontece com o seguinte código?
 class Teste{
 	public static void main(String[] args) {
@@ -129,7 +129,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[a) Imprime 1]]>
 			</textContent>
 			
@@ -141,7 +141,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[b) Imprime 12]]>
 			</textContent>
 			
@@ -153,7 +153,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[c) Imprime default12]]>
 			</textContent>
 			
@@ -175,7 +175,7 @@ class Teste{
 		
 		<!--  Questao 4 -->
 		<element>
-			<textContent backgroundColor="0x000000">
+			<textContent backgroundColor="0x000000" alpha="0.85">
 				<![CDATA[Pergunta 4: O que acontece com o seguinte código?
 class Teste{
 	public static void main(String[] args) {
@@ -190,7 +190,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[a) Não compila]]>
 			</textContent>
 			
@@ -202,7 +202,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[b) Compila, roda e imprime false]]>
 			</textContent>
 			
@@ -214,7 +214,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[c) Compila, roda e imprime true]]>
 			</textContent>
 			
@@ -236,7 +236,7 @@ class Teste{
 		
 		<!--  Questao 5 -->
 		<element>
-			<textContent backgroundColor="0x000000">
+			<textContent backgroundColor="0x000000" alpha="0.85">
 				<![CDATA[Pergunta 5: O que acontece com o seguinte código?
 class Teste{
 	public static void main(String[] args) {
@@ -251,7 +251,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[a) Não compila]]>
 			</textContent>
 			
@@ -263,7 +263,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[b) Compila, roda e imprime teste]]>
 			</textContent>
 			
@@ -275,7 +275,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[c) Compila, roda e imprime 1este]]>
 			</textContent>
 			
@@ -287,7 +287,7 @@ class Teste{
 		</element>
 		
 		<element>
-			<textContent backgroundColor="0x0000FF">
+			<textContent backgroundColor="0x0000FF" alpha="0.85">
 				<![CDATA[d) Compila, roda e imprime 1es1e]]>
 			</textContent>
 			

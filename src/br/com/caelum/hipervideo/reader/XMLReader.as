@@ -27,11 +27,13 @@ package br.com.caelum.hipervideo.reader
 				var type:String;
 				var color:uint;
 				var thickness:Number = 1;
+				var alpha:Number = 1;
 				
 				if ("textContent" in element) {
 					content = element.textContent;
 					type = ElementType.TEXT;
 					color = element.textContent.@color.toString().length == 0 ? 0xFFFFFF : uint(element.textContent.@color);
+					alpha = element.textContent.@alpha.toString().length == 0 ? 1 : Number(element.textContent.@alpha);
 				} else if ("imageContent" in element) {
 					content = element.imageContent;
 					type = ElementType.IMAGE;
@@ -58,7 +60,7 @@ package br.com.caelum.hipervideo.reader
 								Strings.seconds(element.link.time), 
 								element.link.video,
 								ActionType.fromValue(element.link.@action)),
-							color, element.textContent.@backgroundColor,
+							color, element.textContent.@backgroundColor, alpha,
 							Strings.seconds(element.time.@start), Strings.seconds(element.time.@duration),
 							element.geometry.@x, element.geometry.@y,
 							element.geometry.@width, element.geometry.@height, thickness)

@@ -84,7 +84,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		new TextElement(
 			new Element(ElementType.TEXT, "",
 				new Link(null, null, null, null, null, 0, null, null),
-				0, "", -Infinity, Infinity, 0, 0, view.config['width'], view.config['height'],0),
+				0, "", 1, -Infinity, Infinity, 0, 0, view.config['width'], view.config['height'],0),
 			this, view);
 	}
 
@@ -241,7 +241,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 							data['link']['video'], 
 							data['link']['action']),
 						uint(data['color']), 
-						data['backgroundColor'], 
+						data['backgroundColor'],
+						data['alpha'] == undefined ? 1 : data['alpha'], 
 						Strings.seconds(data['begin']),
 						Strings.seconds(data['duration']),
 						data['x'], data['y'], data['width'], data['height'], 1);

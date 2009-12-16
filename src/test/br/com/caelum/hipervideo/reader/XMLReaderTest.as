@@ -49,7 +49,7 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 					<element>
-						<textContent color="0xFF0000" backgroundColor="0x0000FF">
+						<textContent color="0xFF0000" backgroundColor="0x0000FF" alpha="0.7">
 							Teste de cores
 						</textContent>
 						
@@ -118,6 +118,11 @@ package test.br.com.caelum.hipervideo.reader
 		private var elementArray:Array = hipervideo.elements;
 		private var playlistArray:Array = hipervideo.playlist;
 		private var actionArray:Array = hipervideo.actions;
+		
+		public function testReadAlphaValue():void {
+			assertEquals(1, elementArray[0].alpha);
+			assertEquals(0.7, elementArray[1].alpha);
+		}
 		
 		public function testReadNextXmlFile():void {
 			assertEquals("support/next.xml", hipervideo.next);

@@ -46,6 +46,7 @@ package br.com.caelum.hipervideo.plugin
 			field.textColor = element.color;
 			field.background = element.hasBackgroundColor;
 			field.backgroundColor = element.backgroundColor;
+			field.alpha = element.alpha;
 			field.filters = new Array(new DropShadowFilter(0,45,0,1,2,2,10,3));
 			
 			field.addEventListener(MouseEvent.CLICK, clickHandler);
