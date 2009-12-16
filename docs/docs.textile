@@ -90,6 +90,10 @@ Opcionalmente, podemos definir a cor do texto e do fundo deste elemento. Para is
 
 <tt>&lt;textContent color="0xFF0000" backgroundColor="0xFFFFFF" /&gt;</tt>
 
+Também podemos definir um fator de transparência para o elemento. Este deve estar compreendido entre 0 (totalmente transparente) e 1 (totalmente opaco).
+
+<tt>&lt;textContent color="0xFF0000" backgroundColor="0xFFFFFF" alpha"0.7"/&gt;</tt>
+
 Podemos especificar quantos elementos de texto quisermos dentro da tag <tt>&lt;elements&gt;</tt>.
 
 h3. Exibindo uma imagem sobre o vídeo
