@@ -4,10 +4,10 @@
 	
 	<actions>
 		<pause at="00:00:01.39"/>
-		<pause at="00:00:05.39"/>
-		<pause at="00:00:09.39"/>
+		<pause at="00:00:07.39"/>
 		<pause at="00:00:13.39"/>
-		<pause at="00:00:17.39"/>
+		<pause at="00:00:19.39"/>
+		<pause at="00:00:25.39"/>
 	</actions>
 
 	<elements>
@@ -53,6 +53,15 @@ public class Teste{
 			<geometry x="0" y="190" height="30" width="400"/>
 		</element>
 		
+		<element>
+			<textContent color="0x0000AA" backgroundColor="0x444444">
+				<![CDATA[Qualquer operação sempre resulta em pelo menos um int]]>
+			</textContent>
+			
+			<time start="00:00:01.6" duration="00:00:05"/>
+			<geometry x="0" y="155" height="70" width="400"/>
+		</element>
+		
 		<!--  Questao 2 -->
 		<element>
 			<textContent backgroundColor="0x000000">
@@ -65,7 +74,7 @@ public class Teste{
 }]]>
 			</textContent>
 			
-			<time start="00:00:05" duration="00:00:00.5"/>
+			<time start="00:00:07" duration="00:00:00.5"/>
 			<geometry x="0" y="0" height="150" width="400"/>
 		</element>
 		
@@ -77,7 +86,7 @@ public class Teste{
 			<link activity_id="#win" action="play">
 			</link>
 			
-			<time start="00:00:05" duration="00:00:00.5"/>
+			<time start="00:00:07" duration="00:00:00.5"/>
 			<geometry x="0" y="155" height="30" width="400"/>
 		</element>
 		
@@ -89,8 +98,17 @@ public class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:05" duration="00:00:00.5"/>
+			<time start="00:00:07" duration="00:00:00.5"/>
 			<geometry x="0" y="190" height="30" width="400"/>
+		</element>
+		
+		<element>
+			<textContent color="0x0000AA" backgroundColor="0x444444">
+				<![CDATA[Métodos só acessam atributos estáticos]]>
+			</textContent>
+			
+			<time start="00:00:07.6" duration="00:00:05"/>
+			<geometry x="0" y="155" height="70" width="400"/>
 		</element>
 		
 		<!--  Questao 3 -->
@@ -106,7 +124,7 @@ class Teste{
 		}	}	}]]>
 			</textContent>
 			
-			<time start="00:00:09" duration="00:00:00.5"/>
+			<time start="00:00:13" duration="00:00:00.5"/>
 			<geometry x="0" y="0" height="150" width="400"/>
 		</element>
 		
@@ -118,7 +136,7 @@ class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:09" duration="00:00:00.5"/>
+			<time start="00:00:13" duration="00:00:00.5"/>
 			<geometry x="0" y="155" height="20" width="400"/>
 		</element>
 		
@@ -130,7 +148,7 @@ class Teste{
 			<link activity_id="#win" action="play">
 			</link>
 			
-			<time start="00:00:09" duration="00:00:00.5"/>
+			<time start="00:00:13" duration="00:00:00.5"/>
 			<geometry x="0" y="180" height="20" width="400"/>
 		</element>
 		
@@ -142,8 +160,17 @@ class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:09" duration="00:00:00.5"/>
+			<time start="00:00:13" duration="00:00:00.5"/>
 			<geometry x="0" y="205" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent color="0x0000AA" backgroundColor="0x444444">
+				<![CDATA[Após uma igualdade do case, o switch segue até um comando de break]]>
+			</textContent>
+			
+			<time start="00:00:13.6" duration="00:00:05"/>
+			<geometry x="0" y="155" height="70" width="400"/>
 		</element>
 		
 		<!--  Questao 4 -->
@@ -158,7 +185,7 @@ class Teste{
 }	}]]>
 			</textContent>
 			
-			<time start="00:00:13" duration="00:00:00.5"/>
+			<time start="00:00:19" duration="00:00:00.5"/>
 			<geometry x="0" y="0" height="150" width="400"/>
 		</element>
 		
@@ -170,7 +197,7 @@ class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:13" duration="00:00:00.5"/>
+			<time start="00:00:19" duration="00:00:00.5"/>
 			<geometry x="0" y="155" height="20" width="400"/>
 		</element>
 		
@@ -182,7 +209,7 @@ class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:13" duration="00:00:00.5"/>
+			<time start="00:00:19" duration="00:00:00.5"/>
 			<geometry x="0" y="180" height="20" width="400"/>
 		</element>
 		
@@ -194,8 +221,17 @@ class Teste{
 			<link activity_id="#win" action="play">
 			</link>
 			
-			<time start="00:00:13" duration="00:00:00.5"/>
+			<time start="00:00:19" duration="00:00:00.5"/>
 			<geometry x="0" y="205" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent color="0x0000AA" backgroundColor="0x444444">
+				<![CDATA[A JVM faz um cache entre os valores de -128 a 127 para o autoboxing]]>
+			</textContent>
+			
+			<time start="00:00:19.6" duration="00:00:05"/>
+			<geometry x="0" y="155" height="70" width="400"/>
 		</element>
 		
 		<!--  Questao 5 -->
@@ -210,7 +246,7 @@ class Teste{
 }	}]]>
 			</textContent>
 			
-			<time start="00:00:17" duration="00:00:00.5"/>
+			<time start="00:00:25" duration="00:00:00.5"/>
 			<geometry x="0" y="0" height="120" width="400"/>
 		</element>
 		
@@ -222,7 +258,7 @@ class Teste{
 			<link activity_id="#fail" action="play">
 			</link>
 			
-			<time start="00:00:17" duration="00:00:00.5"/>
+			<time start="00:00:25" duration="00:00:00.5"/>
 			<geometry x="0" y="125" height="20" width="400"/>
 		</element>
 		
@@ -234,7 +270,7 @@ class Teste{
 			<link activity_id="#win" action="play">
 			</link>
 			
-			<time start="00:00:17" duration="00:00:00.5"/>
+			<time start="00:00:25" duration="00:00:00.5"/>
 			<geometry x="0" y="150" height="20" width="400"/>
 		</element>
 		
@@ -246,7 +282,7 @@ class Teste{
 			<link activity_id="#false" action="play">
 			</link>
 			
-			<time start="00:00:17" duration="00:00:00.5"/>
+			<time start="00:00:25" duration="00:00:00.5"/>
 			<geometry x="0" y="175" height="20" width="400"/>
 		</element>
 		
@@ -258,8 +294,17 @@ class Teste{
 			<link activity_id="#false" action="play">
 			</link>
 			
-			<time start="00:00:17" duration="00:00:00.5"/>
+			<time start="00:00:25" duration="00:00:00.5"/>
 			<geometry x="0" y="200" height="20" width="400"/>
+		</element>
+		
+		<element>
+			<textContent color="0x0000AA" backgroundColor="0x444444">
+				<![CDATA[String são imutáveis, portanto todas as operações sobre elas retornam uma nova String ao invés de alterar a própria String]]>
+			</textContent>
+			
+			<time start="00:00:25.6" duration="00:00:05"/>
+			<geometry x="0" y="155" height="70" width="400"/>
 		</element>
 		
 	</elements>

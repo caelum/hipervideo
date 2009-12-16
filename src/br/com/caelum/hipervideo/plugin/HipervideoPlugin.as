@@ -3,6 +3,7 @@ package br.com.caelum.hipervideo.plugin {
 
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
+import br.com.caelum.hipervideo.model.ElementType;
 import br.com.caelum.hipervideo.model.Hipervideo;
 import br.com.caelum.hipervideo.model.Link;
 import br.com.caelum.hipervideo.reader.XMLReader;
@@ -75,7 +76,17 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		drawClip();
 		
 		hide(config['state']);
+		
+		disablePauseClick();
 	};
+
+	private function disablePauseClick():void {
+		new TextElement(
+			new Element(ElementType.TEXT, "",
+				new Link(null, null, null, null, null, 0, null, null),
+				0, "", -Infinity, Infinity, 0, 0, view.config['width'], view.config['height'],0),
+			this, view);
+	}
 
 	/** Check for captions with a new item. **/
 	private function itemHandler(evt:ControllerEvent=null):void {
@@ -185,7 +196,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	};
 	
 	public function clickHandler(element:Element, clip:MovieClip):void {
-		if (element.link.activityId != "") {
+		if (element.link.activityId != "" && element.link.activityId != null) {
 			receive_notification_from_activity_log(ExternalInterface.call('logActivity', element.link.activityId, currentTime));
 		}
 		

@@ -52,19 +52,19 @@
 			function logActivity(id, time) {
 				var cor;
 				var conteudo;
+				var contentNota = "";
 				
 				if (id == "#win") {
 					cor = "0x00FF00";
-					conteudo = "Acertou";
-					nota++;
+					conteudo = "<b>CERTO</b>";
+					nota+=2;
 				} else {
 					cor = "0xFF0000";
-					conteudo = "Errou";
+					conteudo = "<b>ERRADO</b>";
 				}
 
-				if (time > 16) {
-					alert(nota);
-					conteudo = conteudo + " nota = " + nota;
+				if (time > 25) {
+					contentNota = "Nota = " + nota;
 				}
 				
 				return({
@@ -74,17 +74,17 @@
 							begin:time, duration: "00:00:02", 
 							content: conteudo, type: 'TEXT',
 							color: cor, backgroundColor: '',
-							x:175, y:120,
+							x:175, y:60,
 							width:130, height:30, active:false,
 							link: {}
 						}}, 
 					2:{
 						id: 'Element', 
 						value: {
-							begin:time, duration: "00:00:02", 
-							content: "mimimimi", type: 'TEXT',
+							begin:time, duration: "00:00:04", 
+							content: contentNota, type: 'TEXT',
 							color: cor, backgroundColor: '',
-							x:175, y:160,
+							x:175, y:120,
 							width:130, height:30, active:false,
 							link: {}
 						}
