@@ -256,7 +256,7 @@ A tag <tt>&lt;link&gt;</tt>, visto anteriormente, tem ainda outra propriedade op
 Esta função, opcionalmente, pode retornar um elemento, de qualquer tipo, para exibição no vídeo. Este deve ser um dicionário chave/valor (hash), no seguinte formato:
 
 <pre>
-{
+{ elemento: {
 	id: 'Element', 
 	value: {
 		begin:time, duration: "00:00:05", 
@@ -269,10 +269,44 @@ Esta função, opcionalmente, pode retornar um elemento, de qualquer tipo, para 
 			activityId: '', action: ''
 		}
 	}
-}
+} }
 </pre>
 
 A chave <tt>link</tt> é opcional, assim como qualquer uma de suas chaves internas.
+
+Também é possível retornar um número arbitrário de elementos de uma única vez:
+
+<pre>
+{ elem1: {
+	id: 'Element', 
+	value: {
+		begin:time, duration: "00:00:05", 
+		content: 'Conteúdo', type: 'TEXT',
+		color: '0xFF0000', backgroundColor: '',
+		x:20, y:50,
+		width:100, height:100, active:false,
+		link: {
+			url: '', time: time, 
+			activityId: '', action: ''
+		}
+	}
+}, elem2: {
+	id: 'Element', 
+	value: {
+		begin:time, duration: "00:00:05", 
+		content: 'Outra mensagem', type: 'TEXT',
+		color: '0xFF00FF', backgroundColor: '',
+		x:20, y:150,
+		width:100, height:100, active:false,
+		link: {
+			url: '', time: time, 
+			activityId: '', action: ''
+		}
+	}
+}}
+</pre>
+
+As chaves identificando elementos - <tt>elemento</tt>, <tt>elem1</tt>, <tt>elem2</tt> nestes exemplos - podem possuir qualquer nome.
 
 h3. Vídeos relacionados
 
