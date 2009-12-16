@@ -295,4 +295,6 @@ Podemos especificar uma coleção de vídeos relacionados através da tag <tt>&l
 </hipervideo>
 </pre>
 
-Outro exemplo concreto <a href="../html-template/support/bunny.xml">também está disponível</a>.
+h3. Exemplo
+
+Um exemplo concreto <a href="../html-template/support/bunny.xml">também está disponível</a>.
