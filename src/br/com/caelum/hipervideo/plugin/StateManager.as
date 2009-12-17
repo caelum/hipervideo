@@ -95,11 +95,7 @@ package br.com.caelum.hipervideo.plugin {
 		}
 
 		private function nextHandler(evt:ViewEvent):void {
-			trace(evt.type);
-			trace(ViewEvent.NEXT);
-			trace(evt.type == ViewEvent.NEXT);
 			if (evt.type == ViewEvent.NEXT) {
-				trace("entrou");
 				loadNextVideo();
 			}
 		}

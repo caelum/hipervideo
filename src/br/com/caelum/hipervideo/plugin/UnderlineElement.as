@@ -55,15 +55,15 @@ package br.com.caelum.hipervideo.plugin
 		}
 		
 		private function resizeHandler(evt:ControllerEvent=undefined):void {
-			clickArea.x = element.x * clip.scaleX;
-			clickArea.y = element.y * clip.scaleY;
-			line.x = element.x * clip.scaleX;
-			line.y = ( element.y + element.height - HEIGHT) * clip.scaleY;
-			
 			clickArea.scaleX = clip.scaleX;
 			clickArea.scaleY = clip.scaleY;
 			line.scaleX = clip.scaleX;
 			line.scaleY = clip.scaleY;
+			
+			clickArea.x = element.x * clip.scaleX;
+			clickArea.y = element.y * clip.scaleY;
+			line.x = element.x * clip.scaleX;
+			line.y = ( element.y + element.height - HEIGHT) * clip.scaleY;
 		}
 		
 		private function timeHandler(evt:ModelEvent):void {

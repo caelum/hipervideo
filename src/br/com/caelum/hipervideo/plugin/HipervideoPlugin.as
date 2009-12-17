@@ -48,7 +48,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		
 		back = new MovieClip();
 		back.graphics.beginFill(0x000000,0.75);
-		back.graphics.drawRect(0,0,400,0);
+		back.graphics.drawRect(0,0,400,260);
+		back.graphics.endFill();
 		addChild(back);
 		
 		if (config['back'] == false) {
@@ -148,8 +149,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	/** Resize the captions if the display changes. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
 		width = view.config['width'];
-		scaleY = scaleX;
-		y = view.config['height']-height;
+		height = view.config['height'];
 		
 		if (!xmlLoaded) {
 			itemHandler(evt);
@@ -217,7 +217,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		} else if (element.link.time != 0){
 			view.sendEvent("SEEK", element.link.time);
 		} else if (element.link.video != "") {
-			trace("alguem clicou em alguma coisa");
 			view.config['next'] = element.link.video;
 			loadNextVideo();
 		}
