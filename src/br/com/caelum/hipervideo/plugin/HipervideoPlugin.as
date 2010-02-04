@@ -41,6 +41,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	private var actions:Array;
 	private var lastPos:Number = Infinity;
 	private var currentTime:Number;
+	private var xmlLoaded:Boolean;
 	
 	/** Inicializa o plugin. **/
 	public function initializePlugin(vie:AbstractView):void {
@@ -52,7 +53,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		view.addControllerListener(ControllerEvent.SEEK, seekHandler);
 		
 		drawClip();
-		
 		disablePauseClick();
 	};
 	
@@ -77,8 +77,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			this, view);
 	}
 
-	/** Check for captions with a new item. **/
-	private function itemHandler(evt:ControllerEvent=null):void {
+	/** Carrega arquivo. **/
+	private function loadFile(evt:ControllerEvent=null):void {
 		config['file'] = undefined;
 		var file:String;
 		
@@ -94,6 +94,16 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			}
 		}
 	};
+		
+	private function loadNextVideo():void {
+		if (view.config['next'] != null && view.config['next'] != "") {
+			view.config['hipervideo.file'] = view.config['next'];
+			drawClip();
+			xmlLoaded = false;
+			resizeHandler();
+		}
+	}
+
 
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
@@ -139,23 +149,16 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		}
 	};
 
-	private var xmlLoaded:Boolean;
-
 	/** Lida com mudanças de tamanho. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
 		width = view.config['width'];
 		height = view.config['height'];
 		
 		if (!xmlLoaded) {
-			itemHandler(evt);
+			loadFile(evt);
 			xmlLoaded = true;
 		}
 	};
-	
-	private function drawElement(caption:Object):void {
-		caption.build(this, view);
-		resizeHandler();
-	}
 
 	/** Detecta fim da reproducao vídeo e prepara carregamento do seguinte **/
 	private function stateHandler(evt:ModelEvent):void {
@@ -168,15 +171,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 				break;
 		}
 	};
-	
-	private function loadNextVideo():void {
-		if (view.config['next'] != null && view.config['next'] != "") {
-			view.config['hipervideo.file'] = view.config['next'];
-			drawClip();
-			xmlLoaded = false;
-			resizeHandler();
-		}
-	}
 
 	/** Exibe baloes e executa funcoes JS nos momentos determinados. **/
 	private function timeHandler(evt:ModelEvent):void {
@@ -196,14 +190,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		
 		lastPos = pos;
 	};
-	
-	/** Usado para executar uma acao JS disparada por tempo */
-	private function performAction(action:Action):void {
-		if (action.type == ActionType.ACTIVITY) {
-			receive_notification_from_activity_log(ExternalInterface.call('logActivity', action.data.toString(), currentTime));
-		}
-	}
-	
+		
 	/** Logica para lidar com cliques em baloes */
 	public function clickHandler(element:Element, clip:MovieClip):void {
 		if (element.link.activityId != "" && element.link.activityId != null) {
@@ -229,6 +216,38 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		} else if (element.link.video != "") {
 			view.config['next'] = element.link.video;
 			loadNextVideo();
+		}
+	}
+	
+	public function elementStateHandler(element:Object, item:Object, evt:ModelEvent):void {
+		switch (evt.data.newstate) {
+			case ModelStates.PLAYING:
+				if (element.shouldRemove) 
+					item.visible = false;
+				else
+					item.visible = true;
+				break;
+			case ModelStates.PAUSED:
+				if (!view.config['autoPaused']) {
+					item.visible = false;	
+				}
+				break;
+			case ModelStates.COMPLETED:
+				item.visible = false;
+				break;
+		}
+	}
+	
+
+	private function drawElement(caption:Object):void {
+		caption.build(this, view);
+		resizeHandler();
+	}
+	
+	/** Usado para executar uma acao JS disparada por tempo */
+	private function performAction(action:Action):void {
+		if (action.type == ActionType.ACTIVITY) {
+			receive_notification_from_activity_log(ExternalInterface.call('logActivity', action.data.toString(), currentTime));
 		}
 	}
 	
@@ -263,26 +282,6 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			}
 		}
 	}
-	
-	public function elementStateHandler(element:Object, item:Object, evt:ModelEvent):void {
-		switch (evt.data.newstate) {
-			case ModelStates.PLAYING:
-				if (element.shouldRemove) 
-					item.visible = false;
-				else
-					item.visible = true;
-				break;
-			case ModelStates.PAUSED:
-				if (!view.config['autoPaused']) {
-					item.visible = false;	
-				}
-				break;
-			case ModelStates.COMPLETED:
-				item.visible = false;
-				break;
-		}
-	}
-
 };
 
 }
