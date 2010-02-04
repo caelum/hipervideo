@@ -27,51 +27,22 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
 
-	/** List with configuration settings. **/
 	public var config:Object = {
 		back:false,
 		file:undefined,
 		fontsize:14,
 		state:true
 	};
-	/** XML connect and parse object. **/
+
 	private var loader:URLLoader;
-	/** Reference to the MVC view. **/
 	private var view:AbstractView;
-	/** Reference to the background graphic. **/
 	private var back:MovieClip;
-	/** The array the captions are loaded into. **/
 	private var captions:Array;
 	private var actions:Array;
 	private var lastPos:Number = Infinity;
-
 	private var currentTime:Number;
 	
-	private function drawClip():void {
-		loader = new URLLoader();
-		loader.addEventListener(Event.COMPLETE,loaderHandler);
-		
-		back = new MovieClip();
-		back.graphics.beginFill(0x000000,0.75);
-		back.graphics.drawRect(0,0,400,260);
-		back.graphics.endFill();
-		addChild(back);
-		
-		if (config['back'] == false) {
-			back.alpha = 0;
-		}
-	};
-
-	/** Show/hide the captions **/
-	public function hide(stt:Boolean):void {
-		config['state'] = stt;
-		visible = config['state'];
-		var cke:SharedObject = SharedObject.getLocal('com.jeroenwijering','/');
-		cke.data['hipervideo.state'] = stt;
-		cke.flush();
-	};
-
-	/** Initing the plugin. **/
+	/** Inicializa o plugin. **/
 	public function initializePlugin(vie:AbstractView):void {
 		view = vie;
 		view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
@@ -82,11 +53,22 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		
 		drawClip();
 		
-		hide(config['state']);
-		
 		disablePauseClick();
 	};
+	
+	private function drawClip():void {
+		loader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE,loaderHandler);
+		
+		back = new MovieClip();
+		back.graphics.beginFill(0x000000,0.75);
+		back.graphics.drawRect(0,0,400,260);
+		back.graphics.endFill();
+		addChild(back);
+		back.alpha = 0;
+	};
 
+	/** Desabilita play/pause com cliques sobre o vídeo */
 	private function disablePauseClick():void {
 		new TextElement(
 			new Element(ElementType.TEXT, "",
@@ -132,6 +114,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		view.config['next'] = hipervideo.next;
 	};
 	
+	/** Quando a posicao do vídeo for alterada pela barra de busca,
+	 * não executar nenhum javascript indesejado */
 	private function seekHandler(evt:ControllerEvent):void {
 		lastPos = Infinity;
 	}
@@ -157,7 +141,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	private var xmlLoaded:Boolean;
 
-	/** Resize the captions if the display changes. **/
+	/** Lida com mudanças de tamanho. **/
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
 		width = view.config['width'];
 		height = view.config['height'];
@@ -173,7 +157,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		resizeHandler();
 	}
 
-	/** Check timing of the player to sync captions. **/
+	/** Detecta fim da reproducao vídeo e prepara carregamento do seguinte **/
 	private function stateHandler(evt:ModelEvent):void {
 		visible = 
 			(view.config['state'] == ModelStates.PLAYING || view.config['state'] == ModelStates.PAUSED) 
@@ -194,7 +178,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		}
 	}
 
-	/** Check timing of the player to sync captions. **/
+	/** Exibe baloes e executa funcoes JS nos momentos determinados. **/
 	private function timeHandler(evt:ModelEvent):void {
 		var pos:Number = evt.data.position;
 		currentTime = pos;
@@ -213,13 +197,14 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		lastPos = pos;
 	};
 	
+	/** Usado para executar uma acao JS disparada por tempo */
 	private function performAction(action:Action):void {
 		if (action.type == ActionType.ACTIVITY) {
-			trace("RUN! " + action.data + " @ " + currentTime);
 			receive_notification_from_activity_log(ExternalInterface.call('logActivity', action.data.toString(), currentTime));
 		}
 	}
 	
+	/** Logica para lidar com cliques em baloes */
 	public function clickHandler(element:Element, clip:MovieClip):void {
 		if (element.link.activityId != "" && element.link.activityId != null) {
 			receive_notification_from_activity_log(ExternalInterface.call('logActivity', element.link.activityId, currentTime));
@@ -247,6 +232,7 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 		}
 	}
 	
+	/** Pega a resposta de uma chamada JS e coloca na tela os baloes presentes na resposta */
 	public function receive_notification_from_activity_log(response:Object):void {
 		if (response != null) {
 			for each (var elem:Object in response) {
