@@ -58,13 +58,14 @@
 					cor = "0x00FF00";
 					conteudo = "<b>CERTO</b>";
 					nota+=2;
-				} else {
+				} else if (id == "#fail") {
 					cor = "0xFF0000";
 					conteudo = "<b>ERRADO</b>";
 				}
 
-				if (time > 25) {
+				if (time > 27) {
 					contentNota = "Nota = " + nota;
+					cor = "0x0000FF";
 					nota = 0;
 				}
 				

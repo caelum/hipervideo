@@ -40,7 +40,9 @@ package br.com.caelum.hipervideo.plugin
 			field.defaultTextFormat = format;
 			field.mouseEnabled = true;
 			
-			field.htmlText = element.content;
+			if (element.content != null) {
+				field.htmlText = element.content;
+			}
 			field.width = element.width;
 			field.height = element.height;
 			field.textColor = element.color;

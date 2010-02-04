@@ -3,11 +3,12 @@
 	<video file="bunny.flv" /> 
 	
 	<actions>
-		<pause at="00:00:01.39"/>
-		<pause at="00:00:07.39"/>
-		<pause at="00:00:13.39"/>
-		<pause at="00:00:19.39"/>
-		<pause at="00:00:25.39"/>
+		<pause at="00:01.39"/>
+		<pause at="00:07.39"/>
+		<pause at="00:13.39"/>
+		<pause at="00:19.39"/>
+		<pause at="00:25.39"/>
+		<activity id="resultado" at="00:00:29" />
 	</actions>
 
 	<elements>

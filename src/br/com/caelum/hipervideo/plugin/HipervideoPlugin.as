@@ -1,6 +1,7 @@
 package br.com.caelum.hipervideo.plugin {
 
 
+import br.com.caelum.hipervideo.model.Action;
 import br.com.caelum.hipervideo.model.ActionType;
 import br.com.caelum.hipervideo.model.Element;
 import br.com.caelum.hipervideo.model.ElementType;
@@ -18,6 +19,8 @@ import flash.events.*;
 import flash.external.ExternalInterface;
 import flash.net.*;
 import flash.text.*;
+
+import mx.controls.Alert;
 
 public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
@@ -39,6 +42,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	private var back:MovieClip;
 	/** The array the captions are loaded into. **/
 	private var captions:Array;
+	private var actions:Array;
+	private var lastPos:Number = Infinity;
 
 	private var currentTime:Number;
 	
@@ -110,7 +115,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	/** Captions are loaded; now display them. **/
 	private function loaderHandler(evt:Event):void { 
 		var hipervideo:Hipervideo = new XMLReader(new XML(evt.target.data)).extract();
-		captions = hipervideo.elements; 
+		captions = hipervideo.elements;
+		actions = hipervideo.actions; 
 		
 		view.sendEvent(ViewEvent.LOAD, hipervideo.video);
 		
@@ -192,8 +198,22 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 			if (captions[i].start < pos && captions[i].end > pos && !captions[i].active) {
 				drawElement(captions[i]);
 			}
+		} 
+		for (var next:Number = 0; next < actions.length; next++) {
+			if (actions[next].time < pos && actions[next].time >= lastPos) {
+				performAction(actions[next]);
+			}
 		}
+		
+		lastPos = pos;
 	};
+	
+	private function performAction(action:Action):void {
+		if (action.type == ActionType.ACTIVITY) {
+			trace("RUN! " + action.data + " @ " + currentTime);
+			receive_notification_from_activity_log(ExternalInterface.call('logActivity', action.data.toString(), currentTime));
+		}
+	}
 	
 	public function clickHandler(element:Element, clip:MovieClip):void {
 		if (element.link.activityId != "" && element.link.activityId != null) {

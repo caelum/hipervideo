@@ -76,6 +76,11 @@ package br.com.caelum.hipervideo.reader
 				actions.push(
 					new Action(ActionType.PAUSE, Strings.seconds(action.@at)));
 			}
+			
+			for each (var activity:XML in xml.actions.activity) {
+				actions.push(
+					new Action(ActionType.ACTIVITY, Strings.seconds(activity.@at), activity.@id));
+			}
 
 			return new Hipervideo(xml.video.@file, xml.next.@file, elements, actions, playlist);
 		}

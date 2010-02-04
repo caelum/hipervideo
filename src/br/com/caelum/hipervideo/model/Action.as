@@ -5,11 +5,13 @@ package br.com.caelum.hipervideo.model
 		
 		public var type:String;
 		public var time:Number;
+		public var data:Object;
 		
-		public function Action(type:String, time:Number)
+		public function Action(type:String, time:Number, data:Object=null)
 		{
 			this.type = type;
 			this.time = time;
+			this.data = data;
 		}
 
 	}

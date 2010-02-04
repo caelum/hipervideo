@@ -30,6 +30,8 @@ package test.br.com.caelum.hipervideo.reader
 				<actions>
 					<pause at="00:00:17" />
 					<pause at="00:00:21" />
+					<activity id="act_id1" at="00:02:00" />
+					<activity id="act_id2" at="00:02:10" />
 				</actions>
 								
 				<elements>
@@ -133,7 +135,7 @@ package test.br.com.caelum.hipervideo.reader
 		}
 		
 		public function testReadCorrectNumberOfActions():void {
-			assertEquals(2, actionArray.length);
+			assertEquals(4, actionArray.length);
 		}
 		
 		public function testReadPauses():void {
@@ -141,6 +143,15 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(17, actionArray[0].time);
 			assertEquals(ActionType.PAUSE, actionArray[1].type);
 			assertEquals(21, actionArray[1].time);
+		}
+		
+		public function testReadTimedActivities():void {
+			assertEquals(ActionType.ACTIVITY, actionArray[2].type);
+			assertEquals(120, actionArray[2].time);
+			assertEquals("act_id1", actionArray[2].data);
+			assertEquals(ActionType.ACTIVITY, actionArray[3].type);
+			assertEquals(130, actionArray[3].time);
+			assertEquals("act_id2", actionArray[3].data);
 		}
 
 		public function testReadCorrectNumberOfPlaylistItens():void {
