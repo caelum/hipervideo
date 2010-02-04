@@ -20,20 +20,12 @@ import flash.external.ExternalInterface;
 import flash.net.*;
 import flash.text.*;
 
-import mx.controls.Alert;
-
 public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	[Embed(source="../../../../../dock.png")]
 	private const DockIcon:Class;
 
-	public var config:Object = {
-		back:false,
-		file:undefined,
-		fontsize:14,
-		state:true
-	};
-
+	private var playfile:String;
 	private var loader:URLLoader;
 	private var view:AbstractView;
 	private var back:MovieClip;
@@ -79,16 +71,16 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	/** Carrega arquivo. **/
 	private function loadFile(evt:ControllerEvent=null):void {
-		config['file'] = undefined;
+		playfile = undefined;
 		var file:String;
 		
 		file = view.config['hipervideo.file'];
 		trace("lendo arquivo " + file);
 
 		if (file) {
-			config['file'] = file;
+			playfile = file;
 			try {
-				loader.load(new URLRequest(config['file']));
+				loader.load(new URLRequest(playfile));
 			} catch (err:Error) {
 				Logger.log(err.message,'hipervideo');
 			}
@@ -162,9 +154,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 
 	/** Detecta fim da reproducao vídeo e prepara carregamento do seguinte **/
 	private function stateHandler(evt:ModelEvent):void {
-		visible = 
-			(view.config['state'] == ModelStates.PLAYING || view.config['state'] == ModelStates.PAUSED) 
-				&& config['state'];
+		visible = ( view.config['state'] == ModelStates.PLAYING ||
+					view.config['state'] == ModelStates.PAUSED );
 		switch (evt.data.newstate) {
 			case ModelStates.COMPLETED:
 				loadNextVideo();
