@@ -26,9 +26,7 @@ package br.com.caelum.hipervideo.plugin
 		private function newImage():Loader {
 			image = new Loader();
 			image.load(new URLRequest(element.content));
-			child = addChild(image);
 			image.contentLoaderInfo.addEventListener(Event.COMPLETE, resizeImage);
-			
 			image.addEventListener(MouseEvent.CLICK, clickHandler);
 			return image;
 		}
@@ -44,6 +42,7 @@ package br.com.caelum.hipervideo.plugin
 			this.view = view;
 			data.active = true;
 			child = clip.parent.addChild(newImage());
+			//child.alpha = 0.4; funciona!
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);

@@ -29,7 +29,6 @@
 	
 	<actions>
 		<pause at="00:00:10.05" />
-		<pause at="00:00:12" />
 	</actions>
 
 	<elements>
@@ -105,12 +104,12 @@
 		<element>
 			<imageContent>thumbs/play.jpg</imageContent>
 			
-			<link action="pause">
+			<link action="play">
 				<tooltip>Simples play</tooltip>
 				<thumbnail>thumbs/play.jpg</thumbnail>
 			</link>
 			
-			<time start="00:00:08" duration="00:00:01"/>
+			<time start="00:00:08.5" duration="00:00:03"/>
 			<geometry x="200" y="90" height="200" width="200"/>
 		</element>
 	
