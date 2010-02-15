@@ -7,6 +7,8 @@
 	
 	<actions>
 		<pause at="00:00:51" />
+		<controlbar enabled="false" at="00:00:01" />
+		<controlbar enabled="true" at="00:00:10" />
 	</actions>
 
 	<elements>

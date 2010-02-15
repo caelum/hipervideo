@@ -81,6 +81,11 @@ package br.com.caelum.hipervideo.reader
 				actions.push(
 					new Action(ActionType.ACTIVITY, Strings.seconds(activity.@at), activity.@id));
 			}
+			
+			for each (var controlbarAct:XML in xml.actions.controlbar) {
+				actions.push(
+					new Action(ActionType.CONTROLBAR, Strings.seconds(controlbarAct.@at), controlbarAct.@enabled));
+			}
 
 			return new Hipervideo(xml.video.@file, xml.next.@file, elements, actions, playlist);
 		}

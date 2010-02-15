@@ -2,42 +2,54 @@ h1. Longtail Video Player com plugin de hipervideo
 
 <hr />
 
-Este documento descreve o procedimento necessário para o uso e configuração do <a href="http://longtailvideo.com/">Longtail Video Player</a> acrescido do plugin de hipervideo. 
+Este documento descreve o procedimento necessário para o uso e configuração do <a href="http://longtailvideo.com/">Longtail Video Player</a>
+acrescido do plugin de hipervideo. 
 
 h2. Adicionando o player a uma página
 
-Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo <tt><a href="embed.html">embed.html</a></tt>, presente no mesmo diretório deste documento.
+Para adicionar o player do Longtail Video, acrescido dos plugins para hipervideo, é necessário colar na página o código do arquivo
+<tt><a href="embed.html">embed.html</a></tt>, presente no mesmo diretório deste documento.
 
-Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>, <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar presentes no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o arquivo <tt>html</tt> a ser  alterado. Este diretório pode ser alterado se o código em <tt>embed.html</tt> for alterado coerentemente, nas linhas comentadas com:
+Além disto, os arquivos <tt>player-viral.swf</tt>, <tt>swfobject.js</tt>, <tt>hipervideo.swf</tt> e <tt>statemanager.swf</tt> devem estar
+presentes no subdiretório <tt>./support</tt>, relativo ao caminho do diretório que contém o arquivo <tt>html</tt> a ser  alterado. Este
+diretório pode ser alterado se o código em <tt>embed.html</tt> for alterado coerentemente, nas linhas comentadas com:
 * <tt>// PLAYER PATH HERE</tt>
 * <tt>// SWFOBJECT.JS PATH HERE</tt>
 
-Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais compõem o plugin de hipervideo e precisam ser compilados separadamente.
+Os dois primeiros arquivos podem ser encontrados <a href="./">aqui</a>. Os demais compõem o plugin de hipervideo e precisam ser compilados
+separadamente.
 
 h2. Compilação do plugin
 
-Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode ser obtido gratuitamente na página de <a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.
+Para compilar o plugin de hipervideo, o SDK do Flex será necessário. Este pode ser obtido gratuitamente na página de
+<a href="http://www.adobe.com/products/flex/flexdownloads/">downloads</a> da Adobe.
 
-Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no diretório <tt>src/</tt> e deve ser copiado para um novo arquivo <tt>build.sh</tt>. Este, por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como a localização da instalação local SDK do Flex.
+Depois, o arquivo <tt>build.sh.example</tt> que acompanha esta distribuição, fica no diretório <tt>src/</tt> e deve ser copiado para um novo
+arquivo <tt>build.sh</tt>. Este, por sua vez, deve ser alterado, definindo o valor da variável <tt>FLEXPATH</tt> como a localização da instalação
+local SDK do Flex.
 
 Por fim, basta executar o script <tt>build.sh</tt> para compilar o plugin, que será criado no diretório <tt>/bin-debug/plugins/hipervideo/</tt>.
 
 h2. Variáveis do Longtail Video Player
 
-No código do <tt>embed.html</tt> são definidas algumas variáveis do player, incluindo a localização do arquivo de vídeo a ser reproduzido. Esta configuração é determinada pela variável <tt>file</tt>, definida na linha comentada com:
+No código do <tt>embed.html</tt> são definidas algumas variáveis do player, incluindo a localização do arquivo de vídeo a ser reproduzido. Esta
+configuração é determinada pela variável <tt>file</tt>, definida na linha comentada com:
 * <tt>// VIDEO FILENAME HERE</tt>
 
 Da mesma forma, a imagem de preview, exibida antes do início do vídeo, é determinada pela variável <tt>image</tt>, definida na linha comentada com:
 * <tt>// VIDEO PREVIEW IMAGE HERE</tt>
 
-Mais informações sobre as variáveis do Longtail Video Player podem ser obtidas no <a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.
+Mais informações sobre as variáveis do Longtail Video Player podem ser obtidas no
+<a href="http://developer.longtailvideo.com/trac/wiki/FlashVars">site do produto</a>.
 
 h2. Variáveis do plugin de hipervideo
 
-Os dados de hipervideo são fornecidos por um arquivo XML que também deve ser informado como uma variável do player: <tt>hipervideo.file</tt>. Esta é definida na linha comentada com:
+Os dados de hipervideo são fornecidos por um arquivo XML que também deve ser informado como uma variável do player: <tt>hipervideo.file</tt>.
+Esta é definida na linha comentada com:
 * <tt>// HIPERVIDEO DATA FILE HERE</tt>
 
-O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.ubarposition</tt>, definida na linha comentada com:
+O posicionamento das barras de vídeos relacionados e de links é determinado pela variável <tt>hipervideo.ubarposition</tt>, definida na linha
+comentada com:
 * <tt>// BAR POSITION</tt>
 	
 Os valores possíveis são:
@@ -48,11 +60,13 @@ Os valores possíveis são:
 
 h2. Formato do XML
 
-O arquivo XML com as informações de reprodução do hipervídeo é especificado pela variável <tt>hipervideo.file</tt>. Este arquivo determina o vídeo a ser executado, os elementos a serem exibidos e as ações a serem realizadas automaticamente pelo player.
+O arquivo XML com as informações de reprodução do hipervídeo é especificado pela variável <tt>hipervideo.file</tt>. Este arquivo determina o vídeo
+a ser executado, os elementos a serem exibidos e as ações a serem realizadas automaticamente pelo player.
 
 h3. Definindo o vídeo a ser reproduzido
 
-O hipervídeo é composto de um vídeo comum acrescido de elementos de hipermídia. Para definir um hipervídeo composto apenas de um vídeo comum, fazemos:
+O hipervídeo é composto de um vídeo comum acrescido de elementos de hipermídia. Para definir um hipervídeo composto apenas de um vídeo comum,
+fazemos:
 
 <pre>
 <hipervideo>
@@ -62,7 +76,8 @@ O hipervídeo é composto de um vídeo comum acrescido de elementos de hipermíd
 
 h3. Exibindo texto sobre o vídeo
 
-Para exibir texto sobre o vídeo, especificamos um elemento de texto no XML. Além do texto em questão, é necessário especificar seu posicionamento, dimensões e o intervalo de tempo em que a exibição será feita.
+Para exibir texto sobre o vídeo, especificamos um elemento de texto no XML. Além do texto em questão, é necessário especificar seu posicionamento,
+dimensões e o intervalo de tempo em que a exibição será feita.
 
 <pre>
 <hipervideo>
@@ -82,15 +97,18 @@ Para exibir texto sobre o vídeo, especificamos um elemento de texto no XML. Al�
 </hipervideo>
 </pre>
 
-A tag <tt>&lt;time&gt;</tt> determina o momento inicial da exibição pela propriedade <tt>start</tt> e a duração desta pela propriedade <tt>duration</tt>.
+A tag <tt>&lt;time&gt;</tt> determina o momento inicial da exibição pela propriedade <tt>start</tt> e a duração desta pela propriedade
+<tt>duration</tt>.
 	
-Com a tag <tt>&lt;geometry&gt;</tt> determinamos o posicionamento do elemento (usando <tt>x</tt> e <tt>y</tt>), a largura e a altura (usando <tt>width</tt> e <tt>height</tt>, respectivamente).
+Com a tag <tt>&lt;geometry&gt;</tt> determinamos o posicionamento do elemento (usando <tt>x</tt> e <tt>y</tt>), a largura e a altura
+(usando <tt>width</tt> e <tt>height</tt>, respectivamente).
 
 Opcionalmente, podemos definir a cor do texto e do fundo deste elemento. Para isso, basta alterar a tag <tt>&lt;textContent&gt;</tt>, como abaixo:
 
 <tt>&lt;textContent color="0xFF0000" backgroundColor="0xFFFFFF" /&gt;</tt>
 
-Também podemos definir um fator de transparência para o elemento. Este deve estar compreendido entre 0 (totalmente transparente) e 1 (totalmente opaco).
+Também podemos definir um fator de transparência para o elemento. Este deve estar compreendido entre 0 (totalmente transparente) e 1 (totalmente
+opaco).
 
 <tt>&lt;textContent color="0xFF0000" backgroundColor="0xFFFFFF" alpha"0.7"/&gt;</tt>
 
@@ -98,7 +116,8 @@ Podemos especificar quantos elementos de texto quisermos dentro da tag <tt>&lt;e
 
 h3. Exibindo uma imagem sobre o vídeo
 
-Também é possível exibir uma imagem sobre o vídeo durante um intervalo de tempo. O exemplo abaixo acrescenta um elemento de imagem ao hipervídeo anteriormente definido.
+Também é possível exibir uma imagem sobre o vídeo durante um intervalo de tempo. O exemplo abaixo acrescenta um elemento de imagem ao hipervídeo
+anteriormente definido.
 
 <pre>
 <hipervideo>
@@ -148,7 +167,9 @@ No caso do frame, a propriedade <tt>thickness</tt>, que determina a espessura da
 
 h3. Colocando links nos elementos
 
-Podemos especificar um link a ser aberto quando um elemento for clicado. Este pode ser apontar para uma página, para uma posição específica do vídeo, ou mesmo para outro hipervídeo. Este comportamento é especificado pela tag <tt>&lt;link&gt;</tt>, que deve pertencer a um <tt>&lt;element&gt;</tt>.
+Podemos especificar um link a ser aberto quando um elemento for clicado. Este pode ser apontar para uma página, para uma posição específica do
+vídeo, ou mesmo para outro hipervídeo. Este comportamento é especificado pela tag <tt>&lt;link&gt;</tt>, que deve pertencer a um
+<tt>&lt;element&gt;</tt>.
 
 Para abrir uma página, fazemos:
 
@@ -217,24 +238,6 @@ E para forçar a execução do vídeo, fazemos:
 </link>
 </pre>
 
-h3. Realizando ações automaticamente
-
-Podemos determinar ações a serem realizadas, automaticamente, em um dado momento da execução do vídeo.
-
-No momento, a única ação automática suportada é a de pausar a execução do vídeo. Por exemplo:
-
-<pre>
-<hipervideo>
-	<video file="video.flv"/>
-	
-	<actions>
-		<pause at="00:00:10.05" />
-		<pause at="00:00:12" />
-	</actions>
-	
-</hipervideo>
-</pre>
-
 h3. Começando um outro vídeo após o término do atual
 
 Podemos determinar que, após o fim da execução do vídeo atual, um outro hipervídeo seja carregado e executado automaticamente.
@@ -249,7 +252,8 @@ Podemos determinar que, após o fim da execução do vídeo atual, um outro hipe
 
 h3. Chamando função Javascript
 
-A tag <tt>&lt;link&gt;</tt>, visto anteriormente, tem ainda outra propriedade opcional chamada <tt>activity_id</tt>. Essa propriedade indica que será executado a função Javascript com a assinatura <tt>function log_activity(activity_id, current_time)</tt>.
+A tag <tt>&lt;link&gt;</tt>, visto anteriormente, tem ainda outra propriedade opcional chamada <tt>activity_id</tt>. Essa propriedade indica que
+será executado a função Javascript com a assinatura <tt>function log_activity(activity_id, current_time)</tt>.
 
 <pre>
 <link activity_id="parametro_para_a_funcao">
@@ -257,7 +261,8 @@ A tag <tt>&lt;link&gt;</tt>, visto anteriormente, tem ainda outra propriedade op
 </link>
 </pre>
 
-Esta função, opcionalmente, pode retornar um elemento, de qualquer tipo, para exibição no vídeo. Este deve ser um dicionário chave/valor (hash), no seguinte formato:
+Esta função, opcionalmente, pode retornar um elemento, de qualquer tipo, para exibição no vídeo. Este deve ser um dicionário chave/valor (hash),
+no seguinte formato:
 
 <pre>
 { elemento: {
@@ -311,6 +316,54 @@ Também é possível retornar um número arbitrário de elementos de uma única 
 </pre>
 
 As chaves identificando elementos - <tt>elemento</tt>, <tt>elem1</tt>, <tt>elem2</tt> nestes exemplos - podem possuir qualquer nome.
+
+h3. Realizando ações automaticamente
+
+Podemos determinar ações a serem realizadas automaticamente em um dado momento da execução do vídeo.
+
+É possível interromper a execução do vídeo. Por exemplo:
+
+<pre>
+<hipervideo>
+	<video file="video.flv"/>
+	
+	<actions>
+		<pause at="00:00:10.05" />
+		<pause at="00:00:12" />
+	</actions>
+	
+</hipervideo>
+</pre>
+
+Também podemos desabilitar e habilitar a barra de controle automaticamente:
+
+<pre>
+<hipervideo>
+	<video file="video.flv"/>
+	
+	<actions>
+		<controlbar enabled="false" at="00:00:10" />
+		<controlbar enabled="true" at="00:00:20" />
+	</actions>
+	
+</hipervideo>
+</pre>
+
+Para realizar chamadas javascript automaticamente, fazemos:
+
+<pre>
+<hipervideo>
+	<video file="video.flv"/>
+	
+	<actions>
+		<activity id="resultado" at="00:00:29" />
+	</actions>
+	
+</hipervideo>
+</pre>
+
+Assim como nas chamadas javascript realizadas por clique em elemento, esta irá executar a função <tt>log_activity</tt> passando o id especificado
+e o tempo de execução atual como argumentos. O retorno da função é tratado de maneira identica.
 
 h3. Vídeos relacionados
 

@@ -258,6 +258,8 @@ public class HipervideoPlugin extends MovieClip implements PluginInterface {
 	private function performAction(action:Action):void {
 		if (action.type == ActionType.ACTIVITY) {
 			receive_notification_from_activity_log(ExternalInterface.call('logActivity', action.data.toString(), currentTime));
+		} else if (action.type == ActionType.CONTROLBAR) {
+			view.getPlugin('controlbar').block(action.data == false);
 		}
 	}
 	

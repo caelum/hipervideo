@@ -110,7 +110,7 @@ public class StateManager extends MovieClip implements PluginInterface {
 		}
 	}
 	
-			private function resizeHandler(evt:ControllerEvent=undefined):void {
+	private function resizeHandler(evt:ControllerEvent=undefined):void {
 		if (playlist != null && links != null) {
 			playlist.setVisible(false);
 			playlist.resizeMe();
