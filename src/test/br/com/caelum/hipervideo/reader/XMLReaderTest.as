@@ -100,6 +100,12 @@ package test.br.com.caelum.hipervideo.reader
 					</element>
 					
 					<element>
+						<underline color="0xAAAAAA" alpha="0.2"/>
+						<time start="00:01:00" duration="00:00:10"/>
+						<geometry x="50" y="100" height="50" width="200"/>
+					</element>
+					
+					<element>
 						<frame/>
 						
 						<link activity_id="#ActID#">
@@ -134,6 +140,8 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(0.7, elementArray[1].alpha);
 			assertEquals(0.5, elementArray[2].alpha);
 			assertEquals(1, elementArray[3].alpha);
+			assertEquals(1, elementArray[4].alpha);
+			assertEquals(0.2, elementArray[5].alpha);
 		}
 		
 		public function testReadNextXmlFile():void {
@@ -273,8 +281,9 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(ElementType.IMAGE, elementArray[2].type);
 			assertEquals(ElementType.IMAGE, elementArray[3].type);
 			assertEquals(ElementType.UNDERLINE, elementArray[4].type);
-			assertEquals(ElementType.FRAME, elementArray[5].type);
+			assertEquals(ElementType.UNDERLINE, elementArray[5].type);
 			assertEquals(ElementType.FRAME, elementArray[6].type);
+			assertEquals(ElementType.FRAME, elementArray[7].type);
 		}
 		
 		public function testReadUnderlineColor():void {
@@ -292,13 +301,13 @@ package test.br.com.caelum.hipervideo.reader
 		}
 		
 		public function testReadBorderColor():void {
-			assertEquals("0x0000FF", elementArray[5].color);
-			assertEquals("0xFF0000", elementArray[6].color);
+			assertEquals("0x0000FF", elementArray[6].color);
+			assertEquals("0xFF0000", elementArray[7].color);
 		}
 		
 		public function testReadFrameBorderThickness():void {
-			assertEquals(1, elementArray[5].thickness);
-			assertEquals(4, elementArray[6].thickness);
+			assertEquals(1, elementArray[6].thickness);
+			assertEquals(4, elementArray[7].thickness);
 		}
 
 		public function testReadXMLWithNoElements():void {

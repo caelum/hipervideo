@@ -48,6 +48,7 @@ package br.com.caelum.hipervideo.reader
 					content = "";
 					type = ElementType.UNDERLINE;
 					color = element.underline.@color.toString().length == 0 ? 0x0000FF : uint(element.underline.@color);
+					alpha = element.underline.@alpha.toString().length == 0 ? 1 : Number(element.underline.@alpha);
 				}
 				
 				elements.push(

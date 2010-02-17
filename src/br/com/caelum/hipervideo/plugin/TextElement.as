@@ -33,13 +33,13 @@ package br.com.caelum.hipervideo.plugin
 			format.display = "Hand";
 			
 			field = new TextField();
-			field.x = Infinity;
+ 			field.x = Infinity;
 			field.selectable = false;
 			field.multiline = true;
 			field.wordWrap = true;
 			field.defaultTextFormat = format;
 			field.mouseEnabled = true;
-			
+ 			
 			if (element.content != null) {
 				field.htmlText = element.content;
 			}

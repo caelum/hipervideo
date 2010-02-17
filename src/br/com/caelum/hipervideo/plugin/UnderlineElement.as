@@ -9,6 +9,7 @@ package br.com.caelum.hipervideo.plugin
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
 	
 	public class UnderlineElement extends MovieClip	{
@@ -24,7 +25,7 @@ package br.com.caelum.hipervideo.plugin
 		private var line:TextField;
 		private var clickArea:TextField;
 		
-		private var HEIGHT:Number = 2;
+		private var HEIGHT:Number = 1;
 		
 		private function newUnderline():void {
 			line = new TextField();
@@ -32,8 +33,11 @@ package br.com.caelum.hipervideo.plugin
 			line.height = HEIGHT;
 			line.background = true;
 			line.backgroundColor = element.color;
+			line.alpha = element.alpha;
+			line.filters = new Array(new DropShadowFilter(0,45,element.color,1,2,2,10,3));
 			
 			clickArea = new TextField();
+			clickArea.selectable = false;
 			clickArea.width = element.width;
 			clickArea.height = element.height;
 			

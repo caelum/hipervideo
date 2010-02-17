@@ -47,7 +47,7 @@
 		</element>
 		
 		<element>
-			<textContent color="0x0000FF" backgroundColor="0xEEEEEE">
+			<textContent color="0x0000FF" backgroundColor="0xEEEEEE" alpha="0.5">
 				<![CDATA[Podemos usar <b>negrito</b>, <i>itálico</i> e <u>sublinhado</u>]]>
 			</textContent>
 			
@@ -56,12 +56,12 @@
 				<thumbnail>thumbs/video11.jpg</thumbnail>
 			</link>
 			
-			<time start="00:00:02.5" duration="00:00:02"/>
+			<time start="00:00:02.5" duration="00:00:14"/>
 			<geometry x="70" y="20" height="50" width="250"/>
 		</element>
 	
 		<element>
-			<underline color="0x0000FF"/>
+			<underline color="0x0000FF" />
 			
 			<link>
 				<tooltip>Tooltip do underline.</tooltip>
@@ -72,6 +72,22 @@
 			<time start="00:00:06.5" duration="00:00:02.5"/>
 			<geometry x="55" y="80" height="50" width="295"/>
 		</element>
+		
+		<element>
+			<underline color="0xFF0000" alpha="0.5"/>
+			
+			<link>
+				<tooltip>Tooltip do underline.</tooltip>
+				<url>	http://www.google.com.br/search?q=rodent</url>
+				<thumbnail>thumbs/video10.jpg</thumbnail>
+			</link>
+						
+			<time start="00:00:06.5" duration="00:00:06.5"/>
+			<geometry x="55" y="100" height="50" width="295"/>
+		</element>
+
+	
+		
 	
 		<element>
 			<frame thickness="6"/>
