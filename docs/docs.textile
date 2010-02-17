@@ -225,6 +225,22 @@ E para forçar a execução do vídeo, fazemos:
 </link>
 </pre>
 
+h3. Valores-padrão
+
+Podemos definir um valor padrão para o nível de transparência (<tt>alpha</tt>) de todos os elementos. Este será aplicado a todos os elementos que não especificarem um <tt>alpha</tt>. Quando não definido, considera-se que o padrão é 1 (totalmente opaco).
+
+Para definir o <tt>alpha</tt> padrão, fazemos:
+
+<pre>
+<hipervideo>
+	
+	<defaults>
+		<alpha/>0.75</alpha>
+	</actions>
+	
+</hipervideo>
+</pre>
+
 h3. Começando um outro vídeo após o término do atual
 
 Podemos determinar que, após o fim da execução do vídeo atual, um outro hipervídeo seja carregado e executado automaticamente.
