@@ -10,6 +10,10 @@
 		<pause at="00:25.39"/>
 		<activity id="resultado" at="00:00:29" />
 	</actions>
+	
+	<defaults>
+		<alpha>0.6</alpha>
+	</defaults>
 
 	<elements>
 	

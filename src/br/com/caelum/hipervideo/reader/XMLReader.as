@@ -22,34 +22,36 @@ package br.com.caelum.hipervideo.reader
 			var actions:Array = new Array();
 			var playlist:Array = new Array();
 			
+			var defaultAlpha:Number = xml.defaults.alpha.toString().length == 0 ? 1 : Number(xml.defaults.alpha);
+			
 			for each (var element:XML in xml.elements.element) {
 				var content:String;
 				var type:String;
 				var color:uint;
 				var thickness:Number = 1;
-				var alpha:Number = 1;
+				var alpha:Number = defaultAlpha;
 				
 				if ("textContent" in element) {
 					content = element.textContent;
 					type = ElementType.TEXT;
 					color = element.textContent.@color.toString().length == 0 ? 0xFFFFFF : uint(element.textContent.@color);
-					alpha = element.textContent.@alpha.toString().length == 0 ? 1 : Number(element.textContent.@alpha);
+					alpha = element.textContent.@alpha.toString().length == 0 ? defaultAlpha : Number(element.textContent.@alpha);
 				} else if ("imageContent" in element) {
 					content = element.imageContent;
 					type = ElementType.IMAGE;
 					color = 0xFFFFFF;
-					alpha = element.imageContent.@alpha.toString().length == 0 ? 1 : Number(element.imageContent.@alpha);
+					alpha = element.imageContent.@alpha.toString().length == 0 ? defaultAlpha : Number(element.imageContent.@alpha);
 				} else if ("frame" in element) {
 					content = element.frame;
 					type = ElementType.FRAME;
 					color = element.frame.@color.toString().length == 0 ? 0x0000FF : uint(element.frame.@color);
 					thickness = element.frame.@thickness.toString().length == 0 ? 1 : element.frame.@thickness;
-					alpha = element.frame.@alpha.toString().length == 0 ? 1 : Number(element.frame.@alpha);
+					alpha = element.frame.@alpha.toString().length == 0 ? defaultAlpha : Number(element.frame.@alpha);
 				} else if ("underline" in element) {
 					content = "";
 					type = ElementType.UNDERLINE;
 					color = element.underline.@color.toString().length == 0 ? 0x0000FF : uint(element.underline.@color);
-					alpha = element.underline.@alpha.toString().length == 0 ? 1 : Number(element.underline.@alpha);
+					alpha = element.underline.@alpha.toString().length == 0 ? defaultAlpha : Number(element.underline.@alpha);
 				}
 				
 				elements.push(

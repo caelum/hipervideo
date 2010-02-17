@@ -323,12 +323,12 @@ package test.br.com.caelum.hipervideo.reader
 
 		public function testReadXMLWithNoElements():void {
 			var xmlStr:String = ( <![CDATA[
-				<video>
+				<hipervideo>
 					<playlist>
 					</playlist>
 					<elements>
 					</elements>
-				</video>
+				</hipervideo>
 			]]> ).toString();
 				
 			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
@@ -351,6 +351,29 @@ package test.br.com.caelum.hipervideo.reader
 			
 			assertEquals(0, elementArray.length);
 			assertEquals(0, playlistArray.length);
+		}
+		
+		public function testRespectDefaultAlphaLevel():void {
+			var xmlStr:String = ( <![CDATA[
+				<hipervideo>
+					<defaults>
+						<alpha>0.7</alpha>
+					</defaults>
+					
+					<elements>
+						<element><textContent alpha="0.1" /></element>
+						<element><textContent /></element>
+					</elements>
+				</hipervideo>
+			]]> ).toString();
+				
+			var xmlReader:XMLReader = new XMLReader(new XML(xmlStr));
+			var video:Hipervideo = xmlReader.extract();
+			var elementArray:Array = video.elements;
+			
+			assertEquals(2, elementArray.length);
+			assertEquals(0.1, elementArray[0].alpha);
+			assertEquals(0.7, elementArray[1].alpha);
 		}
 		
 	}
