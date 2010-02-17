@@ -66,6 +66,12 @@ package test.br.com.caelum.hipervideo.reader
 						<time start="00:00:10" duration="00:01:10"/>
 						<geometry x="50" y="70" height="60" width="50"/>
 					</element>
+					
+					<element>
+						<imageContent alpha="0.5">http://link-para-imagem.com</imageContent>						
+						<time start="02:00:00" duration="00:10:0"/>
+						<geometry x="150" y="170" height="960" width="950"/>
+					</element>
 				
 					<element>
 						<imageContent>http://link-para-imagem.com</imageContent>
@@ -126,6 +132,8 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadAlphaValue():void {
 			assertEquals(1, elementArray[0].alpha);
 			assertEquals(0.7, elementArray[1].alpha);
+			assertEquals(0.5, elementArray[2].alpha);
+			assertEquals(1, elementArray[3].alpha);
 		}
 		
 		public function testReadNextXmlFile():void {
@@ -193,8 +201,8 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadLinkTime():void {
 			assertEquals(10, elementArray[0].start);
 			assertEquals(70, elementArray[0].duration);
-			assertEquals(3601, elementArray[2].start);
-			assertEquals(610.5, elementArray[2].duration);			
+			assertEquals(3601, elementArray[3].start);
+			assertEquals(610.5, elementArray[3].duration);			
 		}
 		
 		public function testReadLinkGeometry():void {
@@ -235,7 +243,7 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadLinkSeekPosition():void {
 			assertEquals(0, elementArray[0].link.time);
 			assertEquals(0, elementArray[1].link.time);
-			assertEquals(135, elementArray[2].link.time);
+			assertEquals(135, elementArray[3].link.time);
 		}
 		
 		public function testReadThumbnail():void {
@@ -250,31 +258,32 @@ package test.br.com.caelum.hipervideo.reader
 		public function testReadLinkActivityId():void {
 			assertEquals("", elementArray[0].link.activityId);
 			assertEquals("act_id1", elementArray[1].link.activityId);
-			assertEquals("act_id2", elementArray[2].link.activityId);
+			assertEquals("act_id2", elementArray[3].link.activityId);
 		}
 		
 		public function testReadLinkAction():void {
 			assertEquals(ActionType.NOTHING, elementArray[0].link.action);
 			assertEquals(ActionType.PAUSE, elementArray[1].link.action);
-			assertEquals(ActionType.PLAY, elementArray[2].link.action);
+			assertEquals(ActionType.PLAY, elementArray[3].link.action);
 		}
 		
 		public function testReadElementType():void {
 			assertEquals(ElementType.TEXT, elementArray[0].type);
 			assertEquals(ElementType.TEXT, elementArray[1].type);
 			assertEquals(ElementType.IMAGE, elementArray[2].type);
-			assertEquals(ElementType.UNDERLINE, elementArray[3].type);
-			assertEquals(ElementType.FRAME, elementArray[4].type);
+			assertEquals(ElementType.IMAGE, elementArray[3].type);
+			assertEquals(ElementType.UNDERLINE, elementArray[4].type);
 			assertEquals(ElementType.FRAME, elementArray[5].type);
+			assertEquals(ElementType.FRAME, elementArray[6].type);
 		}
 		
 		public function testReadUnderlineColor():void {
-			assertEquals("0xF0F0F0", elementArray[3].color);		
+			assertEquals("0xF0F0F0", elementArray[4].color);		
 		}
 		
 		public function testReadVideoLink():void {
-			assertEquals("", elementArray[2].link.video);
-			assertEquals("outro.xml", elementArray[3].link.video);
+			assertEquals("", elementArray[3].link.video);
+			assertEquals("outro.xml", elementArray[4].link.video);
 		}
 		
 		public function testReadTargetLink():void {
@@ -283,13 +292,13 @@ package test.br.com.caelum.hipervideo.reader
 		}
 		
 		public function testReadBorderColor():void {
-			assertEquals("0x0000FF", elementArray[4].color);
-			assertEquals("0xFF0000", elementArray[5].color);
+			assertEquals("0x0000FF", elementArray[5].color);
+			assertEquals("0xFF0000", elementArray[6].color);
 		}
 		
 		public function testReadFrameBorderThickness():void {
-			assertEquals(1, elementArray[4].thickness);
-			assertEquals(4, elementArray[5].thickness);
+			assertEquals(1, elementArray[5].thickness);
+			assertEquals(4, elementArray[6].thickness);
 		}
 
 		public function testReadXMLWithNoElements():void {

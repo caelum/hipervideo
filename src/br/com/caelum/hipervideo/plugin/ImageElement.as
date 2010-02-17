@@ -42,7 +42,7 @@ package br.com.caelum.hipervideo.plugin
 			this.view = view;
 			data.active = true;
 			child = clip.parent.addChild(newImage());
-			//child.alpha = 0.4; funciona!
+			child.alpha = element.alpha;
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
 			view.addModelListener(ModelEvent.STATE,stateHandler);

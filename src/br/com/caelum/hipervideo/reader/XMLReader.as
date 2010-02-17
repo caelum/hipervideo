@@ -38,6 +38,7 @@ package br.com.caelum.hipervideo.reader
 					content = element.imageContent;
 					type = ElementType.IMAGE;
 					color = 0xFFFFFF;
+					alpha = element.imageContent.@alpha.toString().length == 0 ? 1 : Number(element.imageContent.@alpha);
 				} else if ("frame" in element) {
 					content = element.frame;
 					type = ElementType.FRAME;

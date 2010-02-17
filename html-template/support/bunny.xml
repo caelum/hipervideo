@@ -1,8 +1,6 @@
 <hipervideo>
 
 	<video file="bunny.flv" /> 
-	
-	<next file="support/next.xml" />
 
 	<playlist>
 		<link>
@@ -102,7 +100,7 @@
 		</element>
 	
 		<element>
-			<imageContent>thumbs/play.jpg</imageContent>
+			<imageContent alpha="0.5">thumbs/play.jpg</imageContent>
 			
 			<link action="play">
 				<tooltip>Simples play</tooltip>
