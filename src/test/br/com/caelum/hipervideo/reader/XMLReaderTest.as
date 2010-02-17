@@ -125,6 +125,13 @@ package test.br.com.caelum.hipervideo.reader
 						<geometry x="30" y="100" height="50" width="200"/>
 					</element>
 					
+					<element>
+						<frame alpha="0.4"/>
+						
+						<time start="00:00:01" duration="00:00:08"/>
+						<geometry x="30" y="100" height="50" width="200"/>
+					</element>
+					
 				</elements>
 			</hipervideo>
 		]]> ).toString();
@@ -142,6 +149,10 @@ package test.br.com.caelum.hipervideo.reader
 			assertEquals(1, elementArray[3].alpha);
 			assertEquals(1, elementArray[4].alpha);
 			assertEquals(0.2, elementArray[5].alpha);
+			assertEquals(1, elementArray[6].alpha);
+			assertEquals(1, elementArray[7].alpha);
+			assertEquals(0.4, elementArray[8].alpha);
+			
 		}
 		
 		public function testReadNextXmlFile():void {

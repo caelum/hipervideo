@@ -44,6 +44,7 @@ package br.com.caelum.hipervideo.reader
 					type = ElementType.FRAME;
 					color = element.frame.@color.toString().length == 0 ? 0x0000FF : uint(element.frame.@color);
 					thickness = element.frame.@thickness.toString().length == 0 ? 1 : element.frame.@thickness;
+					alpha = element.frame.@alpha.toString().length == 0 ? 1 : Number(element.frame.@alpha);
 				} else if ("underline" in element) {
 					content = "";
 					type = ElementType.UNDERLINE;

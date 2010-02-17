@@ -43,6 +43,7 @@ package br.com.caelum.hipervideo.plugin
 			
 			this.addEventListener(MouseEvent.CLICK, clickHandler);
 			child = clip.parent.addChild(this);
+			child.alpha = element.alpha;
 
 			view.addControllerListener(ControllerEvent.RESIZE,resizeHandler);
 			view.addModelListener(ModelEvent.TIME,timeHandler);
