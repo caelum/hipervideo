@@ -102,12 +102,6 @@ public class StateManager extends MovieClip implements PluginInterface {
 		if (evt.data.newstate == ModelStates.PLAYING) {
 			view.config['autoPaused'] = false;
 		}
-		
-		switch (evt.data.newstate) {
-			case ModelStates.COMPLETED:
-				loadNextVideo();
-				break;
-		}
 	}
 	
 	private function resizeHandler(evt:ControllerEvent=undefined):void {
